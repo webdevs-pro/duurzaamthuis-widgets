@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custo Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.1.2
+ * Version:     0.1.3
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -50,7 +50,7 @@ final class Duurzaamthuis_Widgets {
 		// register web devs category
 		add_action( 'elementor/elements/categories_registered', function($elements_manager) {
 			$elements_manager->add_category(
-				'web-devs-category',
+				'duurzaamthuis-widgets',
 				[
 					'title' => __( 'Duurzaamthuis Widgets', 'duurzaamthuis' ),
 					'icon' => 'fa fa-plug',
