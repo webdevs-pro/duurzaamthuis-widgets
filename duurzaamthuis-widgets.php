@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: AI Blocks Elmentor Integration
- * Description: AI Block integration with Elementor Page bilder
- * Plugin URI:  https://plugins.magnificsoft.com/
- * Version:     1.0
- * Author:      web-devs.pro
- * Text Domain: ai-blocks-elementor
+ * Plugin Name: Duurzaamthuis Widgets
+ * Description: Custo Elementor widgets
+ * Plugin URI:  https://magnificsoft.com/
+ * Version:     0.1
+ * Author:      Alex Ischenko
+ * Text Domain: duurzaamthuis
  */
 
 
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  * Any custom code should go inside Plugin Class in the plugin.php file.
  * @since 1.2.0
  */
-final class AI_Blocks_Elementor {
+final class Duurzaamthuis_Widgets {
 	/**
 	 * Plugin Version
 	 *
@@ -35,14 +35,14 @@ final class AI_Blocks_Elementor {
 	 * @since 1.2.0
 	 * @var string Minimum Elementor version required to run the plugin.
 	 */
-	const MINIMUM_ELEMENTOR_VERSION = '2.0.0';
+	const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
 	/**
 	 * Minimum PHP Version
 	 *
 	 * @since 1.2.0
 	 * @var string Minimum PHP version required to run the plugin.
 	 */
-	const MINIMUM_PHP_VERSION = '5.5';
+	const MINIMUM_PHP_VERSION = '7.0';
 	/**
 	 * Constructor
 	 *
@@ -173,14 +173,14 @@ final class AI_Blocks_Elementor {
 	}
 }
 // Instantiate AI_Blocks_Elementor.
-new AI_Blocks_Elementor();
+new Duurzaamthuis_Widgets();
 
 
 
 // plugin updates
 require 'plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-	'https://github.com/webdevs-pro/ai-blocks-elementor',
+	'https://github.com/webdevs-pro/duurzaamthuis-widgets',
 	__FILE__,
-	'ai-blocks-elementor'
+	'duurzaamthuis-widgets'
 );
