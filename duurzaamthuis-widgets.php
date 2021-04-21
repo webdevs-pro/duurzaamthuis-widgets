@@ -3,82 +3,31 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custo Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.1.1
+ * Version:     0.1.2
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
 
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-/**
- * Main Elementor plugin class
- *
- * The init class that runs the plugin.
- * Intended To make sure that the plugin's minimum requirements are met.
- *
- * You should only modify the constants to match your plugin's needs.
- *
- * Any custom code should go inside Plugin Class in the plugin.php file.
- * @since 1.2.0
- */
+
+
 final class Duurzaamthuis_Widgets {
-	/**
-	 * Plugin Version
-	 *
-	 * @since 1.2.0
-	 * @var string The plugin version.
-	 */
-	const VERSION = '1.0';
-	/**
-	 * Minimum Elementor Version
-	 *
-	 * @since 1.2.0
-	 * @var string Minimum Elementor version required to run the plugin.
-	 */
+
 	const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
-	/**
-	 * Minimum PHP Version
-	 *
-	 * @since 1.2.0
-	 * @var string Minimum PHP version required to run the plugin.
-	 */
 	const MINIMUM_PHP_VERSION = '7.0';
-	/**
-	 * Constructor
-	 *
-	 * @since 1.0.0
-	 * @access public
-	 */
+
 	public function __construct() {
-		// Load translation
+
 		add_action( 'init', array( $this, 'i18n' ) );
-		// Init Plugin
+
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
 	}
-	/**
-	 * Load Textdomain
-	 *
-	 * Load plugin localization files.
-	 * Fired by `init` action hook.
-	 *
-	 * @since 1.2.0
-	 * @access public
-	 */
+
 	public function i18n() {
-		load_plugin_textdomain( 'ai-blocks-elementor' );
+		load_plugin_textdomain( 'duurzaamthuis' );
 	}
-	/**
-	 * Initialize the plugin
-	 *
-	 * Validates that Elementor is already loaded.
-	 * Checks for basic plugin requirements, if one check fail don't continue,
-	 * if all check have passed include the plugin class.
-	 *
-	 * Fired by `plugins_loaded` action hook.
-	 *
-	 * @since 1.2.0
-	 * @access public
-	 */
+
 	public function init() {
 		// Check if Elementor installed and activated
 		if ( ! did_action( 'elementor/loaded' ) ) {
@@ -103,7 +52,7 @@ final class Duurzaamthuis_Widgets {
 			$elements_manager->add_category(
 				'web-devs-category',
 				[
-					'title' => __( 'Web Devs Widgets', 'advanced-elementor-widgets' ),
+					'title' => __( 'Duurzaamthuis Widgets', 'duurzaamthuis' ),
 					'icon' => 'fa fa-plug',
 				]
 			);
@@ -123,9 +72,9 @@ final class Duurzaamthuis_Widgets {
 		}
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor */
-			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'ai-blocks-elementor' ),
-			'<strong>' . esc_html__( 'Elementor Hello World', 'ai-blocks-elementor' ) . '</strong>',
-			'<strong>' . esc_html__( 'Elementor', 'ai-blocks-elementor' ) . '</strong>'
+			esc_html__( '"%1$s" requires "%2$s" to be installed and activated.', 'duurzaamthuis' ),
+			'<strong>' . esc_html__( 'Duurzaamthuis Widgets', 'duurzaamthuis' ) . '</strong>',
+			'<strong>' . esc_html__( 'Elementor', 'duurzaamthuis' ) . '</strong>'
 		);
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
 	}
@@ -143,9 +92,9 @@ final class Duurzaamthuis_Widgets {
 		}
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: Elementor 3: Required Elementor version */
-			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'ai-blocks-elementor' ),
-			'<strong>' . esc_html__( 'Elementor Hello World', 'ai-blocks-elementor' ) . '</strong>',
-			'<strong>' . esc_html__( 'Elementor', 'ai-blocks-elementor' ) . '</strong>',
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'duurzaamthuis' ),
+			'<strong>' . esc_html__( 'Duurzaamthuis Widgets', 'duurzaamthuis' ) . '</strong>',
+			'<strong>' . esc_html__( 'Elementor', 'duurzaamthuis' ) . '</strong>',
 			self::MINIMUM_ELEMENTOR_VERSION
 		);
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
@@ -164,9 +113,9 @@ final class Duurzaamthuis_Widgets {
 		}
 		$message = sprintf(
 			/* translators: 1: Plugin name 2: PHP 3: Required PHP version */
-			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'ai-blocks-elementor' ),
-			'<strong>' . esc_html__( 'Elementor Hello World', 'ai-blocks-elementor' ) . '</strong>',
-			'<strong>' . esc_html__( 'PHP', 'ai-blocks-elementor' ) . '</strong>',
+			esc_html__( '"%1$s" requires "%2$s" version %3$s or greater.', 'duurzaamthuis' ),
+			'<strong>' . esc_html__( 'Duurzaamthuis Widgets', 'duurzaamthuis' ) . '</strong>',
+			'<strong>' . esc_html__( 'PHP', 'duurzaamthuis' ) . '</strong>',
 			self::MINIMUM_PHP_VERSION
 		);
 		printf( '<div class="notice notice-warning is-dismissible"><p>%1$s</p></div>', $message );
