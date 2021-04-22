@@ -58,7 +58,7 @@ class Content_Block_1 {
 // disable pannel widgets for non admin
 $user = wp_get_current_user();
 if ( ! in_array( 'administrator', (array) $user->roles ) ) {
-	// add_filter( 'elementor/editor/localize_settings', 'disable_panel_widgets' );
+	add_filter( 'elementor/editor/localize_settings', 'disable_panel_widgets' );
 }
 function disable_panel_widgets( $settings ) {
 	$user = wp_get_current_user();

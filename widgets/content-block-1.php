@@ -24,10 +24,6 @@ class Content_Block_1_Widget extends \Elementor\Widget_Base {
 		return __( 'Content block 1', 'duurzaamthuis' );
 	}
 
-	// public function get_icon() {
-	// 	return 'eicon-post-content';
-	// }
-
 	public function get_icon() {
 		return 'duurzaamthuis-widgets-icon-content-1';
 	}
