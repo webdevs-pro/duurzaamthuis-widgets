@@ -2,13 +2,17 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-/**
- * Main Plugin Class
- *
- * Register new elementor widget.
- *
- * @since 1.0.0
- */
+
+
+add_action( 'elementor/editor/after_enqueue_styles', 'icons_font_styles' );
+add_action( 'elementor/preview/enqueue_styles', 'icons_font_styles' );
+function icons_font_styles() {
+	wp_enqueue_style( 'elements-font', plugin_dir_url( __FILE__ ) . '/assets/css/icons.css' );
+}
+
+
+
+
 
 new Content_Block_1();
 class Content_Block_1 {
@@ -39,3 +43,37 @@ class Content_Block_1 {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new Content_Block_1_Widget() );
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// disable pannel widgets for non admin
+add_filter( 'elementor/editor/localize_settings', function( $settings ) {
+
+	if ( current_user_can('administrator') ) return;
+
+	$editor_alowed_widgets = array(
+		'heading',
+		'duurzaamthuis-content-1',
+	);
+
+	foreach ( $settings['initial_document']['widgets'] as $widget_name => $widget_settings ) {
+
+		if ( ! in_array( $widget_name, $editor_alowed_widgets ) ) {
+			$settings['initial_document']['widgets'][$widget_name]['show_in_panel'] = false;
+		}
+	}
+
+	return $settings;
+
+}, 100 );

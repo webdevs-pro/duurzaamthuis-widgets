@@ -17,15 +17,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Content_Block_1_Widget extends \Elementor\Widget_Base {
 
 	public function get_name() {
-		return 'duurzaamthuis-widgets';
+		return 'duurzaamthuis-content-1';
 	}
 
 	public function get_title() {
 		return __( 'Content block 1', 'duurzaamthuis' );
 	}
 
+	// public function get_icon() {
+	// 	return 'eicon-post-content';
+	// }
+
 	public function get_icon() {
-		return 'eicon-post-content';
+		return 'duurzaamthuis-widgets-icon-content-1';
 	}
 
 	public function get_categories() {
