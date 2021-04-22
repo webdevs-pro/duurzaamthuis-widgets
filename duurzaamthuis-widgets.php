@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custo Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.1.3
+ * Version:     0.1.4
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -133,3 +133,5 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	__FILE__,
 	'duurzaamthuis-widgets'
 );
+//Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('main');
