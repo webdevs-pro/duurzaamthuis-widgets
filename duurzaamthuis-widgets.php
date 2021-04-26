@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custo Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.2.2
+ * Version:     0.2.3
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
