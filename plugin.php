@@ -64,7 +64,7 @@ function disable_panel_widgets( $settings ) {
 	$user = wp_get_current_user();
 	if ( in_array( 'administrator', (array) $user->roles ) ) return;
 
-	$editor_alowed_widgets = array(
+	$editor_allowed_widgets = array(
 		'heading',
 		'duurzaamthuis-content-1',
 	);

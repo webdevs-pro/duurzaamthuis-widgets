@@ -1,124 +1,115 @@
-/* PHOTOSWIPE */
-
-@media (max-width: 767px) {
-    .gallery_col-mobile-1 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 1);
-    }
-    .gallery_col-mobile-2 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 2);
-    }
-    .gallery_col-mobile-3 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 3 - 0.1px);
-    }
-    .gallery_col-mobile-4 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 4);
-    }
-    .gallery_col-mobile-5 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 5);
-    }
-    .gallery_col-mobile-6 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 6);
-    }
+/* CONTENT 1 */
+/* .elementor-widget-duurzaamthuis-content-1 .wrapper {
+   display: grid;
+   column-gap: 30px;
 }
-@media (min-width: 768px) and (max-width: 1024px) {
-    .gallery_col-tablet-1 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 1);
-    }
-    .gallery_col-tablet-2 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 2);
-    }
-    .gallery_col-tablet-3 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 3 - 0.1px);
-    }
-    .gallery_col-tablet-4 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 4);
-    }
-    .gallery_col-tablet-5 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 5);
-    }
-    .gallery_col-tablet-6 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 6);
-    }
+.elementor-widget-duurzaamthuis-content-1.image-width-33 .wrapper {
+   grid-template-columns: 1fr 2fr;
 }
-@media (min-width: 1025px) {
-    .gallery_col-1 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 1);
-    }
-    .gallery_col-2 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 2);
-    }
-    .gallery_col-3 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 3 - 0.1px);
-    }
-    .gallery_col-4 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 4);
-    }
-    .gallery_col-5 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 5);
-    }
-    .gallery_col-6 .gallery_block_gallery .psgal .msnry_item {
-        width: calc(100% / 6);
-    }
+.elementor-widget-duurzaamthuis-content-1.image-width-50 .wrapper {
+   grid-template-columns: 1fr 1fr;
 }
+.elementor-widget-duurzaamthuis-content-1.image-width-66 .wrapper {
+   grid-template-columns: 2fr 1fr;
+}
+.elementor-widget-duurzaamthuis-content-1.image-align-left .image-column {
+   grid-column: 1 / 2;
+   grid-row: 1 / 2;
+}
+.elementor-widget-duurzaamthuis-content-1.image-align-left .content-column {
+   grid-column: 2 / 3;
+   grid-row: 1 / 2;
+}
+.elementor-widget-duurzaamthuis-content-1.image-align-right .image-column {
+   grid-column: 2 / 3;
+   grid-row: 1 / 2;
+}
+.elementor-widget-duurzaamthuis-content-1.image-align-right .content-column {
+   grid-column: 1 / 2;
+   grid-row: 1 / 2;
+}
+@media(max-width: 767px) {
+   .elementor-widget-duurzaamthuis-content-1.image-width-33 .wrapper,
+   .elementor-widget-duurzaamthuis-content-1.image-width-50 .wrapper,
+   .elementor-widget-duurzaamthuis-content-1.image-width-66 .wrapper {
+      grid-template-columns: 1fr;
+   }
+   .elementor-widget-duurzaamthuis-content-1:not(.reverse-columns) .image-column {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+   }
+   .elementor-widget-duurzaamthuis-content-1:not(.reverse-columns) .content-column {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+   }
+   .elementor-widget-duurzaamthuis-content-1.reverse-columns .image-column {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+   }
+   .elementor-widget-duurzaamthuis-content-1.reverse-columns .content-column {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+   }
+} */
 
-
-
-.gallery_block_gallery .psgal .msnry_item {
-    height: auto !important;
+.elementor-widget-duurzaamthuis-content-1 .wrapper {
+   display: flex;
+}
+.elementor-widget-duurzaamthuis-content-1.image-width-33 .image-column {
+   flex-basis: calc(33.333% - 15px);
+}
+.elementor-widget-duurzaamthuis-content-1.image-width-33 .gap-column {
+   flex-basis: 30px;
+}
+.elementor-widget-duurzaamthuis-content-1.image-width-33 .content-column {
+   flex-basis: calc(66.666% - 15px);
 }
 
-.psgal {
-    width: 100% !important;
+.elementor-widget-duurzaamthuis-content-1.image-width-50 .image-column {
+   flex-basis: calc(50% - 15px);
+}
+.elementor-widget-duurzaamthuis-content-1.image-width-50 .gap-column {
+   flex-basis: 30px;
+}
+.elementor-widget-duurzaamthuis-content-1.image-width-50 .content-column {
+   flex-basis: calc(50% - 15px);
 }
 
-.psgal a:before {
-    content: '';
-    position: absolute;
-    opacity: 0;
-	transition: all 0.2s;
+.elementor-widget-duurzaamthuis-content-1.image-width-66 .image-column {
+   flex-basis: calc(66.666% - 15px);
 }
-.psgal a:after {
-	content: '';
-	font-family: 'eicons';
-    position: absolute;
-    top: 50%; 
-	left: 50%;
-	transform: translate(-50%, calc(-50% + 5px));
-    opacity: 0;
-    transition: all 0.2s;
+.elementor-widget-duurzaamthuis-content-1.image-width-66 .gap-column {
+   flex-basis: 30px;
 }
-.psgal a:hover:after {
-	opacity: 1;
-	transition: all 0.4s;
-	transform: translate(-50%, -50%);
-}
-.psgal a:hover:before {
-	opacity: 1;
-	transition: all 0.2s;
-}
-@media (max-width: 1024px) { 
-	.psgal a:before,
-	.psgal a:after {
-		display: none;
-	}
+.elementor-widget-duurzaamthuis-content-1.image-width-66 .content-column {
+   flex-basis: calc(33.333% - 15px);
 }
 
 
-.pswp__button--share,
-.pswp__button--zoom,
-.pswp__button--fs {
-	display: none !important;
+
+
+.elementor-widget-duurzaamthuis-content-1.image-align-right .wrapper {
+   flex-direction: row-reverse;
 }
-.pswp--touch .pswp__button--arrow--left,
-.pswp--touch .pswp__button--arrow--right {
-	visibility: visible;
+
+@media(max-width: 767px) {
+   .elementor-widget-duurzaamthuis-content-1 .wrapper {
+      flex-direction: column;
+   }
+   .elementor-widget-duurzaamthuis-content-1.image-align-right .wrapper {
+      flex-direction: column-reverse;
+   }
+   .elementor-widget-duurzaamthuis-content-1.reverse-columns .wrapper {
+      flex-direction: column-reverse;
+   }
+   .elementor-widget-duurzaamthuis-content-1.image-align-right.reverse-columns .wrapper {
+      flex-direction: column;
+   }
 }
-@media (max-width: 768px) {
-	.pswp__button--fs {
-		display: block !important; 
-	}
-}
-.pswp {
-    z-index: 9999999999;
-}
-/*  END PHOTOSWIPE */
+
+
+
+
+
+
+/* CONTENT 2 */
