@@ -14,10 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 
-class Content_Block_1_Widget extends \Elementor\Widget_Base {
+class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 
 	public function get_name() {
-		return 'duurzaamthuis-content-1';
+		return 'image-heading-text';
 	}
 
 	public function get_title() {
@@ -25,11 +25,11 @@ class Content_Block_1_Widget extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'duurzaamthuis-widgets-icon-content-1';
+		return 'dh-icons-image-heading-text';
 	}
 
 	public function get_categories() {
-		return [ 'duurzaamthuis-widgets' ];
+		return [ 'dh-widgets' ];
 	}
 
 	protected function _register_controls() {
@@ -70,7 +70,7 @@ class Content_Block_1_Widget extends \Elementor\Widget_Base {
 					],
 					'default' => 'left',
 					'toggle' => false,
-					'prefix_class' => 'image-align-',
+					'prefix_class' => 'dh-image-align-',
 				]
 			);
 			$this->add_control(
@@ -84,7 +84,7 @@ class Content_Block_1_Widget extends \Elementor\Widget_Base {
 						'50' => __( '50%', 'plugin-domain' ),
 						'66' => __( '66%', 'plugin-domain' ),
 					],
-					'prefix_class' => 'image-width-',
+					'prefix_class' => 'dh-image-width-',
 				]
 			);
 			$this->add_control(
@@ -95,7 +95,7 @@ class Content_Block_1_Widget extends \Elementor\Widget_Base {
 					'label_on' => __( 'Yes', 'your-plugin' ),
 					'label_off' => __( 'No', 'your-plugin' ),					
 					'return_value' => 'columns',
-					'prefix_class' => 'reverse-',
+					'prefix_class' => 'dh-reverse-',
 				]
 			);
 			$this->add_control(
@@ -133,16 +133,16 @@ class Content_Block_1_Widget extends \Elementor\Widget_Base {
 
 
 		?>
-			<div class="wrapper">
-				<div class="image-column">
+			<div class="dh-wrapper">
+				<div class="dh-image-column">
 					<img src="<?php echo $image['url']; ?>">
 				</div>
-				<div class="gap-column"></div>
-				<div class="content-column">
+				<div class="dh-gap-column"></div>
+				<div class="dh-content-column">
 					<h2>
 						<?php echo $heading; ?>
 					</h2>
-					<div class="content">
+					<div class="dh-content">
 						<?php echo $content; ?>
 					</div>
 				</div>
@@ -153,16 +153,16 @@ class Content_Block_1_Widget extends \Elementor\Widget_Base {
 	protected function content_template() {
 
 		?>
-			<div class="wrapper">
-				<div class="image-column">
+			<div class="dh-wrapper">
+				<div class="dh-image-column">
 					<img src="{{ settings.image.url }}">
 				</div>
-				<div class="gap-column">
-				<div class="content-column">
+				<div class="dh-gap-column">
+				<div class="dh-content-column">
 					<h2>
 						{{{ settings.heading }}}
 					</h2>
-					<div class="content">
+					<div class="dh-content">
 						{{{ settings.content }}}
 					</div>
 				</div>
