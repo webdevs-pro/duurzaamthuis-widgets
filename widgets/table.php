@@ -7,6 +7,7 @@ use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Border;
 use Elementor\Scheme_Typography;
 use Elementor\Group_Control_Text_Shadow;
+use Elementor\Modules\DynamicTags\Module as TagsModule;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -14,18 +15,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 
-class DH_Anchor_Navigation extends \Elementor\Widget_Base {
+class DH_Table extends \Elementor\Widget_Base {
 
 	public function get_name() {
-		return 'dh-anchor-navigation';
+		return 'dh-table';
 	}
 
 	public function get_title() {
-		return __( 'Anchor navigation', 'duurzaamthuis' );
+		return __( 'Table', 'duurzaamthuis' );
 	}
 
 	public function get_icon() {
-		return 'dh-icons-anchor-navigation';
+		return 'dh-icons-table';
 	}
 
 	public function get_categories() {
@@ -40,42 +41,12 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
          'tab' => Controls_Manager::TAB_CONTENT,
       ]);
 
-			$this->add_control( 'heading', [
-            'label' => __( 'Heading', 'plugin-domain' ),
-            'type' => \Elementor\Controls_Manager::TEXT,
-            'default' => __( 'Heading text', 'plugin-domain' ),
+         $this->add_control( 'table', [
+            'label' => 'Test',
             'label_block' => true,
-            'separator' => 'before'
+            'type' => 'dh-table-control',
+            'default' => '[["Column 1 heading","Column 2 heading"],["Some text","Some text"]]',
          ]);
-
-         $repeater = new \Elementor\Repeater();
-
-         $repeater->add_control( 'title', [
-            'label' => __( 'Title', 'plugin-domain' ),
-            'type' => \Elementor\Controls_Manager::TEXT,
-            'label_block' => true,
-         ]);
-   
-         $repeater->add_control( 'anchor', [
-            'label' => __( 'Anchor', 'plugin-domain' ),
-            'type' => \Elementor\Controls_Manager::TEXT,
-            'label_block' => true,
-         ]);
-         
-         $repeater->add_control( 'description', [
-            'raw' => __( 'Only Id without \'#\' sign', 'elementor-pro' ),
-            'type' => Controls_Manager::RAW_HTML,
-            'content_classes' => 'elementor-descriptor',
-         ]);
-   
-         $this->add_control( 'items', [
-            'label' => __( 'Items', 'plugin-domain' ),
-            'type' => \Elementor\Controls_Manager::REPEATER,
-            'fields' => $repeater->get_controls(),
-            'title_field' => '{{{ title }}}',
-         ]);
-
-
 
 		$this->end_controls_section(); 
 
@@ -87,9 +58,19 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 
-		$heading = $settings['heading'];
-      $items = $settings['items'] ?: array();
+		$rows = json_decode( $settings['table'] ) ?: array();
 
+      $html = '';
+      foreach ( $rows as $index => $row ) {
+         $html .= '<tr>';
+         foreach ( $row as $cell ) {
+            $html .= '<td contenteditable>' . $cell . '</td>';
+         }
+         $html .= '</tr>';
+      }
+      echo '<table>' . $html . '</table>';
+
+      /*
 		?>
          <h2 class="dh-heading">
             <?php echo $heading; ?>
@@ -106,6 +87,7 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
             <?php } ?>
          </div>
 		<?php
+      */
 	}
 	
 }

@@ -13,7 +13,7 @@ function icons_font_styles() {
 
 
 
-// widget content block 1
+// register widgets
 new DH_Register_Widgets();
 class DH_Register_Widgets {
 	public function __construct() {
@@ -41,10 +41,12 @@ class DH_Register_Widgets {
 	private function includes() {
 		require __DIR__ . '/widgets/image-heading-text.php';
 		require __DIR__ . '/widgets/anchor-navigation.php';
+		require __DIR__ . '/widgets/table.php';
 	}
 	private function register_widget() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Anchor_Navigation() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Table() );
 	}
 }
 
@@ -53,6 +55,13 @@ class DH_Register_Widgets {
 
 
 
+// register controls
+add_action( 'elementor/controls/controls_registered', 'dh_register_controls' );
+function dh_register_controls() {
+	require __DIR__ . '/inc/table-control.php';
+	$controls_manager = \Elementor\Plugin::$instance->controls_manager;
+	$controls_manager->register_control( 'dh-table-control', new DH_Table_Control() );
+}
 
 
 
@@ -69,8 +78,9 @@ function disable_panel_widgets( $settings ) {
 	if ( in_array( 'administrator', (array) $user->roles ) ) return;
 
 	$editor_allowed_widgets = array(
-		'image-heading-text',
-		'anchor-navigation',
+		'dh-image-heading-text',
+		'dh-anchor-navigation',
+		'dh-table',
 		'heading',
 	);
 

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 
 	public function get_name() {
-		return 'image-heading-text';
+		return 'dh-image-heading-text';
 	}
 
 	public function get_title() {
