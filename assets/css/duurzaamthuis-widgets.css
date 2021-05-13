@@ -71,7 +71,8 @@
    color: var(--e-global-color-secondary);
    transition: color 200ms, background-color 200ms;
 }
-.elementor-widget-anchor-navigation .dh-item:hover {
+.elementor-widget-anchor-navigation .dh-item:hover,
+.elementor-widget-anchor-navigation .dh-item:not([href]):hover {
    background-color: #DEAC30;
    color: #fff;
 }
