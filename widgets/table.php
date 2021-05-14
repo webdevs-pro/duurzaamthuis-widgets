@@ -60,15 +60,21 @@ class DH_Table extends \Elementor\Widget_Base {
 
 		$rows = json_decode( $settings['table'] ) ?: array();
 
-      $html = '';
+      $html = '<table>';
       foreach ( $rows as $index => $row ) {
+         if ( $index == 0 ) {
+            $tag = 'th';
+         } else {
+            $tag = 'td';
+         }
          $html .= '<tr>';
          foreach ( $row as $cell ) {
-            $html .= '<td contenteditable>' . $cell . '</td>';
+            $html .= '<' . $tag . ' contenteditable>' . $cell . '</' . $tag . '>';
          }
          $html .= '</tr>';
       }
-      echo '<table>' . $html . '</table>';
+      $html .= '</table>';
+      echo $html;
 
       /*
 		?>

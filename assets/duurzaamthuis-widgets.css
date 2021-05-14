@@ -91,3 +91,13 @@
       grid-template-columns: 1fr;
    }   
 }
+
+
+
+
+
+
+/* table */
+.elementor-widget-dh-table table {
+   table-layout: fixed;
+} 

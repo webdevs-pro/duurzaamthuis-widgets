@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 add_action( 'elementor/editor/after_enqueue_styles', 'icons_font_styles' );
 add_action( 'elementor/preview/enqueue_styles', 'icons_font_styles' );
 function icons_font_styles() {
-	wp_enqueue_style( 'elements-font', plugin_dir_url( __FILE__ ) . '/assets/css/icons.css' );
+	wp_enqueue_style( 'elements-font', plugin_dir_url( __FILE__ ) . '/assets/icons.css' );
 }
 
 
@@ -25,12 +25,12 @@ class DH_Register_Widgets {
 
 		add_action( 'elementor/frontend/after_register_scripts', function() {
 			// to do replace time() with plugin version
-			wp_register_script( 'duurzaamthuis-widgets', plugins_url( '/assets/js/duurzaamthuis-widgets.js', __FILE__ ), array( 'jquery' ), time(), true );
+			wp_register_script( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.js', __FILE__ ), array( 'jquery' ), time(), true );
 		});
 
 		add_action( 'elementor/frontend/after_enqueue_styles', function() {
 			// to do replace time() with plugin version
-			wp_enqueue_style( 'duurzaamthuis-widgets', plugins_url( '/assets/css/duurzaamthuis-widgets.css', __FILE__ ), array(), time() ); 
+			wp_enqueue_style( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.css', __FILE__ ), array(), time() ); 
 		});
 
 	}

@@ -60,7 +60,7 @@ class DH_Table_Control extends \Elementor\Base_Data_Control {
 
 // enqueue editor assets
 add_action( 'elementor/editor/after_enqueue_scripts', function() {
-   	wp_register_script( 'dh-editor', plugins_url( '/js/editor.js', __FILE__ ), array( 'jquery' ), time() );
-		wp_enqueue_script( 'dh-editor' );
-		wp_enqueue_style( 'dh-editor', plugins_url( '/css/editor.css', __FILE__ ), array(), time() ); 
+   wp_register_script( 'dh-editor', plugins_url( '/assets/editor.js', __FILE__ ), array( 'jquery' ), time() );
+   wp_enqueue_script( 'dh-editor' );
+   wp_enqueue_style( 'dh-editor', plugins_url( '/assets/editor.css', __FILE__ ), array(), time() ); 
 });
