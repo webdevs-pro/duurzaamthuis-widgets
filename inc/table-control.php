@@ -43,6 +43,7 @@ class DH_Table_Control extends \Elementor\Base_Data_Control {
                         <table class="dh-table-<?php echo $table_id; ?>" data-table-id="<?php echo $table_id; ?>"></table>
                         <button class="dh-add-row">Add row</button>
                         <button class="dh-add-column">Add column</button>
+                        <br>&nbsp;
                      </div>
                   </div>
                </div>

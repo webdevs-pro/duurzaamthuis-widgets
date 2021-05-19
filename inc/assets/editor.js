@@ -1,35 +1,45 @@
 (function($) {
 
-
+   // show popup
    $(document).on('click', '.dh-table-popup-open', function() {
       generateTable();
    });
 
-
+   // close popup on wrapper click
    $(document).on('click', '.dh-table-popup-close, .dh-table-popup-wrapper', function() {
       saveData();
    });
 
-
+   // fix close popup on click outside
    $(document).on('click', '.dh-table-popup', function(e) {
       e.stopPropagation();
    });
 
+
+   // generate table
    function generateTable(rows) {
       var popup = $('.dh-table-popup-wrapper');
       var table = popup.find('table');
       var table_id = table.attr('data-table-id');
       if(!rows) {
          rows = JSON.parse($('#elementor-control-default-'+table_id).val());
-         console.log('rows', rows);
+         // console.log('rows', rows);
       }
       
       // generate table html
       var table_html = '';
-      $.each(rows, function(index, row) {
+      $.each(rows, function(row_index, row) {
          table_html += '<tr>';
-         $.each(row, function(index, cell) {
-            table_html += '<td><span contenteditable="true">'+cell+'</span></td>';
+         $.each(row, function(col_index, cell) {
+            var control_html = '';
+            if(row_index == 0) {
+               control_html += '<div class="dh-col-control" data-col-index="'+col_index+'"><i class="fas fa-times"></i></div>';
+            }
+            if(col_index == row.length-1 ) {
+               control_html += '<div class="dh-row-control" data-row-index="'+row_index+'"><i class="fas fa-times"></i></div>';
+            }
+            table_html += '<td><span contenteditable="true">'+cell+'</span>'+control_html+'</td>';
+            
          });
          table_html += '</tr>';
       });
@@ -45,8 +55,8 @@
          });  
          return ui;  
       };
-      // sortable rows
 
+      // sortable rows
       $(table).sortable({  
          helper: fixHelper,
          cursor: "move",
@@ -54,7 +64,6 @@
          placeholder: "sortable-placeholder",
          containment: '.dh-table-popup',
       });
-
 
       $.each($._data($(popup).closest('.elementor-control')[0], "events"), function(i, event) {
          $.each(event, function(j, h) {
@@ -67,6 +76,7 @@
    }
 
 
+   // save data
    function saveData() {
       var popup = $('.dh-table-popup-wrapper');
       var table_id = popup.find('table').attr('data-table-id');
@@ -132,12 +142,16 @@
       var table_id = $('.dh-table-popup-wrapper').find('table').attr('data-table-id');
       var trs = tableToArray(table_id);
       var last_row = trs[trs.length - 1];
+      // console.log(last_row);
+      $.each(last_row, function(index, cell){
+         last_row[index] = '';
+      });
       trs.push(last_row);
       generateTable(trs);
    });
 
-   
-   // add row
+
+   // add column
    $(document).on('click', '.dh-add-column', function() {
       var table_id = $('.dh-table-popup-wrapper').find('table').attr('data-table-id');
       var trs = tableToArray(table_id);
@@ -148,6 +162,51 @@
       });
       generateTable(new_trs);
    });
+
+
+   // hover
+   $(document).on('mouseenter', 'table td', function() {
+      var cellIndex = this.cellIndex;
+      var rowIndex = this.parentNode.rowIndex;
+      $('.dh-col-control[data-col-index="'+cellIndex+'"]').addClass('active');
+      $('.dh-row-control[data-row-index="'+rowIndex+'"]').addClass('active');
+   });
+   $(document).on('mouseleave', 'table td', function() {
+      var cellIndex = this.cellIndex;
+      var rowIndex = this.parentNode.rowIndex;
+      $('.dh-col-control[data-col-index="'+cellIndex+'"]').removeClass('active');
+      $('.dh-row-control[data-row-index="'+rowIndex+'"]').removeClass('active');
+   });
+
+
+   // delete column
+   $(document).on('click', '.dh-col-control i', function(){
+      var table_id = $('.dh-table-popup-wrapper').find('table').attr('data-table-id');
+      var col_index = $(this).parent().data('col-index');
+      var trs = tableToArray(table_id);
+      if(trs[0].length == 1) return;
+      $.each(trs, function(index, row) {
+         row.splice(col_index,1);
+      });
+      generateTable(trs);
+   });
+
+
+   // delete row
+   $(document).on('click', '.dh-row-control i', function(){
+      var table_id = $('.dh-table-popup-wrapper').find('table').attr('data-table-id');
+      var row_index = $(this).parent().data('row-index');
+      var trs = tableToArray(table_id);
+      if(trs.length == 1) return;
+      trs.splice(row_index,1);
+      generateTable(trs);
+   });
+
+
+
+
+
+
 
 
 })(jQuery);
