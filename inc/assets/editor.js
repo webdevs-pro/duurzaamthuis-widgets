@@ -174,21 +174,15 @@
    $(document).on('mouseenter', 'table td', function() {
       var cellIndex = this.cellIndex;
       var rowIndex = this.parentNode.rowIndex;
-      $('.dh-col-control').each(function(){
-         $(this).removeClass('active');
-      });
-      $('.dh-row-control').each(function(){
-         $(this).removeClass('active');
-      });
       $('.dh-col-control[data-col-index="'+cellIndex+'"]').addClass('active');
       $('.dh-row-control[data-row-index="'+rowIndex+'"]').addClass('active');
    });
-   // $(document).on('mouseleave', 'table td', function() {
-   //    var cellIndex = this.cellIndex;
-   //    var rowIndex = this.parentNode.rowIndex;
-   //    $('.dh-col-control[data-col-index="'+cellIndex+'"]').removeClass('active');
-   //    $('.dh-row-control[data-row-index="'+rowIndex+'"]').removeClass('active');
-   // });
+   $(document).on('mouseleave', 'table td', function() {
+      var cellIndex = this.cellIndex;
+      var rowIndex = this.parentNode.rowIndex;
+      $('.dh-col-control[data-col-index="'+cellIndex+'"]').removeClass('active');
+      $('.dh-row-control[data-row-index="'+rowIndex+'"]').removeClass('active');
+   });
 
 
    // delete column
