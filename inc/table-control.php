@@ -69,3 +69,5 @@ add_action( 'elementor/editor/after_enqueue_scripts', function() {
    wp_enqueue_script( 'dh-editor' );
    wp_enqueue_style( 'dh-editor', plugins_url( '/assets/editor.css', __FILE__ ), array(), time() ); 
 });
+
+

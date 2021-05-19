@@ -117,7 +117,7 @@
    align-items: center;
    font-size: 20px;
    cursor: auto;
-   display: none;
+   opacity: 0;
 }
 .dh-table-popup-content .dh-row-control {
    position: absolute;
@@ -130,11 +130,11 @@
    align-items: center;
    font-size: 20px;
    cursor: auto;
-   display: none;
+   opacity: 0;
 }
 .dh-table-popup-content .dh-col-control.active,
 .dh-table-popup-content .dh-row-control.active {
-   display: flex;
+   opacity: 1;
 }
 .dh-table-popup-content i {
    color: red;

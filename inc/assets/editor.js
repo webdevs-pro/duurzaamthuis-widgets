@@ -63,6 +63,18 @@
          cancel: '[contenteditable]',
          placeholder: "sortable-placeholder",
          containment: '.dh-table-popup',
+         start: function( event, ui ) {
+            $('.dh-col-control').each(function(){
+               $(this).removeClass('active');
+            });
+            $('.dh-row-control').each(function(){
+               $(this).removeClass('active');
+            });
+         },
+         stop: function( event, ui ) {
+            var trs = tableToArray(table_id);
+            generateTable(trs);
+         }
       });
 
       $.each($._data($(popup).closest('.elementor-control')[0], "events"), function(i, event) {
@@ -80,16 +92,10 @@
    function saveData() {
       var popup = $('.dh-table-popup-wrapper');
       var table_id = popup.find('table').attr('data-table-id');
-
       popup.removeClass('active');
-
       var trs = tableToArray(table_id);
-
       var json = JSON.stringify(trs);
       var rows = $('#elementor-control-default-'+table_id).val();
-      // console.log(json);
-      // console.log(rows);
-
       if(rows != json) {
          $('#elementor-control-default-'+table_id).val(json).trigger('change');
          $('#elementor-control-default-'+table_id).trigger('input');
@@ -141,12 +147,12 @@
    $(document).on('click', '.dh-add-row', function() {
       var table_id = $('.dh-table-popup-wrapper').find('table').attr('data-table-id');
       var trs = tableToArray(table_id);
-      var last_row = trs[trs.length - 1];
-      // console.log(last_row);
-      $.each(last_row, function(index, cell){
-         last_row[index] = '';
-      });
-      trs.push(last_row);
+      var new_row = [];
+      var column_count = trs[0].length;
+      for(var i = 0; i < column_count; i++) {
+         new_row.push('');
+      }
+      trs.push(new_row);
       generateTable(trs);
    });
 
@@ -168,15 +174,21 @@
    $(document).on('mouseenter', 'table td', function() {
       var cellIndex = this.cellIndex;
       var rowIndex = this.parentNode.rowIndex;
+      $('.dh-col-control').each(function(){
+         $(this).removeClass('active');
+      });
+      $('.dh-row-control').each(function(){
+         $(this).removeClass('active');
+      });
       $('.dh-col-control[data-col-index="'+cellIndex+'"]').addClass('active');
       $('.dh-row-control[data-row-index="'+rowIndex+'"]').addClass('active');
    });
-   $(document).on('mouseleave', 'table td', function() {
-      var cellIndex = this.cellIndex;
-      var rowIndex = this.parentNode.rowIndex;
-      $('.dh-col-control[data-col-index="'+cellIndex+'"]').removeClass('active');
-      $('.dh-row-control[data-row-index="'+rowIndex+'"]').removeClass('active');
-   });
+   // $(document).on('mouseleave', 'table td', function() {
+   //    var cellIndex = this.cellIndex;
+   //    var rowIndex = this.parentNode.rowIndex;
+   //    $('.dh-col-control[data-col-index="'+cellIndex+'"]').removeClass('active');
+   //    $('.dh-row-control[data-row-index="'+rowIndex+'"]').removeClass('active');
+   // });
 
 
    // delete column
@@ -201,11 +213,6 @@
       trs.splice(row_index,1);
       generateTable(trs);
    });
-
-
-
-
-
 
 
 
