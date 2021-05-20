@@ -25,7 +25,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icons-image-heading-text';
+		return 'dh-icon dh-icon-image-heading-text';
 	}
 
 	public function get_categories() {

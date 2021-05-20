@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 add_action( 'elementor/editor/after_enqueue_styles', 'icons_font_styles' );
 add_action( 'elementor/preview/enqueue_styles', 'icons_font_styles' );
 function icons_font_styles() {
-	wp_enqueue_style( 'elements-font', plugin_dir_url( __FILE__ ) . '/assets/icons.css' );
+	wp_enqueue_style( 'dh-icons', plugin_dir_url( __FILE__ ) . '/assets/dh-icons-font/style.css' );
 }
 
 
@@ -31,6 +31,7 @@ class DH_Register_Widgets {
 		add_action( 'elementor/frontend/after_enqueue_styles', function() {
 			// to do replace time() with plugin version
 			wp_enqueue_style( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.css', __FILE__ ), array(), time() ); 
+			wp_enqueue_style( 'dh-icons', plugins_url( '/assets/dh-icons-font/style.css', __FILE__ ), array(), time() ); 
 		});
 
 	}
@@ -42,11 +43,13 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/image-heading-text.php';
 		require __DIR__ . '/widgets/anchor-navigation.php';
 		require __DIR__ . '/widgets/table.php';
+		require __DIR__ . '/widgets/page-header.php';
 	}
 	private function register_widget() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Anchor_Navigation() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Table() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Page_Header() );
 	}
 }
 
@@ -81,6 +84,7 @@ function disable_panel_widgets( $settings ) {
 		'dh-image-heading-text',
 		'dh-anchor-navigation',
 		'dh-table',
+		'dh-page-header',
 		'heading',
 	);
 
@@ -106,3 +110,12 @@ function disable_panel_widgets( $settings ) {
 // 		 }
 // 	}, 10, 3
 // );
+
+
+
+function post_read_time( $post_id ) {
+	$content = get_post_field( 'post_content', $post_id );
+	$word_count = str_word_count( strip_tags( $content ) );
+	$readingtime = ceil( $word_count / 200);
+	return $readingtime;
+}

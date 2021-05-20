@@ -9,6 +9,7 @@ use Elementor\Scheme_Typography;
 use Elementor\Group_Control_Text_Shadow;
 use Elementor\Modules\DynamicTags\Module as TagsModule;
 
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -26,7 +27,7 @@ class DH_Table extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icons-table';
+		return 'dh-icon dh-icon-table';
 	}
 
 	public function get_categories() {
@@ -42,7 +43,7 @@ class DH_Table extends \Elementor\Widget_Base {
       ]);
 
          $this->add_control( 'table', [
-            'label' => 'Test',
+            'label' => 'Table',
             'label_block' => true,
             'type' => 'dh-table-control',
             'default' => '[["Column 1 heading","Column 2 heading"],["Some text","Some text"]]',
@@ -60,7 +61,7 @@ class DH_Table extends \Elementor\Widget_Base {
 
 		$rows = json_decode( $settings['table'] ) ?: array();
 
-      $html = '<table>';
+      $html = '<div class="dh-table-wrapper"><table>';
       foreach ( $rows as $index => $row ) {
          if ( $index == 0 ) {
             $tag = 'th';
@@ -73,7 +74,7 @@ class DH_Table extends \Elementor\Widget_Base {
          }
          $html .= '</tr>';
       }
-      $html .= '</table>';
+      $html .= '</table></div>';
       echo $html;
 
 

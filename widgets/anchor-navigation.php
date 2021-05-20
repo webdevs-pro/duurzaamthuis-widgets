@@ -25,7 +25,7 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icons-anchor-navigation';
+		return 'dh-icon dh-icon-anchor-navigation';
 	}
 
 	public function get_categories() {

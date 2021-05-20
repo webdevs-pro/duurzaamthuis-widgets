@@ -41,8 +41,8 @@ class DH_Table_Control extends \Elementor\Base_Data_Control {
                      <div class="dh-table-popup-content">
                         <?php $table_id = str_replace( 'elementor-control-default-', '', $control_uid ); ?>
                         <table class="dh-table-<?php echo $table_id; ?>" data-table-id="<?php echo $table_id; ?>"></table>
-                        <button class="dh-add-row">Add row</button>
-                        <button class="dh-add-column">Add column</button>
+                        <button class="dh-add-row"><i class="fas fa-plus"></i>Add row</button>
+                        <button class="dh-add-column"><i class="fas fa-plus"></i>Add column</button>
                         <br>&nbsp;
                      </div>
                   </div>

@@ -101,3 +101,113 @@
 .elementor-widget-dh-table table {
    table-layout: fixed;
 } 
+.elementor-widget-dh-table table {
+   text-align: left;
+} 
+@media(max-width: 768px) {
+   .elementor-widget-dh-table .dh-table-wrapper {
+      overflow-x: auto;
+   } 
+   .elementor-widget-dh-table table {
+      width: auto;
+   } 
+   .elementor-widget-dh-table table th {
+      min-width: 60vw;
+   } 
+}
+
+
+
+
+/* page header */
+.elementor-widget-dh-page-header .dh-overlay {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: linear-gradient(180deg, rgba(16, 29, 48, 0) 0%, #101D30 100%);
+}
+.dh-page-header {
+   background-size: cover;
+   background-position: center center;
+   flex-direction: column;
+}
+.dh-page-header-tags {
+   display: flex;
+   list-style-type: none;
+   padding: 0;
+}
+.dh-page-header-tag {
+   padding: 4px 17px;
+   border-radius: 4px;
+}
+.dh-page-header-tag a {
+   text-transform: uppercase;
+   font-weight: 600;
+   color: #fff;
+}
+.dh-page-header-tag:first-child {
+   background-color: #769179;
+
+}
+.dh-page-header-features {
+   display: grid;
+   grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr 14px;
+   column-gap: 20px;
+   padding: 20px;
+   background: rgba(255, 255, 255, 0.2);
+   border-radius: 6px;
+}
+.dh-page-header-features-title {
+   display: flex;
+   align-items: center;
+   position: relative;
+}
+.dh-page-header-features-title:after {
+   content: '';
+   position: absolute;
+   right: 0; 
+   width: 2px;
+   height: 58px;
+   background: #FFFFFF;
+   opacity: 0.2;
+}
+.dh-page-header-feature {
+   display: flex;
+   flex-direction: column;
+   /* align-items: center; */
+   justify-content: center;
+}
+.dh-page-header-feature-title i {
+   margin-right: 10px;
+}.dh-page-header-feature-value {
+   margin-left: 26px;
+}
+.dh-page-header-features-tip-icon {
+   font-size: 14px;
+}
+.dh-page-header-footer {
+   display: flex;
+}
+.dh-page-header-meta {
+   display: inline-flex;
+}
+.dh-page-header-meta-item {
+   display: flex;
+   align-items: center;
+   line-height: 1.2em;
+   margin-right: 20px;
+   padding-right: 20px;
+}
+.dh-page-header-meta-item:not(:last-child) {
+   border-right: 2px solid rgba(255, 255, 255, 0.2);
+}
+.dh-page-header-meta-item i {
+   margin-right: 7px;
+   font-size: 16px;
+   fill: #333;
+}
+.dh-page-header-breadcrumbs {
+   display: inline-block;
+}

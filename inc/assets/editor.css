@@ -1,5 +1,4 @@
-/* table control
- */
+/* table control */
 .dh-table-popup-wrapper {
    display: none;
    position: fixed;
@@ -139,4 +138,16 @@
 .dh-table-popup-content i {
    color: red;
    cursor: pointer;
+}
+
+.dh-table-popup-content .dh-add-row,
+.dh-table-popup-content .dh-add-column {
+   padding: 5px 10px;
+   margin-top: 5px;
+   cursor: pointer;
+}
+.dh-table-popup-content .dh-add-row i,
+.dh-table-popup-content .dh-add-column i {
+   color: inherit;
+   margin-right: 5px;
 }
