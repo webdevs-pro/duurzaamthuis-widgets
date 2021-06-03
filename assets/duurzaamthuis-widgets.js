@@ -3,13 +3,21 @@
  	 * @param $scope The Widget wrapper element as a jQuery element
 	 * @param $ The jQuery alias
 	 */ 
-	var WidgetAIBlocksElementorHandler = function( $scope, $ ) {
+	var DH_Header = function( $scope, $ ) {
+
+		var toggle = $scope.find('.dh-page-header-calc-toggle');
+		var content = $scope.find('.dh-page-header-calc-text');
+
+		$(toggle).on('click', function(){
+			$(toggle).toggleClass('active');
+			$(content).slideToggle(300);
+		})
 		
 	};
 	
 	// Make sure you run this code under Elementor.
 	$( window ).on( 'elementor/frontend/init', function() {
-		elementorFrontend.hooks.addAction( 'frontend/element_ready/duurzaamthuis-widgets.default', WidgetAIBlocksElementorHandler );
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-page-header.default', DH_Header );
 	} );
 
 } )( jQuery );

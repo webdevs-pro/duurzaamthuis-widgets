@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'dh-icons';
   src:
-    url('fonts/dh-icons.ttf?hvgre5') format('truetype'),
-    url('fonts/dh-icons.woff?hvgre5') format('woff'),
-    url('fonts/dh-icons.svg?hvgre5#dh-icons') format('svg');
+    url('fonts/dh-icons.ttf?5nrrxl') format('truetype'),
+    url('fonts/dh-icons.woff?5nrrxl') format('woff'),
+    url('fonts/dh-icons.svg?5nrrxl#dh-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,51 +24,51 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dh-icon-arrow-right:before {
+  content: "\e90e";
+}
+.dh-icon-arrow-left:before {
+  content: "\e90f";
+}
+.dh-icon-arrow-up:before {
+  content: "\e90c";
+}
+.dh-icon-arrow-down:before {
+  content: "\e90d";
+}
 .dh-icon-info:before {
   content: "\e90b";
-  color: #fff;
 }
 .dh-icon-clock:before {
   content: "\e909";
-  color: #fff;
 }
 .dh-icon-comments:before {
   content: "\e90a";
-  color: #fff;
 }
 .dh-icon-table:before {
   content: "\e906";
-  color: #e0e1e3;
 }
 .dh-icon-anchor-navigation:before {
   content: "\e907";
-  color: #e0e1e3;
 }
 .dh-icon-image-heading-text:before {
   content: "\e908";
-  color: #e0e1e3;
 }
 .dh-icon-user:before {
   content: "\e900";
-  color: #fff;
 }
 .dh-icon-benefit:before {
   content: "\e901";
-  color: #fff;
 }
 .dh-icon-price:before {
   content: "\e902";
-  color: #fff;
 }
 .dh-icon-payback:before {
   content: "\e903";
-  color: #fff;
 }
 .dh-icon-convenience:before {
   content: "\e904";
-  color: #fff;
 }
 .dh-icon-subsidy:before {
   content: "\e905";
-  color: #fff;
 }
