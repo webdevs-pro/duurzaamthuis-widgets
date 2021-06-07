@@ -93,37 +93,87 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
 
                <?php if ( $settings['show_infobar'] ) { ?>
-                  <div class="dh-page-header-features">
-                     <div class="dh-page-header-features-title">Impact</div>
-                     <div class="dh-page-header-feature">
-                        <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-benefit"></i>Milieuwinst</div>
-                        <div class="dh-page-header-feature-value"><?php echo get_post_meta( $post_id, 'milieuwinst', true ); ?> kilo CO2</div>
+                  <?php
+                     $milieuwinst = get_post_meta( $post_id, 'milieuwinst', true );
+                     if ( is_numeric( $milieuwinst ) ) {
+                        $milieuwinst = $milieuwinst . ' kilo CO2';
+                     } 
+
+                     $prijs = get_post_meta( $post_id, 'prijs', true );
+                     if ( is_numeric( $prijs ) ) {
+                        $prijs = $prijs . ' euro p/j';
+                     } 
+
+                     $terugverdientijd = get_post_meta( $post_id, 'terugverdientijd', true );
+                     if ( is_numeric( $terugverdientijd ) ) {
+                        $terugverdientijd = $terugverdientijd . ' jaar';
+                     } 
+
+                     $gemak = get_post_meta( $post_id, 'gemak', true );
+                     if ( is_numeric( $gemak ) ) {
+                        $gemak = $gemak . ' uur';
+                     } 
+
+                     $subsidie = get_post_meta( $post_id, 'subsidie', true );
+
+                     $calculations_text = get_post_meta( $post_id, 'calculations-text', true );
+
+
+
+
+                  ?>
+                  <div class="dh-page-header-impact">
+                     <div class="dh-page-header-features">
+                        <div class="dh-page-header-features-title">Impact</div>
+                        <?php if ( $milieuwinst ) { ?>
+                           <div class="dh-page-header-feature">
+                              <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-benefit"></i>Milieuwinst</div>
+                              <div class="dh-page-header-feature-value"><?php echo $milieuwinst; ?></div>
+                           </div>
+                        <?php } ?>
+
+                        <?php if ( $prijs ) { ?>
+                           <div class="dh-page-header-feature">
+                              <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-price"></i>Prijs</div>
+                              <div class="dh-page-header-feature-value"><?php echo $prijs; ?></div>
+                           </div>
+                        <?php } ?>
+
+                        <?php if ( $terugverdientijd ) { ?>
+                           <div class="dh-page-header-feature">
+                              <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-payback"></i>Terugverdientijd</div>
+                              <div class="dh-page-header-feature-value"><?php echo $terugverdientijd; ?></div>
+                           </div>
+                        <?php } ?>
+
+                        <?php if ( $gemak ) { ?>
+                           <div class="dh-page-header-feature">
+                              <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-convenience"></i>Gemak</div>
+                              <div class="dh-page-header-feature-value"><?php echo $gemak; ?></div>
+                           </div>
+                        <?php } ?>
+
+                        <?php if ( $subsidie ) { ?>
+                           <div class="dh-page-header-feature">
+                              <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie</div>
+                              <div class="dh-page-header-feature-value"><?php echo $subsidie; ?></div>
+                           </div>
+                        <?php } ?>
                      </div>
-                     <div class="dh-page-header-feature">
-                        <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-price"></i>Prijs</div>
-                        <div class="dh-page-header-feature-value"><?php echo get_post_meta( $post_id, 'prijs', true ); ?> euro p/j</div>
-                     </div>
-                     <div class="dh-page-header-feature">
-                        <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-payback"></i>Terugverdientijd</div>
-                        <div class="dh-page-header-feature-value"><?php echo get_post_meta( $post_id, 'terugverdientijd', true ); ?> jaar</div>
-                     </div>
-                     <div class="dh-page-header-feature">
-                        <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-convenience"></i>Gemak</div>
-                        <div class="dh-page-header-feature-value"><?php echo get_post_meta( $post_id, 'gemak', true ); ?> uur</div>
-                     </div>
-                     <div class="dh-page-header-feature">
-                        <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie</div>
-                        <div class="dh-page-header-feature-value"><?php echo get_post_meta( $post_id, 'subsidie', true ); ?></div>
-                     </div>
-                     <div class="dh-page-header-calc">
-                        <div class="dh-page-header-calc-toggle">
-                           <div class="close">Close Calculation<i class="dh-icon dh-icon-arrow-up"></i></div>
-                           <div class="open">Open Calculation<i class="dh-icon dh-icon-arrow-down"></i></div>
+
+
+                     <?php if ( $calculations_text ) { ?>
+                        <div class="dh-page-header-calc">
+                           <div class="dh-page-header-calc-toggle">
+                              <div class="close">Close Calculation<i class="dh-icon dh-icon-arrow-up"></i></div>
+                              <div class="open">Open Calculation<i class="dh-icon dh-icon-arrow-down"></i></div>
+                           </div>
+                           <div class="dh-page-header-calc-text"><?php echo $calculations_text; ?></div>
                         </div>
-                        <div class="dh-page-header-calc-text"><?php echo get_post_meta( $post_id, 'calculations-text', true ); ?></div>
-                     </div>
+                     <?php } ?>
                   </div>
                <?php } ?>
+
 
 
                <div class="dh-page-header-footer">
