@@ -25,17 +25,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+	// elementor.settings.page.addChangeCallback("dh_template", function (newValue) {
+	// 	elementor.saver.update.apply().then(function () {
+	// 		elementor.reloadPreview();
+	// 	});
+	// });
 
 
 

@@ -199,14 +199,7 @@ class DH_Impact_Fields {
 				'button',
 				[
 					'type' => \Elementor\Controls_Manager::RAW_HTML,
-					'raw' => '<button class="elementor-update-preview-button elementor-button elementor-button-success" onclick="elementor.reloadPreview();">Reload Preview</button>',
-				]
-			);
-			$post->add_control(
-				'description',
-				[
-					'type' => \Elementor\Controls_Manager::RAW_HTML,
-					'raw' => '<div class="elementor-control-field-description">To see the changes, save the document and click "Reload Preview" button.</div>',
+					'raw' => '<button class="elementor-update-preview-button elementor-button elementor-button-success" onclick="elementor.saver.update.apply().then(function(){elementor.reloadPreview();});">Update And Reload Preview</button>',
 				]
 			);
 		$post->end_controls_section(); 
