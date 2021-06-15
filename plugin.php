@@ -119,3 +119,125 @@ function post_read_time( $post_id ) {
 	$readingtime = ceil( $word_count / 200);
 	return $readingtime;
 }
+
+
+
+
+
+
+
+/**
+ * 
+ * class for adding Impact meta section to Elementor page/post settings
+ * 
+ */
+class DH_Impact_Fields {
+	public function __construct() {
+		add_action( 'elementor/element/wp-post/document_settings/after_section_end', [ $this, 'add_post_settings_controls' ] );
+		add_action( 'elementor/element/wp-page/document_settings/after_section_end', [ $this, 'add_page_settings_controls' ] );
+		add_action( 'elementor/document/after_save', [ $this, 'save_settings' ], 10, 2 );
+	}
+	public function add_post_settings_controls( \Elementor\Core\DocumentTypes\Post $post ) {
+		$this->add_controls( $post );
+	}
+	public function add_page_settings_controls( \Elementor\Core\DocumentTypes\Page $page ) {
+		$this->add_controls( $page );
+	}
+	public function add_controls( $post ) {
+		$post->start_controls_section( 'section_impact', [
+			'label' => __( 'Impact', 'magnific-addons' ),
+			'tab' => \Elementor\Controls_Manager::TAB_SETTINGS, // https://developers.elementor.com/elementor-element-panel-tabs/
+		]);
+			$post->add_control(
+				'milieuwinst',
+				[
+					'label' => __( 'Milieuwinst', 'plugin-domain' ),
+					'type' => \Elementor\Controls_Manager::TEXT,
+					// 'default' => '-',
+				]
+			);
+			$post->add_control(
+				'prijs',
+				[
+					'label' => __( 'Prijs', 'plugin-domain' ),
+					'type' => \Elementor\Controls_Manager::TEXT,
+					// 'default' => '-',
+				]
+			);
+			$post->add_control(
+				'terugverdientijd',
+				[
+					'label' => __( 'Terugverdientijd', 'plugin-domain' ),
+					'type' => \Elementor\Controls_Manager::TEXT,
+					// 'default' => '-',
+				]
+			);
+			$post->add_control(
+				'gemak',
+				[
+					'label' => __( 'Gemak', 'plugin-domain' ),
+					'type' => \Elementor\Controls_Manager::TEXT,
+					// 'default' => '-',
+				]
+			);
+			$post->add_control(
+				'subsidie',
+				[
+					'label' => __( 'Subsidie', 'plugin-domain' ),
+					'type' => \Elementor\Controls_Manager::TEXT,
+					// 'default' => '-',
+				]
+			);
+			$post->add_control(
+				'calculations_text',
+				[
+					'label' => __( 'Calculations', 'plugin-domain' ),
+					'type' => \Elementor\Controls_Manager::WYSIWYG,
+				]
+			);
+			$post->add_control(
+				'button',
+				[
+					'type' => \Elementor\Controls_Manager::RAW_HTML,
+					'raw' => '<button class="elementor-update-preview-button elementor-button elementor-button-success" onclick="elementor.reloadPreview();">Reload Preview</button>',
+				]
+			);
+			$post->add_control(
+				'description',
+				[
+					'type' => \Elementor\Controls_Manager::RAW_HTML,
+					'raw' => '<div class="elementor-control-field-description">To see the changes, save the document and click "Reload Preview" button.</div>',
+				]
+			);
+		$post->end_controls_section(); 
+	}
+	public function save_settings( $instance, $data ) {
+		// error_log( "instance\n" . print_r($instance, true) . "\n");
+		// error_log( "data\n" . print_r($data, true) . "\n");
+
+		$post_id = $instance->get_post()->ID;
+		// error_log( "post_id\n" . print_r($post_id, true) . "\n" );
+
+		if ( empty( $data) ) return;
+
+		$settings = $data['settings'];
+
+		update_post_meta( $post_id, 'milieuwinst', $settings['milieuwinst'] ?? '-' );
+		update_post_meta( $post_id, 'prijs', $settings['prijs'] ?? '-');
+		update_post_meta( $post_id, 'terugverdientijd', $settings['terugverdientijd'] ?? '-' );
+		update_post_meta( $post_id, 'gemak', $settings['gemak'] ?? '-' );
+		update_post_meta( $post_id, 'subsidie', $settings['subsidie'] ?? '-' );
+		update_post_meta( $post_id, 'calculations-text', $settings['calculations_text'] ?? '' );
+
+
+		// https://developers.elementor.com/elementor-document-settings/
+	}
+}
+new DH_Impact_Fields();
+
+
+
+
+
+
+

@@ -20,4 +20,26 @@
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-page-header.default', DH_Header );
 	} );
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 } )( jQuery );

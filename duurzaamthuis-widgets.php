@@ -3,13 +3,16 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custo Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.3.4
+ * Version:     0.3.6
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
 
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+require_once ( dirname( __FILE__ ) . '/inc/custom-templates.php' );
+
 
 
 final class Duurzaamthuis_Widgets {

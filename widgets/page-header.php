@@ -27,7 +27,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-page-header';
+		return 'dh-icon dh-icon-post-header';
 	}
 
 	public function get_categories() {
@@ -52,7 +52,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
             'label_on' => __( 'Show', 'your-plugin' ),
             'label_off' => __( 'Hide', 'your-plugin' ),
             'return_value' => 'yes',
-            'default' => 'yes',
+            'default' => '',
          ]);
 
 		$this->end_controls_section(); 
@@ -128,7 +128,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                         <?php if ( $milieuwinst ) { ?>
                            <div class="dh-page-header-feature">
                               <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-benefit"></i>Milieuwinst</div>
-                              <div class="dh-page-header-feature-value"><?php echo $milieuwinst; ?></div>
+                              <div class="dh-page-header-feature-value milieuwinst"><?php echo $milieuwinst; ?></div>
                            </div>
                         <?php } ?>
 
