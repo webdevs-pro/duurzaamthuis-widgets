@@ -11,7 +11,12 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-require_once ( dirname( __FILE__ ) . '/inc/custom-templates.php' );
+define( 'DH_PLUGIN_DIR', dirname( __FILE__ ) ); // for php
+define( 'DH_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) ); // for assets
+
+
+// includes
+require_once ( DH_PLUGIN_DIR . '/inc/modules/dh-templates/dh-templates.php' );
 
 
 
@@ -128,7 +133,7 @@ new Duurzaamthuis_Widgets();
 
 
 // plugin updates
-require 'plugin-update-checker/plugin-update-checker.php';
+require 'inc/vendor/plugin-update-checker/plugin-update-checker.php';
 $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 	'https://github.com/webdevs-pro/duurzaamthuis-widgets',
 	__FILE__,

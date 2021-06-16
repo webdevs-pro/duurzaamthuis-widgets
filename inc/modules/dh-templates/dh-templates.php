@@ -168,14 +168,11 @@ class DH_Custom_Templates {
 
 
 	public function misha_enqueue_quick_edit_population( $pagehook ) {
-
 		// do nothing if we are not on the target pages
 		if ( 'edit.php' != $pagehook ) {
 			return;
 		}
-	
-		wp_enqueue_script( 'populatequickedit', plugins_url( '/assets/admin.js', __FILE__ ), array( 'jquery' ) );
-	
+		wp_enqueue_script( 'dh-templates', DH_PLUGIN_DIR_URL . 'inc/modules/dh-templates/assets/admin.js', array( 'jquery' ) );
 	}
 
 
