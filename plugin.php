@@ -145,13 +145,13 @@ class DH_Impact_Fields {
 	}
 	public function add_controls( $post ) {
 		$post->start_controls_section( 'section_impact', [
-			'label' => __( 'Impact', 'magnific-addons' ),
+			'label' => __( 'Impact', 'duurzaamthuis' ),
 			'tab' => \Elementor\Controls_Manager::TAB_SETTINGS, // https://developers.elementor.com/elementor-element-panel-tabs/
 		]);
 			$post->add_control(
 				'milieuwinst',
 				[
-					'label' => __( 'Milieuwinst', 'plugin-domain' ),
+					'label' => __( 'Milieuwinst', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::TEXT,
 					// 'default' => '-',
 				]
@@ -159,7 +159,7 @@ class DH_Impact_Fields {
 			$post->add_control(
 				'prijs',
 				[
-					'label' => __( 'Prijs', 'plugin-domain' ),
+					'label' => __( 'Prijs', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::TEXT,
 					// 'default' => '-',
 				]
@@ -167,7 +167,7 @@ class DH_Impact_Fields {
 			$post->add_control(
 				'terugverdientijd',
 				[
-					'label' => __( 'Terugverdientijd', 'plugin-domain' ),
+					'label' => __( 'Terugverdientijd', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::TEXT,
 					// 'default' => '-',
 				]
@@ -175,7 +175,7 @@ class DH_Impact_Fields {
 			$post->add_control(
 				'gemak',
 				[
-					'label' => __( 'Gemak', 'plugin-domain' ),
+					'label' => __( 'Gemak', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::TEXT,
 					// 'default' => '-',
 				]
@@ -183,7 +183,7 @@ class DH_Impact_Fields {
 			$post->add_control(
 				'subsidie',
 				[
-					'label' => __( 'Subsidie', 'plugin-domain' ),
+					'label' => __( 'Subsidie', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::TEXT,
 					// 'default' => '-',
 				]
@@ -191,7 +191,7 @@ class DH_Impact_Fields {
 			$post->add_control(
 				'calculations_text',
 				[
-					'label' => __( 'Calculations', 'plugin-domain' ),
+					'label' => __( 'Calculations', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::WYSIWYG,
 				]
 			);

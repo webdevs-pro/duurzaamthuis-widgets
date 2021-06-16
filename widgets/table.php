@@ -38,7 +38,7 @@ class DH_Table extends \Elementor\Widget_Base {
 
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
-         'label' => __( 'Content', 'magnific-addons' ),
+         'label' => __( 'Content', 'duurzaamthuis' ),
          'tab' => Controls_Manager::TAB_CONTENT,
       ]);
 

@@ -42,12 +42,12 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
-         'label' => __( 'Content', 'magnific-addons' ),
+         'label' => __( 'Content', 'duurzaamthuis' ),
          'tab' => Controls_Manager::TAB_CONTENT,
       ]);
 
          $this->add_control( 'show_infobar', [
-            'label' => __( 'Show Infobar', 'plugin-domain' ),
+            'label' => __( 'Show Infobar', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::SWITCHER,
             'label_on' => __( 'Show', 'your-plugin' ),
             'label_off' => __( 'Hide', 'your-plugin' ),

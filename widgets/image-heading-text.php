@@ -38,7 +38,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'section_content',
 			[
-				'label' => __( 'Content', 'magnific-addons' ),
+				'label' => __( 'Content', 'duurzaamthuis' ),
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -46,7 +46,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 			$this->add_control(
 				'image',
 				[
-					'label' => __( 'Choose Image', 'plugin-domain' ),
+					'label' => __( 'Choose Image', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::MEDIA,
 					'default' => [
 						'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -56,15 +56,15 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 			$this->add_control(
 				'image_align',
 				[
-					'label' => __( 'Image Column Alignment', 'plugin-domain' ),
+					'label' => __( 'Image Column Alignment', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::CHOOSE,
 					'options' => [
 						'left' => [
-							'title' => __( 'Left', 'plugin-domain' ),
+							'title' => __( 'Left', 'duurzaamthuis' ),
 							'icon' => 'eicon-h-align-left',
 						],
 						'right' => [
-							'title' => __( 'Right', 'plugin-domain' ),
+							'title' => __( 'Right', 'duurzaamthuis' ),
 							'icon' => 'eicon-h-align-right',
 						],
 					],
@@ -76,13 +76,13 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 			$this->add_control(
 				'image_width',
 				[
-					'label' => __( 'Image Column Width', 'plugin-domain' ),
+					'label' => __( 'Image Column Width', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::SELECT,
 					'default' => '50',
 					'options' => [
-						'33'  => __( '33%', 'plugin-domain' ),
-						'50' => __( '50%', 'plugin-domain' ),
-						'66' => __( '66%', 'plugin-domain' ),
+						'33'  => __( '33%', 'duurzaamthuis' ),
+						'50' => __( '50%', 'duurzaamthuis' ),
+						'66' => __( '66%', 'duurzaamthuis' ),
 					],
 					'prefix_class' => 'dh-image-width-',
 				]
@@ -90,7 +90,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 			$this->add_control(
 				'image_reverse',
 				[
-					'label' => __( 'Mobile Columns Reverse', 'plugin-domain' ),
+					'label' => __( 'Mobile Columns Reverse', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::SWITCHER,
 					'label_on' => __( 'Yes', 'your-plugin' ),
 					'label_off' => __( 'No', 'your-plugin' ),					
@@ -101,9 +101,9 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 			$this->add_control(
 				'heading',
 				[
-					'label' => __( 'Heading', 'plugin-domain' ),
+					'label' => __( 'Heading', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::TEXT,
-					'default' => __( 'Heading text', 'plugin-domain' ),
+					'default' => __( 'Heading text', 'duurzaamthuis' ),
 					'label_block' => true,
 					'separator' => 'before'
 				]
@@ -111,9 +111,9 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 			$this->add_control(
 				'content',
 				[
-					'label' => __( 'Content', 'plugin-domain' ),
+					'label' => __( 'Content', 'duurzaamthuis' ),
 					'type' => \Elementor\Controls_Manager::WYSIWYG,
-					'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'plugin-domain' ),
+					'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'duurzaamthuis' ),
 				]
 			);
 

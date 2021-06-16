@@ -36,14 +36,14 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
 
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
-         'label' => __( 'Content', 'magnific-addons' ),
+         'label' => __( 'Content', 'duurzaamthuis' ),
          'tab' => Controls_Manager::TAB_CONTENT,
       ]);
 
 			$this->add_control( 'heading', [
-            'label' => __( 'Heading', 'plugin-domain' ),
+            'label' => __( 'Heading', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::TEXT,
-            'default' => __( 'Heading text', 'plugin-domain' ),
+            'default' => __( 'Heading text', 'duurzaamthuis' ),
             'label_block' => true,
             'separator' => 'before'
          ]);
@@ -51,13 +51,13 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
          $repeater = new \Elementor\Repeater();
 
          $repeater->add_control( 'title', [
-            'label' => __( 'Title', 'plugin-domain' ),
+            'label' => __( 'Title', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::TEXT,
             'label_block' => true,
          ]);
    
          $repeater->add_control( 'anchor', [
-            'label' => __( 'Anchor', 'plugin-domain' ),
+            'label' => __( 'Anchor', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::TEXT,
             'label_block' => true,
          ]);
@@ -69,7 +69,7 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
          ]);
    
          $this->add_control( 'items', [
-            'label' => __( 'Items', 'plugin-domain' ),
+            'label' => __( 'Items', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
             'title_field' => '{{{ title }}}',
