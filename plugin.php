@@ -215,12 +215,12 @@ class DH_Impact_Fields {
 
 		$settings = $data['settings'];
 
-		update_post_meta( $post_id, 'milieuwinst', $settings['milieuwinst'] ?? '-' );
-		update_post_meta( $post_id, 'prijs', $settings['prijs'] ?? '-');
-		update_post_meta( $post_id, 'terugverdientijd', $settings['terugverdientijd'] ?? '-' );
-		update_post_meta( $post_id, 'gemak', $settings['gemak'] ?? '-' );
-		update_post_meta( $post_id, 'subsidie', $settings['subsidie'] ?? '-' );
-		update_post_meta( $post_id, 'calculations-text', $settings['calculations_text'] ?? '' );
+		update_post_meta( $post_id, 'milieuwinst', $settings['milieuwinst'] );
+		update_post_meta( $post_id, 'prijs', $settings['prijs'] );
+		update_post_meta( $post_id, 'terugverdientijd', $settings['terugverdientijd'] );
+		update_post_meta( $post_id, 'gemak', $settings['gemak'] );
+		update_post_meta( $post_id, 'subsidie', $settings['subsidie'] );
+		update_post_meta( $post_id, 'calculations-text', $settings['calculations_text'] );
 
 
 		// https://developers.elementor.com/elementor-document-settings/
