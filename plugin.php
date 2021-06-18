@@ -205,25 +205,18 @@ class DH_Impact_Fields {
 		$post->end_controls_section(); 
 	}
 	public function save_settings( $instance, $data ) {
-		// error_log( "instance\n" . print_r($instance, true) . "\n");
-		// error_log( "data\n" . print_r($data, true) . "\n");
-
 		$post_id = $instance->get_post()->ID;
-		// error_log( "post_id\n" . print_r($post_id, true) . "\n" );
 
 		if ( empty( $data) ) return;
 
 		$settings = $data['settings'];
 
-		update_post_meta( $post_id, 'milieuwinst', $settings['milieuwinst'] );
-		update_post_meta( $post_id, 'prijs', $settings['prijs'] );
-		update_post_meta( $post_id, 'terugverdientijd', $settings['terugverdientijd'] );
-		update_post_meta( $post_id, 'gemak', $settings['gemak'] );
-		update_post_meta( $post_id, 'subsidie', $settings['subsidie'] );
-		update_post_meta( $post_id, 'calculations-text', $settings['calculations_text'] );
-
-
-		// https://developers.elementor.com/elementor-document-settings/
+		update_post_meta( $post_id, 'milieuwinst', $settings['milieuwinst'] ?? '' );
+		update_post_meta( $post_id, 'prijs', $settings['prijs'] ?? '' );
+		update_post_meta( $post_id, 'terugverdientijd', $settings['terugverdientijd'] ?? '' );
+		update_post_meta( $post_id, 'gemak', $settings['gemak'] ?? '' );
+		update_post_meta( $post_id, 'subsidie', $settings['subsidie'] ?? '' );
+		update_post_meta( $post_id, 'calculations-text', $settings['calculations_text'] ?? '' );
 	}
 }
 new DH_Impact_Fields();

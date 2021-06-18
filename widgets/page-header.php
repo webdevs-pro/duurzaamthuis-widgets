@@ -144,36 +144,33 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                <h1 class="dh-page-header-title"><?php echo get_the_title( $post_id ); ?></h1>
 
 
-               <?php if ( $settings['show_infobar'] ) { ?>
-                  <?php
-                     $milieuwinst = get_post_meta( $post_id, 'milieuwinst', true );
-                     if ( is_numeric( $milieuwinst ) ) {
-                        $milieuwinst = $milieuwinst . ' kilo CO2';
-                     } 
+               
+               <?php
+                  $milieuwinst = get_post_meta( $post_id, 'milieuwinst', true );
+                  if ( is_numeric( $milieuwinst ) ) {
+                     $milieuwinst = $milieuwinst . ' kilo CO2';
+                  } 
 
-                     $prijs = get_post_meta( $post_id, 'prijs', true );
-                     if ( is_numeric( $prijs ) ) {
-                        $prijs = $prijs . ' euro p/j';
-                     } 
+                  $prijs = get_post_meta( $post_id, 'prijs', true );
+                  if ( is_numeric( $prijs ) ) {
+                     $prijs = $prijs . ' euro p/j';
+                  } 
 
-                     $terugverdientijd = get_post_meta( $post_id, 'terugverdientijd', true );
-                     if ( is_numeric( $terugverdientijd ) ) {
-                        $terugverdientijd = $terugverdientijd . ' jaar';
-                     } 
+                  $terugverdientijd = get_post_meta( $post_id, 'terugverdientijd', true );
+                  if ( is_numeric( $terugverdientijd ) ) {
+                     $terugverdientijd = $terugverdientijd . ' jaar';
+                  } 
 
-                     $gemak = get_post_meta( $post_id, 'gemak', true );
-                     if ( is_numeric( $gemak ) ) {
-                        $gemak = $gemak . ' uur';
-                     } 
+                  $gemak = get_post_meta( $post_id, 'gemak', true );
+                  if ( is_numeric( $gemak ) ) {
+                     $gemak = $gemak . ' uur';
+                  } 
 
-                     $subsidie = get_post_meta( $post_id, 'subsidie', true );
-
-                     $calculations_text = get_post_meta( $post_id, 'calculations-text', true );
-
-
-
-
-                  ?>
+                  $subsidie = get_post_meta( $post_id, 'subsidie', true );
+                  $calculations_text = get_post_meta( $post_id, 'calculations-text', true );
+               ?>
+                  
+               <?php if ( $settings['show_infobar'] && ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie ) ) : ?>
                   <div class="dh-page-header-impact">
                      <div class="dh-page-header-features">
                         <div class="dh-page-header-features-title">Impact</div>
@@ -224,7 +221,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                         </div>
                      <?php } ?>
                   </div>
-               <?php } ?>
+               <?php endif; ?>
 
 
 

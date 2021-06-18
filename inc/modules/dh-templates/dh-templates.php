@@ -18,7 +18,8 @@ class DH_Custom_Templates {
 		add_action( 'manage_page_posts_custom_column', [ $this, 'print_post_column' ], 10, 2);
 		add_action( 'quick_edit_custom_box', [ $this, 'add_quick_edit_control' ], 10, 2 );
 		add_action( 'bulk_edit_custom_box', [ $this, 'add_quick_edit_control' ], 10, 2 );
-		// add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_script' ] );
+		add_action( 'load-post.php',     array( $this, 'init_metabox' ) );
+		add_action( 'load-post-new.php', array( $this, 'init_metabox' ) );
 		add_action( 'admin_print_footer_scripts-edit.php', [ $this, 'print_admin_script' ] );
 		add_action( 'save_post', [ $this, 'save_quick_edit_control' ], 10, 2 );
 		add_action( 'wp_ajax_dh_template_save_bulk', [ $this, 'seve_bulk_edit_control' ] ); 
@@ -108,7 +109,6 @@ class DH_Custom_Templates {
 						<label class="inline-edit-group">
 							<?php
 							if ( $column_name === 'dh_template' ) {
-								// $views = (int) get_post_meta( get_the_ID(), 'views', true );
 								$templates = get_terms(
 									array(
 										'taxonomy' => 'dh_templates',
@@ -144,25 +144,85 @@ class DH_Custom_Templates {
 
 
 	public function save_quick_edit_control( $post_id, $post ) {
-		
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return $post_id;
 		}
-		
 		if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return $post_id;
 		}
-		
 		if ( ! isset( $_REQUEST['_inline_edit'] ) || ! wp_verify_nonce( $_REQUEST['_inline_edit'], 'inlineeditnonce' ) ) {
 			return $post_id;
 		}
-		
 		if ( isset( $_POST['dh_template'] ) ) {
 			wp_set_post_terms( $post_id, (int) $_POST['dh_template'], 'dh_templates', false);
 		}
-		error_log( "POST\n" . print_r($_POST, true) . "\n" );
-	
 		return $post_id;
+	}
+
+
+	public function init_metabox() {
+		add_action( 'add_meta_boxes', [ $this, 'add_metabox' ] );
+		add_action( 'save_post', [ $this, 'save_metabox' ], 10, 2 );
+	}
+
+
+	public function add_metabox() {
+		add_meta_box(
+			'dh-template',
+			__( 'DH Template', 'duurzaamthuis' ),
+			[ $this, 'render_metabox' ],
+			[ 'post', 'page' ],
+			'side',
+			'high',
+			[ '__back_compat_meta_box' => false ]
+		);
+	}
+
+
+	public function render_metabox( $post ) {
+		wp_nonce_field( 'dh_template_nonce_action', 'dh_template_nonce' );
+		$templates = get_terms(
+			array(
+				'taxonomy' => 'dh_templates',
+				'hide_empty' => false,
+			)
+		);
+		$current_template = get_the_terms( get_the_ID(), 'dh_templates' );
+		if ( ! empty( $current_template ) ) {
+			$current_template = $current_template[0]->term_id;
+		}
+		?>
+		<select class="dh_template" name="dh_template">
+			<option value="0"><?php echo __( 'None', 'duurzaamthuis' ); ?></option>
+			<?php foreach ( $templates as $template ) {
+				if ( $template->term_id == $current_template ) {
+					echo '<option selected value="' . $template->term_id . '">' . $template->name . '</option>';
+				} else {
+					echo '<option value="' . $template->term_id . '">' . $template->name . '</option>';
+				}
+			} ?>
+		</select>
+		<?php
+	}
+
+
+	public function save_metabox( $post_id, $post ) {
+		// Add nonce for security and authentication.
+		$nonce_name = isset( $_POST['dh_template_nonce'] ) ? $_POST['dh_template_nonce'] : '';
+		$nonce_action = 'dh_template_nonce_action';
+		if ( ! wp_verify_nonce( $nonce_name, $nonce_action ) ) {
+			return;
+		}
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+		if ( wp_is_post_autosave( $post_id ) ) {
+			return;
+		}
+		if ( wp_is_post_revision( $post_id ) ) {
+			return;
+		}
+		wp_set_post_terms( $post_id, (int) $_POST['dh_template'], 'dh_templates', false);
 	}
 
 
@@ -303,20 +363,14 @@ class DH_Custom_Templates {
 		$post_id = $instance->get_post()->ID;
 		if ( empty( $data) ) return;
 		$settings = $data['settings'];
-      // error_log( "settings\n" . print_r($settings, true) . "\n" );
-		wp_set_post_terms( $post_id, (int) $settings['dh_template'], 'dh_templates', false);
+      // error_log( "settings template\n" . print_r($settings, true) . "\n" );
+		if ( isset( $settings['dh_template'] ) ) {
+			wp_set_post_terms( $post_id, (int) $settings['dh_template'], 'dh_templates', false );
+		}
 	}
 
 }
 new DH_Custom_Templates();
-
-
-
-
-
-
-
-
 
 
 
