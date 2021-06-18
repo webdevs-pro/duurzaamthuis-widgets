@@ -144,21 +144,23 @@ class DH_Custom_Templates {
 
 
 	public function save_quick_edit_control( $post_id, $post ) {
+		
 		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return $post_id;
 		}
-	
-		if ( 'post' !== $post->post_type || ! current_user_can( 'edit_post', $post_id ) ) {
+		
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
 			return $post_id;
 		}
-	
+		
 		if ( ! isset( $_REQUEST['_inline_edit'] ) || ! wp_verify_nonce( $_REQUEST['_inline_edit'], 'inlineeditnonce' ) ) {
 			return $post_id;
 		}
-
+		
 		if ( isset( $_POST['dh_template'] ) ) {
 			wp_set_post_terms( $post_id, (int) $_POST['dh_template'], 'dh_templates', false);
 		}
+		error_log( "POST\n" . print_r($_POST, true) . "\n" );
 	
 		return $post_id;
 	}
@@ -180,8 +182,11 @@ class DH_Custom_Templates {
 					if(id > 0) {
 						var specific_post_edit_row = $('#edit-' + id);
 						var specific_post_row = $('#post-' + id);
-						var term_id = $('.dh_template', specific_post_row ).text().match(/\(([^)]+)\)/)[1];
-						$('select[name="dh_template"]', specific_post_edit_row ).val(term_id);
+						var term = $('.dh_template', specific_post_row ).text().match(/\(([^)]+)\)/);
+						if(term) {
+							$('select[name="dh_template"]', specific_post_edit_row ).val(term[1]);
+						}
+						
 					}
 				}
 
@@ -214,14 +219,9 @@ class DH_Custom_Templates {
 		if( empty( $_POST[ 'post_ids' ] ) ) {
 			die();
 		}
-	
-		// for each post ID
 		foreach( $_POST[ 'post_ids' ] as $id ) {
-	
 			wp_set_post_terms( $id, (int) $_POST['dh_template'], 'dh_templates', false);
-	
 		}
-	
 		die();
 	}
 
