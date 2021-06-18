@@ -136,7 +136,6 @@
    background-size: cover;
    background-position: center center;
    flex-direction: column;
-   color: #fff;
    padding-top: 200px;
    padding-bottom: 40px;
    padding-left: 20px;
@@ -154,11 +153,6 @@
 .dh-page-header-tag a {
    text-transform: uppercase;
    font-weight: 600;
-   color: #fff;
-}
-.dh-page-header-tag:first-child {
-   background-color: #769179;
-
 }
 .dh-page-header-impact {
    padding: 20px;
@@ -221,7 +215,6 @@
 }
 .dh-page-header-feature-title i {
    margin-right: 10px;
-   color: #54cc8b;
 }
 .dh-page-header-feature-value {
    margin-left: 26px;
@@ -281,7 +274,7 @@
       flex-direction: column;
    }
 }
-.dh-page-header-meta {
+.dh-page-header-meta-items {
    display: inline-flex;
    margin-bottom: 10px;
 }
@@ -297,7 +290,6 @@
 }
 .dh-page-header-meta-item i {
    margin-right: 7px;
-   color: #769179;
 }
 .dh-page-header-breadcrumbs {
    display: inline-block;
@@ -308,5 +300,4 @@
 .dh-page-header-breadcrumbs i {
    font-size: 0.8em;
    margin: 0;
-   color: #fff;
 }

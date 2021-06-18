@@ -14,20 +14,19 @@ function icons_font_styles() {
 
 
 // register widgets
-new DH_Register_Widgets();
 class DH_Register_Widgets {
 	public function __construct() {
 		$this->add_actions();
 	}
 	private function add_actions() {
-
+		
 		add_action( 'elementor/widgets/widgets_registered', [ $this, 'on_widgets_registered' ] );
-
+		
 		add_action( 'elementor/frontend/after_register_scripts', function() {
 			// to do replace time() with plugin version
 			wp_register_script( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.js', __FILE__ ), array( 'jquery' ), time(), true );
 		});
-
+		
 		add_action( 'elementor/frontend/after_enqueue_styles', function() {
 			// to do replace time() with plugin version
 			wp_enqueue_style( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.css', __FILE__ ), array(), time() ); 
@@ -52,6 +51,7 @@ class DH_Register_Widgets {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Page_Header() );
 	}
 }
+new DH_Register_Widgets();
 
 
 

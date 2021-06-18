@@ -58,6 +58,58 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 		$this->end_controls_section(); 
 
 
+		// SECTION STYLE
+		$this->start_controls_section( 'section_style', [
+         'label' => __( 'Style', 'duurzaamthuis' ),
+         'tab' => Controls_Manager::TAB_STYLE,
+      ]);
+
+         $this->add_control( 'text_color', [
+            'label' => __( 'Text Color', 'duurzaamthuis' ),
+            'type' => \Elementor\Controls_Manager::COLOR,
+            'default' => '#FFFFFF',
+            'selectors' => [
+               '{{WRAPPER}} .dh-page-header-title' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-features-title' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-feature-title' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-feature-value' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-meta' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-calc-toggle .open' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-calc-toggle .close' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-calc-text' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-tag a' => 'color: {{VALUE}}',
+               '{{WRAPPER}} ..dh-page-header-breadcrumbs i' => 'color: {{VALUE}}',
+
+            ],
+         ]);
+         $this->add_control( 'first_tag_background_color', [
+            'label' => __( 'First Tag Background Color', 'duurzaamthuis' ),
+            'type' => \Elementor\Controls_Manager::COLOR,
+            'default' => '#769179',
+            'selectors' => [
+               '{{WRAPPER}} .dh-page-header-tag:first-child' => 'color: {{VALUE}}',
+            ],
+         ]);
+         $this->add_control( 'impact_icons_color', [
+            'label' => __( 'Impact Icons Color', 'duurzaamthuis' ),
+            'type' => \Elementor\Controls_Manager::COLOR,
+            'default' => '#54CC8B',
+            'selectors' => [
+               '{{WRAPPER}} .dh-page-header-feature-title i' => 'color: {{VALUE}}',
+            ],
+         ]);
+         $this->add_control( 'meta_icons_color', [
+            'label' => __( 'Meta Icons Color', 'duurzaamthuis' ),
+            'type' => \Elementor\Controls_Manager::COLOR,
+            'default' => '#769179',
+            'selectors' => [
+               '{{WRAPPER}} .dh-page-header-meta-item i' => 'color: {{VALUE}}',
+            ],
+         ]);
+
+		$this->end_controls_section(); 
+
+
 
 
 
@@ -177,22 +229,22 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
 
                <div class="dh-page-header-footer">
-                  <div class="dh-page-header-meta">
+                  <div class="dh-page-header-meta-items">
                      <div class="dh-page-header-meta-item">
                         <i class="dh-icon dh-icon-user"></i>
-                        <div class="dh-page-header-meta-author-name"><?php echo get_the_author(); ?></div>
+                        <a class="dh-page-header-meta dh-page-header-meta-author-name" href="<?php echo get_author_posts_url( get_the_author_meta('ID') ); ?>"><?php echo get_the_author(); ?></a>
                      </div>
                      <div class="dh-page-header-meta-item">
                         <i class="dh-icon dh-icon-comments"></i>
-                        <div class="dh-page-header-meta-comments-count"><?php echo get_comments_number(); ?></div>
+                        <div class="dh-page-header-meta dh-page-header-meta-comments-count"><?php echo get_comments_number(); ?></div>
                      </div>
                      <div class="dh-page-header-meta-item">
                         <i class="dh-icon dh-icon-clock"></i>
-                        <div class="dh-page-header-meta-comments-count"><?php echo post_read_time( $post_id ); ?> min leestijd</div>
+                        <div class="dh-page-header-meta dh-page-header-meta-reading-time"><?php echo post_read_time( $post_id ); ?> min leestijd</div>
                      </div>
                   </div>
                   <?php if ( function_exists('yoast_breadcrumb') ) { ?>
-                     <div class="dh-page-header-meta-item dh-page-header-breadcrumbs">
+                     <div class="dh-page-header-meta dh-page-header-meta-item dh-page-header-breadcrumbs">
                            <?php yoast_breadcrumb( '<nav class="yoast-breadcrumbs">', '</nav>' ); ?>
                      </div>
                   <?php } ?>
