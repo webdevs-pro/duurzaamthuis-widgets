@@ -136,10 +136,16 @@
    background-size: cover;
    background-position: center center;
    flex-direction: column;
+   flex-wrap: nowrap !important;
    padding-top: 200px;
    padding-bottom: 40px;
    padding-left: 20px;
    padding-right: 20px;
+}
+@media(max-width: 767px) {
+   .dh-page-header {
+      padding-top: 100px;
+   }
 }
 .dh-page-header-tags {
    display: flex;
@@ -161,15 +167,26 @@
    position: relative;
    backdrop-filter: blur(20px);
 }
-.dh-page-header-features {
+.dh-page-header-features-section {
    display: grid;
-   grid-template-columns: 100px repeat(5, 1fr);
+   grid-template-columns: 100px 1fr;
    column-gap: 20px;
 }
 @media(max-width: 767px) {
-   .dh-page-header-features {
-      grid-template-columns: 1fr 1fr;
+   .dh-page-header-features-section {
+      grid-template-columns: 1fr;
       row-gap: 15px;
+   }
+}
+.dh-page-header-features {
+   display: grid;
+   column-gap: 20px;
+   row-gap: 20px;
+   grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+}
+@media(max-width: 767px) {
+   .dh-page-header-features {
+      grid-template-columns: repeat(auto-fill,minmax(120px,1fr));
    }
 }
 .dh-page-header-features-title {
@@ -181,7 +198,6 @@
 }
 @media(max-width: 767px) {
    .dh-page-header-features-title {
-      grid-column: 1 / 3;
       padding-bottom: 10px;
    }
 }
@@ -213,12 +229,22 @@
    font-weight: bold;
    font-size: 14px;
 }
+@media(max-width: 767px) {
+   .dh-page-header-feature-title {
+      font-size: 12px;
+   }
+}
 .dh-page-header-feature-title i {
    margin-right: 10px;
 }
 .dh-page-header-feature-value {
    margin-left: 26px;
    font-size: 14px;
+}
+@media(max-width: 767px) {
+   .dh-page-header-feature-value {
+      font-size: 12px;
+   }
 }
 
 .dh-page-header-calc {
@@ -274,6 +300,9 @@
       flex-direction: column;
    }
 }
+.dh-page-header-footer a:hover {
+   text-decoration: underline;
+}
 .dh-page-header-meta-items {
    display: inline-flex;
    margin-bottom: 10px;
@@ -300,4 +329,11 @@
 .dh-page-header-breadcrumbs i {
    font-size: 0.8em;
    margin: 0;
+}
+
+.dh-page-intro {
+   padding-top: 60px;
+   padding-bottom: 60px;
+   font-weight: bold;
+   font-size: 18px;
 }
