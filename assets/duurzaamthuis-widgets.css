@@ -139,12 +139,12 @@
    flex-wrap: nowrap !important;
    padding-top: 200px;
    padding-bottom: 40px;
-   padding-left: 20px;
-   padding-right: 20px;
+   padding-left: 10px;
+   padding-right: 10px;
 }
 @media(max-width: 767px) {
    .dh-page-header {
-      padding-top: 100px;
+      padding-top: 50px;
    }
 }
 .dh-page-header-tags {
@@ -182,7 +182,13 @@
    display: grid;
    column-gap: 20px;
    row-gap: 20px;
-   grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+   grid-template-columns: repeat(5, 1fr);
+}
+
+@media(max-width: 1024px) {
+   .dh-page-header-features {
+      grid-template-columns: repeat(auto-fill,minmax(150px,1fr));
+   }
 }
 @media(max-width: 767px) {
    .dh-page-header-features {
@@ -334,6 +340,15 @@
 .dh-page-intro {
    padding-top: 60px;
    padding-bottom: 60px;
+   padding-left: 10px;
+   padding-right: 10px;
    font-weight: bold;
    font-size: 18px;
+}
+@media(max-width: 767px) {
+   .dh-page-intro {
+      padding-top: 30px;
+      padding-bottom: 30px;
+      font-size: 16px;
+   }
 }
