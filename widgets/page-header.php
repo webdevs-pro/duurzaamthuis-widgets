@@ -115,6 +115,14 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
 	}
 
+
+   public function is_number( $string ) {
+      $string = str_replace( ',', '.', $string );
+      error_log( "string\n" . print_r($string, true) . "\n" );
+      if ( is_numeric( $string ) ) return true;
+      return false;
+   }
+
 	protected function render() { // php template
 
 		$settings = $this->get_settings_for_display();
@@ -147,22 +155,22 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                
                <?php
                   $milieuwinst = get_post_meta( $post_id, 'milieuwinst', true );
-                  if ( is_numeric( $milieuwinst ) ) {
-                     $milieuwinst = $milieuwinst . ' kilo CO2';
+                  if ( $this->is_number( $milieuwinst ) ) {
+                     $milieuwinst = $milieuwinst . ' kilo СО<sub>2</sub>';
                   } 
 
                   $prijs = get_post_meta( $post_id, 'prijs', true );
-                  if ( is_numeric( $prijs ) ) {
+                  if ( $this->is_number( $prijs ) ) {
                      $prijs = $prijs . ' euro p/j';
                   } 
 
                   $terugverdientijd = get_post_meta( $post_id, 'terugverdientijd', true );
-                  if ( is_numeric( $terugverdientijd ) ) {
+                  if ( $this->is_number( $terugverdientijd ) ) {
                      $terugverdientijd = $terugverdientijd . ' jaar';
                   } 
 
                   $gemak = get_post_meta( $post_id, 'gemak', true );
-                  if ( is_numeric( $gemak ) ) {
+                  if ( $this->is_number( $gemak ) ) {
                      $gemak = $gemak . ' uur';
                   } 
 
@@ -183,7 +191,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
                         <?php if ( $prijs ) { ?>
                            <div class="dh-page-header-feature">
-                              <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-price"></i>Prijs</div>
+                              <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-price"></i>Kosten</div>
                               <div class="dh-page-header-feature-value"><?php echo $prijs; ?></div>
                            </div>
                         <?php } ?>

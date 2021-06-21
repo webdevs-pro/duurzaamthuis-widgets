@@ -202,6 +202,11 @@ class DH_Custom_Templates {
 				}
 			} ?>
 		</select>
+		<style>
+			.dh_template {
+				width: calc(100% - 36px);
+			}
+		</style>
 		<?php
 	}
 
@@ -371,12 +376,6 @@ class DH_Custom_Templates {
 
 }
 new DH_Custom_Templates();
-
-
-
-
-
-
 
 
 
