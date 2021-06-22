@@ -1,13 +1,13 @@
 <?php
 
-use Elementor\Widget_Base;
-use Elementor\Controls_Manager;
-use Elementor\Group_Control_Typography;
-use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Border;
-use Elementor\Scheme_Typography;
-use Elementor\Group_Control_Text_Shadow;
-use Elementor\Modules\DynamicTags\Module as TagsModule;
+// use Elementor\Widget_Base;
+// use Elementor\Controls_Manager;
+// use Elementor\Group_Control_Typography;
+// use Elementor\Group_Control_Background;
+// use Elementor\Group_Control_Border;
+// use Elementor\Scheme_Typography;
+// use Elementor\Group_Control_Text_Shadow;
+// use Elementor\Modules\DynamicTags\Module as TagsModule;
 
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -43,11 +43,11 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => Controls_Manager::TAB_CONTENT,
+         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
       ]);
 
          $this->add_control( 'show_infobar', [
-            'label' => __( 'Show Infobar', 'duurzaamthuis' ),
+            'label' => __( 'Show Impact Section', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::SWITCHER,
             'label_on' => __( 'Show', 'your-plugin' ),
             'label_off' => __( 'Hide', 'your-plugin' ),
@@ -61,7 +61,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 		// SECTION STYLE
 		$this->start_controls_section( 'section_style', [
          'label' => __( 'Style', 'duurzaamthuis' ),
-         'tab' => Controls_Manager::TAB_STYLE,
+         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
       ]);
 
          $this->add_control( 'text_color', [
@@ -118,10 +118,10 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
    public function is_number( $string ) {
       $string = str_replace( ',', '.', $string );
-      error_log( "string\n" . print_r($string, true) . "\n" );
       if ( is_numeric( $string ) ) return true;
       return false;
    }
+
 
 	protected function render() { // php template
 

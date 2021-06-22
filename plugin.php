@@ -43,12 +43,14 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/anchor-navigation.php';
 		require __DIR__ . '/widgets/table.php';
 		require __DIR__ . '/widgets/page-header.php';
+		require __DIR__ . '/widgets/product-comparison.php';
 	}
 	private function register_widget() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Anchor_Navigation() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Table() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Page_Header() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Product_Comparison() );
 	}
 }
 new DH_Register_Widgets();
