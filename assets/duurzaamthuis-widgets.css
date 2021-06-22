@@ -333,6 +333,7 @@
 }
 
 .dh-page-intro {
+   display: block;
    padding-top: 60px;
    padding-bottom: 60px;
    padding-left: 10px;
