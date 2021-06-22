@@ -339,7 +339,7 @@
    padding-left: 10px;
    padding-right: 10px;
    font-weight: bold;
-   font-size: 18px;
+   font-size: 15px;
 }
 @media(max-width: 767px) {
    .dh-page-intro {
