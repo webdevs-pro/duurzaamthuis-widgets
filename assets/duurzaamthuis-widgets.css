@@ -291,11 +291,6 @@
    font-size: 12px;
    font-weight: 600;
 }
-@media(max-width: 767px) {
-   .dh-page-header-calc-toggle > div {
-      justify-content: flex-start;
-   }
-}
 .dh-page-header-footer {
    display: flex;
    font-size: 12px;
