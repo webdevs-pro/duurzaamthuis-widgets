@@ -46,6 +46,10 @@ class DH_Table extends \Elementor\Widget_Base {
             'label' => 'Table',
             'label_block' => true,
             'type' => 'dh-table-control',
+            'buton_title' => 'Edit Table',
+            'allow_columns' => true,
+            'add_row_title' => __( 'Add Row', 'plugin-domain' ),
+            'add_column_title' => __( 'Add Column', 'plugin-domain' ),
             'default' => '[["Column 1 heading","Column 2 heading"],["Some text","Some text"]]',
          ]);
 

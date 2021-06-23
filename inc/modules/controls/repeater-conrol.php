@@ -1,9 +1,9 @@
 <?php
 
-class DH_Table_Control extends \Elementor\Base_Data_Control {
+class DH_Repeater_Control extends \Elementor\Base_Data_Control {
 
 	public function get_type() {
-		return 'dh-table-control';
+		return 'dh-repeater-conrol';
 	}
 
 	protected function get_default_settings() {
@@ -25,20 +25,18 @@ class DH_Table_Control extends \Elementor\Base_Data_Control {
                <input id="<?php echo $control_uid; ?>" type="hidden" data-setting="{{{ data.name }}}" />
 
                <div class="elementor-button-wrapper">
-                  <button class="elementor-button elementor-button-default dh-table-popup-open" type="button">
-                     <?php echo __( 'Edit table', 'elementor' ); ?>
-                  </button>
+                  <button class="elementor-button elementor-button-default dh-control-popup-open" type="button">{{{ data.buton_title }}}</button>
                </div>
 
-               <div class="dh-table-popup-wrapper">
-                  <div class="dh-table-popup">
-                     <div class="dh-table-popup-header">
-                        <div class="dh-table-popup-title">Table</div>
-                        <div class="dh-table-popup-close">
+               <div class="dh-control-popup-wrapper">
+                  <div class="dh-control-popup">
+                     <div class="dh-control-popup-header">
+                        <div class="dh-control-popup-title">{{{ data.buton_title }}}</div>
+                        <div class="dh-control-popup-close">
                            <i aria-hidden="true" class="far fa-times-circle"></i>
                         </div>
                      </div>
-                     <div class="dh-table-popup-content">
+                     <div class="dh-control-popup-content">
                         <?php $table_id = str_replace( 'elementor-control-default-', '', $control_uid ); ?>
                         <table class="dh-table-<?php echo $table_id; ?>" data-table-id="<?php echo $table_id; ?>"></table>
                         <button class="dh-add-row"><i class="fas fa-plus"></i>Add row</button>
@@ -47,6 +45,7 @@ class DH_Table_Control extends \Elementor\Base_Data_Control {
                      </div>
                   </div>
                </div>
+
 
             </div>
 
@@ -63,11 +62,6 @@ class DH_Table_Control extends \Elementor\Base_Data_Control {
 
 }
 
-// enqueue editor assets
-add_action( 'elementor/editor/after_enqueue_scripts', function() {
-   wp_register_script( 'dh-editor', plugins_url( '/assets/editor.js', __FILE__ ), array( 'jquery' ), time() );
-   wp_enqueue_script( 'dh-editor' );
-   wp_enqueue_style( 'dh-editor', plugins_url( '/assets/editor.css', __FILE__ ), array(), time() ); 
-});
+
 
 

@@ -1,24 +1,25 @@
 (function($) {
 
    // show popup
-   $(document).on('click', '.dh-table-popup-open', function() {
+   $(document).on('click', '.dh-control-popup-open', function() {
       generateTable();
    });
 
    // close popup on wrapper click
-   $(document).on('click', '.dh-table-popup-close, .dh-table-popup-wrapper', function() {
+   $(document).on('click', '.dh-control-popup-close, .dh-control-popup-wrapper', function() {
       saveData();
    });
 
    // fix close popup on click outside
-   $(document).on('click', '.dh-table-popup', function(e) {
+   $(document).on('click', '.dh-control-popup', function(e) {
       e.stopPropagation();
    });
 
 
    // generate table
    function generateTable(rows) {
-      var popup = $('.dh-table-popup-wrapper');
+      console.log(rows);
+      var popup = $('.dh-control-popup-wrapper');
       var table = popup.find('table');
       var table_id = table.attr('data-table-id');
       if(!rows) {
@@ -62,7 +63,7 @@
          cursor: "move",
          cancel: '[contenteditable]',
          placeholder: "sortable-placeholder",
-         containment: '.dh-table-popup',
+         containment: '.dh-control-popup',
          start: function( event, ui ) {
             $('.dh-col-control').each(function(){
                $(this).removeClass('active');
@@ -90,7 +91,7 @@
 
    // save data
    function saveData() {
-      var popup = $('.dh-table-popup-wrapper');
+      var popup = $('.dh-control-popup-wrapper');
       var table_id = popup.find('table').attr('data-table-id');
       popup.removeClass('active');
       var trs = tableToArray(table_id);
@@ -145,7 +146,7 @@
    
    // add row
    $(document).on('click', '.dh-add-row', function() {
-      var table_id = $('.dh-table-popup-wrapper').find('table').attr('data-table-id');
+      var table_id = $('.dh-control-popup-wrapper').find('table').attr('data-table-id');
       var trs = tableToArray(table_id);
       var new_row = [];
       var column_count = trs[0].length;
@@ -159,7 +160,7 @@
 
    // add column
    $(document).on('click', '.dh-add-column', function() {
-      var table_id = $('.dh-table-popup-wrapper').find('table').attr('data-table-id');
+      var table_id = $('.dh-control-popup-wrapper').find('table').attr('data-table-id');
       var trs = tableToArray(table_id);
       var new_trs = [];
       $.each(trs, function(index, row) {
@@ -187,7 +188,7 @@
 
    // delete column
    $(document).on('click', '.dh-col-control i', function(){
-      var table_id = $('.dh-table-popup-wrapper').find('table').attr('data-table-id');
+      var table_id = $('.dh-control-popup-wrapper').find('table').attr('data-table-id');
       var col_index = $(this).parent().data('col-index');
       var trs = tableToArray(table_id);
       if(trs[0].length == 1) return;
@@ -200,12 +201,31 @@
 
    // delete row
    $(document).on('click', '.dh-row-control i', function(){
-      var table_id = $('.dh-table-popup-wrapper').find('table').attr('data-table-id');
+      var table_id = $('.dh-control-popup-wrapper').find('table').attr('data-table-id');
       var row_index = $(this).parent().data('row-index');
       var trs = tableToArray(table_id);
       if(trs.length == 1) return;
       trs.splice(row_index,1);
       generateTable(trs);
+   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   // show popup
+   $(document).on('click', '.dh-repeater-popup-open', function() {
+      generateTable();
    });
 
 

@@ -63,10 +63,17 @@ new DH_Register_Widgets();
 // register controls
 add_action( 'elementor/controls/controls_registered', 'dh_register_controls' );
 function dh_register_controls() {
-	require __DIR__ . '/inc/table-control.php';
-	$controls_manager = \Elementor\Plugin::$instance->controls_manager;
-	$controls_manager->register_control( 'dh-table-control', new DH_Table_Control() );
+	require __DIR__ . '/inc/modules/controls/popup-control.php';
+	\Elementor\Plugin::$instance->controls_manager->register_control( 'dh-table-control', new DH_Popup_Control() );
+	// require __DIR__ . '/inc/modules/controls/repeater-conrol.php';
+	// \Elementor\Plugin::$instance->controls_manager->register_control( 'dh-repeater-conrol', new DH_Repeater_Control() );
 }
+// enqueue editor assets
+add_action( 'elementor/editor/after_enqueue_scripts', function() {
+   wp_register_script( 'dh-editor', DH_PLUGIN_DIR_URL . 'inc/assets/editor.js', array( 'jquery' ), time() );
+   wp_enqueue_script( 'dh-editor' );
+   wp_enqueue_style( 'dh-editor', DH_PLUGIN_DIR_URL . 'inc/assets/editor.css', array(), time() ); 
+});
 
 
 
