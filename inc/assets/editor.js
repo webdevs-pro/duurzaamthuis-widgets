@@ -1,8 +1,16 @@
 (function($) {
 
+   var popup;
+   var table;
+   var table_id;
+
    // show popup
    $(document).on('click', '.dh-control-popup-open', function() {
-      generateTable();
+      popup = $(this).closest('.elementor-control').find('.dh-control-popup-wrapper');
+      table = popup.find('table');
+      console.log(table);
+      table_id = $(table).attr('data-table-id');
+      showPopup();
    });
 
    // close popup on wrapper click
@@ -17,34 +25,11 @@
 
 
    // generate table
-   function generateTable(rows) {
-      console.log(rows);
-      var popup = $('.dh-control-popup-wrapper');
-      var table = popup.find('table');
-      var table_id = table.attr('data-table-id');
-      if(!rows) {
-         rows = JSON.parse($('#elementor-control-default-'+table_id).val());
-         // console.log('rows', rows);
-      }
+   function showPopup() {
+
+
       
-      // generate table html
-      var table_html = '';
-      $.each(rows, function(row_index, row) {
-         table_html += '<tr>';
-         $.each(row, function(col_index, cell) {
-            var control_html = '';
-            if(row_index == 0) {
-               control_html += '<div class="dh-col-control" data-col-index="'+col_index+'"><i class="fas fa-times"></i></div>';
-            }
-            if(col_index == row.length-1 ) {
-               control_html += '<div class="dh-row-control" data-row-index="'+row_index+'"><i class="fas fa-times"></i></div>';
-            }
-            table_html += '<td><span contenteditable="true">'+cell+'</span>'+control_html+'</td>';
-            
-         });
-         table_html += '</tr>';
-      });
-      table.html(table_html);
+      generateTable();
       
       // show popup
       popup.addClass('active');
@@ -57,20 +42,22 @@
          return ui;  
       };
 
+      console.log($( ".elementor-repeater-fields-wrapper").sortable( "instance" ));
       // sortable rows
       $(table).sortable({  
          helper: fixHelper,
          cursor: "move",
          cancel: '[contenteditable]',
          placeholder: "sortable-placeholder",
-         containment: '.dh-control-popup',
+         containment: $(popup).find('.dh-control-popup'),
          start: function( event, ui ) {
-            $('.dh-col-control').each(function(){
+            $(popup).find('.dh-col-control').each(function(){
                $(this).removeClass('active');
             });
-            $('.dh-row-control').each(function(){
+            $(popup).find('.dh-row-control').each(function(){
                $(this).removeClass('active');
             });
+            $( ".elementor-repeater-fields-wrapper").sortable( "destroy" );
          },
          stop: function( event, ui ) {
             var trs = tableToArray(table_id);
@@ -88,13 +75,38 @@
       $(popup).closest('.elementor-control').unbind('input', handler); // fix contenteditable update control
    }
 
+   // generate table html
+   function generateTable(rows) {
+      if(!rows) {
+         rows = JSON.parse($('#elementor-control-default-'+table_id).val());
+      }
+      var table_html = '';
+      $.each(rows, function(row_index, row) {
+         table_html += '<tr>';
+         $.each(row, function(col_index, cell) {
+            var control_html = '';
+            if(row_index == 0) {
+               control_html += '<div class="dh-col-control" data-col-index="'+col_index+'"><i class="fas fa-times"></i></div>';
+            }
+            if(col_index == row.length-1 ) {
+               control_html += '<div class="dh-row-control" data-row-index="'+row_index+'"><i class="fas fa-times"></i></div>';
+            }
+            table_html += '<td><span contenteditable="true">'+cell+'</span>'+control_html+'</td>';
+            
+         });
+         table_html += '</tr>';
+      });
+      table.html(table_html);
+   }
+
 
    // save data
    function saveData() {
-      var popup = $('.dh-control-popup-wrapper');
-      var table_id = popup.find('table').attr('data-table-id');
+      // var popup = $('.dh-control-popup-wrapper');
+      // var table_id = popup.find('table').attr('data-table-id');
       popup.removeClass('active');
       var trs = tableToArray(table_id);
+
       var json = JSON.stringify(trs);
       var rows = $('#elementor-control-default-'+table_id).val();
       if(rows != json) {
@@ -146,7 +158,7 @@
    
    // add row
    $(document).on('click', '.dh-add-row', function() {
-      var table_id = $('.dh-control-popup-wrapper').find('table').attr('data-table-id');
+      // var table_id = $(popup).find('table').attr('data-table-id');
       var trs = tableToArray(table_id);
       var new_row = [];
       var column_count = trs[0].length;
@@ -160,7 +172,7 @@
 
    // add column
    $(document).on('click', '.dh-add-column', function() {
-      var table_id = $('.dh-control-popup-wrapper').find('table').attr('data-table-id');
+      // var table_id = $(popup).find('table').attr('data-table-id');
       var trs = tableToArray(table_id);
       var new_trs = [];
       $.each(trs, function(index, row) {
@@ -188,7 +200,7 @@
 
    // delete column
    $(document).on('click', '.dh-col-control i', function(){
-      var table_id = $('.dh-control-popup-wrapper').find('table').attr('data-table-id');
+      var table_id = $(popup).find('table').attr('data-table-id');
       var col_index = $(this).parent().data('col-index');
       var trs = tableToArray(table_id);
       if(trs[0].length == 1) return;
@@ -201,7 +213,7 @@
 
    // delete row
    $(document).on('click', '.dh-row-control i', function(){
-      var table_id = $('.dh-control-popup-wrapper').find('table').attr('data-table-id');
+      // var table_id = $(popup).find('table').attr('data-table-id');
       var row_index = $(this).parent().data('row-index');
       var trs = tableToArray(table_id);
       if(trs.length == 1) return;
@@ -215,21 +227,13 @@
 
 
 
-
-
-
-
-
-
-
-
-   // show popup
-   $(document).on('click', '.dh-repeater-popup-open', function() {
-      generateTable();
+   $(document).on('click', '.run-sortable', function(){
+      // sortable rows
+      $('#sortable').sortable({  
+         cursor: "move",
+         cancel: '[contenteditable]',
+         placeholder: "sortable-placeholder",
+      });
    });
-
-
-
-
 
 })(jQuery);

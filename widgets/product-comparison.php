@@ -71,13 +71,13 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
          $repeater = new \Elementor\Repeater();
 
-            $repeater->add_control( 'product_title', [
+            $repeater->add_control( 'title', [
                'label' => __( 'Title', 'plugin-domain' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'default' => __( 'Product title' , 'plugin-domain' ),
                'label_block' => true,
             ] );
-            $repeater->add_control( 'product_badge', [
+            $repeater->add_control( 'badge', [
                'label' => __( 'Badge', 'plugin-domain' ),
                'type' => \Elementor\Controls_Manager::SELECT,
                'default' => 'none',
@@ -89,14 +89,14 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                ],
                'classes' => "extended-skin-control",
             ] );
-            $repeater->add_control( 'product_image', [
+            $repeater->add_control( 'image', [
                'label' => __( 'Image', 'plugin-domain' ),
                'type' => \Elementor\Controls_Manager::MEDIA,
                'default' => [
                   'url' => \Elementor\Utils::get_placeholder_image_src(),
                ],
             ] );
-            $repeater->add_control( 'product_rating', [
+            $repeater->add_control( 'star_rating', [
                'label' => __( 'Rating', 'elementor' ),
                'type' => \Elementor\Controls_Manager::NUMBER,
                'min' => 0,
@@ -108,44 +108,41 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'label' => __( 'Text Rating', 'plugin-domain' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'classes' => "extended-skin-control",
+               'label_block' => true,
+               'default' => '9.5/10 van 26 reviews op cooiblue en Bol.com',
             ] );
-            $repeater->add_control( 'product_price', [
+            $repeater->add_control( 'price', [
                'label' => __( 'Price', 'plugin-domain' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'default' => '10',
                ] );
-            $repeater->add_control( 'product_order_by', [
+            $repeater->add_control( 'order_by', [
                'label' => __( 'Order By', 'plugin-domain' ),
                'type' => \Elementor\Controls_Manager::TEXT,
-               'classes' => "extended-skin-control",
-               'label_block' => true,
                'default' => 'Voor 23:59 besteld',
             ] );
-            $repeater->add_control( 'product_button_text', [
+            $repeater->add_control( 'button_text', [
                'label' => __( 'Button Text', 'plugin-domain' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'separator' => 'before',
                'default' => 'Button text',
                'label_block' => true,
             ] );
-            $repeater->add_control( 'product_button_link', [
+            $repeater->add_control( 'button_link', [
                'label' => __( 'Button Link', 'plugin-domain' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'default' => '#',
                'label_block' => true,
             ] );
-            $repeater->add_control(
-               'sponsored',
-               [
-                  'label' => __( 'Sponsored', 'plugin-domain' ),
-                  'type' => \Elementor\Controls_Manager::SWITCHER,
-                  'label_on' => __( 'Yes', 'your-plugin' ),
-                  'label_off' => __( 'No', 'your-plugin' ),
-                  'return_value' => 'yes',
-                  'default' => 'yes',
-                  'render_type' => 'ui',
-               ]
-            );
+            $repeater->add_control( 'sponsored',[
+               'label' => __( 'Sponsored', 'plugin-domain' ),
+               'type' => \Elementor\Controls_Manager::SWITCHER,
+               'label_on' => __( 'Yes', 'your-plugin' ),
+               'label_off' => __( 'No', 'your-plugin' ),
+               'return_value' => 'yes',
+               'default' => 'yes',
+               'render_type' => 'ui',
+            ]);
             $repeater->add_control( 'pros', [
                'label' => 'Pros',
                'label_block' => false,
@@ -167,6 +164,14 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'default' => '[["Cons 1"],["Cons 2"]]',
                'classes' => "extended-skin-control",
             ]);
+            $repeater->add_control( 'description', [
+               'label' => __( 'Description', 'plugin-domain' ),
+               'type' => \Elementor\Controls_Manager::TEXTAREA,
+               'rows' => 10,
+               'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'plugin-domain' ),
+               'placeholder' => __( 'Type your description here', 'plugin-domain' ),
+               'classes' => "extended-skin-control",
+            ]);
 
 
 
@@ -176,11 +181,33 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
             'fields' => $repeater->get_controls(),
             'default' => [
                [
-                  'product_title' => __( 'Product title', 'plugin-domain' ),
+                  'title' => __( 'Product title', 'plugin-domain' ),
                ],
             ],
-            'title_field' => '{{{ product_title }}}',
+            'title_field' => '{{{ title }}}',
          ] );
+
+         // $this->add_control( 'pros', [
+         //    'label' => 'Pros',
+         //    'label_block' => false,
+         //    'buton_title' => __( 'Edit Pros', 'plugin-domain' ),
+         //    'type' => 'dh-table-control',
+         //    'separator' => 'before',
+         //    'allow_columns' => false,
+         //    'add_row_title' => __( 'Add Item', 'plugin-domain' ),
+         //    'default' => '[["Pros 1"],["Pros 2"]]',
+         //    'classes' => "extended-skin-control",
+         // ]);
+         // $this->add_control( 'cons', [
+         //    'label' => 'Cons',
+         //    'type' => 'dh-table-control',
+         //    'label_block' => false,
+         //    'buton_title' => __( 'Edit Cons', 'plugin-domain' ),
+         //    'allow_columns' => false,
+         //    'add_row_title' => __( 'Add Item', 'plugin-domain' ),
+         //    'default' => '[["Cons 1"],["Cons 2"]]',
+         //    'classes' => "extended-skin-control",
+         // ]);
 
 		$this->end_controls_section(); 
 
@@ -264,22 +291,25 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                if ( $settings['skin'] == 'simple' ) :
                   echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
                      echo '<div class="dh-product-image">';
-                        if ( $item['product_image']['id'] ) {
-                           echo wp_get_attachment_image( $item['product_image']['id'], 'medium' );
+                        if ( $item['image']['id'] ) {
+                           echo wp_get_attachment_image( $item['image']['id'], 'medium' );
                         } else {
                            echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
                         }
                         
                      echo '</div>';
                      echo '<div class="dh-product-content">';
-                        echo '<h3 class="dh-product-title">' . $item['product_title'] . '</h3>';
-                        echo '<div class="elementor-star-rating">';
-                           echo $this->render_stars( $item['product_rating'] );
+                        echo '<h3 class="dh-product-title">' . $item['title'] . '</h3>';
+                        echo '<div class="dh-product-star-rating">';
+                           echo '<div class="elementor-star-rating">';
+                              echo $this->render_stars( $item['star_rating'] );
+                           echo '</div>';
                         echo '</div>';
-                        echo '<div class="dh-product-price">€ ' . $item['product_price'] . '</div>';
-                        echo '<div class="dh-product-order-by"> ' . $item['product_order_by'] . '</div>';
+                        echo '<div class="dh-product-price">€ ' . $item['price'] . '</div>';
+                        echo '<div class="dh-product-order-by"> ' . $item['order_by'] . '</div>';
                      echo '</div>';
-                     echo '<a class="dh-product-button" href="' . $item['product_button_link'] . '">' . $item['product_button_text'] . '</a>';
+                     $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
+                     echo '<a class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
                   echo '</div>';
                endif;
 
@@ -289,8 +319,8 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                if ( $settings['skin'] == 'extended' ) :
                   echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
                      echo '<div class="dh-product-image">';
-                        if ( $item['product_badge'] ) {
-                           switch ( $item['product_badge'] ) {
+                        if ( $item['badge'] ) {
+                           switch ( $item['badge'] ) {
                               case 'best_price':
                                  echo '<div class="dh-product-badge dh-product-price-badge">Beste Prijs</div>';
                                  break;
@@ -302,29 +332,41 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                  break;
                            }
                         }
-                        if ( $item['product_image']['id'] ) {
-                           echo wp_get_attachment_image( $item['product_image']['id'], 'medium' );
+                        if ( $item['image']['id'] ) {
+                           echo wp_get_attachment_image( $item['image']['id'], 'medium' );
                         } else {
                            echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
                         }
-                        
                      echo '</div>';
                      echo '<div class="dh-product-content">';
-                        echo '<h3 class="dh-product-title">' . $item['product_title'] . '</h3>';
-                        echo '<div class="elementor-star-rating">';
-                           echo $this->render_stars( $item['product_rating'] );
+                        echo '<div class="dh-product-star-rating">';
+                           echo '<div class="dh-product-star-rating-heading">Beoordeling</div>';
+                           echo '<div class="elementor-star-rating">';
+                              echo $this->render_stars( $item['star_rating'] );
+                           echo '</div>';
                         echo '</div>';
-                        echo '<div class="dh-product-price">€ ' . $item['product_price'] . '</div>';
-                        echo '<div class="dh-product-order-by"> ' . $item['product_order_by'] . '</div>';
+                        echo '<div class="dh-product-rating">' . $item['product_text_rating'] . '</div>';
+                        echo '<div class="dh-product-price">Price: <span>€ ' . $item['price'] . '</span></div>';
+                        echo '<h3 class="dh-product-title">' . $item['title'] . '</h3>';
+
+                        $pros = json_decode( $item['pros'] );
+                        echo '<div class="dh-product-pros">';
+                        foreach ( $pros as $pros_item ) {
+                           echo '<div class="dh-product-pros-item">';
+                              echo '<i class=""></i>';
+                              echo '<div class="dh-product-pros-item-text">' . $pros_item[0] . '</div>';
+                           echo '</div>';
+                        }
+                        echo '</div>';
                      echo '</div>';
-                     echo '<a class="dh-product-button" href="' . $item['product_button_link'] . '">' . $item['product_button_text'] . '</a>';
+                     $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
+                     echo '<a class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
                   echo '</div>';
                endif;
 
             endforeach;
          echo '</div>';
       endif;
-
       
 
 	}
@@ -362,16 +404,20 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                   <# if(settings.skin == 'simple') { #>
                      <div class="dh-product dh-product-{{ item._id }}">
                         <div class="dh-product-image">
-                           <img src="{{ item.product_image.url }}">
+                           <img src="{{ item.image.url }}">
                         </div>
                         <div class="dh-product-content">
-                           <h3 class="dh-product-title">{{{ item.product_title }}}</h3>
-                           <div class="elementor-star-rating">
-                              {{{ renderStars( item.product_rating ) }}}
+                           <h3 class="dh-product-title">{{{ item.title }}}</h3>
+                           <div class="dh-product-star-rating">
+                              <div class="elementor-star-rating">
+                                 {{{ renderStars( item.star_rating ) }}}
+                              </div>
                            </div>
-                           <div class="dh-product-price">€ {{{ item.product_price }}}</div>
+                           <div class="dh-product-price">€ {{{ item.price }}}</div>
+                           <div class="dh-product-order-by">{{{ item.order_by }}}</div>
+
                         </div>
-                        <a class="dh-product-button" href="{{{ item.product_button_link }}}">{{{ item.product_button_text }}}</a>
+                        <a class="dh-product-button" href="{{{ item.button_link }}}">{{{ item.button_text }}}</a>
                      </div>
                   <# } #>
 
@@ -379,8 +425,8 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                   <# if(settings.skin == 'extended') { #>
                      <div class="dh-product dh-product-{{ item._id }}">
                         <#
-                           if(item.product_badge) {
-                              switch(item.product_badge) {
+                           if(item.badge) {
+                              switch(item.badge) {
                                  case 'best_price': #>
                                     <div class="dh-product-badge dh-product-price-badge">Beste Prijs</div>
                                     <# break;
@@ -394,16 +440,20 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                            }
                         #>
                         <div class="dh-product-image">
-                           <img src="{{ item.product_image.url }}">
+                           <img src="{{ item.image.url }}">
                         </div>
                         <div class="dh-product-content">
-                           <h3 class="dh-product-title">{{{ item.product_title }}}</h3>
-                           <div class="elementor-star-rating">
-                              {{{ renderStars( item.product_rating ) }}}
+                           <div class="dh-product-star-rating">
+                              <div class="dh-product-star-rating-heading">Beoordeling</div>
+                              <div class="elementor-star-rating">
+                                 {{{ renderStars( item.star_rating ) }}}
+                              </div>
                            </div>
-                           <div class="dh-product-price">€ {{{ item.product_price }}}</div>
+                           <div class="dh-product-rating">{{{ item.product_text_rating }}}</div>
+                           <div class="dh-product-price">€ {{{ item.price }}}</div>
+                           <h3 class="dh-product-title">{{{ item.title }}}</h3>
                         </div>
-                        <a class="dh-product-button" href="{{{ item.product_button_link }}}">{{{ item.product_button_text }}}</a>
+                        <a class="dh-product-button" href="{{{ item.button_link }}}">{{{ item.button_text }}}</a>
                      </div>
                   <# } #>
 

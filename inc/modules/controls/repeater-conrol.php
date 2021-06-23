@@ -24,33 +24,20 @@ class DH_Repeater_Control extends \Elementor\Base_Data_Control {
 
                <input id="<?php echo $control_uid; ?>" type="hidden" data-setting="{{{ data.name }}}" />
 
-               <div class="elementor-button-wrapper">
-                  <button class="elementor-button elementor-button-default dh-control-popup-open" type="button">{{{ data.buton_title }}}</button>
-               </div>
-
-               <div class="dh-control-popup-wrapper">
-                  <div class="dh-control-popup">
-                     <div class="dh-control-popup-header">
-                        <div class="dh-control-popup-title">{{{ data.buton_title }}}</div>
-                        <div class="dh-control-popup-close">
-                           <i aria-hidden="true" class="far fa-times-circle"></i>
-                        </div>
-                     </div>
-                     <div class="dh-control-popup-content">
-                        <?php $table_id = str_replace( 'elementor-control-default-', '', $control_uid ); ?>
-                        <table class="dh-table-<?php echo $table_id; ?>" data-table-id="<?php echo $table_id; ?>"></table>
-                        <button class="dh-add-row"><i class="fas fa-plus"></i>Add row</button>
-                        <button class="dh-add-column"><i class="fas fa-plus"></i>Add column</button>
-                        <br>&nbsp;
-                     </div>
-                  </div>
-               </div>
-
-
+            </div>
+            <div class="elementor-button-wrapper">
+                  <button class="elementor-button elementor-button-default run-sortable" type="button">{{{ data.buton_title }}}</button>
             </div>
 
 
+         </div>
 
+         <div id="sortable">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
          </div>
          <# if ( data.description ) { #>
             <div class="elementor-control-field-description">{{{ data.description }}}</div>
