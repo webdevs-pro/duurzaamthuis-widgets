@@ -6,11 +6,17 @@
 
    // show popup
    $(document).on('click', '.dh-control-popup-open', function() {
-      popup = $(this).closest('.elementor-control').find('.dh-control-popup-wrapper');
+ 
+      var data = $(this).data('settings');
+      var singleTemplate = wp.template( 'my-template' );
+      $('body').append( singleTemplate( data ) );
+
+      popup = $('.dh-control-popup-wrapper');
       table = popup.find('table');
-      console.log(table);
       table_id = $(table).attr('data-table-id');
+
       showPopup();
+
    });
 
    // close popup on wrapper click
@@ -27,8 +33,6 @@
    // generate table
    function showPopup() {
 
-
-      
       generateTable();
       
       // show popup
@@ -42,7 +46,7 @@
          return ui;  
       };
 
-      console.log($( ".elementor-repeater-fields-wrapper").sortable( "instance" ));
+
       // sortable rows
       $(table).sortable({  
          helper: fixHelper,
@@ -57,7 +61,6 @@
             $(popup).find('.dh-row-control').each(function(){
                $(this).removeClass('active');
             });
-            $( ".elementor-repeater-fields-wrapper").sortable( "destroy" );
          },
          stop: function( event, ui ) {
             var trs = tableToArray(table_id);
@@ -65,14 +68,17 @@
          }
       });
 
-      $.each($._data($(popup).closest('.elementor-control')[0], "events"), function(i, event) {
-         $.each(event, function(j, h) {
-            if(h.selector == '[contenteditable=\"true\"]') {
-               handler = h.handler;
-            }
-         });
-      });
-      $(popup).closest('.elementor-control').unbind('input', handler); // fix contenteditable update control
+      // $.each($._data($(popup).closest('.elementor-control')[0], "events"), function(i, event) {
+      //    $.each(event, function(j, h) {
+      //       if(h.selector == '[contenteditable=\"true\"]') {
+      //          handler = h.handler;
+      //       }
+      //    });
+      // });
+      // $(popup).closest('.elementor-control').unbind('input', handler); // fix contenteditable update control
+
+
+
    }
 
    // generate table html
@@ -102,17 +108,16 @@
 
    // save data
    function saveData() {
-      // var popup = $('.dh-control-popup-wrapper');
-      // var table_id = popup.find('table').attr('data-table-id');
       popup.removeClass('active');
       var trs = tableToArray(table_id);
-
       var json = JSON.stringify(trs);
       var rows = $('#elementor-control-default-'+table_id).val();
       if(rows != json) {
          $('#elementor-control-default-'+table_id).val(json).trigger('change');
          $('#elementor-control-default-'+table_id).trigger('input');
       }
+      // remove popup
+      $('.dh-control-popup-wrapper').remove();
    }
 
 
@@ -228,12 +233,10 @@
 
 
    $(document).on('click', '.run-sortable', function(){
-      // sortable rows
-      $('#sortable').sortable({  
-         cursor: "move",
-         cancel: '[contenteditable]',
-         placeholder: "sortable-placeholder",
-      });
+      console.log($(this).data('settings'));
+      var data = $(this).data('settings');
+      var singleTemplate = wp.template( 'my-template' );
+      $('body').append( singleTemplate( data ) );
    });
 
 })(jQuery);

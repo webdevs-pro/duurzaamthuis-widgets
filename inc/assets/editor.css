@@ -101,7 +101,7 @@
    margin: 5px !important;
    border: 2px dashed #999;
 }
-.dh-control-popup-content table tr:first-child {
+.dh-control-popup-content table.table tr:first-child {
    font-weight: bold;
 }
 

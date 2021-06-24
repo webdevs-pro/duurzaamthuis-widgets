@@ -24,31 +24,9 @@ class DH_Popup_Control extends \Elementor\Base_Data_Control {
 
                <input id="<?php echo $control_uid; ?>" type="hidden" data-setting="{{{ data.name }}}" />
 
+               <# var json = JSON.stringify(data); #>
                <div class="elementor-button-wrapper">
-                  <button class="elementor-button elementor-button-default dh-control-popup-open" type="button">{{{ data.buton_title }}}</button>
-               </div>
-
-               <div class="dh-control-popup-wrapper">
-                  <div class="dh-control-popup">
-                     <div class="dh-control-popup-header">
-                        <div class="dh-control-popup-title">{{{ data.buton_title }}}</div>
-                        <div class="dh-control-popup-close">
-                           <i aria-hidden="true" class="far fa-times-circle"></i>
-                        </div>
-                     </div>
-                     <div class="dh-control-popup-content">
-                        <?php $table_id = str_replace( 'elementor-control-default-', '', $control_uid ); ?>
-                        <table class="dh-table-<?php echo $table_id; ?>" data-table-id="<?php echo $table_id; ?>"></table>
-                        <button class="dh-add-row"><i class="fas fa-plus"></i>{{{ data.add_row_title }}}</button>
-                        <# if ( data.allow_columns ) {#>
-                           <button class="dh-add-column"><i class="fas fa-plus"></i>{{{ data.add_column_title }}}</button>
-                        <# } else { #>
-                           <style>.dh-col-control { display: none !important; }</style>
-                        <# } #>
-
-                        <br>&nbsp;
-                     </div>
-                  </div>
+                  <button class="elementor-button elementor-button-default dh-control-popup-open" data-settings="{{ json }}" type="button">{{{ data.button_title }}}</button>
                </div>
 
             </div>
@@ -59,6 +37,7 @@ class DH_Popup_Control extends \Elementor\Base_Data_Control {
          <# if ( data.description ) { #>
             <div class="elementor-control-field-description">{{{ data.description }}}</div>
          <# } #>
+
 		<?php
 	}
 
@@ -74,3 +53,34 @@ add_action( 'elementor/editor/after_enqueue_scripts', function() {
 });
 
 
+add_action( 'elementor/editor/footer', function() {
+   ?>
+
+      
+      <script type="text/html" id="tmpl-my-template">
+         <div class="dh-control-popup-wrapper">
+            <div class="dh-control-popup">
+               <div class="dh-control-popup-header">
+                  <div class="dh-control-popup-title">{{{ data.button_title }}}</div>
+                  <div class="dh-control-popup-close">
+                     <i aria-hidden="true" class="far fa-times-circle"></i>
+                  </div>
+               </div>
+               <div class="dh-control-popup-content">
+         
+                  <table class="dh-table-{{{ data._cid }}} {{{ data.table_classes }}}" data-table-id="{{{ data._cid }}}"></table>
+                  <button class="dh-add-row"><i class="fas fa-plus"></i>{{{ data.add_row_title }}}</button>
+                  <# if ( data.allow_columns ) {#>
+                     <button class="dh-add-column"><i class="fas fa-plus"></i>{{{ data.add_column_title }}}</button>
+                  <# } else { #>
+                     <style>.dh-col-control { display: none !important; }</style>
+                  <# } #>
+
+                  <br>&nbsp;
+               </div>
+            </div>
+         </div>
+      </script>
+
+   <?php
+});
