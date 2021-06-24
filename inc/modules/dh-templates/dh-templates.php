@@ -18,8 +18,8 @@ class DH_Custom_Templates {
 		add_action( 'manage_page_posts_custom_column', [ $this, 'print_post_column' ], 10, 2);
 		add_action( 'quick_edit_custom_box', [ $this, 'add_quick_edit_control' ], 10, 2 );
 		add_action( 'bulk_edit_custom_box', [ $this, 'add_quick_edit_control' ], 10, 2 );
-		// add_action( 'load-post.php',     array( $this, 'init_metabox' ) );
-		// add_action( 'load-post-new.php', array( $this, 'init_metabox' ) );
+		add_action( 'load-post.php',     array( $this, 'init_metabox' ) );
+		add_action( 'load-post-new.php', array( $this, 'init_metabox' ) );
 		add_action( 'admin_print_footer_scripts-edit.php', [ $this, 'print_admin_script' ] );
 		add_action( 'save_post', [ $this, 'save_quick_edit_control' ], 10, 2 );
 		add_action( 'wp_ajax_dh_template_save_bulk', [ $this, 'seve_bulk_edit_control' ] ); 
