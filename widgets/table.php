@@ -47,6 +47,7 @@ class DH_Table extends \Elementor\Widget_Base {
             'label_block' => true,
             'type' => 'dh-table-control',
             'button_title' => 'Edit Table',
+            'label_block' => false,
             'allow_columns' => true,
             'table_classes' => 'table',
             'add_row_title' => __( 'Add Row', 'duurzaamthuis' ),

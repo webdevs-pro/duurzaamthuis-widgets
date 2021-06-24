@@ -189,28 +189,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
             'title_field' => '{{{ title }}}',
          ] );
 
-         // $this->add_control( 'pros', [
-         //    'label' => 'Pros',
-         //    'label_block' => false,
-         //    'button_title' => __( 'Edit Pros', 'duurzaamthuis' ),
-         //    'type' => 'dh-table-control',
-         //    'separator' => 'before',
-         //    'allow_columns' => false,
-         //    'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
-         //    'default' => '[["Pros 1"],["Pros 2"]]',
-         //    'classes' => "extended-skin-control",
-         // ]);
-         // $this->add_control( 'cons', [
-         //    'label' => 'Cons',
-         //    'type' => 'dh-table-control',
-         //    'label_block' => false,
-         //    'button_title' => __( 'Edit Cons', 'duurzaamthuis' ),
-         //    'allow_columns' => false,
-         //    'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
-         //    'default' => '[["Cons 1"],["Cons 2"]]',
-         //    'classes' => "extended-skin-control",
-         // ]);
-
 		$this->end_controls_section(); 
 
 
@@ -292,26 +270,28 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                // simple skin
                if ( $settings['skin'] == 'simple' ) :
                   echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
-                     echo '<div class="dh-product-image">';
-                        if ( $item['image']['id'] ) {
-                           echo wp_get_attachment_image( $item['image']['id'], 'medium' );
-                        } else {
-                           echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
-                        }
-                        
-                     echo '</div>';
-                     echo '<div class="dh-product-content">';
-                        echo '<h3 class="dh-product-title">' . $item['title'] . '</h3>';
-                        echo '<div class="dh-product-star-rating">';
-                           echo '<div class="elementor-star-rating">';
-                              echo $this->render_stars( $item['star_rating'] );
-                           echo '</div>';
+                     echo '<div class="dh-product-wrapper">';
+                        echo '<div class="dh-product-image">';
+                           if ( $item['image']['id'] ) {
+                              echo wp_get_attachment_image( $item['image']['id'], 'medium' );
+                           } else {
+                              echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
+                           }
+                           
                         echo '</div>';
-                        echo '<div class="dh-product-price">€ ' . $item['price'] . '</div>';
-                        echo '<div class="dh-product-order-by"> ' . $item['order_by'] . '</div>';
+                        echo '<div class="dh-product-content">';
+                           echo '<h3 class="dh-product-title">' . $item['title'] . '</h3>';
+                           echo '<div class="dh-product-star-rating">';
+                              echo '<div class="elementor-star-rating">';
+                                 echo $this->render_stars( $item['star_rating'] );
+                              echo '</div>';
+                           echo '</div>';
+                           echo '<div class="dh-product-price">€ ' . $item['price'] . '</div>';
+                           echo '<div class="dh-product-order-by"> ' . $item['order_by'] . '</div>';
+                        echo '</div>';
+                        $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
+                        echo '<a class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
                      echo '</div>';
-                     $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
-                     echo '<a class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
                   echo '</div>';
                endif;
 
@@ -320,49 +300,73 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                // extended skin
                if ( $settings['skin'] == 'extended' ) :
                   echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
-                     echo '<div class="dh-product-image">';
-                        if ( $item['badge'] ) {
-                           switch ( $item['badge'] ) {
-                              case 'best_price':
-                                 echo '<div class="dh-product-badge dh-product-price-badge">Beste Prijs</div>';
-                                 break;
-                              case 'best_quality':
-                                 echo '<div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>';
-                                 break;
-                              case 'eco_choice':
-                                 echo '<div class="dh-product-badge dh-product-eco-badge">Environmental choice</div>';
-                                 break;
+                     echo '<div class="dh-product-wrapper">';
+                        echo '<div class="dh-product-image">';
+                           if ( $item['badge'] ) {
+                              switch ( $item['badge'] ) {
+                                 case 'best_price':
+                                    echo '<div class="dh-product-badge dh-product-price-badge">Beste Prijs</div>';
+                                    break;
+                                 case 'best_quality':
+                                    echo '<div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>';
+                                    break;
+                                 case 'eco_choice':
+                                    echo '<div class="dh-product-badge dh-product-eco-badge">Environmental choice</div>';
+                                    break;
+                              }
                            }
-                        }
-                        if ( $item['image']['id'] ) {
-                           echo wp_get_attachment_image( $item['image']['id'], 'medium' );
-                        } else {
-                           echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
-                        }
-                     echo '</div>';
-                     echo '<div class="dh-product-content">';
-                        echo '<div class="dh-product-star-rating">';
-                           echo '<div class="dh-product-star-rating-heading">Beoordeling</div>';
-                           echo '<div class="elementor-star-rating">';
-                              echo $this->render_stars( $item['star_rating'] );
-                           echo '</div>';
+                           if ( $item['image']['id'] ) {
+                              echo wp_get_attachment_image( $item['image']['id'], 'medium' );
+                           } else {
+                              echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
+                           }
                         echo '</div>';
-                        echo '<div class="dh-product-rating">' . $item['product_text_rating'] . '</div>';
-                        echo '<div class="dh-product-price">Price: <span>€ ' . $item['price'] . '</span></div>';
-                        echo '<h3 class="dh-product-title">' . $item['title'] . '</h3>';
+                        echo '<div class="dh-product-content">';
+                           echo '<div class="dh-product-star-rating">';
+                              echo '<div class="dh-product-star-rating-heading">Beoordeling</div>';
+                              echo '<div class="elementor-star-rating">';
+                                 echo $this->render_stars( $item['star_rating'] );
+                              echo '</div>';
+                           echo '</div>';
+                           echo '<div class="dh-product-rating">' . $item['product_text_rating'] . '</div>';
+                           echo '<div class="dh-product-price">Price: <span>€ ' . $item['price'] . '</span></div>';
+                           echo '<h3 class="dh-product-title">' . $item['title'] . '</h3>';
+                           echo '<div class="dh-product-description">';
+                              echo '<div class="dh-product-description-content">' . $item['description'] . '</div>';
+                              echo '<div class="dh-product-description-toggle">';
+                                 echo '<div class="open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>';
+                                 echo '<div class="close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>';
+                              echo '</div>';
+                           echo '</div>';
+                           $pros = json_decode( $item['pros'] );
+                           if ( ! empty( $pros ) ) {
+                              echo '<div class="dh-product-pros">';
+                                 echo '<div class="dh-product-pros-heading">Voordelen</div>';
+                                 foreach ( $pros as $pros_item ) {
+                                    echo '<div class="dh-product-pros-item">';
+                                       echo '<i class="dh-icon dh-icon-check"></i>';
+                                       echo '<div class="dh-product-pros-item-text">' . $pros_item[0] . '</div>';
+                                    echo '</div>';
+                                 }
+                              echo '</div>';
+                           }
 
-                        $pros = json_decode( $item['pros'] );
-                        echo '<div class="dh-product-pros">';
-                        foreach ( $pros as $pros_item ) {
-                           echo '<div class="dh-product-pros-item">';
-                              echo '<i class=""></i>';
-                              echo '<div class="dh-product-pros-item-text">' . $pros_item[0] . '</div>';
-                           echo '</div>';
-                        }
+                           $cons = json_decode( $item['cons'] );
+                           if ( ! empty( $cons ) ) {
+                              echo '<div class="dh-product-cons">';
+                                 echo '<div class="dh-product-cons-heading">Nadelen</div>';
+                                 foreach ( $cons as $cons_item ) {
+                                    echo '<div class="dh-product-cons-item">';
+                                       echo '<i class="dh-icon dh-icon-times"></i>';
+                                       echo '<div class="dh-product-cons-item-text">' . $cons_item[0] . '</div>';
+                                    echo '</div>';
+                                 }
+                              echo '</div>';
+                           }
                         echo '</div>';
+                        $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
+                        echo '<a class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
                      echo '</div>';
-                     $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
-                     echo '<a class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
                   echo '</div>';
                endif;
 
@@ -405,57 +409,92 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                   <!-- simple skin -->
                   <# if(settings.skin == 'simple') { #>
                      <div class="dh-product dh-product-{{ item._id }}">
-                        <div class="dh-product-image">
-                           <img src="{{ item.image.url }}">
-                        </div>
-                        <div class="dh-product-content">
-                           <h3 class="dh-product-title">{{{ item.title }}}</h3>
-                           <div class="dh-product-star-rating">
-                              <div class="elementor-star-rating">
-                                 {{{ renderStars( item.star_rating ) }}}
-                              </div>
+                        <div class="dh-product-wrapper">
+                           <div class="dh-product-image">
+                              <img src="{{ item.image.url }}">
                            </div>
-                           <div class="dh-product-price">€ {{{ item.price }}}</div>
-                           <div class="dh-product-order-by">{{{ item.order_by }}}</div>
+                           <div class="dh-product-content">
+                              <h3 class="dh-product-title">{{{ item.title }}}</h3>
+                              <div class="dh-product-star-rating">
+                                 <div class="elementor-star-rating">
+                                    {{{ renderStars( item.star_rating ) }}}
+                                 </div>
+                              </div>
+                              <div class="dh-product-price">€ {{{ item.price }}}</div>
+                              <div class="dh-product-order-by">{{{ item.order_by }}}</div>
 
+                           </div>
+                           <a class="dh-product-button" href="{{{ item.button_link }}}">{{{ item.button_text }}}</a>
                         </div>
-                        <a class="dh-product-button" href="{{{ item.button_link }}}">{{{ item.button_text }}}</a>
                      </div>
                   <# } #>
 
                   <!-- extended skin -->
                   <# if(settings.skin == 'extended') { #>
                      <div class="dh-product dh-product-{{ item._id }}">
-                        <#
-                           if(item.badge) {
-                              switch(item.badge) {
-                                 case 'best_price': #>
-                                    <div class="dh-product-badge dh-product-price-badge">Beste Prijs</div>
-                                    <# break;
-                                 case 'best_quality': #>
-                                    <div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>
-                                    <# break;
-                                 case 'eco_choice': #>
-                                    <div class="dh-product-badge dh-product-eco-badge">Environmental choice</div>
-                                    <# break;
+                        <div class="dh-product-wrapper">
+                           <#
+                              if(item.badge) {
+                                 switch(item.badge) {
+                                    case 'best_price': #>
+                                       <div class="dh-product-badge dh-product-price-badge">Beste Prijs</div>
+                                       <# break;
+                                    case 'best_quality': #>
+                                       <div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>
+                                       <# break;
+                                    case 'eco_choice': #>
+                                       <div class="dh-product-badge dh-product-eco-badge">Environmental choice</div>
+                                       <# break;
+                                 }
                               }
-                           }
-                        #>
-                        <div class="dh-product-image">
-                           <img src="{{ item.image.url }}">
-                        </div>
-                        <div class="dh-product-content">
-                           <div class="dh-product-star-rating">
-                              <div class="dh-product-star-rating-heading">Beoordeling</div>
-                              <div class="elementor-star-rating">
-                                 {{{ renderStars( item.star_rating ) }}}
-                              </div>
+                           #>
+                           <div class="dh-product-image">
+                              <img src="{{ item.image.url }}">
                            </div>
-                           <div class="dh-product-rating">{{{ item.product_text_rating }}}</div>
-                           <div class="dh-product-price">€ {{{ item.price }}}</div>
-                           <h3 class="dh-product-title">{{{ item.title }}}</h3>
+                           <div class="dh-product-content">
+                              <div class="dh-product-star-rating">
+                                 <div class="dh-product-star-rating-heading">Beoordeling</div>
+                                 <div class="elementor-star-rating">
+                                    {{{ renderStars(item.star_rating) }}}
+                                 </div>
+                              </div>
+                              <div class="dh-product-rating">{{{ item.product_text_rating }}}</div>
+                              <div class="dh-product-price">€ {{{ item.price }}}</div>
+                              <h3 class="dh-product-title">{{{ item.title }}}</h3>
+                              <div class="dh-product-description">
+                                 <div class="dh-product-description-content">{{{ item.description }}}</div>
+                                    <div class="dh-product-description-toggle">
+                                    <div class="open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>
+                                    <div class="close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>
+                                 </div>
+                              </div>
+                              <# var pros = JSON.parse(item.pros);  #>
+                              <# if(pros.length) { #>
+                                 <div class="dh-product-pros">
+                                    <div class="dh-product-pros-heading">Voordelen</div>
+                                    <# _.each( pros, function(pros_item) { #>
+                                       <div class="dh-product-pros-item">
+                                          <i class="dh-icon dh-icon-check"></i>
+                                          <div class="dh-product-pros-item-text">{{{ pros_item[0] }}}</div>
+                                       </div>
+                                    <# }); #>
+                                 </div>
+                              <# } #>
+                              <# var cons = JSON.parse(item.cons);  #>
+                              <# if(cons.length) { #>
+                              <div class="dh-product-cons">
+                                 <div class="dh-product-cons-heading">Nadelen</div>
+                                 <# _.each( cons, function(cons_item) { #>
+                                    <div class="dh-product-cons-item">
+                                       <i class="dh-icon dh-icon-times"></i>
+                                       <div class="dh-product-cons-item-text">{{{ cons_item[0] }}}</div>
+                                    </div>
+                                 <# }); #>
+                              </div>
+                           <# } #>
+                           </div>
+                           <a class="dh-product-button" href="{{{ item.button_link }}}">{{{ item.button_text }}}</a>
                         </div>
-                        <a class="dh-product-button" href="{{{ item.button_link }}}">{{{ item.button_text }}}</a>
                      </div>
                   <# } #>
 

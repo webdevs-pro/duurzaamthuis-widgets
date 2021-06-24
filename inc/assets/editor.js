@@ -166,8 +166,12 @@
       // var table_id = $(popup).find('table').attr('data-table-id');
       var trs = tableToArray(table_id);
       var new_row = [];
-      var column_count = trs[0].length;
-      for(var i = 0; i < column_count; i++) {
+      if (trs[0]) {
+         var column_count = trs[0].length;
+         for(var i = 0; i < column_count; i++) {
+            new_row.push('');
+         }
+      } else {
          new_row.push('');
       }
       trs.push(new_row);
@@ -218,10 +222,9 @@
 
    // delete row
    $(document).on('click', '.dh-row-control i', function(){
-      // var table_id = $(popup).find('table').attr('data-table-id');
       var row_index = $(this).parent().data('row-index');
       var trs = tableToArray(table_id);
-      if(trs.length == 1) return;
+      // if(trs.length == 1) return;
       trs.splice(row_index,1);
       generateTable(trs);
    });

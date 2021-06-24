@@ -65,8 +65,8 @@ add_action( 'elementor/controls/controls_registered', 'dh_register_controls' );
 function dh_register_controls() {
 	require __DIR__ . '/inc/modules/controls/popup-control.php';
 	\Elementor\Plugin::$instance->controls_manager->register_control( 'dh-table-control', new DH_Popup_Control() );
-	require __DIR__ . '/inc/modules/controls/repeater-conrol.php';
-	\Elementor\Plugin::$instance->controls_manager->register_control( 'dh-repeater-conrol', new DH_Repeater_Control() );
+	// require __DIR__ . '/inc/modules/controls/repeater-conrol.php';
+	// \Elementor\Plugin::$instance->controls_manager->register_control( 'dh-repeater-conrol', new DH_Repeater_Control() );
 }
 // enqueue editor assets
 add_action( 'elementor/editor/after_enqueue_scripts', function() {

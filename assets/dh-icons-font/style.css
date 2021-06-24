@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'dh-icons';
   src:
-    url('fonts/dh-icons.ttf?niotop') format('truetype'),
-    url('fonts/dh-icons.woff?niotop') format('woff'),
-    url('fonts/dh-icons.svg?niotop#dh-icons') format('svg');
+    url('fonts/dh-icons.ttf?d7fzbq') format('truetype'),
+    url('fonts/dh-icons.woff?d7fzbq') format('woff'),
+    url('fonts/dh-icons.svg?d7fzbq#dh-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dh-icon-times:before {
+  content: "\e911";
+}
+.dh-icon-check:before {
+  content: "\e912";
+}
 .dh-icon-post-header:before {
   content: "\e910";
 }
