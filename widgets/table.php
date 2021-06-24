@@ -49,8 +49,8 @@ class DH_Table extends \Elementor\Widget_Base {
             'button_title' => 'Edit Table',
             'allow_columns' => true,
             'table_classes' => 'table',
-            'add_row_title' => __( 'Add Row', 'plugin-domain' ),
-            'add_column_title' => __( 'Add Column', 'plugin-domain' ),
+            'add_row_title' => __( 'Add Row', 'duurzaamthuis' ),
+            'add_column_title' => __( 'Add Column', 'duurzaamthuis' ),
             'default' => '[["Column 1 heading","Column 2 heading"],["Some text","Some text"]]',
          ]);
 

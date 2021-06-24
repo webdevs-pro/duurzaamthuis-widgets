@@ -37,12 +37,12 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
       ]);
 
          $this->add_control( 'skin', [
-            'label' => __( 'Skin', 'plugin-domain' ),
+            'label' => __( 'Skin', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::SELECT,
             'default' => 'simple',
             'options' => [
-               'simple'  => __( 'Simple', 'plugin-domain' ),
-               'extended' => __( 'Extended', 'plugin-domain' ),
+               'simple'  => __( 'Simple', 'duurzaamthuis' ),
+               'extended' => __( 'Extended', 'duurzaamthuis' ),
             ],
             'classes' => "dh-skin-control",
          ] );
@@ -56,7 +56,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
          );
 
          $this->add_responsive_control( 'columns_count', [
-				'label' => __( 'Columns', 'plugin-domain' ),
+				'label' => __( 'Columns', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'min' => 1,
 				'max' => 6,
@@ -72,25 +72,25 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
          $repeater = new \Elementor\Repeater();
 
             $repeater->add_control( 'title', [
-               'label' => __( 'Title', 'plugin-domain' ),
+               'label' => __( 'Title', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXT,
-               'default' => __( 'Product title' , 'plugin-domain' ),
+               'default' => __( 'Product title' , 'duurzaamthuis' ),
                'label_block' => true,
             ] );
             $repeater->add_control( 'badge', [
-               'label' => __( 'Badge', 'plugin-domain' ),
+               'label' => __( 'Badge', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::SELECT,
                'default' => 'none',
                'options' => [
-                  'none'  => __( 'None', 'plugin-domain' ),
-                  'best_price' => __( 'Beste Prijs', 'plugin-domain' ),
-                  'best_quality' => __( 'Beste Kwaliteit', 'plugin-domain' ),
-                  'eco_choice' => __( 'Environmental choice', 'plugin-domain' ),
+                  'none'  => __( 'None', 'duurzaamthuis' ),
+                  'best_price' => __( 'Beste Prijs', 'duurzaamthuis' ),
+                  'best_quality' => __( 'Beste Kwaliteit', 'duurzaamthuis' ),
+                  'eco_choice' => __( 'Environmental choice', 'duurzaamthuis' ),
                ],
                'classes' => "extended-skin-control",
             ] );
             $repeater->add_control( 'image', [
-               'label' => __( 'Image', 'plugin-domain' ),
+               'label' => __( 'Image', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::MEDIA,
                'default' => [
                   'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -105,37 +105,37 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'default' => 5,
             ] );
             $repeater->add_control( 'product_text_rating', [
-               'label' => __( 'Text Rating', 'plugin-domain' ),
+               'label' => __( 'Text Rating', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'classes' => "extended-skin-control",
                'label_block' => true,
                'default' => '9.5/10 van 26 reviews op cooiblue en Bol.com',
             ] );
             $repeater->add_control( 'price', [
-               'label' => __( 'Price', 'plugin-domain' ),
+               'label' => __( 'Price', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'default' => '10',
                ] );
             $repeater->add_control( 'order_by', [
-               'label' => __( 'Order By', 'plugin-domain' ),
+               'label' => __( 'Order By', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'default' => 'Voor 23:59 besteld',
             ] );
             $repeater->add_control( 'button_text', [
-               'label' => __( 'Button Text', 'plugin-domain' ),
+               'label' => __( 'Button Text', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'separator' => 'before',
                'default' => 'Button text',
                'label_block' => true,
             ] );
             $repeater->add_control( 'button_link', [
-               'label' => __( 'Button Link', 'plugin-domain' ),
+               'label' => __( 'Button Link', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'default' => '#',
                'label_block' => true,
             ] );
             $repeater->add_control( 'sponsored',[
-               'label' => __( 'Sponsored', 'plugin-domain' ),
+               'label' => __( 'Sponsored', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::SWITCHER,
                'label_on' => __( 'Yes', 'your-plugin' ),
                'label_off' => __( 'No', 'your-plugin' ),
@@ -146,12 +146,12 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
             $repeater->add_control( 'pros', [
                'label' => 'Pros',
                'label_block' => false,
-               'button_title' => __( 'Edit Pros', 'plugin-domain' ),
+               'button_title' => __( 'Edit Pros', 'duurzaamthuis' ),
                'type' => 'dh-table-control',
                'separator' => 'before',
                'allow_columns' => false,
                'table_classes' => 'repeater',
-               'add_row_title' => __( 'Add Item', 'plugin-domain' ),
+               'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
                'default' => '[["Pros 1"],["Pros 2"]]',
                'classes' => "extended-skin-control",
             ]);
@@ -159,31 +159,31 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'label' => 'Cons',
                'type' => 'dh-table-control',
                'label_block' => false,
-               'button_title' => __( 'Edit Cons', 'plugin-domain' ),
+               'button_title' => __( 'Edit Cons', 'duurzaamthuis' ),
                'allow_columns' => false,
                'table_classes' => 'repeater',
-               'add_row_title' => __( 'Add Item', 'plugin-domain' ),
+               'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
                'default' => '[["Cons 1"],["Cons 2"]]',
                'classes' => "extended-skin-control",
             ]);
             $repeater->add_control( 'description', [
-               'label' => __( 'Description', 'plugin-domain' ),
+               'label' => __( 'Description', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXTAREA,
                'rows' => 10,
-               'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'plugin-domain' ),
-               'placeholder' => __( 'Type your description here', 'plugin-domain' ),
+               'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'duurzaamthuis' ),
+               'placeholder' => __( 'Type your description here', 'duurzaamthuis' ),
                'classes' => "extended-skin-control",
             ]);
 
 
 
          $this->add_control( 'products', [
-            'label' => __( 'Products', 'plugin-domain' ),
+            'label' => __( 'Products', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
             'default' => [
                [
-                  'title' => __( 'Product title', 'plugin-domain' ),
+                  'title' => __( 'Product title', 'duurzaamthuis' ),
                ],
             ],
             'title_field' => '{{{ title }}}',
@@ -192,11 +192,11 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
          // $this->add_control( 'pros', [
          //    'label' => 'Pros',
          //    'label_block' => false,
-         //    'button_title' => __( 'Edit Pros', 'plugin-domain' ),
+         //    'button_title' => __( 'Edit Pros', 'duurzaamthuis' ),
          //    'type' => 'dh-table-control',
          //    'separator' => 'before',
          //    'allow_columns' => false,
-         //    'add_row_title' => __( 'Add Item', 'plugin-domain' ),
+         //    'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
          //    'default' => '[["Pros 1"],["Pros 2"]]',
          //    'classes' => "extended-skin-control",
          // ]);
@@ -204,9 +204,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
          //    'label' => 'Cons',
          //    'type' => 'dh-table-control',
          //    'label_block' => false,
-         //    'button_title' => __( 'Edit Cons', 'plugin-domain' ),
+         //    'button_title' => __( 'Edit Cons', 'duurzaamthuis' ),
          //    'allow_columns' => false,
-         //    'add_row_title' => __( 'Add Item', 'plugin-domain' ),
+         //    'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
          //    'default' => '[["Cons 1"],["Cons 2"]]',
          //    'classes' => "extended-skin-control",
          // ]);
