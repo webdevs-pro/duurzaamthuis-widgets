@@ -161,7 +161,7 @@
    font-weight: 600;
 }
 .dh-page-header-impact {
-   padding: 20px;
+   padding: 10px 20px;
    background: rgba(255, 255, 255, 0.2);
    border-radius: 6px;
    position: relative;
@@ -171,6 +171,7 @@
    display: grid;
    grid-template-columns: 100px 1fr;
    column-gap: 20px;
+   margin: 10px 0;
 }
 @media(max-width: 767px) {
    .dh-page-header-features-section {
@@ -692,7 +693,7 @@
 
 /* impact */
 .dh-impact {
-   padding: 20px;
+   padding: 10px 20px;
    background: rgba(255, 255, 255, 0.2);
    border-radius: 6px;
    position: relative;
@@ -703,6 +704,7 @@
    display: grid;
    grid-template-columns: 100px 1fr;
    column-gap: 20px;
+   margin: 10px 0;
 }
 @media(max-width: 767px) {
    .dh-impact-features-section {

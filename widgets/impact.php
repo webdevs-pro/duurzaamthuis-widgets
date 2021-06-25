@@ -74,8 +74,6 @@ class DH_Impact extends \Elementor\Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 
-      $post_id = get_the_ID();
-
 		$milieuwinst = $settings['milieuwinst'];
 		if ( $this->is_number( $milieuwinst ) ) {
 			$milieuwinst = $milieuwinst . ' kilo СО<sub>2</sub>';
@@ -172,6 +170,109 @@ class DH_Impact extends \Elementor\Widget_Base {
 			</div>
 		<?php endif; 
 
+	}
+
+	protected function content_template() { // js template
+		?>
+			<#
+				function is_numeric( mixed_var ) {
+					return (mixed_var == '') ? false : !isNaN(mixed_var);
+				}
+				function is_number(str) {
+					str = str.replace(',', '.');
+					if(is_numeric(str)) return true;
+					return false;
+				}
+		 		var milieuwinst = settings.milieuwinst;
+				if(is_number(milieuwinst)) {
+					milieuwinst = milieuwinst + ' kilo СО<sub>2</sub>';
+				} 
+		 		var prijs = settings.prijs;
+				if(is_number(prijs)) {
+					prijs = prijs + ' euro p/j';
+				} 
+		 		var terugverdientijd = settings.terugverdientijd;
+				if(is_number(terugverdientijd)) {
+					terugverdientijd = terugverdientijd + ' jaar';
+				} 
+		 		var gemak = settings.gemak;
+				if(is_number(gemak)) {
+					gemak = gemak + ' uur';
+				} 
+
+				var vervuiling = settings.vervuiling;
+				
+				var advies = settings.advies;
+
+				var subsidie = settings.subsidie;
+
+				var calculations_text = settings.calculations_text;
+			#>
+			<div class="dh-impact">
+				<div class="dh-impact-features-section">
+					<div class="dh-impact-features-title">Impact</div>
+					<div class="dh-impact-features">
+						<# if(milieuwinst) { #>
+							<div class="dh-impact-feature">
+								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-benefit"></i>Milieuwinst</div>
+								<div class="dh-impact-feature-value milieuwinst">{{{ milieuwinst }}}</div>
+							</div>
+						<# } #>
+
+						<# if(prijs) { #>
+							<div class="dh-impact-feature">
+								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-price"></i>Kosten</div>
+								<div class="dh-impact-feature-value">{{{ prijs }}}</div>
+							</div>
+						<# } #>
+
+						<# if(terugverdientijd) { #>
+							<div class="dh-impact-feature">
+								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-payback"></i>Terugverdientijd</div>
+								<div class="dh-impact-feature-value">{{{ terugverdientijd }}}</div>
+							</div>
+						<# } #>
+
+						<# if(gemak) { #>
+							<div class="dh-impact-feature">
+								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-convenience"></i>Gemak</div>
+								<div class="dh-impact-feature-value">{{{ gemak }}}</div>
+							</div>
+						<# } #>
+
+						<# if(vervuiling) { #>
+							<div class="dh-impact-feature">
+								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-convenience"></i>Vervuiling</div>
+								<div class="dh-impact-feature-value">{{{ vervuiling }}}</div>
+							</div>
+						<# } #>
+
+						<# if(advies) { #>
+							<div class="dh-impact-feature">
+								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-convenience"></i>Advies</div>
+								<div class="dh-impact-feature-value">{{{ advies }}}</div>
+							</div>
+						<# } #>
+
+						<# if(subsidie) { #>
+							<div class="dh-impact-feature">
+								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie</div>
+								<div class="dh-impact-feature-value">{{{ subsidie }}}</div>
+							</div>
+						<# } #>
+					</div>
+				</div>
+				<# if(calculations_text) { #>
+					<div class="dh-impact-calc">
+						<div class="dh-impact-calc-toggle">
+							<div class="dh-close">Sluiten<i class="dh-icon dh-icon-arrow-up"></i></div>
+							<div class="dh-open">Toelichting<i class="dh-icon dh-icon-arrow-down"></i></div>
+						</div>
+						<div class="dh-impact-calc-text">{{{ calculations_text }}}</div>
+					</div>
+				<# } #>
+			</div>
+		<?php
 	}
 
 
