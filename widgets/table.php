@@ -66,6 +66,7 @@ class DH_Table extends \Elementor\Widget_Base {
 		$settings = $this->get_settings_for_display();
 
 		$rows = json_decode( $settings['table'] ) ?: array();
+      if ( empty( $rows ) ) return;
 
       $html = '<div class="dh-table-wrapper"><table>';
       foreach ( $rows as $index => $row ) {
@@ -76,7 +77,7 @@ class DH_Table extends \Elementor\Widget_Base {
          }
          $html .= '<tr>';
          foreach ( $row as $cell ) {
-            $html .= '<' . $tag . ' contenteditable>' . $cell . '</' . $tag . '>';
+            $html .= '<' . $tag . '>' . $cell . '</' . $tag . '>';
          }
          $html .= '</tr>';
       }

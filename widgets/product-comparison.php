@@ -152,7 +152,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'allow_columns' => false,
                'table_classes' => 'repeater',
                'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
-               'default' => '[["Pros 1"],["Pros 2"]]',
+               'default' => '[["Advantage 1"],["Advantage 2"]]',
                'classes' => "extended-skin-control",
             ]);
             $repeater->add_control( 'cons', [
@@ -163,7 +163,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'allow_columns' => false,
                'table_classes' => 'repeater',
                'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
-               'default' => '[["Cons 1"],["Cons 2"]]',
+               'default' => '[["Disadvantage 1"],["Disadvantage 2"]]',
                'classes' => "extended-skin-control",
             ]);
             $repeater->add_control( 'description', [
@@ -383,7 +383,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
    protected function content_template() {
 		?>
          <#
-            renderStars = function( rating ) {
+            function renderStars( rating ) {
                var starsHtml = '';
                var flooredRating = Math.floor( rating );
 
@@ -398,6 +398,22 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                }
 
                return starsHtml;
+            }
+
+            function check_and_parse_json(json) {
+               function is_json(str) {
+                  try {
+                     JSON.parse(str);
+                  } catch (e) {
+                     return false;
+                  }
+                  return true;
+               }
+               if(is_json(json)){
+                  return JSON.parse(json);
+               } else {
+                  return [];
+               }
             }
          #>
 
@@ -468,7 +484,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                     <div class="close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>
                                  </div>
                               </div>
-                              <# var pros = JSON.parse(item.pros);  #>
+                              <# var pros = check_and_parse_json(item.pros);  #>
                               <# if(pros.length) { #>
                                  <div class="dh-product-pros">
                                     <div class="dh-product-pros-heading">Voordelen</div>
@@ -480,7 +496,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                     <# }); #>
                                  </div>
                               <# } #>
-                              <# var cons = JSON.parse(item.cons);  #>
+                              <# var cons = check_and_parse_json(item.cons);  #>
                               <# if(cons.length) { #>
                               <div class="dh-product-cons">
                                  <div class="dh-product-cons-heading">Nadelen</div>

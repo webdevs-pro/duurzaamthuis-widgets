@@ -84,7 +84,12 @@
    // generate table html
    function generateTable(rows) {
       if(!rows) {
-         rows = JSON.parse($('#elementor-control-default-'+table_id).val());
+         var control_value = $('#elementor-control-default-'+table_id).val();
+         if(IsJsonString(control_value)) {
+            rows = JSON.parse(control_value);
+         } else {
+            rows = [];
+         }
       }
       var table_html = '';
       $.each(rows, function(row_index, row) {
@@ -104,6 +109,16 @@
       });
       table.html(table_html);
    }
+
+   // is JSON string
+   function IsJsonString(str) {
+      try {
+          JSON.parse(str);
+      } catch (e) {
+          return false;
+      }
+      return true;
+  }
 
 
    // save data
