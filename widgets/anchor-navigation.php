@@ -107,5 +107,30 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
          </div>
 		<?php
 	}
+
+	protected function content_template() { // js template
+
+      ?>
+         <h2 class="dh-heading">
+            {{{ settings.heading }}}
+         </h2>
+         <div class="dh-repeater">
+            <# _.each( settings.items, function( item ) { #>
+               <# if(item.anchor) {
+                  var href = 'href="#' + item.anhor + '"';
+               } else {
+                  var href = '';
+               } #>
+               <a class="dh-item" {{{ href }}}>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M12.2744 19.75V4.75" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                     <path d="M18.2988 13.7002L12.2748 19.7502L6.24976 13.7002" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  {{{ item.title }}}
+               </a>
+            <# }); #>
+         </div>
+		<?php
+	}
 	
 }
