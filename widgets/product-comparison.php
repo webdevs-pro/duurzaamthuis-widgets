@@ -45,13 +45,10 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
             'classes' => "dh-skin-control",
          ] );
 
-         $this->add_control(
-            'controls_conditions',
-            [
-               'type' => \Elementor\Controls_Manager::RAW_HTML,
-               'raw' => $this->get_controls_conditions_script(),            
-            ]
-         );
+         $this->add_control( 'controls_conditions', [
+            'type' => \Elementor\Controls_Manager::RAW_HTML,
+            'raw' => $this->get_controls_conditions_script(),            
+         ] );
 
          $this->add_responsive_control( 'columns_count', [
 				'label' => __( 'Columns', 'duurzaamthuis' ),

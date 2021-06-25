@@ -47,6 +47,7 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/number-heading.php';
 		require __DIR__ . '/widgets/impact.php';
 		require __DIR__ . '/widgets/numbered-list.php';
+		require __DIR__ . '/widgets/related-posts.php';
 	}
 	private function register_widget() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
@@ -57,6 +58,7 @@ class DH_Register_Widgets {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Number_Heading() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Impact() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Numbered_List() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Related_Posts() );
 	}
 }
 new DH_Register_Widgets();
@@ -279,3 +281,17 @@ class DH_Intro_Field {
 	}
 }
 new DH_Intro_Field();
+
+
+
+
+add_filter( 'elementor/query/get_autocomplete/display/ms_custom', function( $results, $data ) {
+	$post = get_post($data);
+	$results = '(' . $post->post_type . ') ' . $post->post_title;
+	return $results;
+}, 10, 2);
+add_filter( 'elementor/query/get_value_titles/display/ms_custom', function( $results, $data ) {
+	$post = get_post($data);
+	$results = '(' . $post->post_type . ') ' . $post->post_title;
+	return $results;
+}, 10, 2);
