@@ -632,8 +632,24 @@
 
 /* number heading */
 .dh-number-heading {
-   display: flex;
+   display: grid;
+   grid-template-columns: auto 1fr;
+   grid-template-areas: "a b";
+   column-gap: 10px;
+   row-gap: 15px;
 }
+.dh-number-heading.with-badge {
+   grid-template-areas: "a b c";
+   grid-template-columns: auto 1fr auto;
+}
+@media(max-width: 767px) {
+   .dh-number-heading.with-badge {
+      grid-template-columns: auto 1fr;
+      grid-template-areas: "c c"
+                           "a b";
+   }
+}
+
 .dh-number-heading .dh-number {
    background: #EADECC;
    border-radius: 8px;
@@ -642,12 +658,32 @@
    display: flex;
    justify-content: center;
    align-items: center;
-   flex-shrink: 0;
+   grid-area: a;
 }
 
 .dh-number-heading .dh-heading {
    margin-top: 0.4em;
-   margin-left: 0.4em;
+   grid-area: b;
+}
+.dh-number-heading .dh-heading-badge {
+   margin-top: 0.4em;
+   grid-area: c;
+}
+.dh-number-heading .dh-heading-badge span {
+   padding: 10px 21px 10px 16px;
+   color: #fff;
+   font-size: 14px;
+   font-weight: 500;
+   display: block;
+   clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 50%, 100% 100%, 0% 100%);
+}
+@media(max-width: 767px) {
+   .dh-number-heading .dh-heading-badge span {
+      display: inline-block;
+   }
+}
+.dh-number-heading .dh-heading-choise-badge span {
+   background-color: #769179;
 }
 
 

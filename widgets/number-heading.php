@@ -30,28 +30,30 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
          'label' => __( 'Content', 'duurzaamthuis' ),
          'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
       ] );
-		$this->add_control( 'number',
-			[
+			$this->add_control( 'number', [
 				'label' => __( 'Number', 'plugin-domain' ),
 				'type' => \Elementor\Controls_Manager::NUMBER,
 				'min' => 1,
 				'max' => 100,
 				'step' => 1,
 				'default' => 1,
-			]
-		);
-		$this->add_control(
-			'heading',
-			[
+			] );
+			$this->add_control( 'heading', [
 				'label' => __( 'Heading', 'plugin-domain' ),
 				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 3,
 				'default' => __( 'Default heading', 'plugin-domain' ),
-			]
-		);
-		$this->add_control(
-			'size',
-			[
+			] );
+			$this->add_control( 'badge', [
+				'label' => __( 'Badge', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'none',
+				'options' => [
+					'none'  => __( 'None', 'duurzaamthuis' ),
+					'best_choise' => __( 'Best Choise', 'duurzaamthuis' ),
+				],
+			] );
+			$this->add_control( 'size', [
 				'label' => __( 'Size', 'plugin-domain' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'default' => 'h2',
@@ -61,8 +63,7 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 					'h3' => __( 'H3', 'plugin-domain' ),
 					'h4' => __( 'H4', 'plugin-domain' ),
 				],
-			]
-		);
+			] );
 		$this->end_controls_section(); 
 
 
@@ -70,22 +71,37 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 	}
 
 	protected function render() { // php template
-
 		$settings = $this->get_settings_for_display();
-
-      echo '<' . $settings['size'] . ' class="dh-number-heading">';
+		$add_class = $settings['badge'] != 'none' ? ' with-badge' : '';
+      echo '<' . $settings['size'] . ' class="dh-number-heading' . $add_class . '">';
          echo '<div class="dh-number">' . $settings['number'] . '</div>';
          echo '<div class="dh-heading">' . $settings['heading'] . '</div>';
+			if ( $settings['badge'] ) {
+				switch ( $settings['badge'] ) {
+					case 'best_choise':
+						echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Best Choise</span></div>';
+						break;
+				}
+			}
       echo '</' . $settings['size'] . '>';
-
 	}
 
 	protected function content_template() { // php template
 
       ?>
-         <{{{ settings.size }}} class="dh-number-heading">
+			<# var add_class = settings.badge != 'none' ? ' with-badge' : ''; #>
+         <{{{ settings.size }}} class="dh-number-heading{{{ add_class }}}">
             <div class="dh-number">{{{ settings.number }}}</div>
             <div class="dh-heading">{{{ settings.heading }}}</div>
+				<#
+					if(settings.badge) {
+						switch(settings.badge) {
+							case 'best_choise': #>
+								<div class="dh-heading-badge dh-heading-choise-badge"><span>Best Choise</span></div>
+								<# break;
+						}
+					}
+				#>
          </{{{ settings.size }}}>
       <?php
 

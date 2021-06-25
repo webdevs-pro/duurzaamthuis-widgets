@@ -50,7 +50,7 @@ class DH_Impact extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::TEXT,
 			] );
 			$this->add_control( 'vervuiling', [
-				'label' => __( 'Vervuilinge', 'duurzaamthuis' ),
+				'label' => __( 'Vervuiling', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
 			] );
 			$this->add_control( 'advies', [

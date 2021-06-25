@@ -192,7 +192,7 @@ class DH_Impact_Fields {
 				'type' => \Elementor\Controls_Manager::TEXT,
 			] );
 			$post->add_control( 'vervuiling', [
-				'label' => __( 'Vervuilinge', 'duurzaamthuis' ),
+				'label' => __( 'Vervuiling', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
 			] );
 			$post->add_control( 'advies', [

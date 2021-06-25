@@ -327,7 +327,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               echo '</div>';
                            echo '</div>';
                            echo '<div class="dh-product-rating">' . $item['product_text_rating'] . '</div>';
-                           echo '<div class="dh-product-price">Price: <span>€ ' . $item['price'] . '</span></div>';
+                           echo '<div class="dh-product-price">Prijs: <span>€ ' . $item['price'] . '</span></div>';
                            echo '<h3 class="dh-product-title">' . $item['title'] . '</h3>';
                            echo '<div class="dh-product-description">';
                               echo '<div class="dh-product-description-content">' . $item['description'] . '</div>';
@@ -473,7 +473,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                  </div>
                               </div>
                               <div class="dh-product-rating">{{{ item.product_text_rating }}}</div>
-                              <div class="dh-product-price">€ {{{ item.price }}}</div>
+                              <div class="dh-product-price">Prijs: <span>€ {{{ item.price }}}</span></div>
                               <h3 class="dh-product-title">{{{ item.title }}}</h3>
                               <div class="dh-product-description">
                                  <div class="dh-product-description-content">{{{ item.description }}}</div>
