@@ -1,13 +1,13 @@
 <?php
 
-use Elementor\Widget_Base;
-use Elementor\Controls_Manager;
-use Elementor\Group_Control_Typography;
-use Elementor\Group_Control_Background;
-use Elementor\Group_Control_Border;
-use Elementor\Scheme_Typography;
-use Elementor\Group_Control_Text_Shadow;
-use Elementor\Modules\DynamicTags\Module as TagsModule;
+// use Elementor\Widget_Base;
+// use Elementor\Controls_Manager;
+// use Elementor\Group_Control_Typography;
+// use Elementor\Group_Control_Background;
+// use Elementor\Group_Control_Border;
+// use Elementor\Scheme_Typography;
+// use Elementor\Group_Control_Text_Shadow;
+// use Elementor\Modules\DynamicTags\Module as TagsModule;
 
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -39,7 +39,7 @@ class DH_Table extends \Elementor\Widget_Base {
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => Controls_Manager::TAB_CONTENT,
+         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
       ]);
 
          $this->add_control( 'table', [

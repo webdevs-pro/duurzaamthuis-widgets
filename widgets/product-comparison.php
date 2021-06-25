@@ -4,8 +4,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-
-
 class DH_Product_Comparison extends \Elementor\Widget_Base {
 
 	public function get_name() {

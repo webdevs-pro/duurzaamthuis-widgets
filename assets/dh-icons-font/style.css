@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'dh-icons';
   src:
-    url('fonts/dh-icons.ttf?d7fzbq') format('truetype'),
-    url('fonts/dh-icons.woff?d7fzbq') format('woff'),
-    url('fonts/dh-icons.svg?d7fzbq#dh-icons') format('svg');
+    url('fonts/dh-icons.ttf?sdtnr') format('truetype'),
+    url('fonts/dh-icons.woff?sdtnr') format('woff'),
+    url('fonts/dh-icons.svg?sdtnr#dh-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dh-icon-number-heading:before {
+  content: "\e913";
+}
 .dh-icon-times:before {
   content: "\e911";
 }

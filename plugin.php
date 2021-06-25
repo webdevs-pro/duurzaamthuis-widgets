@@ -44,6 +44,7 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/table.php';
 		require __DIR__ . '/widgets/page-header.php';
 		require __DIR__ . '/widgets/product-comparison.php';
+		require __DIR__ . '/widgets/number-heading.php';
 	}
 	private function register_widget() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
@@ -51,6 +52,7 @@ class DH_Register_Widgets {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Table() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Page_Header() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Product_Comparison() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Number_Heading() );
 	}
 }
 new DH_Register_Widgets();
@@ -94,6 +96,7 @@ function disable_panel_widgets( $settings ) {
 		'dh-anchor-navigation',
 		'dh-table',
 		'dh-page-header',
+		'dh-product-comparition',
 		'heading',
 	);
 
