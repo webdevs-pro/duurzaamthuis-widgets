@@ -26,7 +26,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 		return [ 'duurzaamthuis-widgets' ];
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
 
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
@@ -174,7 +174,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                   $intro_text = get_post_meta( $post_id, 'intro-text', true );
                ?>
                   
-               <?php if ( $settings['show_infobar'] && ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie ) ) : ?>
+               <?php if ( $settings['show_infobar'] && ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling || $advies ) ) : ?>
                   <div class="dh-page-header-impact">
                      <div class="dh-page-header-features-section">
                         <div class="dh-page-header-features-title">Impact</div>
