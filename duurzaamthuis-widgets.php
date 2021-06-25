@@ -3,14 +3,15 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.5.5
+ * Version:     0.5.6
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
 
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
+require_once ( ABSPATH . 'wp-admin/includes/plugin.php' );
+define( 'DH_VERSION', get_plugin_data( __FILE__ )['Version'] );
 define( 'DH_PLUGIN_DIR', dirname( __FILE__ ) ); // for php
 define( 'DH_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) ); // for assets
 

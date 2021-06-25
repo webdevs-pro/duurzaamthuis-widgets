@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 add_action( 'elementor/editor/after_enqueue_styles', 'icons_font_styles' );
 add_action( 'elementor/preview/enqueue_styles', 'icons_font_styles' );
 function icons_font_styles() {
-	wp_enqueue_style( 'dh-icons', plugin_dir_url( __FILE__ ) . '/assets/dh-icons-font/style.css' );
+	wp_enqueue_style( 'dh-icons', plugin_dir_url( __FILE__ ) . '/assets/dh-icons-font/style.css', array(), DH_VERSION );
 }
 
 
