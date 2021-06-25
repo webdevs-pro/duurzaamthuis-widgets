@@ -334,8 +334,8 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                            echo '<div class="dh-product-description">';
                               echo '<div class="dh-product-description-content">' . $item['description'] . '</div>';
                               echo '<div class="dh-product-description-toggle">';
-                                 echo '<div class="open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>';
-                                 echo '<div class="close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>';
+                                 echo '<div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>';
+                                 echo '<div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>';
                               echo '</div>';
                            echo '</div>';
                            $pros = json_decode( $item['pros'] );
@@ -480,8 +480,8 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               <div class="dh-product-description">
                                  <div class="dh-product-description-content">{{{ item.description }}}</div>
                                     <div class="dh-product-description-toggle">
-                                    <div class="open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>
-                                    <div class="close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>
+                                    <div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>
+                                    <div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>
                                  </div>
                               </div>
                               <# var pros = check_and_parse_json(item.pros);  #>

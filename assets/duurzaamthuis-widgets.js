@@ -22,8 +22,8 @@
 			var content_height = $(content).height();
 			// console.log(content_height);
 			if(content_height > height) {
-				var open = $(this).find('.open');
-				var close = $(this).find('.close');
+				var open = $(this).find('.dh-open');
+				var close = $(this).find('.dh-close');
 				$(open).show();
 				var parent = this;
 				$(open).on('click', function() {

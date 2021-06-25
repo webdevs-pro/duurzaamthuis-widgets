@@ -74,8 +74,8 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                '{{WRAPPER}} .dh-page-header-feature-title' => 'color: {{VALUE}}',
                '{{WRAPPER}} .dh-page-header-feature-value' => 'color: {{VALUE}}',
                '{{WRAPPER}} .dh-page-header-meta' => 'color: {{VALUE}}',
-               '{{WRAPPER}} .dh-page-header-calc-toggle .open' => 'color: {{VALUE}}',
-               '{{WRAPPER}} .dh-page-header-calc-toggle .close' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-calc-toggle .dh-open' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-calc-toggle .dh-close' => 'color: {{VALUE}}',
                '{{WRAPPER}} .dh-page-header-calc-text' => 'color: {{VALUE}}',
                '{{WRAPPER}} .dh-page-header-tag a' => 'color: {{VALUE}}',
                '{{WRAPPER}} ..dh-page-header-breadcrumbs i' => 'color: {{VALUE}}',
@@ -246,8 +246,8 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                      <?php if ( $calculations_text ) { ?>
                         <div class="dh-page-header-calc">
                            <div class="dh-page-header-calc-toggle">
-                              <div class="close">Sluiten<i class="dh-icon dh-icon-arrow-up"></i></div>
-                              <div class="open">Toelichting<i class="dh-icon dh-icon-arrow-down"></i></div>
+                              <div class="dh-close">Sluiten<i class="dh-icon dh-icon-arrow-up"></i></div>
+                              <div class="dh-open">Toelichting<i class="dh-icon dh-icon-arrow-down"></i></div>
                            </div>
                            <div class="dh-page-header-calc-text"><?php echo $calculations_text; ?></div>
                         </div>
