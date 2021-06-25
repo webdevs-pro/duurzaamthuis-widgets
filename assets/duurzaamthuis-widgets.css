@@ -750,3 +750,28 @@
       font-size: 12px;
    }
 }
+
+
+
+
+
+/* numbered list */
+.dh-numbered-list-item {
+   display: flex;
+   margin-bottom: 20px;
+}
+.dh-numbered-list .dh-numbered-list-item-number {
+   background: #EADECC;
+   border-radius: 50%;
+   width: 2em;
+   height: 2em;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-shrink: 0;
+}
+
+.dh-numbered-list .dh-numbered-list-item-text {
+   margin-top: 0.25em;
+   margin-left: 1em;
+}

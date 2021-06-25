@@ -40,7 +40,7 @@ class DH_Table extends \Elementor\Widget_Base {
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
          'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-      ]);
+      ] );
 
          $this->add_control( 'table', [
             'label' => 'Table',
@@ -53,7 +53,7 @@ class DH_Table extends \Elementor\Widget_Base {
             'add_row_title' => __( 'Add Row', 'duurzaamthuis' ),
             'add_column_title' => __( 'Add Column', 'duurzaamthuis' ),
             'default' => '[["Column 1 heading","Column 2 heading"],["Some text","Some text"]]',
-         ]);
+         ] );
 
 		$this->end_controls_section(); 
 

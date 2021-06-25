@@ -38,7 +38,7 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
          'tab' => Controls_Manager::TAB_CONTENT,
-      ]);
+      ] );
 
 			$this->add_control( 'heading', [
             'label' => __( 'Heading', 'duurzaamthuis' ),
@@ -46,7 +46,7 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
             'default' => __( 'Heading text', 'duurzaamthuis' ),
             'label_block' => true,
             'separator' => 'before'
-         ]);
+         ] );
 
          $repeater = new \Elementor\Repeater();
 
@@ -54,26 +54,26 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
             'label' => __( 'Title', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::TEXT,
             'label_block' => true,
-         ]);
+         ] );
    
          $repeater->add_control( 'anchor', [
             'label' => __( 'Anchor', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::TEXT,
             'label_block' => true,
-         ]);
+         ] );
          
          $repeater->add_control( 'description', [
             'raw' => __( 'Only Id without \'#\' sign', 'elementor-pro' ),
             'type' => Controls_Manager::RAW_HTML,
             'content_classes' => 'elementor-descriptor',
-         ]);
+         ] );
    
          $this->add_control( 'items', [
             'label' => __( 'Items', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
             'title_field' => '{{{ title }}}',
-         ]);
+         ] );
 
 
 

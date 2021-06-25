@@ -32,7 +32,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
          'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-      ]);
+      ] );
 
          $this->add_control( 'skin', [
             'label' => __( 'Skin', 'duurzaamthuis' ),
@@ -65,7 +65,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 				'selectors' => [
 					'{{WRAPPER}} .dh-products-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
 				],         
-			]);
+			] );
 
          $repeater = new \Elementor\Repeater();
 
@@ -140,7 +140,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'return_value' => 'yes',
                'default' => 'yes',
                'render_type' => 'ui',
-            ]);
+            ] );
             $repeater->add_control( 'pros', [
                'label' => 'Pros',
                'label_block' => false,
@@ -152,7 +152,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
                'default' => '[["Advantage 1"],["Advantage 2"]]',
                'classes' => "extended-skin-control",
-            ]);
+            ] );
             $repeater->add_control( 'cons', [
                'label' => 'Cons',
                'type' => 'dh-table-control',
@@ -163,7 +163,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
                'default' => '[["Disadvantage 1"],["Disadvantage 2"]]',
                'classes' => "extended-skin-control",
-            ]);
+            ] );
             $repeater->add_control( 'description', [
                'label' => __( 'Description', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXTAREA,
@@ -171,7 +171,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'duurzaamthuis' ),
                'placeholder' => __( 'Type your description here', 'duurzaamthuis' ),
                'classes' => "extended-skin-control",
-            ]);
+            ] );
 
 
 
@@ -195,7 +195,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 		$this->start_controls_section( 'section_style', [
          'label' => __( 'Style', 'duurzaamthuis' ),
          'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-      ]);
+      ] );
 
 
 

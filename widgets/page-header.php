@@ -32,17 +32,16 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
          'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-      ]);
-
-         $this->add_control( 'show_infobar', [
-            'label' => __( 'Show Impact Section', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::SWITCHER,
-            'label_on' => __( 'Show', 'your-plugin' ),
-            'label_off' => __( 'Hide', 'your-plugin' ),
-            'return_value' => 'yes',
-            'default' => '',
-         ]);
-
+      ] );
+         $this->add_control( 'important_note',[
+            'type' => \Elementor\Controls_Manager::RAW_HTML,
+            'raw' => __( 'This widget has no settings', 'duurzaamthuis' ),
+            'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
+         ] );
+         $this->add_control( 'settings_button',[
+            'type' => \Elementor\Controls_Manager::RAW_HTML,
+            'raw' => '<button class="elementor-button elementor-button-default" onclick="$e.route(\'panel/page-settings/settings\');jQuery(\'.elementor-control-section_impact\').click();">Go to Impact settings</button>',
+         ] );
 		$this->end_controls_section(); 
 
 
@@ -50,7 +49,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 		$this->start_controls_section( 'section_style', [
          'label' => __( 'Style', 'duurzaamthuis' ),
          'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-      ]);
+      ] );
 
          $this->add_control( 'text_color', [
             'label' => __( 'Text Color', 'duurzaamthuis' ),
@@ -69,7 +68,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                '{{WRAPPER}} ..dh-page-header-breadcrumbs i' => 'color: {{VALUE}}',
 
             ],
-         ]);
+         ] );
          $this->add_control( 'first_tag_background_color', [
             'label' => __( 'First Tag Background Color', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::COLOR,
@@ -77,7 +76,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
             'selectors' => [
                '{{WRAPPER}} .dh-page-header-tag:first-child' => 'color: {{VALUE}}',
             ],
-         ]);
+         ] );
          $this->add_control( 'impact_icons_color', [
             'label' => __( 'Impact Icons Color', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::COLOR,
@@ -85,7 +84,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
             'selectors' => [
                '{{WRAPPER}} .dh-page-header-feature-title i' => 'color: {{VALUE}}',
             ],
-         ]);
+         ] );
          $this->add_control( 'meta_icons_color', [
             'label' => __( 'Meta Icons Color', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::COLOR,
@@ -93,7 +92,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
             'selectors' => [
                '{{WRAPPER}} .dh-page-header-meta-item i' => 'color: {{VALUE}}',
             ],
-         ]);
+         ] );
 
 		$this->end_controls_section(); 
 
@@ -290,162 +289,3 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 }
 
 
-/**
- * 
- * class for adding Impact meta section to Elementor page/post settings
- * 
- */
-class DH_Impact_Fields {
-	public function __construct() {
-		add_action( 'elementor/element/wp-post/document_settings/after_section_end', [ $this, 'add_post_settings_controls' ] );
-		add_action( 'elementor/element/wp-page/document_settings/after_section_end', [ $this, 'add_page_settings_controls' ] );
-		add_action( 'elementor/document/after_save', [ $this, 'save_settings' ], 10, 2 );
-	}
-	public function add_post_settings_controls( \Elementor\Core\DocumentTypes\Post $post ) {
-		$this->add_controls( $post );
-	}
-	public function add_page_settings_controls( \Elementor\Core\DocumentTypes\Page $page ) {
-		$this->add_controls( $page );
-	}
-	public function add_controls( $post ) {
-		$post->start_controls_section( 'section_impact', [
-			'label' => __( 'Impact', 'duurzaamthuis' ),
-			'tab' => \Elementor\Controls_Manager::TAB_SETTINGS, // https://developers.elementor.com/elementor-element-panel-tabs/
-		]);
-			$post->add_control(
-				'milieuwinst',
-				[
-					'label' => __( 'Milieuwinst', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::TEXT,
-					// 'default' => '-',
-				]
-			);
-			$post->add_control(
-				'prijs',
-				[
-					'label' => __( 'Prijs', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::TEXT,
-					// 'default' => '-',
-				]
-			);
-			$post->add_control(
-				'terugverdientijd',
-				[
-					'label' => __( 'Terugverdientijd', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::TEXT,
-				]
-			);
-			$post->add_control(
-				'gemak',
-				[
-					'label' => __( 'Gemak', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::TEXT,
-				]
-			);
-			$post->add_control(
-				'subsidie',
-				[
-					'label' => __( 'Subsidie', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::TEXT,
-				]
-			);
-			$post->add_control(
-				'vervuiling',
-				[
-					'label' => __( 'Vervuilinge', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::TEXT,
-				]
-			);
-			$post->add_control(
-				'advies',
-				[
-					'label' => __( 'Advies', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::TEXT,
-				]
-			);
-			$post->add_control(
-				'calculations_text',
-				[
-					'label' => __( 'Calculations', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::WYSIWYG,
-				]
-			);
-			$post->add_control(
-				'impact_button',
-				[
-					'type' => \Elementor\Controls_Manager::RAW_HTML,
-					'raw' => '<button class="elementor-update-preview-button elementor-button elementor-button-success" onclick="elementor.saver.update.apply().then(function(){elementor.reloadPreview();});">Update And Reload Preview</button>',
-				]
-			);
-		$post->end_controls_section(); 
-	}
-	public function save_settings( $instance, $data ) {
-		$post_id = $instance->get_post()->ID;
-
-		if ( empty( $data) ) return;
-
-		$settings = $data['settings'];
-
-		update_post_meta( $post_id, 'milieuwinst', $settings['milieuwinst'] ?? '' );
-		update_post_meta( $post_id, 'prijs', $settings['prijs'] ?? '' );
-		update_post_meta( $post_id, 'terugverdientijd', $settings['terugverdientijd'] ?? '' );
-		update_post_meta( $post_id, 'gemak', $settings['gemak'] ?? '' );
-		update_post_meta( $post_id, 'subsidie', $settings['subsidie'] ?? '' );
-		update_post_meta( $post_id, 'vervuiling', $settings['vervuiling'] ?? '' );
-		update_post_meta( $post_id, 'advies', $settings['advies'] ?? '' );
-		update_post_meta( $post_id, 'calculations-text', $settings['calculations_text'] ?? '' );
-	}
-}
-new DH_Impact_Fields();
-
-
-/**
- * 
- * class for adding Impact meta section to Elementor page/post settings
- * 
- */
-class DH_Intro_Field {
-	public function __construct() {
-		add_action( 'elementor/element/wp-post/document_settings/after_section_end', [ $this, 'add_post_settings_controls' ] );
-		add_action( 'elementor/element/wp-page/document_settings/after_section_end', [ $this, 'add_page_settings_controls' ] );
-		add_action( 'elementor/document/after_save', [ $this, 'save_settings' ], 10, 2 );
-	}
-	public function add_post_settings_controls( \Elementor\Core\DocumentTypes\Post $post ) {
-		$this->add_controls( $post );
-	}
-	public function add_page_settings_controls( \Elementor\Core\DocumentTypes\Page $page ) {
-		$this->add_controls( $page );
-	}
-	public function add_controls( $post ) {
-		$post->start_controls_section( 'section_intro', [
-			'label' => __( 'Introduction', 'duurzaamthuis' ),
-			'tab' => \Elementor\Controls_Manager::TAB_SETTINGS, // https://developers.elementor.com/elementor-element-panel-tabs/
-		]);
-			$post->add_control(
-				'intro_text',
-				[
-					'label' => __( 'Introduction Text', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::WYSIWYG,
-				]
-			);
-			$post->add_control(
-				'intro_button',
-				[
-					'type' => \Elementor\Controls_Manager::RAW_HTML,
-					'raw' => '<button class="elementor-update-preview-button elementor-button elementor-button-success" onclick="elementor.saver.update.apply().then(function(){elementor.reloadPreview();});">Update And Reload Preview</button>',
-				]
-			);
-		$post->end_controls_section(); 
-	}
-	public function save_settings( $instance, $data ) {
-		$post_id = $instance->get_post()->ID;
-
-		if ( empty( $data) ) return;
-
-		$settings = $data['settings'];
-
-		update_post_meta( $post_id, 'intro-text', $settings['intro_text'] ?? '' );
-
-	}
-}
-new DH_Intro_Field();

@@ -24,7 +24,40 @@ class DH_Impact extends \Elementor\Widget_Base {
 	}
 
 	protected function register_controls() {
-
+		// SECTION CONTENT
+		$this->start_controls_section( 'section_content', [
+         'label' => __( 'Content', 'duurzaamthuis' ),
+         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+      ] );
+			$this->add_control( 'milieuwinst', [
+				'label' => __( 'Milieuwinst', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$this->add_control( 'prijs', [
+				'label' => __( 'Prijs', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$this->add_control( 'terugverdientijd', [
+				'label' => __( 'Terugverdientijd', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$this->add_control( 'gemak', [
+				'label' => __( 'Gemak', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$this->add_control( 'subsidie', [
+				'label' => __( 'Subsidie', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$this->add_control( 'vervuiling', [
+				'label' => __( 'Vervuilinge', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$this->add_control( 'advies', [
+				'label' => __( 'Advies', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+		$this->end_controls_section(); 
 	}
 
 	public function is_number( $string ) {
@@ -39,33 +72,33 @@ class DH_Impact extends \Elementor\Widget_Base {
 
       $post_id = get_the_ID();
 
-		$milieuwinst = get_post_meta( $post_id, 'milieuwinst', true );
+		$milieuwinst = $settings['milieuwinst'];
 		if ( $this->is_number( $milieuwinst ) ) {
 			$milieuwinst = $milieuwinst . ' kilo СО<sub>2</sub>';
 		} 
 
-		$prijs = get_post_meta( $post_id, 'prijs', true );
+		$prijs = $settings['prijs'];
 		if ( $this->is_number( $prijs ) ) {
 			$prijs = $prijs . ' euro p/j';
 		} 
 
-		$terugverdientijd = get_post_meta( $post_id, 'terugverdientijd', true );
+		$terugverdientijd = $settings['terugverdientijd'];
 		if ( $this->is_number( $terugverdientijd ) ) {
 			$terugverdientijd = $terugverdientijd . ' jaar';
 		} 
 
-		$gemak = get_post_meta( $post_id, 'gemak', true );
+		$gemak = $settings['gemak'];
 		if ( $this->is_number( $gemak ) ) {
 			$gemak = $gemak . ' uur';
 		} 
 
-		$vervuiling = get_post_meta( $post_id, 'vervuiling', true );
+		$vervuiling = $settings['vervuiling'];
 		
-		$advies = get_post_meta( $post_id, 'advies', true );
+		$advies = $settings['advies'];
 
-		$subsidie = get_post_meta( $post_id, 'subsidie', true );
+		$subsidie = $settings['subsidie'];
 
-		if ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling || $advies ) : ?>
+		if ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling || $advies || \Elementor\Plugin::$instance->editor->is_edit_mode() ) : ?>
 			<div class="dh-impact">
 				<div class="dh-impact-features-section">
 					<div class="dh-impact-features-title">Impact</div>

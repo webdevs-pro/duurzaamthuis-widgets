@@ -29,7 +29,7 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
          'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
-      ]);
+      ] );
 		$this->add_control( 'number',
 			[
 				'label' => __( 'Number', 'plugin-domain' ),

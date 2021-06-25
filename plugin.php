@@ -46,6 +46,7 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/product-comparison.php';
 		require __DIR__ . '/widgets/number-heading.php';
 		require __DIR__ . '/widgets/impact.php';
+		require __DIR__ . '/widgets/numbered-list.php';
 	}
 	private function register_widget() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
@@ -55,6 +56,7 @@ class DH_Register_Widgets {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Product_Comparison() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Number_Heading() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Impact() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Numbered_List() );
 	}
 }
 new DH_Register_Widgets();
@@ -147,4 +149,133 @@ function post_read_time( $post_id ) {
 
 
 
+/**
+ * 
+ * class for adding Impact meta section to Elementor page/post settings
+ * 
+ */
+class DH_Impact_Fields {
+	public function __construct() {
+		add_action( 'elementor/element/wp-post/document_settings/after_section_end', [ $this, 'add_post_settings_controls' ] );
+		add_action( 'elementor/element/wp-page/document_settings/after_section_end', [ $this, 'add_page_settings_controls' ] );
+		add_action( 'elementor/document/after_save', [ $this, 'save_settings' ], 10, 2 );
+	}
+	public function add_post_settings_controls( \Elementor\Core\DocumentTypes\Post $post ) {
+		$this->add_controls( $post );
+	}
+	public function add_page_settings_controls( \Elementor\Core\DocumentTypes\Page $page ) {
+		$this->add_controls( $page );
+	}
+	public function add_controls( $post ) {
+		$post->start_controls_section( 'section_impact', [
+			'label' => __( 'Impact', 'duurzaamthuis' ),
+			'tab' => \Elementor\Controls_Manager::TAB_SETTINGS, // https://developers.elementor.com/elementor-element-panel-tabs/
+		] );
+			$post->add_control( 'milieuwinst', [
+				'label' => __( 'Milieuwinst', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$post->add_control( 'prijs', [
+				'label' => __( 'Prijs', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$post->add_control( 'terugverdientijd', [
+				'label' => __( 'Terugverdientijd', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$post->add_control( 'gemak', [
+				'label' => __( 'Gemak', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$post->add_control( 'subsidie', [
+				'label' => __( 'Subsidie', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$post->add_control( 'vervuiling', [
+				'label' => __( 'Vervuilinge', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$post->add_control( 'advies', [
+				'label' => __( 'Advies', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			] );
+			$post->add_control( 'calculations_text', [
+				'label' => __( 'Calculations', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::WYSIWYG,
+			] );
+			$post->add_control( 'impact_button', [
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => '<button class="elementor-update-preview-button elementor-button elementor-button-success" onclick="elementor.saver.update.apply().then(function(){elementor.reloadPreview();});">Update And Reload Preview</button>',
+			] );
+		$post->end_controls_section(); 
+	}
+	public function save_settings( $instance, $data ) {
+		$post_id = $instance->get_post()->ID;
 
+		if ( empty( $data) ) return;
+
+		$settings = $data['settings'];
+
+		update_post_meta( $post_id, 'milieuwinst', $settings['milieuwinst'] ?? '' );
+		update_post_meta( $post_id, 'prijs', $settings['prijs'] ?? '' );
+		update_post_meta( $post_id, 'terugverdientijd', $settings['terugverdientijd'] ?? '' );
+		update_post_meta( $post_id, 'gemak', $settings['gemak'] ?? '' );
+		update_post_meta( $post_id, 'subsidie', $settings['subsidie'] ?? '' );
+		update_post_meta( $post_id, 'vervuiling', $settings['vervuiling'] ?? '' );
+		update_post_meta( $post_id, 'advies', $settings['advies'] ?? '' );
+		update_post_meta( $post_id, 'calculations-text', $settings['calculations_text'] ?? '' );
+	}
+}
+new DH_Impact_Fields();
+
+
+/**
+ * 
+ * class for adding Impact meta section to Elementor page/post settings
+ * 
+ */
+class DH_Intro_Field {
+	public function __construct() {
+		add_action( 'elementor/element/wp-post/document_settings/after_section_end', [ $this, 'add_post_settings_controls' ] );
+		add_action( 'elementor/element/wp-page/document_settings/after_section_end', [ $this, 'add_page_settings_controls' ] );
+		add_action( 'elementor/document/after_save', [ $this, 'save_settings' ], 10, 2 );
+	}
+	public function add_post_settings_controls( \Elementor\Core\DocumentTypes\Post $post ) {
+		$this->add_controls( $post );
+	}
+	public function add_page_settings_controls( \Elementor\Core\DocumentTypes\Page $page ) {
+		$this->add_controls( $page );
+	}
+	public function add_controls( $post ) {
+		$post->start_controls_section( 'section_intro', [
+			'label' => __( 'Introduction', 'duurzaamthuis' ),
+			'tab' => \Elementor\Controls_Manager::TAB_SETTINGS, // https://developers.elementor.com/elementor-element-panel-tabs/
+		] );
+			$post->add_control(
+				'intro_text',
+				[
+					'label' => __( 'Introduction Text', 'duurzaamthuis' ),
+					'type' => \Elementor\Controls_Manager::WYSIWYG,
+				]
+			);
+			$post->add_control(
+				'intro_button',
+				[
+					'type' => \Elementor\Controls_Manager::RAW_HTML,
+					'raw' => '<button class="elementor-update-preview-button elementor-button elementor-button-success" onclick="elementor.saver.update.apply().then(function(){elementor.reloadPreview();});">Update And Reload Preview</button>',
+				]
+			);
+		$post->end_controls_section(); 
+	}
+	public function save_settings( $instance, $data ) {
+		$post_id = $instance->get_post()->ID;
+
+		if ( empty( $data) ) return;
+
+		$settings = $data['settings'];
+
+		update_post_meta( $post_id, 'intro-text', $settings['intro_text'] ?? '' );
+
+	}
+}
+new DH_Intro_Field();
