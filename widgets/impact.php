@@ -57,6 +57,10 @@ class DH_Impact extends \Elementor\Widget_Base {
 				'label' => __( 'Advies', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
 			] );
+			$this->add_control( 'calculations_text', [
+				'label' => __( 'Calculations', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::WYSIWYG,
+			] );
 		$this->end_controls_section(); 
 	}
 
@@ -97,6 +101,9 @@ class DH_Impact extends \Elementor\Widget_Base {
 		$advies = $settings['advies'];
 
 		$subsidie = $settings['subsidie'];
+
+		$calculations_text = $settings['calculations_text'];
+
 
 		if ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling || $advies || \Elementor\Plugin::$instance->editor->is_edit_mode() ) : ?>
 			<div class="dh-impact">
@@ -153,7 +160,15 @@ class DH_Impact extends \Elementor\Widget_Base {
 						<?php } ?>
 					</div>
 				</div>
-
+				<?php if ( $calculations_text ) { ?>
+					<div class="dh-impact-calc">
+						<div class="dh-impact-calc-toggle">
+							<div class="dh-close">Sluiten<i class="dh-icon dh-icon-arrow-up"></i></div>
+							<div class="dh-open">Toelichting<i class="dh-icon dh-icon-arrow-down"></i></div>
+						</div>
+						<div class="dh-impact-calc-text"><?php echo $calculations_text; ?></div>
+					</div>
+				<?php } ?>
 			</div>
 		<?php endif; 
 

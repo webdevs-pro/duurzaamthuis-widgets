@@ -41,11 +41,24 @@
 			}
 		});
 	};
+
+	var DH_Impact = function( $scope, $ ) {
+
+		var toggle = $scope.find('.dh-impact-calc-toggle');
+		var content = $scope.find('.dh-impact-calc-text');
+
+		$(toggle).on('click', function(){
+			$(toggle).toggleClass('active');
+			$(content).slideToggle(300);
+		})
+		
+	};
 	
 	// Make sure you run this code under Elementor.
 	$( window ).on( 'elementor/frontend/init', function() {
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-page-header.default', DH_Header );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-product-comparition.default', DH_Product_Comparison );
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-impact.default', DH_Impact );
 	} );
 
 
