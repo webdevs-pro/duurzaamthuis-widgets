@@ -200,6 +200,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
 	}
 
+   // Elementor not support controls conditions inside repeater control so we made our own conditions based on css classes and JS
    protected function get_controls_conditions_script() {
       ob_start();
          ?>
