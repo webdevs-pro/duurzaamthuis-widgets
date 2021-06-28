@@ -79,6 +79,17 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
                '{{WRAPPER}} .dh-related-posts-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
             ],         
          ] );
+         $this->add_control( 'posts_count', [
+            'label' => __( 'Posts Count', 'duurzaamthuis' ),
+            'type' => \Elementor\Controls_Manager::NUMBER,
+            'min' => 1,
+            'max' => 9,
+            'step' => 1,
+            'default' => 3,
+            'condition' => [
+               'type' => 'related',
+            ],         
+         ] );
          $repeater = new \Elementor\Repeater();
             $repeater->add_control( 'id', [
                'label' => __( 'Search & Select', 'elementor-pro' ),
@@ -118,8 +129,48 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 
 		$this->end_controls_section(); 
 
+	}
 
+   public function get_related_posts( $post_id, $related_count, $args = array() ) {
+		$args = wp_parse_args( (array) $args, array(
+			'orderby' => 'rand',
+			'return'  => 'query', // Valid values are: 'query' (WP_Query object), 'array' (the arguments array)
+		) );
 
+		$related_args = array(
+			'post_type'      => ['post', 'page'],
+			'posts_per_page' => $related_count,
+			'post_status'    => 'publish',
+			'post__not_in'   => array( $post_id ),
+			'orderby'        => $args['orderby'],
+			'tax_query'      => array()
+		);
+
+		$post = get_post( $post_id );
+		$taxonomies = get_object_taxonomies( $post, 'names' );
+
+		foreach ( $taxonomies as $taxonomy ) {
+			$terms = get_the_terms( $post_id, $taxonomy );
+			if ( empty( $terms ) ) {
+				continue;
+			}
+			$term_list = wp_list_pluck( $terms, 'slug' );
+			$related_args['tax_query'][] = array(
+				'taxonomy' => $taxonomy,
+				'field'    => 'slug',
+				'terms'    => $term_list
+			);
+		}
+
+		if ( count( $related_args['tax_query'] ) > 1 ) {
+			$related_args['tax_query']['relation'] = 'OR';
+		}
+
+		if ( $args['return'] == 'query' ) {
+			return new WP_Query( $related_args );
+		} else {
+			return $related_args;
+		}
 	}
 
 	protected function render() { // php template
@@ -129,15 +180,23 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
       if ( $settings['type'] == 'manual' && ! empty( $settings['posts'] ) ) {
          $posts_ids = $settings['posts'];
       } 
-      elseif ( $settings['type'] == 'related' && ! empty( $settings['posts'] ) ) {
-
+      elseif ( $settings['type'] == 'related' ) {
+         $posts = $this->get_related_posts( get_the_ID(), $settings['posts_count'] );
+         $posts_ids = array();
+         if ( ! empty( $posts->posts ) ) {
+            foreach ( $posts->posts as $post ) {
+               $posts_ids[] = array(
+                  'id' => $post->ID,
+               );
+            }
+         }
       }
 
       if ( isset( $posts_ids ) && ! empty( $posts_ids ) ) {
          echo '<div class="dh-related-posts-grid dh-related-posts-' . $settings['type'] . '-skin">';
             foreach ( $posts_ids as $post ) {
                echo '<a class="dh-related-post post-id-' . $post['id'] . '" href="' . get_the_permalink( $post['id'] ) . '">';
-                  if ( isset( $post['id'] ) && $post['show_badge'] == 'yes' ) {
+                  if ( isset( $post['show_badge'] ) && $post['show_badge'] == 'yes' ) {
                      echo '<div class="dh-related-post-badge"><span>' . __( 'Best Choise', 'duurzaamthuis' ) . '</span></div>';
                   }
                   echo '<div class="dh-related-post-image">';
