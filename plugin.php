@@ -285,12 +285,12 @@ new DH_Intro_Field();
 
 
 
-add_filter( 'elementor/query/get_autocomplete/display/ms_custom', function( $results, $data ) {
+add_filter( 'elementor/query/get_autocomplete/display/dh_custom', function( $results, $data ) {
 	$post = get_post($data);
 	$results = '(' . $post->post_type . ') ' . $post->post_title;
 	return $results;
 }, 10, 2);
-add_filter( 'elementor/query/get_value_titles/display/ms_custom', function( $results, $data ) {
+add_filter( 'elementor/query/get_value_titles/display/dh_custom', function( $results, $data ) {
 	$post = get_post($data);
 	$results = '(' . $post->post_type . ') ' . $post->post_title;
 	return $results;

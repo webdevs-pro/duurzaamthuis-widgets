@@ -267,12 +267,13 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                   echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
                      echo '<div class="dh-product-wrapper">';
                         echo '<div class="dh-product-image">';
-                           if ( $item['image']['id'] ) {
-                              echo wp_get_attachment_image( $item['image']['id'], 'medium' );
-                           } else {
-                              echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
-                           }
-                           
+                           echo '<div class="dh-product-image-wrapper">';
+                              if ( $item['image']['id'] ) {
+                                 echo wp_get_attachment_image( $item['image']['id'], 'medium' );
+                              } else {
+                                 echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
+                              }
+                           echo '</div>';
                         echo '</div>';
                         echo '<div class="dh-product-content">';
                            echo '<h3 class="dh-product-title">' . $item['title'] . '</h3>';
@@ -296,25 +297,27 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                if ( $settings['skin'] == 'extended' ) :
                   echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
                      echo '<div class="dh-product-wrapper">';
+                        if ( $item['badge'] ) {
+                           switch ( $item['badge'] ) {
+                              case 'best_price':
+                                 echo '<div class="dh-product-badge dh-product-price-badge">Beste Prijs</div>';
+                                 break;
+                              case 'best_quality':
+                                 echo '<div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>';
+                                 break;
+                              case 'eco_choice':
+                                 echo '<div class="dh-product-badge dh-product-eco-badge">Environmental choice</div>';
+                                 break;
+                           }
+                        }
                         echo '<div class="dh-product-image">';
-                           if ( $item['badge'] ) {
-                              switch ( $item['badge'] ) {
-                                 case 'best_price':
-                                    echo '<div class="dh-product-badge dh-product-price-badge">Beste Prijs</div>';
-                                    break;
-                                 case 'best_quality':
-                                    echo '<div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>';
-                                    break;
-                                 case 'eco_choice':
-                                    echo '<div class="dh-product-badge dh-product-eco-badge">Environmental choice</div>';
-                                    break;
+                           echo '<div class="dh-product-image-wrapper">';
+                              if ( $item['image']['id'] ) {
+                                 echo wp_get_attachment_image( $item['image']['id'], 'medium' );
+                              } else {
+                                 echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
                               }
-                           }
-                           if ( $item['image']['id'] ) {
-                              echo wp_get_attachment_image( $item['image']['id'], 'medium' );
-                           } else {
-                              echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
-                           }
+                           echo '</div>';
                         echo '</div>';
                         echo '<div class="dh-product-content">';
                            echo '<div class="dh-product-star-rating">';
@@ -422,7 +425,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                      <div class="dh-product dh-product-{{ item._id }}">
                         <div class="dh-product-wrapper">
                            <div class="dh-product-image">
-                              <img src="{{ item.image.url }}">
+                              <div class="dh-product-image-wrapper">
+                                 <img src="{{ item.image.url }}">
+                              </div>
                            </div>
                            <div class="dh-product-content">
                               <h3 class="dh-product-title">{{{ item.title }}}</h3>
@@ -460,7 +465,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               }
                            #>
                            <div class="dh-product-image">
-                              <img src="{{ item.image.url }}">
+                              <div class="dh-product-image-wrapper">
+                                 <img src="{{ item.image.url }}">
+                              </div>
                            </div>
                            <div class="dh-product-content">
                               <div class="dh-product-star-rating">

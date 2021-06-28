@@ -41,13 +41,12 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
                      $(repeater_item).find('.elementor-repeater-row-item-title').text(title);
                   } else {
                      counter++;
-                     if(counter > 10) {
+                     if(counter > 30) {
                         clearInterval(timer);
-                        $(repeater_item).find('.elementor-repeater-row-item-title').text('');
                      }
                   }
                }
-            }, 300);		
+            }, 100);		
 			})(jQuery);
       #>
 
@@ -63,7 +62,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
             'type' => \Elementor\Controls_Manager::SELECT,
             'default' => 'manual',
             'options' => [
-               'manual'  => __( 'Simple', 'duurzaamthuis' ),
+               'manual'  => __( 'Manual', 'duurzaamthuis' ),
                'related' => __( 'Related', 'duurzaamthuis' ),
             ],
          ] );
@@ -80,7 +79,6 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
                '{{WRAPPER}} .dh-related-posts-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
             ],         
          ] );
-
          $repeater = new \Elementor\Repeater();
             $repeater->add_control( 'id', [
                'label' => __( 'Search & Select', 'elementor-pro' ),
@@ -90,12 +88,19 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
                'multiple' => false,
                'autocomplete' => [
                   'object' => ElementorPro\Modules\QueryControl\Module::QUERY_OBJECT_POST,
-                  'display' => 'ms_custom',
+                  'display' => 'dh_custom',
                   'query' => [
-                     'post_type' => 'any',
+                     'post_type' => ['post', 'page' ],
                      'post_status' => 'publish',
                   ],
                ],
+            ] );
+            $repeater->add_control( 'show_badge',[
+               'label' => __( 'Show Badge', 'duurzaamthuis' ),
+               'type' => \Elementor\Controls_Manager::SWITCHER,
+               'label_on' => __( 'Yes', 'your-plugin' ),
+               'label_off' => __( 'No', 'your-plugin' ),
+               'return_value' => 'yes',
             ] );
          $this->add_control( 'posts', [
             'label' => __( 'Posts', 'duurzaamthuis' ),
@@ -107,7 +112,6 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 				],
 				'show_label' => false,
 				'prevent_empty' => false,
-				'description' => 'Press \'+ Add item\' button to select posts. You can change posts order by dragging repeater items',
          ] );
 
 
@@ -122,20 +126,34 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 
+      if ( $settings['type'] == 'manual' && ! empty( $settings['posts'] ) ) {
+         $posts_ids = $settings['posts'];
+      } 
+      elseif ( $settings['type'] == 'related' && ! empty( $settings['posts'] ) ) {
+
+      }
+
+      if ( isset( $posts_ids ) && ! empty( $posts_ids ) ) {
+         echo '<div class="dh-related-posts-grid dh-related-posts-' . $settings['type'] . '-skin">';
+            foreach ( $posts_ids as $post ) {
+               echo '<a class="dh-related-post post-id-' . $post['id'] . '" href="' . get_the_permalink( $post['id'] ) . '">';
+                  if ( isset( $post['id'] ) && $post['show_badge'] == 'yes' ) {
+                     echo '<div class="dh-related-post-badge">' . __( 'Best Choise', 'duurzaamthuis' ) . '</div>';
+                  }
+                  echo '<div class="dh-related-post-image">';
+                     echo '<div class="dh-related-post-image-wrapper">';
+                        echo '<img src="' . get_the_post_thumbnail_url( $post['id'], 'medium' ) . '">';
+                     echo '</div>';
+                  echo '</div>';
+                  echo '<h3>' . get_the_title( $post['id'] ) . '</h3>';
+               echo '</a>';
+            }
+         echo '</div>';
+      }
+      
+      // $posts = $this->get_posts( $args );
 
 
 	}
 	
 }
-// add_filter( 'elementor/query/query_args', function( $args, $widget ) {
-// 	if ($widget->get_settings('posts_post_type') == 'by_id') {
-// 		$posts = array_column($widget->get_settings('custom_ids'), 'id');
-// 		if(!empty($posts)) {
-// 			$args['post__in'] = $posts;
-// 			$args['orderby'] = 'post__in';
-// 			$args['posts_per_page'] = '-1';
-// 			$args['post_type'] = 'any';
-// 		}
-// 	}
-// 	return $args;
-// }, 10, 2);
