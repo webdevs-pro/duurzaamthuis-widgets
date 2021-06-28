@@ -895,9 +895,26 @@
    background-color: #FFFFFF;
    box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.05);
    border-radius: 8px;
+   position: relative;
+   overflow: hidden;
 }
 
-
+.dh-related-posts-grid .dh-related-post-badge {
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   z-index: 2;
+}
+.dh-related-posts-grid .dh-related-post-badge span {
+   padding: 4px 13px 4px 9px;
+   color: #fff;
+   font-weight: bold;
+   font-size: 12px;
+   line-height: 18px;
+   display: block;
+   clip-path: polygon(0 0, 100% 0%, calc(100% - 8px) 50%, 100% 100%, 0% 100%);
+   background-color: #ff5050;
+}
 .dh-related-posts-grid .dh-related-post-image {
    padding-bottom: 60%;
    position: relative;
@@ -912,4 +929,12 @@
 }
 .dh-related-posts-grid .dh-related-post-image-wrapper > *{
    object-fit: cover;
+   width: 100%;
+}
+.dh-related-posts-grid .dh-related-post-title {
+   margin: 20px;
+   font-weight: 500;
+   font-size: 14px;
+   line-height: 21px;
+   color: #2D3745;
 }
