@@ -50,13 +50,22 @@
       flex-direction: column;
    }
 }
-
+.elementor-widget-dh-image-heading-text h2 {
+   margin-bottom: 20px;
+}
+.elementor-widget-dh-image-heading-text img {
+   border-radius: 16px;
+}
 
 
 
 
 
 /* anchor-navigation */
+.elementor-widget-dh-anchor-navigation .dh-heading {
+   text-align: center;
+   margin-bottom: 20px;
+}
 .elementor-widget-dh-anchor-navigation .dh-repeater {
    display: grid;
    grid-template-columns: 1fr 1fr;
@@ -244,6 +253,13 @@
 .dh-page-header-feature-title i {
    margin-right: 10px;
 }
+.dh-page-header-feature-title i.dh-icon-info {
+   margin-right: 0px;
+   margin-left: 5px;
+   transform: translateY(-5px);
+   color: #54CC8B;
+   display: inline-block;
+}
 .dh-page-header-feature-value {
    margin-left: 26px;
    font-size: 14px;
@@ -336,8 +352,8 @@
 
 .dh-page-intro {
    display: block !important;
-   padding-top: 60px;
-   padding-bottom: 60px;
+   padding-top: 40px;
+   padding-bottom: 40px;
    padding-left: 10px;
    padding-right: 10px;
    font-weight: bold;
@@ -393,7 +409,7 @@
    display: flex;
 }
 .dh-products-simple-skin .dh-product-image-wrapper > img {
-   object-fit: contain;
+   object-fit: cover;
    object-position: center top;
    border-radius: 8px;
    width: 100%;
@@ -408,8 +424,8 @@
    display: flex;
 }
 .dh-products-simple-skin .dh-product-image-wrapper > picture > img {
-   object-fit: contain;
-   object-position: center top;
+   object-fit: cover;
+   /* object-position: center top; */
    border-radius: 8px;
    width: 100%;
 }
@@ -425,6 +441,7 @@
    font-size: 16px;
    margin-top: 0;
    margin-bottom: 8px;
+   /* color: #deac30; */
 }
 
 .dh-products-simple-skin .elementor-star-rating {
@@ -438,16 +455,16 @@
 .dh-products-simple-skin .dh-product-price {
    font-weight: 500;
    font-size: 14px;
-   color: #FF5050;
+   color: #2D3745;
 }
 .dh-products-simple-skin .dh-product-order-by {
    font-size: 14px;
    line-height: 24px;
-   color: #54CC8B;
+   color: #769179;
 }
 .dh-products-simple-skin .dh-product-button {
    grid-column: span 2;
-   background: #54CC8B;
+   background: #769179;
    border-radius: 8px;
    padding: 11px;
    text-align: center;
@@ -503,14 +520,14 @@
    display: flex;
 }
 .dh-products-extended-skin .dh-product-image-wrapper > img {
-   object-fit: contain;
+   object-fit: cover;
    object-position: center top;
    border-radius: 8px;
    width: 100%;
 }
 /* fix for picture */
 .dh-products-extended-skin .dh-product-image-wrapper > picture {
-   position: absolute;
+   position: cover;
    top: 0;
    left: 0;
    width: 100%;
@@ -528,6 +545,7 @@
 .dh-products-extended-skin .dh-product-star-rating {
    display: flex;
    font-size: 12px;
+   margin-top: 5px;
    margin-bottom: 7px;
 }
 .dh-products-extended-skin .dh-product-star-rating-heading {
@@ -561,6 +579,7 @@
    margin-top: 0;
    margin-bottom: 8px;
    font-weight: bold;
+   color: #deac30;
 }
 
 .dh-products-extended-skin .dh-product-description {
@@ -591,6 +610,7 @@
 .dh-product-pros-heading,
 .dh-product-cons-heading {
    margin: 15px 0;
+   font-weight: 600;
 }
 
 
@@ -604,7 +624,7 @@
 }
 .dh-product-pros-item i {
    font-size: 10px;
-   color: #DEAC30;
+   color: #769179;
    margin-top: 5px;
    margin-right: 10px;
 }
@@ -615,7 +635,7 @@
    margin-right: 10px;
 }
 .dh-products-extended-skin .dh-product-button {
-   background: #54CC8B;
+   background: #769179;
    border-radius: 8px;
    padding: 11px;
    text-align: center;
@@ -832,6 +852,13 @@
    margin-right: 10px;
    color: #54CC8B;
 }
+.dh-impact-feature-title i.dh-icon-info {
+   margin-right: 0px;
+   margin-left: 5px;
+   transform: translateY(-5px);
+   color: #54CC8B;
+   display: inline-block;
+}
 .dh-impact-feature-value {
    margin-left: 26px;
    font-size: 14px;
@@ -981,4 +1008,30 @@
    font-size: 14px;
    line-height: 21px;
    color: #2D3745;
+}
+
+
+
+/* tooltips */
+i[data-dh-tooltip] {
+   position: relative;
+   cursor: pointer;
+}
+i[data-dh-tooltip]:after {
+   content: attr(data-dh-tooltip);
+   position: absolute;
+   top: 0;
+   left: 50%;
+   transform: translate(-50%, -100%);
+   visibility: hidden;
+   font-family: Sans-Serif;
+   color: #878F9A;
+   border: 1px solid #878F9A;
+   border-radius: 3px;
+   padding: 3px;
+   background-color: #fff;
+   display: inline inline-block;
+}
+i[data-dh-tooltip]:hover:after {
+   visibility: visible;
 }

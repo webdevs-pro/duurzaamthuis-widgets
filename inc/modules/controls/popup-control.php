@@ -55,9 +55,7 @@ add_action( 'elementor/editor/after_enqueue_scripts', function() {
 
 add_action( 'elementor/editor/footer', function() {
    ?>
-
-      
-      <script type="text/html" id="tmpl-my-template">
+      <script type="text/html" id="tmpl-dh-popup-control-template">
          <div class="dh-control-popup-wrapper">
             <div class="dh-control-popup">
                <div class="dh-control-popup-header">
@@ -67,7 +65,6 @@ add_action( 'elementor/editor/footer', function() {
                   </div>
                </div>
                <div class="dh-control-popup-content">
-         
                   <table class="dh-table-{{{ data._cid }}} {{{ data.table_classes }}}" data-table-id="{{{ data._cid }}}"></table>
                   <button class="dh-add-row"><i class="fas fa-plus"></i>{{{ data.add_row_title }}}</button>
                   <# if ( data.allow_columns ) {#>
@@ -75,12 +72,10 @@ add_action( 'elementor/editor/footer', function() {
                   <# } else { #>
                      <style>.dh-col-control { display: none !important; }</style>
                   <# } #>
-
                   <br>&nbsp;
                </div>
             </div>
          </div>
       </script>
-
    <?php
 });

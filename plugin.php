@@ -169,6 +169,15 @@ class DH_Impact_Fields {
 		$this->add_controls( $page );
 	}
 	public function add_controls( $post ) {
+		ob_start(); ?>
+      <# 
+         (function($) { 
+            var timer = setTimeout(function() {
+               var text_input = $('.dh-max-chars-restriction').find('input').attr('maxlength', 22);
+            }, 100);		
+			})(jQuery);
+      #>
+		<?php $script = ob_get_clean();
 		$post->start_controls_section( 'section_impact', [
 			'label' => __( 'Impact', 'duurzaamthuis' ),
 			'tab' => \Elementor\Controls_Manager::TAB_SETTINGS, // https://developers.elementor.com/elementor-element-panel-tabs/
@@ -176,38 +185,42 @@ class DH_Impact_Fields {
 			$post->add_control( 'milieuwinst', [
 				'label' => __( 'Milieuwinst', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
+				'classes' => "dh-max-chars-restriction",
 			] );
 			$post->add_control( 'prijs', [
 				'label' => __( 'Prijs', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
+				'classes' => "dh-max-chars-restriction",
 			] );
 			$post->add_control( 'terugverdientijd', [
 				'label' => __( 'Terugverdientijd', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
+				'classes' => "dh-max-chars-restriction",
 			] );
 			$post->add_control( 'gemak', [
 				'label' => __( 'Gemak', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-			] );
-			$post->add_control( 'subsidie', [
-				'label' => __( 'Subsidie', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+				'classes' => "dh-max-chars-restriction",
 			] );
 			$post->add_control( 'vervuiling', [
 				'label' => __( 'Vervuiling', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
+				'classes' => "dh-max-chars-restriction",
 			] );
-			$post->add_control( 'advies', [
-				'label' => __( 'Advies', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+			$post->add_control( 'subsidie', [
+				'label' => __( 'Subsidie', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Ja', 'your-plugin' ),
+				'label_off' => __( 'Nee', 'your-plugin' ),
+				'return_value' => 'yes',
 			] );
 			$post->add_control( 'calculations_text', [
-				'label' => __( 'Calculations', 'duurzaamthuis' ),
+				'label' => __( 'Toelichting', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::WYSIWYG,
 			] );
 			$post->add_control( 'impact_button', [
 				'type' => \Elementor\Controls_Manager::RAW_HTML,
-				'raw' => '<button class="elementor-update-preview-button elementor-button elementor-button-success" onclick="elementor.saver.update.apply().then(function(){elementor.reloadPreview();});">Update And Reload Preview</button>',
+				'raw' => $script . '<button class="elementor-update-preview-button elementor-button elementor-button-success" onclick="elementor.saver.update.apply().then(function(){elementor.reloadPreview();});">Update And Reload Preview</button>',
 			] );
 		$post->end_controls_section(); 
 	}

@@ -54,16 +54,25 @@ final class Duurzaamthuis_Widgets {
 		// Once we get here, We have passed all validation checks so we can safely include our plugin
 		require_once( 'plugin.php' );
 
-		// register web devs category
-		add_action( 'elementor/elements/categories_registered', function($elements_manager) {
-			$elements_manager->add_category(
-				'dh-widgets',
+		// register dh category
+		add_action( 'elementor/elements/categories_registered', function( \Elementor\Elements_Manager $elements_manager ) {
+			//https://github.com/elementor/elementor/issues/7445#issuecomment-692123467
+			$categories = [];
+			$categories['dh-widgets'] =
 				[
-					'title' => __( 'Duurzaamthuis Widgets', 'duurzaamthuis' ),
-					'icon' => 'fa fa-plug',
-				]
-			);
-		});
+					'title' =>  __( 'Duurzaamthuis Widgets', 'duurzaamthuis' ),
+					'icon'  => 'fa fa-plug',
+				];
+
+			$old_categories = $elements_manager->get_categories();
+			$categories = array_merge($categories, $old_categories);
+
+			$set_categories = function ( $categories ) {
+				$this->categories = $categories;
+			};
+
+			$set_categories->call( $elements_manager, $categories );
+		} );
 	}
 	/**
 	 * Admin notice

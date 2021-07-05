@@ -147,9 +147,10 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'allow_columns' => false,
                'table_classes' => 'repeater',
                'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
+               'max' => 5,
                'default' => '[["Advantage 1"],["Advantage 2"]]',
                'classes' => "extended-skin-control",
-            ] );
+               ] );
             $repeater->add_control( 'cons', [
                'label' => 'Cons',
                'type' => 'dh-table-control',
@@ -158,6 +159,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'allow_columns' => false,
                'table_classes' => 'repeater',
                'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
+               'max' => 3,
                'default' => '[["Disadvantage 1"],["Disadvantage 2"]]',
                'classes' => "extended-skin-control",
             ] );
@@ -169,9 +171,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'placeholder' => __( 'Type your description here', 'duurzaamthuis' ),
                'classes' => "extended-skin-control",
             ] );
-
-
-
          $this->add_control( 'products', [
             'label' => __( 'Products', 'duurzaamthuis' ),
             'type' => \Elementor\Controls_Manager::REPEATER,
@@ -183,7 +182,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
             ],
             'title_field' => '{{{ title }}}',
          ] );
-
 		$this->end_controls_section(); 
 
 
@@ -283,7 +281,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                  echo $this->render_stars( $item['star_rating'] );
                               echo '</div>';
                            echo '</div>';
-                           echo '<div class="dh-product-price">€ ' . $item['price'] . '</div>';
+                           if ( $item['price'] ) {
+                              echo '<div class="dh-product-price">€' . $item['price'] . '</div>';
+                           }
                            echo '<div class="dh-product-order-by"> ' . $item['order_by'] . '</div>';
                         echo '</div>';
                         $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
@@ -328,7 +328,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               echo '</div>';
                            echo '</div>';
                            echo '<div class="dh-product-rating">' . $item['product_text_rating'] . '</div>';
-                           echo '<div class="dh-product-price">Prijs: <span>€ ' . $item['price'] . '</span></div>';
+                           if ( $item['price'] ) {
+                              echo '<div class="dh-product-price">Prijs: <span>€' . $item['price'] . '</span></div>';
+                           }
                            echo '<h3 class="dh-product-title">' . $item['title'] . '</h3>';
                            echo '<div class="dh-product-description">';
                               echo '<div class="dh-product-description-content">' . $item['description'] . '</div>';
@@ -437,7 +439,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                     {{{ renderStars( item.star_rating ) }}}
                                  </div>
                               </div>
-                              <div class="dh-product-price">€ {{{ item.price }}}</div>
+                              <# if(item.price) { #>
+                                 <div class="dh-product-price">€{{{ item.price }}}</div>
+                              <# } #>
                               <div class="dh-product-order-by">{{{ item.order_by }}}</div>
 
                            </div>
@@ -478,7 +482,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                  </div>
                               </div>
                               <div class="dh-product-rating">{{{ item.product_text_rating }}}</div>
-                              <div class="dh-product-price">Prijs: <span>€ {{{ item.price }}}</span></div>
+                              <# if(item.price) { #>
+                                 <div class="dh-product-price">Prijs: <span>€{{{ item.price }}}</span></div>
+                              <# } #>
                               <h3 class="dh-product-title">{{{ item.title }}}</h3>
                               <div class="dh-product-description">
                                  <div class="dh-product-description-content">{{{ item.description }}}</div>

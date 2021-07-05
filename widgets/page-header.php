@@ -144,12 +144,12 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                <?php
                   $milieuwinst = get_post_meta( $post_id, 'milieuwinst', true );
                   if ( $this->is_number( $milieuwinst ) ) {
-                     $milieuwinst = $milieuwinst . ' kilo СО<sub>2</sub>';
+                     $milieuwinst = $milieuwinst . ' kilo СО<sub>2</sub> p/j';
                   } 
 
                   $prijs = get_post_meta( $post_id, 'prijs', true );
                   if ( $this->is_number( $prijs ) ) {
-                     $prijs = $prijs . ' euro p/j';
+                     $prijs = $prijs . ' euro';
                   } 
 
                   $terugverdientijd = get_post_meta( $post_id, 'terugverdientijd', true );
@@ -222,8 +222,8 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
                            <?php if ( $subsidie ) { ?>
                               <div class="dh-page-header-feature">
-                                 <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie</div>
-                                 <div class="dh-page-header-feature-value"><?php echo $subsidie; ?></div>
+                                 <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<i class="dh-icon dh-icon-info" data-dh-tooltip="Zie toelichting"></i></div>
+                                 <div class="dh-page-header-feature-value">Jaa</div>
                               </div>
                            <?php } ?>
                         </div>

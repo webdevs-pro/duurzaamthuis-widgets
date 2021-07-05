@@ -3,12 +3,14 @@
    var popup;
    var table;
    var table_id;
+   var data;
 
    // show popup
    $(document).on('click', '.dh-control-popup-open', function() {
  
-      var data = $(this).data('settings');
-      var singleTemplate = wp.template( 'my-template' );
+      data = $(this).data('settings');
+      console.log(data);
+      var singleTemplate = wp.template( 'dh-popup-control-template' );
       $('body').append( singleTemplate( data ) );
 
       popup = $('.dh-control-popup-wrapper');
@@ -178,7 +180,8 @@
    
    // add row
    $(document).on('click', '.dh-add-row', function() {
-      // var table_id = $(popup).find('table').attr('data-table-id');
+      var rows = $(table).find('tr');
+      if(rows.length >= data.max) return false;
       var trs = tableToArray(table_id);
       var new_row = [];
       if (trs[0]) {
@@ -196,7 +199,6 @@
 
    // add column
    $(document).on('click', '.dh-add-column', function() {
-      // var table_id = $(popup).find('table').attr('data-table-id');
       var trs = tableToArray(table_id);
       var new_trs = [];
       $.each(trs, function(index, row) {
@@ -250,11 +252,17 @@
 
 
 
-   $(document).on('click', '.run-sortable', function(){
-      console.log($(this).data('settings'));
-      var data = $(this).data('settings');
-      var singleTemplate = wp.template( 'my-template' );
-      $('body').append( singleTemplate( data ) );
-   });
+   // $(document).on('click', '.run-sortable', function(){
+   //    console.log($(this).data('settings'));
+   //    var data = $(this).data('settings');
+   //    var singleTemplate = wp.template( 'dh-popup-control-template' );
+   //    $('body').append( singleTemplate( data ) );
+   // });
+
+
+
+
+
+
 
 })(jQuery);

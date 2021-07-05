@@ -24,6 +24,16 @@ class DH_Impact extends \Elementor\Widget_Base {
 	}
 
 	protected function register_controls() {
+		ob_start(); ?>
+      <# 
+         (function($) { 
+            var timer = setTimeout(function() {
+               var text_input = $('.dh-max-chars-restriction').find('input').attr('maxlength', 22);
+            }, 100);		
+			})(jQuery);
+      #>
+		<?php $script = ob_get_clean();
+
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
@@ -32,34 +42,42 @@ class DH_Impact extends \Elementor\Widget_Base {
 			$this->add_control( 'milieuwinst', [
 				'label' => __( 'Milieuwinst', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
+				'classes' => "dh-max-chars-restriction",
 			] );
 			$this->add_control( 'prijs', [
 				'label' => __( 'Prijs', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
+				'classes' => "dh-max-chars-restriction",
 			] );
 			$this->add_control( 'terugverdientijd', [
 				'label' => __( 'Terugverdientijd', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
+				'classes' => "dh-max-chars-restriction",
 			] );
 			$this->add_control( 'gemak', [
 				'label' => __( 'Gemak', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
-			] );
-			$this->add_control( 'subsidie', [
-				'label' => __( 'Subsidie', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+				'classes' => "dh-max-chars-restriction",
 			] );
 			$this->add_control( 'vervuiling', [
 				'label' => __( 'Vervuiling', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
+				'classes' => "dh-max-chars-restriction",
 			] );
-			$this->add_control( 'advies', [
-				'label' => __( 'Advies', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+			$this->add_control( 'subsidie', [
+				'label' => __( 'Subsidie', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Ja', 'your-plugin' ),
+				'label_off' => __( 'Nee', 'your-plugin' ),
+				'return_value' => 'yes',
 			] );
 			$this->add_control( 'calculations_text', [
-				'label' => __( 'Calculations', 'duurzaamthuis' ),
+				'label' => __( 'Toelichting', 'duurzaamthuis' ),
 				'type' => \Elementor\Controls_Manager::WYSIWYG,
+			] );
+			$this->add_control( 'script', [
+				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'raw' => $script,
 			] );
 		$this->end_controls_section(); 
 	}
@@ -76,12 +94,12 @@ class DH_Impact extends \Elementor\Widget_Base {
 
 		$milieuwinst = $settings['milieuwinst'];
 		if ( $this->is_number( $milieuwinst ) ) {
-			$milieuwinst = $milieuwinst . ' kilo СО<sub>2</sub>';
+			$milieuwinst = $milieuwinst . ' kilo СО<sub>2</sub> p/j';
 		} 
 
 		$prijs = $settings['prijs'];
 		if ( $this->is_number( $prijs ) ) {
-			$prijs = $prijs . ' euro p/j';
+			$prijs = $prijs . ' euro';
 		} 
 
 		$terugverdientijd = $settings['terugverdientijd'];
@@ -95,15 +113,13 @@ class DH_Impact extends \Elementor\Widget_Base {
 		} 
 
 		$vervuiling = $settings['vervuiling'];
-		
-		$advies = $settings['advies'];
 
 		$subsidie = $settings['subsidie'];
 
 		$calculations_text = $settings['calculations_text'];
 
 
-		if ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling || $advies || \Elementor\Plugin::$instance->editor->is_edit_mode() ) : ?>
+		if ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling || \Elementor\Plugin::$instance->editor->is_edit_mode() ) : ?>
 			<div class="dh-impact">
 				<div class="dh-impact-features-section">
 					<div class="dh-impact-features-title">Impact</div>
@@ -143,17 +159,10 @@ class DH_Impact extends \Elementor\Widget_Base {
 							</div>
 						<?php } ?>
 
-						<?php if ( $advies ) { ?>
-							<div class="dh-impact-feature">
-								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-convenience"></i>Advies</div>
-								<div class="dh-impact-feature-value"><?php echo $advies; ?></div>
-							</div>
-						<?php } ?>
-
 						<?php if ( $subsidie ) { ?>
 							<div class="dh-impact-feature">
-								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie</div>
-								<div class="dh-impact-feature-value"><?php echo $subsidie; ?></div>
+								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<i class="dh-icon dh-icon-info" data-dh-tooltip="Zie toelichting"></i></div>
+								<div class="dh-impact-feature-value">Jaa</div>
 							</div>
 						<?php } ?>
 					</div>
@@ -185,11 +194,11 @@ class DH_Impact extends \Elementor\Widget_Base {
 				}
 		 		var milieuwinst = settings.milieuwinst;
 				if(is_number(milieuwinst)) {
-					milieuwinst = milieuwinst + ' kilo СО<sub>2</sub>';
+					milieuwinst = milieuwinst + ' kilo СО<sub>2</sub> p/j';
 				} 
 		 		var prijs = settings.prijs;
 				if(is_number(prijs)) {
-					prijs = prijs + ' euro p/j';
+					prijs = prijs + ' euro';
 				} 
 		 		var terugverdientijd = settings.terugverdientijd;
 				if(is_number(terugverdientijd)) {
@@ -256,8 +265,8 @@ class DH_Impact extends \Elementor\Widget_Base {
 
 						<# if(subsidie) { #>
 							<div class="dh-impact-feature">
-								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie</div>
-								<div class="dh-impact-feature-value">{{{ subsidie }}}</div>
+								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<i class="dh-icon dh-icon-info" data-dh-tooltip="Zie toelichting"></i></div>
+								<div class="dh-impact-feature-value">Jaa</div>
 							</div>
 						<# } #>
 					</div>
