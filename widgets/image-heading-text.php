@@ -157,7 +157,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 				<div class="dh-image-column">
 					<img src="{{ settings.image.url }}">
 				</div>
-				<div class="dh-gap-column">
+				<div class="dh-gap-column"></div>
 				<div class="dh-content-column">
 					<h2>
 						{{{ settings.heading }}}
