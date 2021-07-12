@@ -162,7 +162,7 @@ class DH_Impact extends \Elementor\Widget_Base {
 						<?php if ( $subsidie ) { ?>
 							<div class="dh-impact-feature">
 								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<i class="dh-icon dh-icon-info" data-dh-tooltip="Zie toelichting"></i></div>
-								<div class="dh-impact-feature-value">Jaa</div>
+								<div class="dh-impact-feature-value">Ja</div>
 							</div>
 						<?php } ?>
 					</div>
@@ -266,7 +266,7 @@ class DH_Impact extends \Elementor\Widget_Base {
 						<# if(subsidie) { #>
 							<div class="dh-impact-feature">
 								<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<i class="dh-icon dh-icon-info" data-dh-tooltip="Zie toelichting"></i></div>
-								<div class="dh-impact-feature-value">Jaa</div>
+								<div class="dh-impact-feature-value">Ja</div>
 							</div>
 						<# } #>
 					</div>

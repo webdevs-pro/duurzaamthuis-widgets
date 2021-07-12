@@ -197,7 +197,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
             foreach ( $posts_ids as $post ) {
                echo '<a class="dh-related-post post-id-' . $post['id'] . '" href="' . get_the_permalink( $post['id'] ) . '">';
                   if ( isset( $post['show_badge'] ) && $post['show_badge'] == 'yes' ) {
-                     echo '<div class="dh-related-post-badge"><span>' . __( 'Best Choise', 'duurzaamthuis' ) . '</span></div>';
+                     echo '<div class="dh-related-post-badge"><span>' . __( 'Beste keuze', 'duurzaamthuis' ) . '</span></div>';
                   }
                   echo '<div class="dh-related-post-image">';
                      echo '<div class="dh-related-post-image-wrapper">';

@@ -223,7 +223,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                            <?php if ( $subsidie ) { ?>
                               <div class="dh-page-header-feature">
                                  <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<i class="dh-icon dh-icon-info" data-dh-tooltip="Zie toelichting"></i></div>
-                                 <div class="dh-page-header-feature-value">Jaa</div>
+                                 <div class="dh-page-header-feature-value">Ja</div>
                               </div>
                            <?php } ?>
                         </div>

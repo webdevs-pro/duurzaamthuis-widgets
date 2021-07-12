@@ -464,13 +464,17 @@
 }
 .dh-products-simple-skin .dh-product-button {
    grid-column: span 2;
-   background: #769179;
+   background-color: #769179;
+   transition: background-color 200ms;
    border-radius: 8px;
    padding: 11px;
    text-align: center;
    font-size: 14px;
    font-weight: 500;
    color: #FFF;
+}
+.dh-products-simple-skin .dh-product-button:hover {
+   background-color: #505050;
 }
 
 
@@ -635,7 +639,8 @@
    margin-right: 10px;
 }
 .dh-products-extended-skin .dh-product-button {
-   background: #769179;
+   background-color: #769179;
+   transition: background-color 200ms;
    border-radius: 8px;
    padding: 11px;
    text-align: center;
@@ -645,7 +650,9 @@
    display: block;
    margin-top: 10px;
 }
-
+.dh-products-extended-skin .dh-product-button:hover {
+   background-color: #505050;
+}
 /*
 .elementor-star-rating {
     color: #ccd6df;

@@ -50,7 +50,8 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 				'default' => 'none',
 				'options' => [
 					'none'  => __( 'None', 'duurzaamthuis' ),
-					'best_choise' => __( 'Best Choise', 'duurzaamthuis' ),
+					'best_choise' => __( 'Beste Keuze', 'duurzaamthuis' ),
+					'reading_tip' => __( 'Leestip', 'duurzaamthuis' ),
 				],
 			] );
 			$this->add_control( 'size', [
@@ -79,7 +80,10 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 			if ( $settings['badge'] ) {
 				switch ( $settings['badge'] ) {
 					case 'best_choise':
-						echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Best Choise</span></div>';
+						echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Beste keuze</span></div>';
+						break;
+					case 'reading_tip':
+						echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Leestip</span></div>';
 						break;
 				}
 			}
@@ -97,7 +101,10 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 					if(settings.badge) {
 						switch(settings.badge) {
 							case 'best_choise': #>
-								<div class="dh-heading-badge dh-heading-choise-badge"><span>Best Choise</span></div>
+								<div class="dh-heading-badge dh-heading-choise-badge"><span>Beste keuze</span></div>
+								<# break;
+							case 'reading_tip': #>
+								<div class="dh-heading-badge dh-heading-choise-badge"><span>Leestip</span></div>
 								<# break;
 						}
 					}
