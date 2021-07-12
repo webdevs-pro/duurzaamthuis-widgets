@@ -90,6 +90,13 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
                'type' => 'related',
             ],         
          ] );
+         $this->add_control( 'show_excerpt',[
+            'label' => __( 'Show Exerpt', 'duurzaamthuis' ),
+            'type' => \Elementor\Controls_Manager::SWITCHER,
+            'label_on' => __( 'Yes', 'your-plugin' ),
+            'label_off' => __( 'No', 'your-plugin' ),
+            'return_value' => 'yes',
+         ] );
          $repeater = new \Elementor\Repeater();
             $repeater->add_control( 'id', [
                'label' => __( 'Search & Select', 'elementor-pro' ),
@@ -215,6 +222,9 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
                      echo '</div>';
                   echo '</div>';
                   echo '<h3 class="dh-related-post-title">' . get_the_title( $post['id'] ) . '</h3>';
+                  if ( $settings['show_excerpt'] ) {
+                     echo '<div class="dh-related-post-exerpt">' . get_the_excerpt( $post['id'] ) . '</div>';
+                  }
                echo '</a>';
             }
          echo '</div>';
