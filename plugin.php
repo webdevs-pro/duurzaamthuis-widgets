@@ -91,7 +91,7 @@ add_action( 'elementor/editor/after_enqueue_scripts', function() {
 // disable pannel widgets for non admin
 $user = wp_get_current_user();
 if ( ! in_array( 'administrator', (array) $user->roles ) ) {
-	add_filter( 'elementor/editor/localize_settings', 'disable_panel_widgets' );
+	// add_filter( 'elementor/editor/localize_settings', 'disable_panel_widgets' );
 }
 function disable_panel_widgets( $settings ) {
 	$user = wp_get_current_user();
@@ -114,7 +114,6 @@ function disable_panel_widgets( $settings ) {
 	}
 
 	return $settings;
-
 }
 
 
@@ -172,7 +171,7 @@ class DH_Impact_Fields {
 		ob_start(); ?>
       <# 
          (function($) { 
-            var timer = setTimeout(function() {
+            setTimeout(function() {
                var text_input = $('.dh-max-chars-restriction').find('input').attr('maxlength', 22);
             }, 100);		
 			})(jQuery);
@@ -237,7 +236,6 @@ class DH_Impact_Fields {
 		update_post_meta( $post_id, 'gemak', $settings['gemak'] ?? '' );
 		update_post_meta( $post_id, 'subsidie', $settings['subsidie'] ?? '' );
 		update_post_meta( $post_id, 'vervuiling', $settings['vervuiling'] ?? '' );
-		update_post_meta( $post_id, 'advies', $settings['advies'] ?? '' );
 		update_post_meta( $post_id, 'calculations-text', $settings['calculations_text'] ?? '' );
 	}
 }
@@ -308,3 +306,28 @@ add_filter( 'elementor/query/get_value_titles/display/dh_custom', function( $res
 	$results = '(' . $post->post_type . ') ' . $post->post_title;
 	return $results;
 }, 10, 2);
+
+
+
+// scrolltop offset
+add_action( 'wp_footer', function() {
+	if ( ! defined( 'ELEMENTOR_VERSION' ) ) {
+		return;
+	}
+	?>
+	<script>
+		jQuery( function( $ ) {
+			// Add space for Elementor Menu Anchor link
+			$( window ).on( 'elementor/frontend/init', function() {
+				elementorFrontend.hooks.addFilter( 'frontend/handlers/menu_anchor/scroll_top_distance', function( scrollTop ) {
+					return scrollTop - 100;
+				} );
+			} );
+		} );
+	</script>
+	<?php
+} );
+
+
+// support exerpt for pages
+add_post_type_support( 'page', 'excerpt' );

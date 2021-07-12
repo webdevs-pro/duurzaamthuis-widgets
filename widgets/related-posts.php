@@ -106,12 +106,15 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
                   ],
                ],
             ] );
-            $repeater->add_control( 'show_badge',[
-               'label' => __( 'Show Badge', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::SWITCHER,
-               'label_on' => __( 'Yes', 'your-plugin' ),
-               'label_off' => __( 'No', 'your-plugin' ),
-               'return_value' => 'yes',
+            $repeater->add_control( 'badge', [
+               'label' => __( 'Badge', 'duurzaamthuis' ),
+               'type' => \Elementor\Controls_Manager::SELECT,
+               'default' => 'none',
+               'options' => [
+                  'none'  => __( 'None', 'duurzaamthuis' ),
+                  'best_choise' => __( 'Beste Keuze', 'duurzaamthuis' ),
+                  'reading_tip' => __( 'Leestip', 'duurzaamthuis' ),
+               ],
             ] );
          $this->add_control( 'posts', [
             'label' => __( 'Posts', 'duurzaamthuis' ),
@@ -196,8 +199,15 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
          echo '<div class="dh-related-posts-grid dh-related-posts-' . $settings['type'] . '-skin">';
             foreach ( $posts_ids as $post ) {
                echo '<a class="dh-related-post post-id-' . $post['id'] . '" href="' . get_the_permalink( $post['id'] ) . '">';
-                  if ( isset( $post['show_badge'] ) && $post['show_badge'] == 'yes' ) {
-                     echo '<div class="dh-related-post-badge"><span>' . __( 'Beste keuze', 'duurzaamthuis' ) . '</span></div>';
+                  if ( $post['badge'] ) {
+                     switch ( $post['badge'] ) {
+                        case 'best_choise':
+                           echo '<div class="dh-related-post-badge dh-heading-choise-badge"><span>Beste keuze</span></div>';
+                           break;
+                        case 'reading_tip':
+                           echo '<div class="dh-related-post-badge dh-heading-choise-badge"><span>Leestip</span></div>';
+                           break;
+                     }
                   }
                   echo '<div class="dh-related-post-image">';
                      echo '<div class="dh-related-post-image-wrapper">';
