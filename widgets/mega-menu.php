@@ -1,0 +1,283 @@
+<?php
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+
+class DH_Mega_Menu extends \Elementor\Widget_Base {
+
+	public function get_name() {
+		return 'dh-mega-menu';
+	}
+
+	public function get_title() {
+		return __( 'Mega Menu', 'duurzaamthuis' );
+	}
+
+	public function get_icon() {
+		return 'dh-icon dh-icon-impact';
+	}
+
+	public function get_categories() {
+		return [ 'dh-widgets' ];
+	}
+
+	private function get_available_menus() {
+		$menus = wp_get_nav_menus();
+		$options = [];
+		foreach ( $menus as $menu ) {
+			$options[$menu->term_id] = $menu->name;
+		}
+		return $options;
+	}
+
+	protected function register_controls() {
+
+		// SECTION CONTENT
+		$this->start_controls_section( 'section_content', [
+         'label' => __( 'Content', 'duurzaamthuis' ),
+         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+      ] );
+
+			$menus = $this->get_available_menus();
+
+			$this->add_control( 'menu', [
+				'label' => __( 'Menu', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'options' => $menus,
+				'default' => ! empty( $menus ) ? array_keys( $menus )[0] : '',
+			] );
+
+		$this->end_controls_section(); 
+
+		// SECTION STYLE DESKTOP
+		$this->start_controls_section( 'section_style', [
+         'label' => __( 'Desktop Menu', 'duurzaamthuis' ),
+         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+      ] );
+			$this->add_control( 'align_items', [
+				'label' => __( 'Align', 'elementor-pro' ),
+				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => __( 'Left', 'elementor-pro' ),
+						'icon' => 'eicon-h-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'elementor-pro' ),
+						'icon' => 'eicon-h-align-center',
+					],
+					'right' => [
+						'title' => __( 'Right', 'elementor-pro' ),
+						'icon' => 'eicon-h-align-right',
+					],
+					'justify' => [
+						'title' => __( 'Stretch', 'elementor-pro' ),
+						'icon' => 'eicon-h-align-stretch',
+					],
+				],
+				'toggle' => false,
+				'default' => 'justify',
+				'prefix_class' => 'dh-menu-align-',
+			] );
+			$this->add_control( 'space_between', [
+				'label' => __( 'Space Between', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 10,
+				],
+				'condition' => [
+					'align_items!' => 'justify',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .dh-menu-top-item:not(:last-child)' => 'margin-right: {{SIZE}}{{UNIT}};',
+				],
+			] );
+			$this->add_control( 'icon_spacing', [
+				'label' => __( 'Icon Spacing', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 5,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .dh-menu-top-item i' => 'margin-right: {{SIZE}}{{UNIT}};',
+				],
+			] );
+			$this->add_control( 'offset', [
+				'label' => __( 'Dropdown Offset', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 5,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .dh-megamenu-item .elementor-container' => 'top: {{SIZE}}{{UNIT}};',
+				],
+			] );
+			$this->add_control( 'color', [
+            'label' => __( 'Color', 'duurzaamthuis' ),
+            'type' => \Elementor\Controls_Manager::COLOR,
+            'default' => '#515F70',
+            'selectors' => [
+               '{{WRAPPER}} .dh-menu-top-item' => 'color: {{VALUE}}',
+            ],
+				'separator' => 'after',
+         ] );
+
+		$this->end_controls_section(); 
+
+
+		// SECTION STYLE MOBILE
+		$this->start_controls_section( 'section_style_mobile', [
+         'label' => __( 'Mobile Menu', 'duurzaamthuis' ),
+         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+      ] );
+			$this->add_control( 'align_toggle', [
+				'label' => __( 'Align Toggle', 'elementor-pro' ),
+				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'options' => [
+					'left' => [
+						'title' => __( 'Left', 'elementor-pro' ),
+						'icon' => 'eicon-h-align-left',
+					],
+					'center' => [
+						'title' => __( 'Center', 'elementor-pro' ),
+						'icon' => 'eicon-h-align-center',
+					],
+					'right' => [
+						'title' => __( 'Right', 'elementor-pro' ),
+						'icon' => 'eicon-h-align-right',
+					],
+				],
+				'toggle' => false,
+				'default' => 'right',
+				'prefix_class' => 'dh-mobile-toggle-align-',
+			] );
+			$this->add_control( 'offset_mobile', [
+				'label' => __( 'Dropdown Offset', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range' => [
+					'px' => [
+						'min' => 0,
+						'max' => 100,
+						'step' => 1,
+					],
+				],
+				'default' => [
+					'unit' => 'px',
+					'size' => 30,
+				],
+				'selectors' => [
+					'{{WRAPPER}} .dh-menu' => 'top: {{SIZE}}{{UNIT}};',
+				],
+			] );
+		$this->end_controls_section(); 
+	}
+
+
+	public function build_menu_tree( array &$items, $parent_id = 0 ) {
+		$branch = [];
+
+		foreach ( $items as &$item ) {
+			if ( $item->menu_item_parent == $parent_id ) {
+				$children = $this->build_menu_tree( $items, $item->ID );
+				if( $children ) {
+					$item->children = $children;
+				}
+				$branch[$item->menu_order] = $item;
+				unset( $item );
+			}
+		}
+
+		return $branch;
+  }
+
+
+  protected function render() {
+
+		$settings = $this->get_settings_for_display();
+
+		if ( ! $settings['menu'] ) {
+			return;
+		}
+
+		$items = wp_get_nav_menu_items( $settings['menu'] );
+		$items_tree = $this->build_menu_tree( $items );      
+
+
+		echo '<div class="dh-mobile-menu-toggle"><i class="dh-icon dh-icon-menu"></i></div>';
+		echo '<nav><ul class="dh-menu">';
+			foreach ( $items_tree as $top_level_item ) {
+				echo '<li class="dh-menu-item dh-menu-top-item menu-item menu-item-' . $top_level_item->ID . ' ' . implode( " ", $top_level_item->classes ) . '">';
+					echo '<a href="' . $top_level_item->url . '" class="">';
+						$icon_classes = get_post_meta( $top_level_item->ID, '_menu_item_icon_classes', true );
+						if ( $icon_classes ) {
+							echo '<i class="' . $icon_classes . '"></i>';
+						}
+						echo $top_level_item->post_title;
+						if ( ! empty( $top_level_item->children ) ) {
+							echo '<i class="dh-dropdown-indicator dh-icon dh-icon-arrow-down"></i>';
+						}
+					echo '</a>';
+
+					// dropdown
+					if ( ! empty( $top_level_item->children ) ) {
+
+						echo '<ul class="dh-megamenu-item elementor-section elementor-section-boxed">';
+							echo '<div class="elementor-container">';
+								foreach ( $top_level_item->children as $second_level_item ) {
+									echo '<li class="dh-menu-item dh-second-level-item menu-item menu-item-' . $second_level_item->ID . ' ' . implode( " ", $second_level_item->classes ) . '">';
+										echo '<a href="' . $second_level_item->url . '" class="dh-menu-second-level-heading">' . $second_level_item->post_title . '</a>';
+										echo '<ul class="dh-megamenu-second-level-item">';
+											if ( ! empty( $second_level_item->children ) ) {
+												foreach ( $second_level_item->children as $third_level_item ) {
+													echo '<li class="dh-menu-item dh-third-level-item menu-item menu-item-' . $third_level_item->ID . ' ' . implode( " ", $third_level_item->classes ) . '">';
+														echo '<a href="' . $third_level_item->url . '" class="dh-menu-third-item">' . $third_level_item->post_title . '</a>';
+													echo '</li>';
+												}
+											}
+										echo '</ul>';
+										echo '<a href="' . $second_level_item->url . '" class="dh-menu-second-level-more">Lees Verder <i class="dh-icon dh-icon-arrow-right"></i></a>';
+									echo '</li>';
+								}
+						echo '</div>';
+						echo '</ul>';
+					}
+				echo '</li>';
+			}
+		echo '</ul></nav>';    
+		
+
+		
+
+	}
+
+}

@@ -48,6 +48,7 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/impact.php';
 		require __DIR__ . '/widgets/numbered-list.php';
 		require __DIR__ . '/widgets/related-posts.php';
+		require __DIR__ . '/widgets/mega-menu.php';
 	}
 	private function register_widget() {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
@@ -59,6 +60,7 @@ class DH_Register_Widgets {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Impact() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Numbered_List() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Related_Posts() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Mega_Menu() );
 	}
 }
 new DH_Register_Widgets();
@@ -331,3 +333,28 @@ add_action( 'wp_footer', function() {
 
 // support exerpt for pages
 add_post_type_support( 'page', 'excerpt' );
+
+
+
+// custom field for menu item to set icon class
+add_action( 'wp_nav_menu_item_custom_fields', 'duurza_menu_item_icon_classes', 10, 2 );
+add_action( 'wp_update_nav_menu_item', 'duurza_save_menu_item_icon_classes', 10, 2 );
+function duurza_menu_item_icon_classes( $item_id, $item ) {
+	$menu_item_icon_classes = get_post_meta( $item_id, '_menu_item_icon_classes', true );
+	?>
+	<p class="description description-thin">
+		<label for="menu_item_icon_classes[<?php echo $item_id ;?>]">
+			Icon CSS classes<br>
+			<input type="text" class="widefat code" name="menu_item_icon_classes[<?php echo $item_id ;?>]" id="menu-item-icon-classes-<?php echo $item_id ;?>" value="<?php echo esc_attr( $menu_item_icon_classes ); ?>" />
+		</label>
+	</p>
+	<?php
+}
+function duurza_save_menu_item_icon_classes( $menu_id, $menu_item_db_id ) {
+	if ( isset( $_POST['menu_item_icon_classes'][$menu_item_db_id]  ) ) {
+		$sanitized_data = sanitize_text_field( $_POST['menu_item_icon_classes'][$menu_item_db_id] );
+		update_post_meta( $menu_item_db_id, '_menu_item_icon_classes', $sanitized_data );
+	} else {
+		delete_post_meta( $menu_item_db_id, '_menu_item_icon_classes' );
+	}
+}

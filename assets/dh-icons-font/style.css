@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'dh-icons';
   src:
-    url('fonts/dh-icons.ttf?pxjiay') format('truetype'),
-    url('fonts/dh-icons.woff?pxjiay') format('woff'),
-    url('fonts/dh-icons.svg?pxjiay#dh-icons') format('svg');
+    url('fonts/dh-icons.ttf?3dbapw') format('truetype'),
+    url('fonts/dh-icons.woff?3dbapw') format('woff'),
+    url('fonts/dh-icons.svg?3dbapw#dh-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,27 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dh-icon-menu:before {
+  content: "\e91c";
+}
+.dh-icon-hummer:before {
+  content: "\e916";
+}
+.dh-icon-bag-of-cash:before {
+  content: "\e917";
+}
+.dh-icon-home:before {
+  content: "\e918";
+}
+.dh-icon-plug:before {
+  content: "\e919";
+}
+.dh-icon-recycle:before {
+  content: "\e91a";
+}
+.dh-icon-thermostat:before {
+  content: "\e91b";
+}
 .dh-icon-numbered-list:before {
   content: "\e915";
 }

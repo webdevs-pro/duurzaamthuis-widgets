@@ -42,6 +42,7 @@
 		});
 	};
 
+
 	var DH_Impact = function( $scope, $ ) {
 
 		var toggle = $scope.find('.dh-impact-calc-toggle');
@@ -53,12 +54,26 @@
 		})
 		
 	};
+
+
+	var DH_Mega_Menu = function( $scope, $ ) {
+
+		var toggle = $scope.find('.dh-mobile-menu-toggle');
+		var menu = $scope.find('.dh-menu');
+
+		$(toggle).on('click', function(){
+			$(menu).toggleClass('active');
+			$(toggle).closest('.elementor').next('.elementor').find('.elementor-section-wrap').toggleClass('dh-mobile-menu-active');
+		})
+		
+	};
 	
 	// Make sure you run this code under Elementor.
 	$( window ).on( 'elementor/frontend/init', function() {
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-page-header.default', DH_Header );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-product-comparition.default', DH_Product_Comparison );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-impact.default', DH_Impact );
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-mega-menu.default', DH_Mega_Menu );
 	} );
 
 
