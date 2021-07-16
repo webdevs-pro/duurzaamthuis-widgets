@@ -1011,7 +1011,7 @@
 
 .dh-related-posts-grid .dh-related-post-title {
    margin: 20px 20px 10px 20px;
-   font-weight: 500;
+   font-weight: 600;
    font-size: 14px;
    line-height: 21px;
    color: #2D3745;
@@ -1072,7 +1072,8 @@ i[data-dh-tooltip]:hover:after {
    margin: 0;
 }
 @media(min-width: 1025px) {
-   .elementor-widget-dh-mega-menu .dh-mobile-menu-toggle {
+   .elementor-widget-dh-mega-menu .dh-mobile-menu-toggle,
+   .elementor-widget-dh-mega-menu .dh-mobile-menu {
       display: none;
    }
    .elementor-widget-dh-mega-menu .dh-menu {
@@ -1093,7 +1094,7 @@ i[data-dh-tooltip]:hover:after {
    .elementor-widget-dh-mega-menu .dh-menu-top-item {
       position: static;
    }
-   .elementor-widget-dh-mega-menu .dh-menu-top-item .dh-megamenu-item {
+   .elementor-widget-dh-mega-menu .dh-menu-top-item .dh-megamenu {
       position: absolute;
       visibility: hidden;
       opacity: 0;
@@ -1107,14 +1108,14 @@ i[data-dh-tooltip]:hover:after {
       margin-left: -50vw;
       left: 50%;
    }
-   .elementor-widget-dh-mega-menu .dh-menu-top-item .dh-megamenu-item > .elementor-container {
+   .elementor-widget-dh-mega-menu .dh-menu-top-item .dh-megamenu > .elementor-container {
       width: 100%;
       background-color: #fff;
       box-shadow: 0px 30px 250px rgba(18, 33, 52, 0.07);
       border-radius: 0px 0px 16px 16px;
       padding: 40px 40px 30px;
    }
-   .elementor-widget-dh-mega-menu .dh-menu-top-item:hover .dh-megamenu-item {
+   .elementor-widget-dh-mega-menu .dh-menu-top-item:hover .dh-megamenu {
       visibility: visible;
       opacity: 1;
       transform: translateY(0px);
@@ -1173,7 +1174,9 @@ i[data-dh-tooltip]:hover:after {
 
 
 @media(max-width: 1024px) {
-
+   .elementor-widget-dh-mega-menu .dh-menu {
+      display: none;
+   }
    .elementor-widget-dh-mega-menu .elementor-widget-container {
       display: flex;
    }
@@ -1191,7 +1194,8 @@ i[data-dh-tooltip]:hover:after {
       display: block;
       cursor: pointer;
    }
-   .elementor-widget-dh-mega-menu .dh-menu {
+
+   .elementor-widget-dh-mega-menu .dh-mobile-menu {
       visibility: hidden;
       opacity: 0;
       transition: opacity 300ms, visibility 300ms, transform 300ms;
@@ -1208,7 +1212,7 @@ i[data-dh-tooltip]:hover:after {
       border-radius: 0px 0px 16px 16px;
       padding: 40px 40px 30px;
    }
-   .elementor-widget-dh-mega-menu .dh-menu.active {
+   .elementor-widget-dh-mega-menu .dh-mobile-menu.active {
       visibility: visible;
       opacity: 1;
       transform: translateY(0px);
@@ -1224,6 +1228,27 @@ i[data-dh-tooltip]:hover:after {
       left: 0;
       right: 0;
       animation: 300ms 300ms forwards dh-mobile-menu-background;
+   }
+
+   .elementor-widget-dh-mega-menu .dh-mobile-menu a {
+      white-space: nowrap;
+   }
+   .elementor-widget-dh-mega-menu .dh-mobile-menu .dh-menu-top-item > a {
+      display: flex;
+      align-items: center;
+      color: inherit;
+      cursor: pointer;
+   }
+
+   .elementor-widget-dh-mega-menu .dh-mobile-menu .dh-mobile-submenu-toggle .dh-dropdown-indicator {
+      transition: transform 200ms;
+      display: inline-block;
+   }
+   .elementor-widget-dh-mega-menu .dh-mobile-menu .dh-mobile-submenu-toggle.active > .dh-dropdown-indicator {
+      transform: rotate(90deg);
+   }
+   .elementor-widget-dh-mega-menu .dh-mobile-menu .dh-submenu {
+      display: none;
    }
 
 }

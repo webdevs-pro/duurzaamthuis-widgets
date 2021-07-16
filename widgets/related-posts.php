@@ -223,6 +223,10 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
                   echo '</div>';
                   echo '<h3 class="dh-related-post-title">' . get_the_title( $post['id'] ) . '</h3>';
                   if ( $settings['show_excerpt'] ) {
+                     // $exerpt = get_yoast_derfve
+                     // inhinh
+                     // EBML_ID_TARGETSetgb
+
                      echo '<div class="dh-related-post-exerpt">' . get_the_excerpt( $post['id'] ) . '</div>';
                   }
                echo '</a>';

@@ -58,13 +58,21 @@
 
 	var DH_Mega_Menu = function( $scope, $ ) {
 
-		var toggle = $scope.find('.dh-mobile-menu-toggle');
-		var menu = $scope.find('.dh-menu');
+		var toggle = $scope.find( '.dh-mobile-menu-toggle' );
+		var menu = $scope.find( '.dh-mobile-menu' );
+		var submenu_toggle = $scope.find( '.dh-mobile-submenu-toggle' );
 
-		$(toggle).on('click', function(){
-			$(menu).toggleClass('active');
-			$(toggle).closest('.elementor').next('.elementor').find('.elementor-section-wrap').toggleClass('dh-mobile-menu-active');
-		})
+		$( toggle ).on( 'click', function() {
+			$( menu ).toggleClass( 'active' );
+			$( toggle ).closest( '.elementor' ).next( '.elementor' ).find( '.elementor-section-wrap' ).toggleClass( 'dh-mobile-menu-active' );
+		} );
+		
+		$( submenu_toggle ).on( 'click', function() {
+			// e.stopPropagation();
+			$( this ).closest( '.dh-menu-item' ).find( '.dh-submenu' ).eq(0).slideToggle( 200 );
+			$( this ).toggleClass( 'active' );
+		} );
+
 		
 	};
 	
