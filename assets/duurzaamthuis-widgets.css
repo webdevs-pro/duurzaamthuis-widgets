@@ -1200,7 +1200,7 @@ i[data-dh-tooltip]:hover:after {
       opacity: 0;
       transition: opacity 300ms, visibility 300ms, transform 300ms;
       transition-delay: 100ms;
-      z-index: 2;
+      z-index: 20;
       position: absolute;
       transform: translateY(10px);
       width: 100vw;
@@ -1217,27 +1217,21 @@ i[data-dh-tooltip]:hover:after {
       opacity: 1;
       transform: translateY(0px);
    }
-   .dh-mobile-menu-active {
-      position: relative;
-   }
-   .dh-mobile-menu-active:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      animation: 300ms 300ms forwards dh-mobile-menu-background;
-   }
 
+   /* .elementor-widget-dh-mega-menu .dh-mobile-menu li {
+      padding: 5px 0;
+   } */
    .elementor-widget-dh-mega-menu .dh-mobile-menu a {
       white-space: nowrap;
+      color: inherit;
+      padding: 3px 0;
+      display: inline-block;
+      cursor: pointer;
    }
    .elementor-widget-dh-mega-menu .dh-mobile-menu .dh-menu-top-item > a {
+      padding: 5px 0;
       display: flex;
       align-items: center;
-      color: inherit;
-      cursor: pointer;
    }
 
    .elementor-widget-dh-mega-menu .dh-mobile-menu .dh-mobile-submenu-toggle .dh-dropdown-indicator {
@@ -1249,14 +1243,8 @@ i[data-dh-tooltip]:hover:after {
    }
    .elementor-widget-dh-mega-menu .dh-mobile-menu .dh-submenu {
       display: none;
+      margin-left: 20px;
+      margin-bottom: 10px;
    }
 
-}
-@keyframes dh-mobile-menu-background {
-   from {
-      background-color: rgba(0, 0, 0, 0);
-   }
-   to {
-      background-color: rgba(0, 0, 0, 0.5);
-   }
 }

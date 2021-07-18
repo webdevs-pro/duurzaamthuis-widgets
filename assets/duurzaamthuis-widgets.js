@@ -64,11 +64,9 @@
 
 		$( toggle ).on( 'click', function() {
 			$( menu ).toggleClass( 'active' );
-			$( toggle ).closest( '.elementor' ).next( '.elementor' ).find( '.elementor-section-wrap' ).toggleClass( 'dh-mobile-menu-active' );
 		} );
 		
 		$( submenu_toggle ).on( 'click', function() {
-			// e.stopPropagation();
 			$( this ).closest( '.dh-menu-item' ).find( '.dh-submenu' ).eq(0).slideToggle( 200 );
 			$( this ).toggleClass( 'active' );
 		} );

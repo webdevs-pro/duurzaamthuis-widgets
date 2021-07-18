@@ -285,49 +285,53 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 
 		echo '<div class="dh-mobile-menu-toggle"><i class="dh-icon dh-icon-menu"></i></div>';
 		echo '<nav><ul class="dh-mobile-menu">';
-			foreach ( $mobile_items_tree as $top_level_item ) {
-				echo '<li class="dh-menu-item dh-menu-top-item menu-item menu-item-' . $top_level_item->ID . ' ' . implode( " ", $top_level_item->classes ) . '">';
-					$icon_classes = get_post_meta( $top_level_item->ID, '_menu_item_icon_classes', true );
-					if ( empty( $top_level_item->children ) ) {
-						echo '<a class="dh-mobile-submenu-toggle">';
-							if ( $icon_classes ) {
-								echo '<i class="' . $icon_classes . '"></i>';
-							}
-							echo $top_level_item->post_title;
-						echo '</a>';
-					} else {
-						echo '<a class="dh-mobile-submenu-toggle">';
-							if ( $icon_classes ) {
-								echo '<i class="' . $icon_classes . '"></i>';
-							}
-							echo $top_level_item->post_title;
-							echo '<i class="dh-dropdown-indicator dh-icon dh-icon-arrow-right"></i>';
-						echo '</a>';
-						echo '<ul class="dh-submenu">';
-							foreach ( $top_level_item->children as $second_level_item ) {
-								echo '<li class="dh-menu-item dh-second-level-item menu-item menu-item-' . $second_level_item->ID . ' ' . implode( " ", $second_level_item->classes ) . '">';
-									if ( empty( $second_level_item->children ) ) {
-										echo '<a href="' . $second_level_item->url . '">' . $second_level_item->post_title . '</a>';
-									} else {
-										echo '<a class="dh-mobile-submenu-toggle">';
-											echo $second_level_item->post_title;
-											echo '<i class="dh-dropdown-indicator dh-icon dh-icon-arrow-right"></i>';
-										echo '</a>';
-										echo '<ul class="dh-submenu">';
-											foreach ( $second_level_item->children as $third_level_item ) {
-												echo '<li class="dh-menu-item dh-third-level-item menu-item menu-item-' . $third_level_item->ID . ' ' . implode( " ", $third_level_item->classes ) . '">';
-													echo '<a href="' . $third_level_item->url . '">' . $third_level_item->post_title . '</a>';
-												echo '</li>';
-											}
-										echo '</ul>';
-									}
-								echo '</li>';
-							}
+			echo '<div class="dh-mobile-menu-wrapper">';
 
-						echo '</ul>';
-					}
-				echo '</li>';
-			}
+				foreach ( $mobile_items_tree as $top_level_item ) {
+					echo '<li class="dh-menu-item dh-menu-top-item menu-item menu-item-' . $top_level_item->ID . ' ' . implode( " ", $top_level_item->classes ) . '">';
+						$icon_classes = get_post_meta( $top_level_item->ID, '_menu_item_icon_classes', true );
+						if ( empty( $top_level_item->children ) ) {
+							echo '<a class="dh-mobile-submenu-toggle">';
+								if ( $icon_classes ) {
+									echo '<i class="' . $icon_classes . '"></i>';
+								}
+								echo $top_level_item->post_title;
+							echo '</a>';
+						} else {
+							echo '<a class="dh-mobile-submenu-toggle">';
+								if ( $icon_classes ) {
+									echo '<i class="' . $icon_classes . '"></i>';
+								}
+								echo $top_level_item->post_title;
+								echo '<i class="dh-dropdown-indicator dh-icon dh-icon-arrow-right"></i>';
+							echo '</a>';
+							echo '<ul class="dh-submenu">';
+								foreach ( $top_level_item->children as $second_level_item ) {
+									echo '<li class="dh-menu-item dh-second-level-item menu-item menu-item-' . $second_level_item->ID . ' ' . implode( " ", $second_level_item->classes ) . '">';
+										if ( empty( $second_level_item->children ) ) {
+											echo '<a href="' . $second_level_item->url . '">' . $second_level_item->post_title . '</a>';
+										} else {
+											echo '<a class="dh-mobile-submenu-toggle">';
+												echo $second_level_item->post_title;
+												echo '<i class="dh-dropdown-indicator dh-icon dh-icon-arrow-right"></i>';
+											echo '</a>';
+											echo '<ul class="dh-submenu">';
+												foreach ( $second_level_item->children as $third_level_item ) {
+													echo '<li class="dh-menu-item dh-third-level-item menu-item menu-item-' . $third_level_item->ID . ' ' . implode( " ", $third_level_item->classes ) . '">';
+														echo '<a href="' . $third_level_item->url . '">' . $third_level_item->post_title . '</a>';
+													echo '</li>';
+												}
+											echo '</ul>';
+										}
+									echo '</li>';
+								}
+
+							echo '</ul>';
+						}
+					echo '</li>';
+				}
+
+			echo '</div>';  
 		echo '</ul></nav>';  
 		
 		
