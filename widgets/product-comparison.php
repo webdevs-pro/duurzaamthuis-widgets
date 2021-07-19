@@ -78,9 +78,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'default' => 'none',
                'options' => [
                   'none'  => __( 'None', 'duurzaamthuis' ),
-                  'best_price' => __( 'Beste Prijs', 'duurzaamthuis' ),
+                  'best_price' => __( 'Beste prijs', 'duurzaamthuis' ),
                   'best_quality' => __( 'Beste Kwaliteit', 'duurzaamthuis' ),
-                  'eco_choice' => __( 'Environmental choice', 'duurzaamthuis' ),
+                  'eco_choice' => __( 'Beste eco keuze', 'duurzaamthuis' ),
                ],
                'classes' => "extended-skin-control",
             ] );
@@ -111,11 +111,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'type' => \Elementor\Controls_Manager::TEXT,
                'default' => '10',
                ] );
-            $repeater->add_control( 'order_by', [
-               'label' => __( 'Order By', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::TEXT,
-               'default' => 'Voor 23:59 besteld',
-            ] );
             $repeater->add_control( 'button_text', [
                'label' => __( 'Button Text', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXT,
@@ -284,7 +279,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                            if ( $item['price'] ) {
                               echo '<div class="dh-product-price">€' . $item['price'] . '</div>';
                            }
-                           echo '<div class="dh-product-order-by"> ' . $item['order_by'] . '</div>';
                         echo '</div>';
                         $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
                         echo '<a class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
@@ -301,13 +295,13 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                         if ( $item['badge'] ) {
                            switch ( $item['badge'] ) {
                               case 'best_price':
-                                 echo '<div class="dh-product-badge dh-product-price-badge">Beste Prijs</div>';
+                                 echo '<div class="dh-product-badge dh-product-price-badge">Beste prijs</div>';
                                  break;
                               case 'best_quality':
                                  echo '<div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>';
                                  break;
                               case 'eco_choice':
-                                 echo '<div class="dh-product-badge dh-product-eco-badge">Environmental choice</div>';
+                                 echo '<div class="dh-product-badge dh-product-eco-badge">Beste eco keuze</div>';
                                  break;
                            }
                         }
@@ -442,8 +436,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               <# if(item.price) { #>
                                  <div class="dh-product-price">€{{{ item.price }}}</div>
                               <# } #>
-                              <div class="dh-product-order-by">{{{ item.order_by }}}</div>
-
                            </div>
                            <a class="dh-product-button" href="{{{ item.button_link }}}">{{{ item.button_text }}}</a>
                         </div>
@@ -458,13 +450,13 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               if(item.badge) {
                                  switch(item.badge) {
                                     case 'best_price': #>
-                                       <div class="dh-product-badge dh-product-price-badge">Beste Prijs</div>
+                                       <div class="dh-product-badge dh-product-price-badge">Beste prijs</div>
                                        <# break;
                                     case 'best_quality': #>
                                        <div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>
                                        <# break;
                                     case 'eco_choice': #>
-                                       <div class="dh-product-badge dh-product-eco-badge">Environmental choice</div>
+                                       <div class="dh-product-badge dh-product-eco-badge">Beste eco keuze</div>
                                        <# break;
                                  }
                               }
