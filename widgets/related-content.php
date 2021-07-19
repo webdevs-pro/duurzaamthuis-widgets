@@ -9,11 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 class DH_Related_Posts extends \Elementor\Widget_Base {
 
 	public function get_name() {
-		return 'dh-related-posts';
+		return 'dh-related-content';
 	}
 
 	public function get_title() {
-		return __( 'Related Posts', 'duurzaamthuis' );
+		return __( 'Related Content', 'duurzaamthuis' );
 	}
 
 	public function get_icon() {
@@ -76,7 +76,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
             'tablet_default' => 2,
             'mobile_default' => 1,
             'selectors' => [
-               '{{WRAPPER}} .dh-related-posts-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+               '{{WRAPPER}} .dh-related-content-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
             ],         
          ] );
          $this->add_control( 'posts_count', [
@@ -203,7 +203,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
       }
 
       if ( isset( $posts_ids ) && ! empty( $posts_ids ) ) {
-         echo '<div class="dh-related-posts-grid dh-related-posts-' . $settings['type'] . '-skin">';
+         echo '<div class="dh-related-content-grid dh-related-content-' . $settings['type'] . '-skin">';
             foreach ( $posts_ids as $post ) {
                echo '<a class="dh-related-post post-id-' . $post['id'] . '" href="' . get_the_permalink( $post['id'] ) . '">';
                   if ( $post['badge'] ) {

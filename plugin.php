@@ -47,7 +47,7 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/number-heading.php';
 		require __DIR__ . '/widgets/impact.php';
 		require __DIR__ . '/widgets/numbered-list.php';
-		require __DIR__ . '/widgets/related-posts.php';
+		require __DIR__ . '/widgets/related-content.php';
 		require __DIR__ . '/widgets/mega-menu.php';
 	}
 	private function register_widget() {
@@ -357,4 +357,26 @@ function duurza_save_menu_item_icon_classes( $menu_id, $menu_item_db_id ) {
 	} else {
 		delete_post_meta( $menu_item_db_id, '_menu_item_icon_classes' );
 	}
+}
+
+
+// filter excerpt
+add_filter( 'get_the_excerpt', 'dh_excerpt_filter', 10, 2 );
+function dh_excerpt_filter( $exerpt, $post ) {
+
+	$yoast_description = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true ); 
+	
+	if ( ! $yoast_description ) {
+		$introduction = get_post_meta( $post->ID, 'intro-text', true );
+		if ( ! $introduction ) {
+			$post_exerpt = $post->post_excerpt;
+			if ( ! $post_exerpt ) {
+				$body_text = $post->post_content;
+			}
+		}
+	}
+
+	$exerpt = strip_tags( $yoast_description ?: ( $introduction ?: ( $exerpt ?: $body_text ) ) );
+
+	return $exerpt;
 }

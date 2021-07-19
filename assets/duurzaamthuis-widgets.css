@@ -949,12 +949,12 @@
 
 
 /* related posts */
-.dh-related-posts-grid {
+.dh-related-content-grid {
    display: grid;
    column-gap: 15px;
    row-gap: 15px;
 }
-.dh-related-posts-grid .dh-related-post {
+.dh-related-content-grid .dh-related-post {
    background-color: #FFFFFF;
    box-shadow: 0px 30px 60px rgba(0, 0, 0, 0.05);
    border-radius: 8px;
@@ -962,13 +962,13 @@
    overflow: hidden;
 }
 
-.dh-related-posts-grid .dh-related-post-badge {
+.dh-related-content-grid .dh-related-post-badge {
    position: absolute;
    top: 10px;
    right: 10px;
    z-index: 2;
 }
-.dh-related-posts-grid .dh-related-post-badge span {
+.dh-related-content-grid .dh-related-post-badge span {
    padding: 4px 13px 4px 9px;
    color: #fff;
    font-weight: bold;
@@ -979,11 +979,11 @@
    background-color: #769179;
 }
 
-.dh-related-posts-grid .dh-related-post-image {
+.dh-related-content-grid .dh-related-post-image {
    padding-bottom: 60%;
    position: relative;
 }
-.dh-related-posts-grid .dh-related-post-image-wrapper {
+.dh-related-content-grid .dh-related-post-image-wrapper {
    position: absolute;
    top: 0;
    left: 0;
@@ -991,12 +991,12 @@
    height: 100%;
    display: flex;
 }
-.dh-related-posts-grid .dh-related-post-image-wrapper > img {
+.dh-related-content-grid .dh-related-post-image-wrapper > img {
    object-fit: cover;
    width: 100%;
 }
 /* fix for picture */
-.dh-related-posts-grid .dh-related-post-image-wrapper > picture {
+.dh-related-content-grid .dh-related-post-image-wrapper > picture {
    position: absolute;
    top: 0;
    left: 0;
@@ -1004,19 +1004,19 @@
    height: 100%;
    display: flex;
 }
-.dh-related-posts-grid .dh-related-post-image-wrapper > picture > img {
+.dh-related-content-grid .dh-related-post-image-wrapper > picture > img {
    object-fit: cover;
    width: 100%;
 }
 
-.dh-related-posts-grid .dh-related-post-title {
+.dh-related-content-grid .dh-related-post-title {
    margin: 20px 20px 10px 20px;
    font-weight: 600;
    font-size: 14px;
    line-height: 21px;
    color: #2D3745;
 }
-.dh-related-posts-grid .dh-related-post-exerpt {
+.dh-related-content-grid .dh-related-post-exerpt {
    margin: 10px 20px 20px 20px;;
    font-size: 12px;
    color: #2D3745;
@@ -1113,7 +1113,8 @@ i[data-dh-tooltip]:hover:after {
       background-color: #fff;
       box-shadow: 0px 30px 250px rgba(18, 33, 52, 0.07);
       border-radius: 0px 0px 16px 16px;
-      padding: 40px 40px 30px;
+      padding: 40px 40px 10px;
+      flex-wrap: wrap;
    }
    .elementor-widget-dh-mega-menu .dh-menu-top-item:hover .dh-megamenu {
       visibility: visible;
@@ -1134,18 +1135,19 @@ i[data-dh-tooltip]:hover:after {
 
    .elementor-widget-dh-mega-menu .dh-second-level-item {
       flex: 25% 0 0;
+      margin-bottom: 30px;
    }
    .elementor-widget-dh-mega-menu .dh-menu-second-level-heading {
       font-weight: bold;
       font-size: 15px;
       line-height: 22px;
       color: #2D3745;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       display: inline-block;
    }
 
    .elementor-widget-dh-mega-menu .dh-menu-second-level-more {
-      margin-top: 20px;
+      margin-top: 5px;
       display: inline-block;
       color: #deac30;
       font-weight: 500;
