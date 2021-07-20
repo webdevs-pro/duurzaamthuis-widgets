@@ -461,6 +461,7 @@
    font-size: 14px;
    line-height: 24px;
    color: #769179;
+   margin-top: 5px;
 }
 .dh-products-simple-skin .dh-product-button {
    grid-column: span 2;
@@ -1079,16 +1080,16 @@ i[data-dh-tooltip]:hover:after {
    .elementor-widget-dh-mega-menu .dh-menu {
       display: flex;
    }
-   .elementor-widget-dh-mega-menu.dh-menu-align-left .dh-menu{
+   .elementor-widget-dh-mega-menu.dh-menu-align-left .dh-menu {
       justify-content: flex-start;
    }
-   .elementor-widget-dh-mega-menu.dh-menu-align-center .dh-menu{
+   .elementor-widget-dh-mega-menu.dh-menu-align-center .dh-menu {
       justify-content: center;
    }
-   .elementor-widget-dh-mega-menu.dh-menu-align-right .dh-menu{
+   .elementor-widget-dh-mega-menu.dh-menu-align-right .dh-menu {
       justify-content: flex-end;
    }
-   .elementor-widget-dh-mega-menu.dh-menu-align-justify .dh-menu{
+   .elementor-widget-dh-mega-menu.dh-menu-align-justify .dh-menu {
       justify-content: space-between;
    }
    .elementor-widget-dh-mega-menu .dh-menu-top-item {
@@ -1100,7 +1101,7 @@ i[data-dh-tooltip]:hover:after {
       opacity: 0;
       transition: opacity 300ms, visibility 300ms, transform 300ms;
       transition-delay: 100ms;
-      z-index: 2;
+      z-index: 20;
       position: absolute;
       transform: translateY(10px);
       display: flex;

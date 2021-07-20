@@ -110,7 +110,13 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                'label' => __( 'Price', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXT,
                'default' => '10',
-               ] );
+            ] );
+            $repeater->add_control( 'order_by', [
+               'label' => __( 'Order By', 'duurzaamthuis' ),
+               'type' => \Elementor\Controls_Manager::TEXT,
+               'default' => 'Voor 23:59 besteld',
+               'classes' => "simple-skin-control",
+            ] );
             $repeater->add_control( 'button_text', [
                'label' => __( 'Button Text', 'duurzaamthuis' ),
                'type' => \Elementor\Controls_Manager::TEXT,
@@ -210,7 +216,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                   if(val == 'simple') {
                      jQuery('#dh-controls-conditions').html('.extended-skin-control { display: none; }');
                   } else {
-                     jQuery('#dh-controls-conditions').html('');
+                     jQuery('#dh-controls-conditions').html('.simple-skin-control { display: none; }');
                   }
                }
             #>
@@ -278,6 +284,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                            echo '</div>';
                            if ( $item['price'] ) {
                               echo '<div class="dh-product-price">€' . $item['price'] . '</div>';
+                           }
+                           if ( $item['order_by'] ) {
+                              echo '<div class="dh-product-order-by">€' . $item['order_by'] . '</div>';
                            }
                         echo '</div>';
                         $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
@@ -435,6 +444,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               </div>
                               <# if(item.price) { #>
                                  <div class="dh-product-price">€{{{ item.price }}}</div>
+                              <# } #>
+                              <# if(item.order_by) { #>
+                                 <div class="dh-product-order-by">€{{{ item.order_by }}}</div>
                               <# } #>
                            </div>
                            <a class="dh-product-button" href="{{{ item.button_link }}}">{{{ item.button_text }}}</a>
