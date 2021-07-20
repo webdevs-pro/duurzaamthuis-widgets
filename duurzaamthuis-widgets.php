@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.6.12
+ * Version:     0.6.13
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */

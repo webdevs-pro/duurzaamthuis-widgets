@@ -286,7 +286,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               echo '<div class="dh-product-price">€' . $item['price'] . '</div>';
                            }
                            if ( $item['order_by'] ) {
-                              echo '<div class="dh-product-order-by">€' . $item['order_by'] . '</div>';
+                              echo '<div class="dh-product-order-by">' . $item['order_by'] . '</div>';
                            }
                         echo '</div>';
                         $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
@@ -446,7 +446,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                  <div class="dh-product-price">€{{{ item.price }}}</div>
                               <# } #>
                               <# if(item.order_by) { #>
-                                 <div class="dh-product-order-by">€{{{ item.order_by }}}</div>
+                                 <div class="dh-product-order-by">{{{ item.order_by }}}</div>
                               <# } #>
                            </div>
                            <a class="dh-product-button" href="{{{ item.button_link }}}">{{{ item.button_text }}}</a>
