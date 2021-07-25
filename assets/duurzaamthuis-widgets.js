@@ -1,4 +1,6 @@
 ( function( $ ) {
+
+	alert('test');
 	/**
  	 * @param $scope The Widget wrapper element as a jQuery element
 	 * @param $ The jQuery alias

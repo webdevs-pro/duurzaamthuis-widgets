@@ -25,7 +25,7 @@ class DH_Register_Widgets {
 		add_action( 'elementor/frontend/after_register_scripts', function() {
 			// to do replace time() with plugin version
 			wp_register_script( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.js', __FILE__ ), array( 'jquery' ), time(), true );
-		});
+		}, 10 );
 		
 		add_action( 'elementor/frontend/after_enqueue_styles', function() {
 			// to do replace time() with plugin version
