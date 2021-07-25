@@ -41,46 +41,46 @@ class DH_Impact extends \Elementor\Widget_Base {
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
 			$this->add_control( 'milieuwinst', [
 				'label' => __( 'Milieuwinst', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+				'type' => Elementor\Controls_Manager::TEXT,
 				'classes' => "dh-max-chars-restriction",
 			] );
 			$this->add_control( 'prijs', [
 				'label' => __( 'Prijs', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+				'type' => Elementor\Controls_Manager::TEXT,
 				'classes' => "dh-max-chars-restriction",
 			] );
 			$this->add_control( 'terugverdientijd', [
 				'label' => __( 'Terugverdientijd', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+				'type' => Elementor\Controls_Manager::TEXT,
 				'classes' => "dh-max-chars-restriction",
 			] );
 			$this->add_control( 'gemak', [
 				'label' => __( 'Gemak', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+				'type' => Elementor\Controls_Manager::TEXT,
 				'classes' => "dh-max-chars-restriction",
 			] );
 			$this->add_control( 'vervuiling', [
 				'label' => __( 'Vervuiling', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+				'type' => Elementor\Controls_Manager::TEXT,
 				'classes' => "dh-max-chars-restriction",
 			] );
 			$this->add_control( 'subsidie', [
 				'label' => __( 'Subsidie', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'type' => Elementor\Controls_Manager::SWITCHER,
 				'label_on' => __( 'Ja', 'your-plugin' ),
 				'label_off' => __( 'Nee', 'your-plugin' ),
 				'return_value' => 'yes',
 			] );
 			$this->add_control( 'calculations_text', [
 				'label' => __( 'Toelichting', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::WYSIWYG,
+				'type' => Elementor\Controls_Manager::WYSIWYG,
 			] );
 			$this->add_control( 'script', [
-				'type' => \Elementor\Controls_Manager::RAW_HTML,
+				'type' => Elementor\Controls_Manager::RAW_HTML,
 				'raw' => $script,
 			] );
 		$this->end_controls_section(); 

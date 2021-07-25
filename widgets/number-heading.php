@@ -28,11 +28,11 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
 			$this->add_control( 'number', [
 				'label' => __( 'Number', 'plugin-domain' ),
-				'type' => \Elementor\Controls_Manager::NUMBER,
+				'type' => Elementor\Controls_Manager::NUMBER,
 				'min' => 1,
 				'max' => 100,
 				'step' => 1,
@@ -40,13 +40,13 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 			] );
 			$this->add_control( 'heading', [
 				'label' => __( 'Heading', 'plugin-domain' ),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'type' => Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 3,
 				'default' => __( 'Default heading', 'plugin-domain' ),
 			] );
 			$this->add_control( 'badge', [
 				'label' => __( 'Badge', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::SELECT,
+				'type' => Elementor\Controls_Manager::SELECT,
 				'default' => 'none',
 				'options' => [
 					'none'  => __( 'None', 'duurzaamthuis' ),
@@ -56,7 +56,7 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 			] );
 			$this->add_control( 'size', [
 				'label' => __( 'Size', 'plugin-domain' ),
-				'type' => \Elementor\Controls_Manager::SELECT,
+				'type' => Elementor\Controls_Manager::SELECT,
 				'default' => 'h2',
 				'options' => [
 					'h1'  => __( 'H1', 'plugin-domain' ),

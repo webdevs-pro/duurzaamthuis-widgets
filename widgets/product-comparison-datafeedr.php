@@ -31,12 +31,12 @@ class DH_Product_Comparison_Datafeedr extends \Elementor\Widget_Base {
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
 
          $this->add_responsive_control( 'columns_count', [
 				'label' => __( 'Columns', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::NUMBER,
+				'type' => Elementor\Controls_Manager::NUMBER,
 				'min' => 1,
 				'max' => 6,
 				'step' => 1,
@@ -52,13 +52,13 @@ class DH_Product_Comparison_Datafeedr extends \Elementor\Widget_Base {
 
             $repeater->add_control( 'title', [
                'label' => __( 'Title', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::TEXT,
+               'type' => Elementor\Controls_Manager::TEXT,
                'default' => __( 'Product title' , 'duurzaamthuis' ),
                'label_block' => true,
             ] );
             $repeater->add_control( 'badge', [
                'label' => __( 'Badge', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::SELECT,
+               'type' => Elementor\Controls_Manager::SELECT,
                'default' => 'none',
                'options' => [
                   'none'  => __( 'None', 'duurzaamthuis' ),
@@ -69,14 +69,14 @@ class DH_Product_Comparison_Datafeedr extends \Elementor\Widget_Base {
             ] );
             $repeater->add_control( 'image', [
                'label' => __( 'Image', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::MEDIA,
+               'type' => Elementor\Controls_Manager::MEDIA,
                'default' => [
-                  'url' => \Elementor\Utils::get_placeholder_image_src(),
+                  'url' => Elementor\Utils::get_placeholder_image_src(),
                ],
             ] );
             $repeater->add_control( 'star_rating', [
                'label' => __( 'Rating', 'elementor' ),
-               'type' => \Elementor\Controls_Manager::NUMBER,
+               'type' => Elementor\Controls_Manager::NUMBER,
                'min' => 0,
                'max' => 5,
                'step' => 0.1,
@@ -84,37 +84,37 @@ class DH_Product_Comparison_Datafeedr extends \Elementor\Widget_Base {
             ] );
             $repeater->add_control( 'product_text_rating', [
                'label' => __( 'Text Rating', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::TEXT,
+               'type' => Elementor\Controls_Manager::TEXT,
                'classes' => "extended-skin-control",
                'label_block' => true,
                'default' => '9.5/10 van 26 reviews op cooiblue en Bol.com',
             ] );
             $repeater->add_control( 'price', [
                'label' => __( 'Price', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::TEXT,
+               'type' => Elementor\Controls_Manager::TEXT,
                'default' => '10',
             ] );
             $repeater->add_control( 'order_by', [
                'label' => __( 'Order By', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::TEXT,
+               'type' => Elementor\Controls_Manager::TEXT,
                'default' => 'Voor 23:59 besteld',
             ] );
             $repeater->add_control( 'button_text', [
                'label' => __( 'Button Text', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::TEXT,
+               'type' => Elementor\Controls_Manager::TEXT,
                'separator' => 'before',
                'default' => 'Button text',
                'label_block' => true,
             ] );
             $repeater->add_control( 'button_link', [
                'label' => __( 'Button Link', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::TEXT,
+               'type' => Elementor\Controls_Manager::TEXT,
                'default' => '#',
                'label_block' => true,
             ] );
             $repeater->add_control( 'sponsored',[
                'label' => __( 'Sponsored', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::SWITCHER,
+               'type' => Elementor\Controls_Manager::SWITCHER,
                'label_on' => __( 'Yes', 'your-plugin' ),
                'label_off' => __( 'No', 'your-plugin' ),
                'return_value' => 'yes',
@@ -146,14 +146,26 @@ class DH_Product_Comparison_Datafeedr extends \Elementor\Widget_Base {
             ] );
             $repeater->add_control( 'description', [
                'label' => __( 'Description', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::TEXTAREA,
+               'type' => Elementor\Controls_Manager::TEXTAREA,
                'rows' => 10,
                'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'duurzaamthuis' ),
                'placeholder' => __( 'Type your description here', 'duurzaamthuis' ),
             ] );
+            $repeater->add_control(
+               'shortcode',
+               [
+                  'label' => esc_html__( 'Enter your shortcode', 'elementor' ),
+                  'type' => Elementor\Controls_Manager::TEXTAREA,
+                  'dynamic' => [
+                     'active' => true,
+                  ],
+                  'placeholder' => '[gallery id="123" size="medium"]',
+                  'default' => '',
+               ]
+            );
          $this->add_control( 'products', [
             'label' => __( 'Products', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::REPEATER,
+            'type' => Elementor\Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
             'default' => [
                [
@@ -169,7 +181,7 @@ class DH_Product_Comparison_Datafeedr extends \Elementor\Widget_Base {
 		// SECTION STYLE
 		$this->start_controls_section( 'section_style', [
          'label' => __( 'Style', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+         'tab' => Elementor\Controls_Manager::TAB_STYLE,
       ] );
 
 
@@ -282,6 +294,8 @@ class DH_Product_Comparison_Datafeedr extends \Elementor\Widget_Base {
                      echo '</div>';
                      $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
                      echo '<a class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
+                     $shortcode = do_shortcode( shortcode_unautop( $item['shortcode'] ) );
+                     echo '<div class="">' . $shortcode . '</div>';
                   echo '</div>';
                echo '</div>';
 

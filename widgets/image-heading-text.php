@@ -47,9 +47,9 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 				'image',
 				[
 					'label' => __( 'Choose Image', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::MEDIA,
+					'type' => Elementor\Controls_Manager::MEDIA,
 					'default' => [
-						'url' => \Elementor\Utils::get_placeholder_image_src(),
+						'url' => Elementor\Utils::get_placeholder_image_src(),
 					],
 				]
 			);
@@ -57,7 +57,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 				'image_align',
 				[
 					'label' => __( 'Image Column Alignment', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::CHOOSE,
+					'type' => Elementor\Controls_Manager::CHOOSE,
 					'options' => [
 						'left' => [
 							'title' => __( 'Left', 'duurzaamthuis' ),
@@ -77,7 +77,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 				'image_width',
 				[
 					'label' => __( 'Image Column Width', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::SELECT,
+					'type' => Elementor\Controls_Manager::SELECT,
 					'default' => '50',
 					'options' => [
 						'33'  => __( '33%', 'duurzaamthuis' ),
@@ -91,7 +91,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 				'image_reverse',
 				[
 					'label' => __( 'Mobile Columns Reverse', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::SWITCHER,
+					'type' => Elementor\Controls_Manager::SWITCHER,
 					'label_on' => __( 'Yes', 'your-plugin' ),
 					'label_off' => __( 'No', 'your-plugin' ),					
 					'return_value' => 'columns',
@@ -102,7 +102,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 				'heading',
 				[
 					'label' => __( 'Heading', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::TEXT,
+					'type' => Elementor\Controls_Manager::TEXT,
 					'default' => __( 'Heading text', 'duurzaamthuis' ),
 					'label_block' => true,
 					'separator' => 'before'
@@ -112,7 +112,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 				'content',
 				[
 					'label' => __( 'Content', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::WYSIWYG,
+					'type' => Elementor\Controls_Manager::WYSIWYG,
 					'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'duurzaamthuis' ),
 				]
 			);

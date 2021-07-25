@@ -39,7 +39,7 @@ class DH_Table extends \Elementor\Widget_Base {
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
 
          $this->add_control( 'table', [

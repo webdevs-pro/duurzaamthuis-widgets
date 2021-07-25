@@ -305,13 +305,13 @@ class DH_Custom_Templates {
 	public function add_controls( $post ) {
 		$post->start_controls_section( 'section_dh_template', [
 			'label' => __( 'DH Template', 'duurzaamthuis' ),
-			'tab' => \Elementor\Controls_Manager::TAB_SETTINGS, // https://developers.elementor.com/elementor-element-panel-tabs/
+			'tab' => Elementor\Controls_Manager::TAB_SETTINGS, // https://developers.elementor.com/elementor-element-panel-tabs/
 		]);
 			$post->add_control(
 				'dh_template',
             [
                'label' => __( 'Select Template', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::SELECT,
+               'type' => Elementor\Controls_Manager::SELECT,
                'options' => $this->get_templates(),
                'default' => $this->get_current_template(),
             ]
@@ -319,14 +319,14 @@ class DH_Custom_Templates {
 			$post->add_control(
 				'current_dh_template',
 				[
-					'type' => \Elementor\Controls_Manager::HIDDEN,
+					'type' => Elementor\Controls_Manager::HIDDEN,
 					'default' => $this->get_current_template(),
 				]
 			);
 			$post->add_control(
 				'script',
 				[
-					'type' => \Elementor\Controls_Manager::RAW_HTML,
+					'type' => Elementor\Controls_Manager::RAW_HTML,
 					'raw' => $this->get_elementor_script_string(),
 				]
 			);

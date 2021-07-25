@@ -28,20 +28,20 @@ class DH_Numbered_List extends \Elementor\Widget_Base {
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
 			$repeater = new \Elementor\Repeater();
 
 				$repeater->add_control( 'text', [
 					'label' => __( 'Text', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::TEXTAREA,
+					'type' => Elementor\Controls_Manager::TEXTAREA,
 					'rows' => 3,
 					'default' => __( 'Item text' , 'duurzaamthuis' ),
 					'label_block' => true,
 				] );
 			$this->add_control( 'items', [
 				'label' => __( 'Products', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::REPEATER,
+				'type' => Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
 					[

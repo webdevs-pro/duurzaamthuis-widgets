@@ -31,15 +31,15 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
          $this->add_control( 'important_note',[
-            'type' => \Elementor\Controls_Manager::RAW_HTML,
+            'type' => Elementor\Controls_Manager::RAW_HTML,
             'raw' => __( 'This widget has no settings', 'duurzaamthuis' ),
             'content_classes' => 'elementor-panel-alert elementor-panel-alert-info',
          ] );
          $this->add_control( 'settings_button',[
-            'type' => \Elementor\Controls_Manager::RAW_HTML,
+            'type' => Elementor\Controls_Manager::RAW_HTML,
             'raw' => '<button class="elementor-button elementor-button-default" onclick="$e.route(\'panel/page-settings/settings\');jQuery(\'.elementor-control-section_impact\').click();">Go to Impact settings</button>',
          ] );
 		$this->end_controls_section(); 
@@ -48,12 +48,12 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 		// SECTION STYLE
 		$this->start_controls_section( 'section_style', [
          'label' => __( 'Style', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+         'tab' => Elementor\Controls_Manager::TAB_STYLE,
       ] );
 
          $this->add_control( 'text_color', [
             'label' => __( 'Text Color', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::COLOR,
+            'type' => Elementor\Controls_Manager::COLOR,
             'default' => '#FFFFFF',
             'selectors' => [
                '{{WRAPPER}} .dh-page-header-title' => 'color: {{VALUE}}',
@@ -71,7 +71,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
          ] );
          $this->add_control( 'first_tag_background_color', [
             'label' => __( 'First Tag Background Color', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::COLOR,
+            'type' => Elementor\Controls_Manager::COLOR,
             'default' => '#769179',
             'selectors' => [
                '{{WRAPPER}} .dh-page-header-tag:first-child' => 'color: {{VALUE}}',
@@ -79,7 +79,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
          ] );
          $this->add_control( 'impact_icons_color', [
             'label' => __( 'Impact Icons Color', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::COLOR,
+            'type' => Elementor\Controls_Manager::COLOR,
             'default' => '#54CC8B',
             'selectors' => [
                '{{WRAPPER}} .dh-page-header-feature-title i' => 'color: {{VALUE}}',
@@ -87,7 +87,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
          ] );
          $this->add_control( 'meta_icons_color', [
             'label' => __( 'Meta Icons Color', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::COLOR,
+            'type' => Elementor\Controls_Manager::COLOR,
             'default' => '#769179',
             'selectors' => [
                '{{WRAPPER}} .dh-page-header-meta-item i' => 'color: {{VALUE}}',

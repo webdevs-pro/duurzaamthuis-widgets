@@ -55,11 +55,11 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
          $this->add_control( 'type', [
             'label' => __( 'Query', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::SELECT,
+            'type' => Elementor\Controls_Manager::SELECT,
             'default' => 'manual',
             'options' => [
                'manual'  => __( 'Manual', 'duurzaamthuis' ),
@@ -68,7 +68,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
          ] );
          $this->add_responsive_control( 'columns_count', [
             'label' => __( 'Columns', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::NUMBER,
+            'type' => Elementor\Controls_Manager::NUMBER,
             'min' => 1,
             'max' => 6,
             'step' => 1,
@@ -81,7 +81,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
          ] );
          $this->add_control( 'posts_count', [
             'label' => __( 'Posts Count', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::NUMBER,
+            'type' => Elementor\Controls_Manager::NUMBER,
             'min' => 1,
             'max' => 9,
             'step' => 1,
@@ -92,7 +92,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
          ] );
          $this->add_control( 'show_excerpt',[
             'label' => __( 'Show Exerpt', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::SWITCHER,
+            'type' => Elementor\Controls_Manager::SWITCHER,
             'label_on' => __( 'Yes', 'your-plugin' ),
             'label_off' => __( 'No', 'your-plugin' ),
             'return_value' => 'yes',
@@ -115,7 +115,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
             ] );
             $repeater->add_control( 'badge', [
                'label' => __( 'Badge', 'duurzaamthuis' ),
-               'type' => \Elementor\Controls_Manager::SELECT,
+               'type' => Elementor\Controls_Manager::SELECT,
                'default' => 'none',
                'options' => [
                   'none'  => __( 'None', 'duurzaamthuis' ),
@@ -125,7 +125,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
             ] );
          $this->add_control( 'posts', [
             'label' => __( 'Posts', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::REPEATER,
+            'type' => Elementor\Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
 				'title_field' => $script,
 				'condition' => [

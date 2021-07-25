@@ -42,7 +42,7 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
 
 			$this->add_control( 'heading', [
             'label' => __( 'Heading', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::TEXT,
+            'type' => Elementor\Controls_Manager::TEXT,
             'default' => __( 'Heading text', 'duurzaamthuis' ),
             'label_block' => true,
             'separator' => 'before'
@@ -52,13 +52,13 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
 
          $repeater->add_control( 'title', [
             'label' => __( 'Title', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::TEXT,
+            'type' => Elementor\Controls_Manager::TEXT,
             'label_block' => true,
          ] );
    
          $repeater->add_control( 'anchor', [
             'label' => __( 'Anchor', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::TEXT,
+            'type' => Elementor\Controls_Manager::TEXT,
             'label_block' => true,
          ] );
          
@@ -70,7 +70,7 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
    
          $this->add_control( 'items', [
             'label' => __( 'Items', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::REPEATER,
+            'type' => Elementor\Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
             'title_field' => '{{{ title }}}',
          ] );

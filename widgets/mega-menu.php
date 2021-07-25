@@ -41,20 +41,20 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 		// SECTION CONTENT
 		$this->start_controls_section( 'section_content', [
          'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
 
 			$menus = $this->get_available_menus();
 
 			$this->add_control( 'menu', [
 				'label' => __( 'Menu', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::SELECT,
+				'type' => Elementor\Controls_Manager::SELECT,
 				'options' => $menus,
 				'default' => array_keys( $menus )[0],
 			] );
 			$this->add_control( 'mobile_menu', [
 				'label' => __( 'Mobile Menu', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::SELECT,
+				'type' => Elementor\Controls_Manager::SELECT,
 				'default' => array_keys( $menus )[0],
 				'options' => $menus,
 			] );
@@ -64,11 +64,11 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 		// SECTION STYLE DESKTOP
 		$this->start_controls_section( 'section_style', [
          'label' => __( 'Desktop Menu', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+         'tab' => Elementor\Controls_Manager::TAB_STYLE,
       ] );
 			$this->add_control( 'align_items', [
 				'label' => __( 'Align', 'elementor-pro' ),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Elementor\Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
 						'title' => __( 'Left', 'elementor-pro' ),
@@ -93,7 +93,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 			] );
 			$this->add_control( 'space_between', [
 				'label' => __( 'Space Between', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
+				'type' => Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
 					'px' => [
@@ -115,7 +115,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 			] );
 			$this->add_control( 'icon_spacing', [
 				'label' => __( 'Icon Spacing', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
+				'type' => Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
 					'px' => [
@@ -134,7 +134,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 			] );
 			$this->add_control( 'offset', [
 				'label' => __( 'Dropdown Offset', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
+				'type' => Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
 					'px' => [
@@ -153,7 +153,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 			] );
 			$this->add_control( 'color', [
             'label' => __( 'Color', 'duurzaamthuis' ),
-            'type' => \Elementor\Controls_Manager::COLOR,
+            'type' => Elementor\Controls_Manager::COLOR,
             'default' => '#515F70',
             'selectors' => [
                '{{WRAPPER}} .dh-menu-top-item' => 'color: {{VALUE}}',
@@ -167,11 +167,11 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 		// SECTION STYLE MOBILE
 		$this->start_controls_section( 'section_style_mobile', [
          'label' => __( 'Mobile Menu', 'duurzaamthuis' ),
-         'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+         'tab' => Elementor\Controls_Manager::TAB_STYLE,
       ] );
 			$this->add_control( 'align_toggle', [
 				'label' => __( 'Align Toggle', 'elementor-pro' ),
-				'type' => \Elementor\Controls_Manager::CHOOSE,
+				'type' => Elementor\Controls_Manager::CHOOSE,
 				'options' => [
 					'left' => [
 						'title' => __( 'Left', 'elementor-pro' ),
@@ -192,7 +192,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 			] );
 			$this->add_control( 'offset_mobile', [
 				'label' => __( 'Dropdown Offset', 'duurzaamthuis' ),
-				'type' => \Elementor\Controls_Manager::SLIDER,
+				'type' => Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px' ],
 				'range' => [
 					'px' => [
