@@ -1209,8 +1209,6 @@ i[data-dh-tooltip]:hover:after {
       position: absolute;
       transform: translateY(10px);
       width: 100vw;
-      margin-left: -50vw;
-      left: 50%;
       display: block;
       background-color: #fff;
       box-shadow: 0px 30px 250px rgba(18, 33, 52, 0.07);

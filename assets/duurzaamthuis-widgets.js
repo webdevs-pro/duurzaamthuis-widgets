@@ -72,6 +72,19 @@
 			$( this ).toggleClass( 'active' );
 		} );
 
+		function setMobileMenuPosition() {
+			$( menu ).css({
+				'left': - $( toggle ).offset().left,
+			});
+		}
+		
+		setMobileMenuPosition();
+		
+		$( window ).on( 'resize', function() {
+			setMobileMenuPosition();
+		} );
+
+
 		
 	};
 	
