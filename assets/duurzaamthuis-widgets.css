@@ -1094,6 +1094,8 @@ i[data-dh-tooltip]:hover:after {
    }
    .elementor-widget-dh-mega-menu .dh-menu-top-item {
       position: static;
+      font-size: 16px;
+      font-weight: 500;
    }
    .elementor-widget-dh-mega-menu .dh-menu-top-item .dh-megamenu {
       position: absolute;

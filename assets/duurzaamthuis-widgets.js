@@ -59,6 +59,7 @@
 	var DH_Mega_Menu = function( $scope, $ ) {
 
 		var toggle = $scope.find( '.dh-mobile-menu-toggle' );
+		console.log(toggle);
 		var menu = $scope.find( '.dh-mobile-menu' );
 		var submenu_toggle = $scope.find( '.dh-mobile-submenu-toggle' );
 
