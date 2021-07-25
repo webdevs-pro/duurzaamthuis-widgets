@@ -23,6 +23,10 @@ class DH_Impact extends \Elementor\Widget_Base {
 		return [ 'dh-widgets' ];
 	}
 
+	public function get_script_depends() {
+		return [ 'duurzaamthuis-widgets' ];
+	}
+
 	protected function register_controls() {
 		ob_start(); ?>
       <# 

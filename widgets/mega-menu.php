@@ -23,6 +23,10 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 		return [ 'dh-widgets' ];
 	}
 
+	public function get_script_depends() {
+		return [ 'duurzaamthuis-widgets' ];
+	}
+
 	private function get_available_menus() {
 		$menus = wp_get_nav_menus();
 		$options = [];

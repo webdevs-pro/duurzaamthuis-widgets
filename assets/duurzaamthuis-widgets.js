@@ -1,6 +1,5 @@
 ( function( $ ) {
 
-	alert('test');
 	/**
  	 * @param $scope The Widget wrapper element as a jQuery element
 	 * @param $ The jQuery alias
@@ -61,7 +60,6 @@
 	var DH_Mega_Menu = function( $scope, $ ) {
 
 		var toggle = $scope.find( '.dh-mobile-menu-toggle' );
-		console.log(toggle);
 		var menu = $scope.find( '.dh-mobile-menu' );
 		var submenu_toggle = $scope.find( '.dh-mobile-submenu-toggle' );
 
