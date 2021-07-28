@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.6.21
+ * Version:     0.6.22
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -151,3 +151,13 @@ $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 );
 //Set the branch that contains the stable release.
 $myUpdateChecker->setBranch('main');
+
+
+
+add_filter( 'elementor/utils/get_the_archive_title', 'duurza_archive_title' );
+function duurza_archive_title( $title ) {
+	if ( is_search() ) {
+		return 'Zoekresultaten: ' . get_search_query();
+	}
+	return $title;
+}
