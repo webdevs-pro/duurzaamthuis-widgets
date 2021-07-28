@@ -161,7 +161,8 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                   'dynamic' => [
                      'active' => true,
                   ],
-                  'placeholder' => '[gallery id="123" size="medium"]',
+                  'placeholder' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
+                  'description' => 'Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
                   'default' => '',
                ]
             );
@@ -235,10 +236,10 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
                   echo '<div class="dh-product-wrapper">';
                      echo '<div class="dh-product-column">';
-                        echo '<div class="dh-product-heading">';
+                        echo '<h3 class="dh-product-heading">';
                            echo '<div class="dh-number">' . ( $index + 1 ) . '</div>';
-                           echo '<h3 class="dh-product-title">' . $item['title'] . '</h3>';
-                        echo '</div>'; // dh-product-heading
+                           echo '<div class="dh-heading">' . $item['title'] . '</div>';
+                        echo '</h3>'; // dh-product-heading
                         echo '<div class="dh-product-image">';
                            echo '<div class="dh-product-image-wrapper">';
                               if ( $item['image']['id'] ) {
@@ -254,7 +255,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               echo '<div>';
                                  echo $item['quality'];
                                  if ( $item['quality_tooltip'] ) {
-                                    echo $item['quality_tooltip'];
+                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $item['quality_tooltip'] . '"></i>';
                                  }
                               echo '</div>';
                            echo '</div>';
@@ -265,18 +266,18 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               echo '<div>';
                                  echo $item['co2'] . 'kg CO<sub>2</sub>';
                                  if ( $item['co2_tooltip'] ) {
-                                    echo $item['co2_tooltip'];
+                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $item['co2_tooltip'] . '"></i>';
                                  }
-                              echo '</div>';
-                           echo '</div>';
-                        }
-                        if ( $item['price'] ) {
-                           echo '<div class="dh-product-price">';
-                              echo '<div>Prijs</div>';
-                              echo '<div>';
+                                 echo '</div>';
+                                 echo '</div>';
+                              }
+                              if ( $item['price'] ) {
+                                 echo '<div class="dh-product-price">';
+                                 echo '<div>Prijs</div>';
+                                 echo '<div>';
                                  echo $item['price'];
                                  if ( $item['price_tooltip'] ) {
-                                    echo $item['price_tooltip'];
+                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $item['price_tooltip'] . '"></i>';
                                  }
                               echo '</div>';
                            echo '</div>';
@@ -387,9 +388,9 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                   <div class="dh-product dh-product-{{ item._id }}">
                      <div class="dh-product-wrapper">
                         <div class="dh-product-column">
-                           <div class="dh-product-heading">
+                           <div class="dh-product-heading dh-number-heading">
                               <div class="dh-number">{{{ index + 1 }}}</div>
-                              <h3 class="dh-product-title">{{{ item.title }}}</h3>
+                              <h3 class="dh-heading">{{{ item.title }}}</h3>
                            </div>
                            <div class="dh-product-image">
                               <div class="dh-product-image-wrapper">
@@ -402,7 +403,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  <div>
                                     {{{ item.quality }}}
                                     <# if ( item.quality_tooltip ) { #>
-                                       {{{ item.quality_tooltip }}}
+                                       <i class="dh-icon dh-icon-info" data-dh-tooltip="{{{ item.quality_tooltip }}}"></i>
                                     <# } #>
                                  </div>
                               </div>
@@ -413,7 +414,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  <div>
                                     {{{ item.co2 }}}kg CO<sub>2</sub>
                                     <# if ( item.co2_tooltip ) { #>
-                                       {{{ item.co2_tooltip }}}
+                                       <i class="dh-icon dh-icon-info" data-dh-tooltip="{{{ item.co2_tooltip }}}"></i>
                                     <# } #>
                                  </div>
                               </div>
@@ -424,7 +425,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  <div>
                                     {{{ item.price }}}
                                     <# if ( item.price_tooltip ) { #>
-                                       {{{ item.price_tooltip }}}
+                                       <i class="dh-icon dh-icon-info" data-dh-tooltip="{{{ item.price_tooltip }}}"></i>
                                     <# } #>
                                  </div>
                               </div>

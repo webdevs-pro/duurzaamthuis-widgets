@@ -1207,13 +1207,106 @@ i[data-dh-tooltip]:hover:after {
 
 
 /* product comparison sustainability score */
-
-
-
-.elementor-widget-dh-product-comparition-sustainability-score .dh-products-horizontal-skin .dh-product-wrapper {
-   display: grid;
-   grid-template-columns: repeat( 3, 1fr );
+@media(min-width: 1025px) {
+   .elementor-widget-dh-product-comparition-sustainability-score .dh-products-horizontal-skin .dh-product-wrapper {
+      display: grid;
+      grid-template-columns: 33.333% 33.333% 33.333%;
+      column-gap: 60px;
+      padding: 38px;
+      background: #FFFFFF;
+      box-shadow: 0px 40px 60px rgba(0, 0, 0, 0.03);
+      border-radius: 16px;
+   }
 }
+
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-heading {
+   display: grid;
+   grid-template-columns: auto 1fr;
+   grid-template-areas: "a b";
+   column-gap: 10px;
+   row-gap: 15px;
+}
+@media(max-width: 767px) {
+   .elementor-widget-dh-product-comparition-sustainability-score .dh-product-heading.with-badge {
+      grid-template-columns: auto 1fr;
+      grid-template-areas: "c c"
+                           "a b";
+   }
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-heading .dh-number {
+   background: #EADECC;
+   border-radius: 8px;
+   width: 2em;
+   height: 2em;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   grid-area: a;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-heading .dh-heading {
+   grid-area: b;
+   font-size: 16px;
+   line-height: 24px;
+   font-weight: 600;
+   display: flex;
+   align-items: center;
+}
+
+
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-image {
+   border-radius: 8px;
+   position: relative;
+   padding-bottom: 50%;
+   margin-bottom: 10px;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-image-wrapper {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-image-wrapper > img {
+   object-fit: cover;
+   object-position: center;
+   border-radius: 8px;
+   width: 100%;
+}
+/* fix for picture */
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-image-wrapper > picture {
+   position: cover;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-image-wrapper > picture > img {
+   object-fit: cover;
+   object-position: center;
+   border-radius: 8px;
+   width: 100%;
+}
+
+
+.elementor-widget-dh-product-comparition-sustainability-score .dh-icon-info {
+   color: #878F9A;
+}
+
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-quality,
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-co2,
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-price {
+   display: flex;
+   justify-content: space-between;
+   padding: 12px 0;
+   border-bottom: 1px solid #eaebed;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-price {
+   border: none;
+   margin-bottom: 10px;
+}
+
 
 .elementor-widget-dh-product-comparition-sustainability-score .dh-product-score {
    display: flex;
@@ -1222,9 +1315,7 @@ i[data-dh-tooltip]:hover:after {
    background: #f9f5ec;
    border-radius: 16px;
 }
-.elementor-widget-dh-product-comparition-sustainability-score .dh-product-score .dh-icon-info {
-   color: #878F9A;
-}
+
 .elementor-widget-dh-product-comparition-sustainability-score .dh-product-score img {
    flex: 0 0 54px;
    width: 54px;
