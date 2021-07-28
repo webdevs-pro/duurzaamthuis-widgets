@@ -38,7 +38,7 @@ class DH_Custom_Templates {
 			],
 			'description'           => '',
 			'public'                => true,
-			'show_ui'               => true, // равен аргументу public
+			'show_ui'               => false, // равен аргументу public
 			'hierarchical'          => true,
 			'show_in_quick_edit'    => false,
 			'rewrite'               => true,
@@ -80,6 +80,61 @@ class DH_Custom_Templates {
 				)
 			);
 	  	}
+		if ( ! term_exists( 'DH Template 4', 'dh_templates' ) ) {
+			wp_insert_term(
+				'Template 4',
+				'dh_templates',
+				array(
+					'slug' => 'dh-template-4'
+				)
+			);
+	  	}
+		if ( ! term_exists( 'DH Template 5', 'dh_templates' ) ) {
+			wp_insert_term(
+				'Template 5',
+				'dh_templates',
+				array(
+					'slug' => 'dh-template-5'
+				)
+			);
+	  	}
+		if ( ! term_exists( 'DH Template 6', 'dh_templates' ) ) {
+			wp_insert_term(
+				'Template 6',
+				'dh_templates',
+				array(
+					'slug' => 'dh-template-6'
+				)
+			);
+	  	}
+		if ( ! term_exists( 'DH Template 7', 'dh_templates' ) ) {
+			wp_insert_term(
+				'Template 7',
+				'dh_templates',
+				array(
+					'slug' => 'dh-template-7'
+				)
+			);
+	  	}
+		if ( ! term_exists( 'DH Template 8', 'dh_templates' ) ) {
+			wp_insert_term(
+				'Template 8',
+				'dh_templates',
+				array(
+					'slug' => 'dh-template-8'
+				)
+			);
+	  	}
+		if ( ! term_exists( 'DH Template 9', 'dh_templates' ) ) {
+			wp_insert_term(
+				'Template 9',
+				'dh_templates',
+				array(
+					'slug' => 'dh-template-9'
+				)
+			);
+	  	}
+
 	}
 
 
