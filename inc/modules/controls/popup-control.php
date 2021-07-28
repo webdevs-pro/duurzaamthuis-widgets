@@ -61,7 +61,7 @@ add_action( 'elementor/editor/footer', function() {
                <div class="dh-control-popup-header">
                   <div class="dh-control-popup-title">{{{ data.button_title }}}</div>
                   <div class="dh-control-popup-close">
-                     <i aria-hidden="true" class="far fa-times-circle"></i>
+                     <i aria-hidden="true" class="dh-icon dh-icon-times"></i>
                   </div>
                </div>
                <div class="dh-control-popup-content">

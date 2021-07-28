@@ -255,7 +255,6 @@
 }
 .dh-page-header-feature-title i.dh-icon-info {
    margin-right: 0px;
-   margin-left: 5px;
    transform: translateY(-5px);
    color: #54CC8B;
    display: inline-block;
@@ -654,60 +653,7 @@
 .dh-products-extended-skin .dh-product-button:hover {
    background-color: #505050;
 }
-/*
-.elementor-star-rating {
-    color: #ccd6df;
-    font-family: eicons;
-    display: inline-block;
-}
-.elementor-star-rating i {
-   display:inline-block;
-   position:relative;
-   font-style:normal;
-   cursor:default
-  }
-  .elementor-star-rating i:before {
-   content:"\e934";
-   display:block;
-   font-size:inherit;
-   font-family:inherit;
-   position:absolute;
-   overflow:hidden;
-   color:#f0ad4e;
-   top:0;
-   left:0
-  }
-  .elementor-star-rating .elementor-star-empty:before {
-   content:none
-  }
-  .elementor-star-rating .elementor-star-1:before {
-   width:10%
-  }
-  .elementor-star-rating .elementor-star-2:before {
-   width:20%
-  }
-  .elementor-star-rating .elementor-star-3:before {
-   width:30%
-  }
-  .elementor-star-rating .elementor-star-4:before {
-   width:40%
-  }
-  .elementor-star-rating .elementor-star-5:before {
-   width:50%
-  }
-  .elementor-star-rating .elementor-star-6:before {
-   width:60%
-  }
-  .elementor-star-rating .elementor-star-7:before {
-   width:70%
-  }
-  .elementor-star-rating .elementor-star-8:before {
-   width:80%
-  }
-  .elementor-star-rating .elementor-star-9:before {
-   width:90%
-  }
-*/
+
 
 
 
@@ -1034,6 +980,7 @@
 i[data-dh-tooltip] {
    position: relative;
    cursor: pointer;
+   margin-left: 5px;
 }
 i[data-dh-tooltip]:after {
    content: attr(data-dh-tooltip);
@@ -1048,7 +995,10 @@ i[data-dh-tooltip]:after {
    border-radius: 3px;
    padding: 3px;
    background-color: #fff;
-   display: inline inline-block;
+   display: inline-block;
+   width: max-content;
+   padding: 5px 10px;
+   max-width: 200px;
 }
 i[data-dh-tooltip]:hover:after {
    visibility: visible;
@@ -1251,3 +1201,120 @@ i[data-dh-tooltip]:hover:after {
    }
 
 }
+
+
+
+
+
+/* product comparison sustainability score */
+
+
+
+.elementor-widget-dh-product-comparition-sustainability-score .dh-products-horizontal-skin .dh-product-wrapper {
+   display: grid;
+   grid-template-columns: repeat( 3, 1fr );
+}
+
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-score {
+   display: flex;
+   padding: 15px;
+   align-items: center;
+   background: #f9f5ec;
+   border-radius: 16px;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-score .dh-icon-info {
+   color: #878F9A;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-score img {
+   flex: 0 0 54px;
+   width: 54px;
+   margin-left: 27px;
+   margin-right: 10px;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-rating {
+   display: flex;
+   align-items: center;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-text-rating {
+   color: #2D3745;
+   font-weight: 600;
+   font-size: 20px;
+   margin-right: 10px;
+}
+
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-shortcode h2 {
+   display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dh-list-rating {
+   color: #ccd6df;
+   font-family: 'dh-icons';
+   display: inline-block;
+}
+.dh-list-rating i {
+  display:inline-block;
+  position:relative;
+  font-style:normal;
+  cursor:default
+ }
+ .dh-list-rating i:before {
+  content:"\e901";
+  display:block;
+  font-size:inherit;
+  font-family:inherit;
+  position:absolute;
+  overflow:hidden;
+  color:#54CC8B;
+  top:0;
+  left:0
+ }
+ .dh-list-rating .dh-list-empty:before {
+  content:none
+ }
+ .dh-list-rating .dh-list-1:before {
+  width:10%
+ }
+ .dh-list-rating .dh-list-2:before {
+  width:20%
+ }
+ .dh-list-rating .dh-list-3:before {
+  width:30%
+ }
+ .dh-list-rating .dh-list-4:before {
+  width:40%
+ }
+ .dh-list-rating .dh-list-5:before {
+  width:50%
+ }
+ .dh-list-rating .dh-list-6:before {
+  width:60%
+ }
+ .dh-list-rating .dh-list-7:before {
+  width:70%
+ }
+ .dh-list-rating .dh-list-8:before {
+  width:80%
+ }
+ .dh-list-rating .dh-list-9:before {
+  width:90%
+ }
