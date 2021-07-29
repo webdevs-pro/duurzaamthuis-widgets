@@ -224,6 +224,12 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
       return $logo_url;
    }
 
+
+   public function is_number( $string ) {
+      $string = str_replace( ',', '.', $string );
+      if ( is_numeric( $string ) ) return true;
+      return false;
+   }
    
 
 	protected function render() { // php template
@@ -264,7 +270,11 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            echo '<div class="dh-product-co2">';
                               echo '<div>CO<sub>2</sub> Afdruk</div>';
                               echo '<div>';
-                                 echo $item['co2'] . 'kg CO<sub>2</sub>';
+                                 $co2 = $item['co2'];
+                                 if ( $this->is_number( $co2 ) ) {
+                                    $co2 = $co2 . 'kg CO<sub>2</sub>';
+                                 } 
+                                 echo $co2;
                                  if ( $item['co2_tooltip'] ) {
                                     echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $item['co2_tooltip'] . '"></i>';
                                  }
@@ -350,6 +360,14 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
    protected function content_template() {
 		?>
          <#
+            function is_numeric( mixed_var ) {
+					return (mixed_var == '') ? false : !isNaN(mixed_var);
+				}
+				function is_number(str) {
+					str = str.replace(',', '.');
+					if(is_numeric(str)) return true;
+					return false;
+				}
             function renderRating( rating ) {
                rating = rating / 2;
                var starsHtml = '';
@@ -412,7 +430,11 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               <div class="dh-product-co2">
                                  <div>CO<sub>2</sub> Afdruk</div>
                                  <div>
-                                    {{{ item.co2 }}}kg CO<sub>2</sub>
+                                    <# var co2 = item.co2; 
+                                    if ( is_number( co2 ) ) {
+                                       co2 = co2 + 'kg CO<sub>2</sub>';
+                                    } #>
+                                    {{{ co2 }}}
                                     <# if ( item.co2_tooltip ) { #>
                                        <i class="dh-icon dh-icon-info" data-dh-tooltip="{{{ item.co2_tooltip }}}"></i>
                                     <# } #>
