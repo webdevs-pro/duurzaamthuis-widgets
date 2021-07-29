@@ -133,7 +133,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                'table_classes' => 'repeater',
                'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
                'max' => 5,
-               'default' => '[["Advantage 1"],["Advantage 2"]]',
+               'default' => '[["Advantage 1"],["Advantage 2"],["Advantage 3"],["Advantage 4"]]',
                ] );
             $repeater->add_control( 'cons', [
                'label' => 'Cons',
@@ -326,10 +326,10 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            echo '</div>';
                         }
                         echo '<div class="dh-product-description">';
-                           echo '<div class="dh-product-description-toggle">';
-                              echo '<div class="dh-open">Omschrijving<i class="dh-icon dh-icon-arrow-down"></i></div>';
-                           echo '</div>';
                            echo '<div class="dh-product-description-content">' . $item['description'] . '</div>';
+                           echo '<div class="dh-product-description-toggle">';
+                              echo 'Omschrijving<i class="dh-icon dh-icon-arrow-down"></i>';
+                           echo '</div>';
                         echo '</div>';
                      echo '</div>';  // dh-product-column
                      echo '<div class="dh-product-column">';
@@ -474,10 +474,10 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               </div>
                            <# } #>
                            <div class="dh-product-description">
-                              <div class="dh-product-description-toggle">
-                                 <div class="dh-open">Omschrijving<i class="dh-icon dh-icon-arrow-down"></i></div>
-                              </div>
                               <div class="dh-product-description-content">{{{ item.description }}}</div>
+                              <div class="dh-product-description-toggle">
+                                 Omschrijving<i class="dh-icon dh-icon-arrow-down"></i>
+                              </div>
                            </div>
                         </div>
                         <div class="dh-product-column">

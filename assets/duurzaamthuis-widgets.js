@@ -14,7 +14,7 @@
 			$(content).slideToggle(300);
 		})
 		
-	};
+	}
 
 	var DH_Product_Comparison = function( $scope, $ ) {
 		$scope.find('.dh-product-description').each(function() {
@@ -41,7 +41,7 @@
 				});
 			}
 		});
-	};
+	}
 
 
 	var DH_Impact = function( $scope, $ ) {
@@ -54,7 +54,7 @@
 			$(content).slideToggle(300);
 		})
 		
-	};
+	}
 
 
 	var DH_Mega_Menu = function( $scope, $ ) {
@@ -84,9 +84,23 @@
 			setMobileMenuPosition();
 		} );
 
+	}
 
-		
-	};
+
+	var DH_Product_Comparition_Sustainability_Score = function( $scope, $ ) {
+
+		var toggle = $scope.find( '.dh-product-description-toggle' );
+		var content = $scope.find( '.dh-product-description-content' );
+
+		$( toggle ).on( 'click', function() {
+			$( content ).slideToggle( 300 );
+			$( this ).toggleClass( 'active' );
+		} );
+
+	}
+
+
+
 	
 	// Make sure you run this code under Elementor.
 	$( window ).on( 'elementor/frontend/init', function() {
@@ -94,6 +108,7 @@
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-product-comparition.default', DH_Product_Comparison );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-impact.default', DH_Impact );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-mega-menu.default', DH_Mega_Menu );
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-product-comparition-sustainability-score.default', DH_Product_Comparition_Sustainability_Score );
 	} );
 
 
