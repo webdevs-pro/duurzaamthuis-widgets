@@ -1489,7 +1489,7 @@ i[data-dh-tooltip]:hover:after {
 }
 .elementor-widget-dh-product-comparition-sustainability-score .dfrcs ul.dfrcs_compset li .dfrcs_price del,
 .elementor-widget-dh-product-comparition-sustainability-score .dfrcs ul.dfrcs_compset li .dfrcs_price .usedprice {
-   display: none;
+   display: none !important;
 }
 .elementor-widget-dh-product-comparition-sustainability-score .dfrcs ul.dfrcs_compset li .dfrcs_link {
    flex: none !important;
@@ -1517,8 +1517,10 @@ i[data-dh-tooltip]:hover:after {
 .elementor-widget-dh-product-comparition-sustainability-score .dfrcs .dfrcs_last_updated {
    display: none;
 }
-body:not(.logged-in) .elementor-widget-dh-product-comparition-sustainability-score .dh-dfrcs-last-updated {
+body:not(.logged-in) .elementor-widget-dh-product-comparition-sustainability-score .dh-product-last-updated-text {
    display: none;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-last-updated-text {
    font-size: 10px;
    color: #777;
 }
