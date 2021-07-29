@@ -241,7 +241,8 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 
 		$items = wp_get_nav_menu_items( $settings['menu'] );
 		if ( $items ) {
-			$items_tree = $this->build_menu_tree( $items );      
+			$items_tree = $this->build_menu_tree( $items );  
+			error_log( "items_tree\n" . print_r($items_tree, true) . "\n" );    
 
 			echo '<nav><ul class="dh-menu">';
 				foreach ( $items_tree as $top_level_item ) {
@@ -251,7 +252,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 							if ( $icon_classes ) {
 								echo '<i class="' . $icon_classes . '"></i>';
 							}
-							echo $top_level_item->post_title;
+							echo $top_level_item->title;
 							if ( ! empty( $top_level_item->children ) ) {
 								echo '<i class="dh-dropdown-indicator dh-icon dh-icon-arrow-down"></i>';
 							}
@@ -264,12 +265,12 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 								echo '<div class="elementor-container">';
 									foreach ( $top_level_item->children as $second_level_item ) {
 										echo '<li class="dh-menu-item dh-second-level-item menu-item menu-item-' . $second_level_item->ID . ' ' . implode( " ", $second_level_item->classes ) . '">';
-											echo '<a href="' . ( $second_level_item->url != '#' ? $second_level_item->url : '' ) . '" class="dh-menu-second-level-heading">' . $second_level_item->post_title . '</a>';
+											echo '<a href="' . ( $second_level_item->url != '#' ? $second_level_item->url : '' ) . '" class="dh-menu-second-level-heading">' . $second_level_item->title . '</a>';
 											echo '<ul class="dh-megamenu-second-level-item">';
 												if ( ! empty( $second_level_item->children ) ) {
 													foreach ( $second_level_item->children as $third_level_item ) {
 														echo '<li class="dh-menu-item dh-third-level-item menu-item menu-item-' . $third_level_item->ID . ' ' . implode( " ", $third_level_item->classes ) . '">';
-															echo '<a href="' . $third_level_item->url . '" class="dh-menu-third-item">' . $third_level_item->post_title . '</a>';
+															echo '<a href="' . $third_level_item->url . '" class="dh-menu-third-item">' . $third_level_item->title . '</a>';
 														echo '</li>';
 													}
 												}
@@ -303,30 +304,30 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 								if ( $icon_classes ) {
 									echo '<i class="' . $icon_classes . '"></i>';
 								}
-								echo $top_level_item->post_title;
+								echo $top_level_item->title;
 							echo '</a>';
 						} else {
 							echo '<a class="dh-mobile-submenu-toggle">';
 								if ( $icon_classes ) {
 									echo '<i class="' . $icon_classes . '"></i>';
 								}
-								echo $top_level_item->post_title;
+								echo $top_level_item->title;
 								echo '<i class="dh-dropdown-indicator dh-icon dh-icon-arrow-right"></i>';
 							echo '</a>';
 							echo '<ul class="dh-submenu">';
 								foreach ( $top_level_item->children as $second_level_item ) {
 									echo '<li class="dh-menu-item dh-second-level-item menu-item menu-item-' . $second_level_item->ID . ' ' . implode( " ", $second_level_item->classes ) . '">';
 										if ( empty( $second_level_item->children ) ) {
-											echo '<a href="' . $second_level_item->url . '">' . $second_level_item->post_title . '</a>';
+											echo '<a href="' . $second_level_item->url . '">' . $second_level_item->title . '</a>';
 										} else {
 											echo '<a class="dh-mobile-submenu-toggle">';
-												echo $second_level_item->post_title;
+												echo $second_level_item->title;
 												echo '<i class="dh-dropdown-indicator dh-icon dh-icon-arrow-right"></i>';
 											echo '</a>';
 											echo '<ul class="dh-submenu">';
 												foreach ( $second_level_item->children as $third_level_item ) {
 													echo '<li class="dh-menu-item dh-third-level-item menu-item menu-item-' . $third_level_item->ID . ' ' . implode( " ", $third_level_item->classes ) . '">';
-														echo '<a href="' . $third_level_item->url . '">' . $third_level_item->post_title . '</a>';
+														echo '<a href="' . $third_level_item->url . '">' . $third_level_item->title . '</a>';
 													echo '</li>';
 												}
 											echo '</ul>';
