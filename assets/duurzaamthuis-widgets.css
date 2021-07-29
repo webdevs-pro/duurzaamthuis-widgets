@@ -1205,18 +1205,21 @@ i[data-dh-tooltip]:hover:after {
 
 
 /* product comparison sustainability score */
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-wrapper {
+   padding: 20px;
+   background: #FFFFFF;
+   box-shadow: 0px 40px 60px rgba(0, 0, 0, 0.03);
+   border-radius: 16px;
+   font-size: 16px;
+}
 @media(min-width: 1025px) {
    .elementor-widget-dh-product-comparition-sustainability-score .dh-products-horizontal-skin .dh-product-wrapper {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       column-gap: 60px;
       padding: 38px;
-      background: #FFFFFF;
-      box-shadow: 0px 40px 60px rgba(0, 0, 0, 0.03);
-      border-radius: 16px;
    }
 }
-
 .elementor-widget-dh-product-comparition-sustainability-score .dh-product-heading {
    display: grid;
    grid-template-columns: auto 1fr;
