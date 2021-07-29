@@ -74,7 +74,7 @@
 
 		function setMobileMenuPosition() {
 			$( menu ).css({
-				'left': - $( toggle ).offset().left,
+				'left': - $scope.offset().left,
 			});
 		}
 		
