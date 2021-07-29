@@ -1313,12 +1313,17 @@ i[data-dh-tooltip]:hover:after {
    background: #f9f5ec;
    border-radius: 16px;
 }
-
 .elementor-widget-dh-product-comparition-sustainability-score .dh-product-score img {
    flex: 0 0 54px;
    width: 54px;
    margin-left: 27px;
    margin-right: 10px;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-score .dh-product-rating-heading {
+   font-size: 14px;
+}
+.elementor-widget-dh-product-comparition-sustainability-score .dh-product-score .dh-product-rating-heading i {
+   font-size: 16px;
 }
 .elementor-widget-dh-product-comparition-sustainability-score .dh-product-rating {
    display: flex;
