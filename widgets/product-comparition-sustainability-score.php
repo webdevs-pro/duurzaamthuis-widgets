@@ -6,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base {
 
+   public $price;
+   public $last_updated;
+
 	public function get_name() {
 		return 'dh-product-comparition-sustainability-score';
 	}
@@ -69,12 +72,25 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                'default' => __( 'Product title' , 'duurzaamthuis' ),
                'label_block' => true,
             ] );
+            $repeater->add_control( 'badge', [
+               'label' => __( 'Badge', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::SELECT,
+               'default' => 'none',
+               'options' => [
+                  'none'  => __( 'None', 'duurzaamthuis' ),
+                  'best_price' => __( 'Beste prijs', 'duurzaamthuis' ),
+                  'best_quality' => __( 'Beste Kwaliteit', 'duurzaamthuis' ),
+                  'eco_choice' => __( 'Beste eco keuze', 'duurzaamthuis' ),
+               ],
+               'classes' => "extended-skin-control",
+            ] );
             $repeater->add_control( 'image', [
                'label' => __( 'Image', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::MEDIA,
                'default' => [
                   'url' => Elementor\Utils::get_placeholder_image_src(),
                ],
+               'separator' => 'after',
             ] );
             $repeater->add_control( 'quality', [
                'label' => __( 'Quality', 'duurzaamthuis' ),
@@ -87,8 +103,13 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                'default' => '',
                'separator' => 'after',
             ] );
+            $repeater->add_control( 'co2_custom_label', [
+               'label' => __( 'Custom label', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'description' => 'Will be used instead "CO<sub>2</sub>-afdruk"',
+            ] );
             $repeater->add_control( 'co2', [
-               'label' => __( 'CO<sub>2</sub> Print', 'duurzaamthuis' ),
+               'label' => __( 'CO<sub>2</sub>-afdruk', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::TEXT,
                'default' => '150',
             ] );
@@ -102,6 +123,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                'label' => __( 'Price', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::TEXT,
                'default' => '26,50',
+               'description' => 'If empty, the lowest price from datafeedr will be taken',
             ] );
             $repeater->add_control( 'price_tooltip', [
                'label' => __( 'Tooltip', 'duurzaamthuis' ),
@@ -156,16 +178,42 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
             $repeater->add_control(
                'shortcode',
                [
-                  'label' => esc_html__( 'Enter your shortcode', 'elementor' ),
+                  'label' => esc_html__( 'Enter your shortcode or text', 'elementor' ),
                   'type' => Elementor\Controls_Manager::TEXTAREA,
                   'dynamic' => [
                      'active' => true,
                   ],
                   'placeholder' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
-                  'description' => 'Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
+                  'description' => 'HTML allowed. Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
                   'default' => '',
                ]
             );
+            $repeater->add_control( 'last_updated_text', [
+               'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'button_text', [
+               'label' => __( 'Button Text', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'separator' => 'before',
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'button_link', [
+               'label' => __( 'Button Link', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '#',
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'sponsored',[
+               'label' => __( 'Sponsored', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::SWITCHER,
+               'label_on' => __( 'Yes', 'your-plugin' ),
+               'label_off' => __( 'No', 'your-plugin' ),
+               'return_value' => 'yes',
+               'default' => 'yes',
+               'render_type' => 'ui',
+            ] );
          $this->add_control( 'products', [
             'label' => __( 'Products', 'duurzaamthuis' ),
             'type' => Elementor\Controls_Manager::REPEATER,
@@ -239,6 +287,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 		if ( $settings['products'] ) :
          echo '<div class="dh-products-grid dh-products-' . $settings['skin'] . '-skin">';
             foreach ( $settings['products'] as $index => $item ) :
+               $shortcode = $this->render_shortcode( $item['shortcode'] );
                echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
                   echo '<div class="dh-product-wrapper">';
                      echo '<div class="dh-product-column">';
@@ -247,6 +296,19 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            echo '<div class="dh-heading">' . $item['title'] . '</div>';
                         echo '</h3>'; // dh-product-heading
                         echo '<div class="dh-product-image">';
+                           if ( $item['badge'] ) {
+                              switch ( $item['badge'] ) {
+                                 case 'best_price':
+                                    echo '<div class="dh-product-badge dh-product-price-badge">Beste prijs</div>';
+                                    break;
+                                 case 'best_quality':
+                                    echo '<div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>';
+                                    break;
+                                 case 'eco_choice':
+                                    echo '<div class="dh-product-badge dh-product-eco-badge">Beste eco keuze</div>';
+                                    break;
+                              }
+                           }
                            echo '<div class="dh-product-image-wrapper">';
                               if ( $item['image']['id'] ) {
                                  echo wp_get_attachment_image( $item['image']['id'], 'medium' );
@@ -266,29 +328,31 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               echo '</div>';
                            echo '</div>';
                         }
-                        if ( $item['co2'] ) {
+                        if ( $item['co2'] || $item['co2_custom_label'] ) {
                            echo '<div class="dh-product-co2">';
-                              echo '<div>CO<sub>2</sub> Afdruk</div>';
+                              echo '<div>' . ( $item['co2_custom_label'] ?: 'CO<sub>2</sub>-afdruk' ) . '</div>';
                               echo '<div>';
                                  $co2 = $item['co2'];
-                                 if ( $this->is_number( $co2 ) ) {
-                                    $co2 = $co2 . 'kg CO<sub>2</sub>';
+                                 if ( ! $item['co2_custom_label'] && $this->is_number( $co2 ) ) {
+                                    $co2 = $co2 . 'kg CO<sub>2</sub> p/j';
                                  } 
                                  echo $co2;
                                  if ( $item['co2_tooltip'] ) {
                                     echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $item['co2_tooltip'] . '"></i>';
                                  }
-                                 echo '</div>';
-                                 echo '</div>';
+                              echo '</div>';
+                           echo '</div>'; // dh-product-co2
+                        }
+                        $price = $item['price'] ?: $this->price;
+                        if ( $price ) {
+                           echo '<div class="dh-product-price">';
+                              echo '<div>Prijs</div>';
+                              echo '<div>';
+                              echo '€' . $price;
+                              $last_updated = $item['price_tooltip'] ?: 'Laatste update: ' . $this->last_updated;
+                              if ( $last_updated ) {
+                                 echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $last_updated . '"></i>';
                               }
-                              if ( $item['price'] ) {
-                                 echo '<div class="dh-product-price">';
-                                 echo '<div>Prijs</div>';
-                                 echo '<div>';
-                                 echo $item['price'];
-                                 if ( $item['price_tooltip'] ) {
-                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $item['price_tooltip'] . '"></i>';
-                                 }
                               echo '</div>';
                            echo '</div>';
                         }
@@ -335,17 +399,24 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               }
                            echo '</div>';
                         }
+                        echo '<div class="dh-product-description-heading">Omschrijving</div>';
                         echo '<div class="dh-product-description">';
                            echo '<div class="dh-product-description-content">' . $item['description'] . '</div>';
                            echo '<div class="dh-product-description-toggle">';
-                              echo 'Omschrijving<i class="dh-icon dh-icon-arrow-down"></i>';
+                              echo '<div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>';
+                              echo '<div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>';
                            echo '</div>';
                         echo '</div>';
                      echo '</div>';  // dh-product-column
                      echo '<div class="dh-product-column">';
-                        $shortcode = do_shortcode( shortcode_unautop( $item['shortcode'] ) );
                         echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
                         echo '<div class="dh-product-shortcode">' . $shortcode . '</div>';
+                        $last_updated_text = $item['last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
+                        echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
+                        if ( $item['button_text'] ) {
+                           $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
+                           echo '<a target="_blank" class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
+                        }
                      echo '</div>'; // dh-product-column
                   echo '</div>'; // dh-product-wrapper
                echo '</div>'; // dh-product
@@ -355,6 +426,34 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 	}
 
 
+   public function filter_products( $products ) {
+	   $products = array_slice( $products, 0, 15 );
+      foreach ( $products as $index => $product ) {
+         if ( $products[$index]['finalprice'] < 90 ) {
+            unset( $products[$index] );
+         }
+      }
+	   $products = array_slice( $products, 0, 5 );
+      $key = array_key_first( $products );
+      $this->price = number_format( ( $products[$key]['finalprice'] / 100 ), 2, ',', '.' );
+      return $products;
+   }
+
+
+   public function last_updated( $text, $instance ) {
+      $this->last_updated = $instance->date_updated;
+      return $text;
+   }
+
+
+   public function render_shortcode( $shorcode ) {
+      add_filter( 'dfrcs_products', [ $this, 'filter_products'], 100);
+      add_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100, 2 );
+      $content = do_shortcode( shortcode_unautop( $shorcode ) );
+      remove_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100 );
+      remove_filter( 'dfrcs_products', [ $this, 'filter_products'], 100 );
+      return $content;
+   }
 
 
    protected function content_template() {
@@ -406,11 +505,26 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                   <div class="dh-product dh-product-{{ item._id }}">
                      <div class="dh-product-wrapper">
                         <div class="dh-product-column">
-                           <div class="dh-product-heading dh-number-heading">
+                           <h3 class="dh-product-heading dh-number-heading">
                               <div class="dh-number">{{{ index + 1 }}}</div>
-                              <h3 class="dh-heading">{{{ item.title }}}</h3>
-                           </div>
+                              <div class="dh-heading">{{{ item.title }}}</div>
+                           </h3>
                            <div class="dh-product-image">
+                              <#
+                                 if(item.badge) {
+                                    switch(item.badge) {
+                                       case 'best_price': #>
+                                          <div class="dh-product-badge dh-product-price-badge">Beste prijs</div>
+                                          <# break;
+                                       case 'best_quality': #>
+                                          <div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>
+                                          <# break;
+                                       case 'eco_choice': #>
+                                          <div class="dh-product-badge dh-product-eco-badge">Beste eco keuze</div>
+                                          <# break;
+                                    }
+                                 }
+                              #>
                               <div class="dh-product-image-wrapper">
                                     <img src="{{ item.image.url }}">
                               </div>
@@ -426,12 +540,18 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  </div>
                               </div>
                            <# } #>
-                           <# if ( item.co2 ) { #>
+                           <# if ( item.co2 || item.co2_custom_label ) { #>
                               <div class="dh-product-co2">
-                                 <div>CO<sub>2</sub> Afdruk</div>
+                                 <div>
+                                 <# if ( item.co2_custom_label ) { #>
+                                    {{{ item.co2_custom_label }}}
+                                 <# } else { #>
+                                    CO<sub>2</sub>-afdruk
+                                 <# } #>
+                                 </div>
                                  <div>
                                     <# var co2 = item.co2; 
-                                    if ( is_number( co2 ) ) {
+                                    if ( ! item.co2_custom_label && is_number( co2 ) ) {
                                        co2 = co2 + 'kg CO<sub>2</sub>';
                                     } #>
                                     {{{ co2 }}}
@@ -445,7 +565,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               <div class="dh-product-price">
                                  <div>Prijs</div>
                                  <div>
-                                    {{{ item.price }}}
+                                    €{{{ item.price }}}
                                     <# if ( item.price_tooltip ) { #>
                                        <i class="dh-icon dh-icon-info" data-dh-tooltip="{{{ item.price_tooltip }}}"></i>
                                     <# } #>
@@ -495,16 +615,21 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  <# } ); #>
                               </div>
                            <# } #>
+                           <div class="dh-product-description-heading">Omschrijving</div>
                            <div class="dh-product-description">
                               <div class="dh-product-description-content">{{{ item.description }}}</div>
-                              <div class="dh-product-description-toggle">
-                                 Omschrijving<i class="dh-icon dh-icon-arrow-down"></i>
+                                 <div class="dh-product-description-toggle">
+                                 <div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>
+                                 <div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>
                               </div>
                            </div>
                         </div>
                         <div class="dh-product-column">
                            <div class="dh-product-shortcode-heading">Beste prijs</div>
                            <div class="dh-product-shortcode">{{{ item.shortcode }}}</div>
+                           <# if ( item.button_text ) { #>
+                              <a target="_blank" class="dh-product-button" href="{{{ item.button_link }}}">{{{ item.button_text }}}</a>
+                           <# } #>
                         </div>
                      </div>
                   </div>

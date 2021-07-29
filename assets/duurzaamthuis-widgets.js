@@ -89,13 +89,40 @@
 
 	var DH_Product_Comparition_Sustainability_Score = function( $scope, $ ) {
 
-		var toggle = $scope.find( '.dh-product-description-toggle' );
-		var content = $scope.find( '.dh-product-description-content' );
+		$scope.find('.dh-product-description').each(function() {
+			var height = $(this).height();
+			var content = $(this).find('.dh-product-description-content');
+			var content_height = $(content).height();
+			// console.log(content_height);
+			if(content_height > height) {
+				var open = $(this).find('.dh-open');
+				var close = $(this).find('.dh-close');
+				$(open).show();
+				var parent = this;
+				$(open).on('click', function() {
+					$(parent).css('max-height', content_height + 22);
+					$(this).hide();
+					$(close).show();
+				});
+				$(close).on('click', function() {
+					$(parent).css('max-height', height);
+					setTimeout(function(){
+						$(this).hide();
+						$(open).show();
+					}, 150);
+				});
+			}
+		});
 
-		$( toggle ).on( 'click', function() {
-			$( content ).slideToggle( 300 );
-			$( this ).toggleClass( 'active' );
-		} );
+
+		var products = $scope.find( '.dh-product' );
+
+
+			$( products ).each( function() {
+				var last_updated = $( this ).find( '.dfrcs_last_updated' ).text();
+				console.log('last_updated', last_updated);
+			} );
+		
 
 	}
 

@@ -290,7 +290,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                            }
                         echo '</div>';
                         $rel = isset( $item['sponsored'] ) ? ' rel="sponsored"' : '';
-                        echo '<a class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
+                        echo '<a target="_blank" class="dh-product-button" href="' . $item['button_link'] . '"' . $rel . '>' . $item['button_text'] . '</a>';
                      echo '</div>';
                   echo '</div>';
                endif;
