@@ -330,11 +330,17 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 														echo '<a href="' . $third_level_item->url . '">' . $third_level_item->title . '</a>';
 													echo '</li>';
 												}
+												echo '<li class="dh-menu-item dh-third-level-item menu-item menu-item-all ' . implode( " ", $third_level_item->classes ) . '">';
+													echo '<a href="' . $second_level_item->url . '">Alles in ' . $second_level_item->title . '</a>';
+											echo '</li>';
 											echo '</ul>';
 										}
+
 									echo '</li>';
 								}
-
+								echo '<li class="dh-menu-item dh-second-level-item menu-item menu-item-all ' . implode( " ", $second_level_item->classes ) . '">';
+										echo '<a href="' . $top_level_item->url . '">Alles in ' . $top_level_item->title . '</a>';
+								echo '</li>';
 							echo '</ul>';
 						}
 					echo '</li>';
