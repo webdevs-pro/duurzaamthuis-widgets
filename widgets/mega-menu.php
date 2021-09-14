@@ -242,7 +242,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 		$items = wp_get_nav_menu_items( $settings['menu'] );
 		if ( $items ) {
 			$items_tree = $this->build_menu_tree( $items );  
-			error_log( "items_tree\n" . print_r($items_tree, true) . "\n" );    
+			// error_log( "items_tree\n" . print_r($items_tree, true) . "\n" );    
 
 			echo '<nav><ul class="dh-menu">';
 				foreach ( $items_tree as $top_level_item ) {

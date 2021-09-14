@@ -42,6 +42,7 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/related-content.php';
 		require __DIR__ . '/widgets/mega-menu.php';
 		require __DIR__ . '/widgets/product-comparition-sustainability-score.php';
+		require __DIR__ . '/widgets/template.php';
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Anchor_Navigation() );
@@ -54,6 +55,7 @@ class DH_Register_Widgets {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Related_Posts() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Mega_Menu() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Product_Comparition_Sustainability_Score() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Template() );
 	}
 }
 new DH_Register_Widgets();

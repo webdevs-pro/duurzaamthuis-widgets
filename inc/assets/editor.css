@@ -151,3 +151,40 @@
    color: inherit;
    margin-right: 5px;
 }
+
+
+
+
+
+.dh-edit-template-popup {
+   position: fixed;
+   top: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   z-index: 100;
+   background-color: rgba( 0, 0, 0, 0.7);
+}
+.dh-edit-template-popup iframe {
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   padding: 60px;
+}
+.dh-edit-template-popup .dh-close-template-popup {
+   position: absolute;
+   bottom: 10px;
+   height: 40px;
+   right: 60px;
+   width: 100px;
+   background: #fff;
+   color: #333;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+}
+
+

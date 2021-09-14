@@ -1601,3 +1601,13 @@ body:not(.logged-in) .elementor-widget-dh-product-comparition-sustainability-sco
  .dh-list-rating .dh-list-9:before {
   width:90%
  }
+
+
+
+
+ body.test > *:not(.type-elementor_library ) {
+   display: none;
+}
+body.test .type-elementor_library > header {
+   display: none;
+}
