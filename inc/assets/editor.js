@@ -256,14 +256,16 @@
 
    $( 'body' ).on( 'click', '.dh-edit-template', function() {
       // $( '#elementor-controls' ).find( '.elementor-control-post_id select' ).trigger( 'change' );
-      var post_id = $( '#elementor-controls' ).find( '.elementor-control-post_id select option:selected' ).val();
-      
-      $( 'body' ).append( '<div class="dh-edit-template-popup"><iframe src="http://duurzaamthuis.test/wp-admin/post.php?post=' + post_id + '&action=elementor&dh-template=true"></iframe><div class="dh-close-template-popup">Close</div></div>')
+      var post_id = $( '#elementor-controls' ).find( '.elementor-control-dh_template_post_id select option:selected' ).val();
+      var url = window.location.href;
+      var url_arr = url.split("/");
+      var host_url = url_arr[0] + "//" + url_arr[2];
+      $( 'body' ).append( '<div class="dh-edit-template-popup"><iframe src="' + host_url + '/wp-admin/post.php?post=' + post_id + '&action=elementor&dh-template=true"></iframe><div class="dh-close-template-popup">Close</div></div>')
    } );
 
    $( 'body' ).on( 'click', '.dh-close-template-popup', function() {
       $( '.dh-edit-template-popup' ).remove();
-      $( '#elementor-controls' ).find( '.elementor-control-post_id select' ).trigger( 'change' );
+      $( '#elementor-controls' ).find( '.elementor-control-dh_template_post_id select' ).trigger( 'change' );
    } );
 
 

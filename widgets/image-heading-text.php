@@ -32,118 +32,31 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 		return [ 'dh-widgets' ];
 	}
 
-	protected function _register_controls() {
-
-		// SECTION CONTENT
-		$this->start_controls_section(
-			'section_content',
-			[
-				'label' => __( 'Content', 'duurzaamthuis' ),
-				'tab' => Controls_Manager::TAB_CONTENT,
-			]
-		);
-
-			$this->add_control(
-				'image',
-				[
-					'label' => __( 'Choose Image', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::MEDIA,
-					'default' => [
-						'url' => Elementor\Utils::get_placeholder_image_src(),
-					],
-				]
-			);
-			$this->add_control(
-				'image_align',
-				[
-					'label' => __( 'Image Column Alignment', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::CHOOSE,
-					'options' => [
-						'left' => [
-							'title' => __( 'Left', 'duurzaamthuis' ),
-							'icon' => 'eicon-h-align-left',
-						],
-						'right' => [
-							'title' => __( 'Right', 'duurzaamthuis' ),
-							'icon' => 'eicon-h-align-right',
-						],
-					],
-					'default' => 'left',
-					'toggle' => false,
-					'prefix_class' => 'dh-image-align-',
-				]
-			);
-			$this->add_control(
-				'image_width',
-				[
-					'label' => __( 'Image Column Width', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::SELECT,
-					'default' => '50',
-					'options' => [
-						'33'  => __( '33%', 'duurzaamthuis' ),
-						'50' => __( '50%', 'duurzaamthuis' ),
-						'66' => __( '66%', 'duurzaamthuis' ),
-					],
-					'prefix_class' => 'dh-image-width-',
-				]
-			);
-			$this->add_control(
-				'image_reverse',
-				[
-					'label' => __( 'Mobile Columns Reverse', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::SWITCHER,
-					'label_on' => __( 'Yes', 'your-plugin' ),
-					'label_off' => __( 'No', 'your-plugin' ),					
-					'return_value' => 'columns',
-					'prefix_class' => 'dh-reverse-',
-				]
-			);
-			$this->add_control(
-				'heading',
-				[
-					'label' => __( 'Heading', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::TEXT,
-					'default' => __( 'Heading text', 'duurzaamthuis' ),
-					'label_block' => true,
-					'separator' => 'before'
-				]
-			);
-			$this->add_control(
-				'content',
-				[
-					'label' => __( 'Content', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::WYSIWYG,
-					'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'duurzaamthuis' ),
-				]
-			);
-
-		$this->end_controls_section(); 
-
-
-
+	protected function register_controls() {
+      DH_Widgets_Content_Controls::get_dh_image_heading_text_controls( $this );
 	}
 
 	protected function render() { // php template
-
 		$settings = $this->get_settings_for_display();
 
-		$image = $settings['image'];
-		$heading = $settings['heading'];
-		$content = $this->parse_text_editor( $settings['content'] );
-
+		$image = $settings['dh_image_heading_image'];
+		$heading = $settings['dh_image_heading_heading'];
+		$content = $this->parse_text_editor( $settings['dh_image_heading_content'] );
 
 		?>
-			<div class="dh-wrapper">
-				<div class="dh-image-column">
-					<img src="<?php echo $image['url']; ?>">
-				</div>
-				<div class="dh-gap-column"></div>
-				<div class="dh-content-column">
-					<h2>
-						<?php echo $heading; ?>
-					</h2>
-					<div class="dh-content">
-						<?php echo $content; ?>
+         <div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>">
+				<div class="dh-wrapper">
+					<div class="dh-image-column">
+						<img src="<?php echo $image['url']; ?>">
+					</div>
+					<div class="dh-gap-column"></div>
+					<div class="dh-content-column">
+						<h2>
+							<?php echo $heading; ?>
+						</h2>
+						<div class="dh-content">
+							<?php echo $content; ?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -151,19 +64,29 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 	}
 
 	protected function content_template() {
-
 		?>
-			<div class="dh-wrapper">
-				<div class="dh-image-column">
-					<img src="{{ settings.image.url }}">
-				</div>
-				<div class="dh-gap-column"></div>
-				<div class="dh-content-column">
-					<h2>
-						{{{ settings.heading }}}
-					</h2>
-					<div class="dh-content">
-						{{{ settings.content }}}
+			<# 
+				var classes = [];
+				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
+					if ( value.add_widget_class && settings[index] && value.section == 'dh_image_heading_text_content' ) {
+						classes.push( value.add_widget_class + settings[index] );
+					}
+				} ); 
+				classes = ' ' + classes.join( ' ' );
+			#>
+         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
+				<div class="dh-wrapper">
+					<div class="dh-image-column">
+						<img src="{{ settings.dh_image_heading_image.url }}">
+					</div>
+					<div class="dh-gap-column"></div>
+					<div class="dh-content-column">
+						<h2>
+							{{{ settings.dh_image_heading_heading }}}
+						</h2>
+						<div class="dh-content">
+							{{{ settings.dh_image_heading_content }}}
+						</div>
 					</div>
 				</div>
 			</div>

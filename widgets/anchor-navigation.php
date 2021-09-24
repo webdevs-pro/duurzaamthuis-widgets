@@ -32,103 +32,68 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
 		return [ 'dh-widgets' ];
 	}
 
-	protected function _register_controls() {
-
-		// SECTION CONTENT
-		$this->start_controls_section( 'section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => Controls_Manager::TAB_CONTENT,
-      ] );
-
-			$this->add_control( 'heading', [
-            'label' => __( 'Heading', 'duurzaamthuis' ),
-            'type' => Elementor\Controls_Manager::TEXT,
-            'default' => __( 'Heading text', 'duurzaamthuis' ),
-            'label_block' => true,
-            'separator' => 'before'
-         ] );
-
-         $repeater = new \Elementor\Repeater();
-
-         $repeater->add_control( 'title', [
-            'label' => __( 'Title', 'duurzaamthuis' ),
-            'type' => Elementor\Controls_Manager::TEXT,
-            'label_block' => true,
-         ] );
-   
-         $repeater->add_control( 'anchor', [
-            'label' => __( 'Anchor', 'duurzaamthuis' ),
-            'type' => Elementor\Controls_Manager::TEXT,
-            'label_block' => true,
-         ] );
-         
-         $repeater->add_control( 'description', [
-            'raw' => __( 'Only Id without \'#\' sign', 'elementor-pro' ),
-            'type' => Controls_Manager::RAW_HTML,
-            'content_classes' => 'elementor-descriptor',
-         ] );
-   
-         $this->add_control( 'items', [
-            'label' => __( 'Items', 'duurzaamthuis' ),
-            'type' => Elementor\Controls_Manager::REPEATER,
-            'fields' => $repeater->get_controls(),
-            'title_field' => '{{{ title }}}',
-         ] );
-
-
-
-		$this->end_controls_section(); 
-
-
-
+	protected function register_controls() {
+      DH_Widgets_Content_Controls::get_dh_anchor_navigation_controls( $this );
 	}
 
-	protected function render() { // php template
-
+	protected function render() {
 		$settings = $this->get_settings_for_display();
 
-		$heading = $settings['heading'];
-      $items = $settings['items'] ?: array();
+		$heading = $settings['dh_anchor_navigation_heading'];
+      $items = $settings['dh_anchor_navigation_items'] ?: array();
 
 		?>
-         <h2 class="dh-heading">
-            <?php echo $heading; ?>
-         </h2>
-         <div class="dh-repeater">
-            <?php foreach ( $items as $item ) { ?>
-               <a class="dh-item" <?php echo $item['anchor'] ? 'href="#' . $item['anchor'] . '"' : ''; ?>>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M12.2744 19.75V4.75" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                     <path d="M18.2988 13.7002L12.2748 19.7502L6.24976 13.7002" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <?php echo $item['title']; ?>
-               </a>
-            <?php } ?>
+         <div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>">
+            <h2 class="dh-heading">
+               <?php echo $heading; ?>
+            </h2>
+            <div class="dh-repeater">
+               <?php foreach ( $items as $item ) { ?>
+                  <a class="dh-item" <?php echo $item['dh_anchor_navigation_anchor'] ? 'href="#' . $item['dh_anchor_navigation_anchor'] . '"' : ''; ?>>
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.2744 19.75V4.75" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18.2988 13.7002L12.2748 19.7502L6.24976 13.7002" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                     </svg>
+                     <?php echo $item['dh_anchor_navigation_title']; ?>
+                  </a>
+               <?php } ?>
+            </div>
          </div>
 		<?php
 	}
 
-	protected function content_template() { // js template
-
+	protected function content_template() {
       ?>
-         <h2 class="dh-heading">
-            {{{ settings.heading }}}
-         </h2>
-         <div class="dh-repeater">
-            <# _.each( settings.items, function( item ) { #>
-               <# if(item.anchor) {
-                  var href = 'href="#' + item.anhor + '"';
-               } else {
-                  var href = '';
-               } #>
-               <a class="dh-item" {{{ href }}}>
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M12.2744 19.75V4.75" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                     <path d="M18.2988 13.7002L12.2748 19.7502L6.24976 13.7002" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  {{{ item.title }}}
-               </a>
-            <# }); #>
+			<# 
+				// console.log('dh-anchor-navigation', view.model.attributes.settings.controls);
+				var classes = [];
+				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
+					if ( value.add_widget_class && settings[index] && value.section == 'dh_anchor_navigation_section_content' ) {
+						classes.push( value.add_widget_class + settings[index] );
+					}
+				} ); 
+				classes = ' ' + classes.join( ' ' );
+			#>
+         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
+            <h2 class="dh-heading">
+               {{{ settings.dh_anchor_navigation_heading }}}
+            </h2>
+            <div class="dh-repeater">
+               <# _.each( settings.dh_anchor_navigation_items, function( item ) { #>
+                  <# if(item.dh_anchor_navigation_anchor) {
+                     var href = 'href="#' + item.dh_anchor_navigation_anchor + '"';
+                  } else {
+                     var href = '';
+                  } #>
+                  <a class="dh-item" {{{ href }}}>
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.2744 19.75V4.75" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M18.2988 13.7002L12.2748 19.7502L6.24976 13.7002" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                     </svg>
+                     {{{ item.dh_anchor_navigation_title }}}
+                  </a>
+               <# }); #>
+            </div>
          </div>
 		<?php
 	}
