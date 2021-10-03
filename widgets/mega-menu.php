@@ -27,7 +27,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 		return [ 'duurzaamthuis-widgets' ];
 	}
 
-	private function get_available_menus() {
+	public static function get_available_menus() {
 		$menus = wp_get_nav_menus();
 		$options = [];
 		foreach ( $menus as $menu ) {
@@ -37,179 +37,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 	}
 
 	protected function register_controls() {
-
-		// SECTION CONTENT
-		$this->start_controls_section( 'section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
-      ] );
-
-			$menus = $this->get_available_menus();
-
-			$this->add_control( 'menu', [
-				'label' => __( 'Menu', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::SELECT,
-				'options' => $menus,
-				'default' => array_keys( $menus )[0],
-			] );
-			$this->add_control( 'mobile_menu', [
-				'label' => __( 'Mobile Menu', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::SELECT,
-				'default' => array_keys( $menus )[0],
-				'options' => $menus,
-			] );
-
-		$this->end_controls_section(); 
-
-		// SECTION STYLE DESKTOP
-		$this->start_controls_section( 'section_style', [
-         'label' => __( 'Desktop Menu', 'duurzaamthuis' ),
-         'tab' => Elementor\Controls_Manager::TAB_STYLE,
-      ] );
-			$this->add_control( 'align_items', [
-				'label' => __( 'Align', 'elementor-pro' ),
-				'type' => Elementor\Controls_Manager::CHOOSE,
-				'options' => [
-					'left' => [
-						'title' => __( 'Left', 'elementor-pro' ),
-						'icon' => 'eicon-h-align-left',
-					],
-					'center' => [
-						'title' => __( 'Center', 'elementor-pro' ),
-						'icon' => 'eicon-h-align-center',
-					],
-					'right' => [
-						'title' => __( 'Right', 'elementor-pro' ),
-						'icon' => 'eicon-h-align-right',
-					],
-					'justify' => [
-						'title' => __( 'Stretch', 'elementor-pro' ),
-						'icon' => 'eicon-h-align-stretch',
-					],
-				],
-				'toggle' => false,
-				'default' => 'justify',
-				'prefix_class' => 'dh-menu-align-',
-			] );
-			$this->add_control( 'space_between', [
-				'label' => __( 'Space Between', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 10,
-				],
-				'condition' => [
-					'align_items!' => 'justify',
-				],
-				'selectors' => [
-					'{{WRAPPER}} .dh-menu-top-item:not(:last-child)' => 'margin-right: {{SIZE}}{{UNIT}};',
-				],
-			] );
-			$this->add_control( 'icon_spacing', [
-				'label' => __( 'Icon Spacing', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 5,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .dh-menu-top-item i' => 'margin-right: {{SIZE}}{{UNIT}};',
-				],
-			] );
-			$this->add_control( 'offset', [
-				'label' => __( 'Dropdown Offset', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 5,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .dh-megamenu .elementor-container' => 'top: {{SIZE}}{{UNIT}};',
-				],
-			] );
-			$this->add_control( 'color', [
-            'label' => __( 'Color', 'duurzaamthuis' ),
-            'type' => Elementor\Controls_Manager::COLOR,
-            'default' => '#515F70',
-            'selectors' => [
-               '{{WRAPPER}} .dh-menu-top-item' => 'color: {{VALUE}}',
-            ],
-				'separator' => 'after',
-         ] );
-
-		$this->end_controls_section(); 
-
-
-		// SECTION STYLE MOBILE
-		$this->start_controls_section( 'section_style_mobile', [
-         'label' => __( 'Mobile Menu', 'duurzaamthuis' ),
-         'tab' => Elementor\Controls_Manager::TAB_STYLE,
-      ] );
-			$this->add_control( 'align_toggle', [
-				'label' => __( 'Align Toggle', 'elementor-pro' ),
-				'type' => Elementor\Controls_Manager::CHOOSE,
-				'options' => [
-					'left' => [
-						'title' => __( 'Left', 'elementor-pro' ),
-						'icon' => 'eicon-h-align-left',
-					],
-					'center' => [
-						'title' => __( 'Center', 'elementor-pro' ),
-						'icon' => 'eicon-h-align-center',
-					],
-					'right' => [
-						'title' => __( 'Right', 'elementor-pro' ),
-						'icon' => 'eicon-h-align-right',
-					],
-				],
-				'toggle' => false,
-				'default' => 'right',
-				'prefix_class' => 'dh-mobile-toggle-align-',
-			] );
-			$this->add_control( 'offset_mobile', [
-				'label' => __( 'Dropdown Offset', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::SLIDER,
-				'size_units' => [ 'px' ],
-				'range' => [
-					'px' => [
-						'min' => 0,
-						'max' => 100,
-						'step' => 1,
-					],
-				],
-				'default' => [
-					'unit' => 'px',
-					'size' => 30,
-				],
-				'selectors' => [
-					'{{WRAPPER}} .dh-mobile-menu' => 'top: {{SIZE}}{{UNIT}};',
-				],
-			] );
-		$this->end_controls_section(); 
+      DH_Widgets_Content_Controls::get_dh_mega_menu_controls( $this );
 	}
 
 
@@ -235,14 +63,15 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 
-		if ( ! $settings['menu'] ) {
+		if ( ! $settings['dh_mega_menu_menu'] ) {
 			return;
 		}
 
-		$items = wp_get_nav_menu_items( $settings['menu'] );
+		$items = wp_get_nav_menu_items( $settings['dh_mega_menu_menu'] );
 		if ( $items ) {
 			$items_tree = $this->build_menu_tree( $items );  
 			// error_log( "items_tree\n" . print_r($items_tree, true) . "\n" );    
+         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
 
 			echo '<nav><ul class="dh-menu">';
 				foreach ( $items_tree as $top_level_item ) {
@@ -289,7 +118,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 			echo '</ul></nav>';  
 		}
 
-		$mobile_items = wp_get_nav_menu_items( $settings['mobile_menu'] ?: $settings['menu'] );
+		$mobile_items = wp_get_nav_menu_items( $settings['dh_mega_menu_mobile_menu'] ?: $settings['dh_mega_menu_menu'] );
 		if ( $mobile_items ) {
 			$mobile_items_tree = $this->build_menu_tree( $mobile_items );      
 
@@ -349,6 +178,8 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 
 			echo '</ul></nav>';  
 		}
+		echo '</div>';
+
 
 
 	}

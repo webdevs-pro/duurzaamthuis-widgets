@@ -24,54 +24,26 @@ class DH_Numbered_List extends \Elementor\Widget_Base {
 	}
 
 	protected function _register_controls() {
-
-		// SECTION CONTENT
-		$this->start_controls_section( 'section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
-      ] );
-			$repeater = new \Elementor\Repeater();
-
-				$repeater->add_control( 'text', [
-					'label' => __( 'Text', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::TEXTAREA,
-					'rows' => 3,
-					'default' => __( 'Item text' , 'duurzaamthuis' ),
-					'label_block' => true,
-				] );
-			$this->add_control( 'items', [
-				'label' => __( 'Products', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::REPEATER,
-				'fields' => $repeater->get_controls(),
-				'default' => [
-					[
-						'text' => __( 'Item text', 'duurzaamthuis' ),
-					],
-					[
-						'text' => __( 'Item text', 'duurzaamthuis' ),
-					],
-				],
-				'title_field' => '{{{ text }}}',
-			] );
-		$this->end_controls_section(); 
-
-
-
+      DH_Widgets_Content_Controls::get_dh_numbered_list_controls( $this );
 	}
 
 	protected function render() { // php template
 
 		$settings = $this->get_settings_for_display();
 
-		if ( $settings['items'] ) {
+		if ( $settings['dh_numbered_list_items'] ) {
+         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+
          echo '<div class="dh-numbered-list">';
-            foreach (  $settings['items'] as $index => $item ) {
+            foreach (  $settings['dh_numbered_list_items'] as $index => $item ) {
 					echo '<div class="dh-numbered-list-item">';
 						echo '<div class="dh-numbered-list-item-number">' . ( $index + 1 ) . '</div>';
-						echo '<div class="dh-numbered-list-item-text">' . $item['text']. '</div>';
+						echo '<div class="dh-numbered-list-item-text">' . $item['dh_numbered_list_text']. '</div>';
 					echo '</div>';
 				}
          echo '</div>';
+
+			?></div><?php
 		}
 
 	}
@@ -79,15 +51,26 @@ class DH_Numbered_List extends \Elementor\Widget_Base {
 	protected function content_template() { // php template
 
       ?>
-		<# if ( settings.items ) { #>
-         <div class="dh-numbered-list">
-				<# _.each( settings.items, function( item, index ) { #>
-					<div class="dh-numbered-list-item">
-						<div class="dh-numbered-list-item-number">{{{ index + 1 }}}</div>
-						<div class="dh-numbered-list-item-text">{{{ item.text }}}</div>
-					</div>
-				<# }); #>
-         </div>
+		<# if ( settings.dh_numbered_list_items ) { #>
+			<# 
+				var classes = [];
+				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
+					if ( value.add_widget_class && settings[index] && value.section == 'dh_impact_content' ) {
+						classes.push( value.add_widget_class + settings[index] );
+					}
+				} ); 
+				classes = ' ' + classes.join( ' ' );
+			#>
+			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
+				<div class="dh-numbered-list">
+					<# _.each( settings.dh_numbered_list_items, function( item, index ) { #>
+						<div class="dh-numbered-list-item">
+							<div class="dh-numbered-list-item-number">{{{ index + 1 }}}</div>
+							<div class="dh-numbered-list-item-text">{{{ item.dh_numbered_list_text }}}</div>
+						</div>
+					<# }); #>
+				</div>
+			</div>
 		<# } #>
       <?php
 
