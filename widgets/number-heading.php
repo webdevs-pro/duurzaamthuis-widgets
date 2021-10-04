@@ -23,93 +23,63 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 		return [ 'dh-widgets' ];
 	}
 
-	protected function _register_controls() {
-
-		// SECTION CONTENT
-		$this->start_controls_section( 'section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
-         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
-      ] );
-			$this->add_control( 'number', [
-				'label' => __( 'Number', 'plugin-domain' ),
-				'type' => Elementor\Controls_Manager::NUMBER,
-				'min' => 1,
-				'max' => 100,
-				'step' => 1,
-				'default' => 1,
-			] );
-			$this->add_control( 'heading', [
-				'label' => __( 'Heading', 'plugin-domain' ),
-				'type' => Elementor\Controls_Manager::TEXTAREA,
-				'rows' => 3,
-				'default' => __( 'Default heading', 'plugin-domain' ),
-			] );
-			$this->add_control( 'badge', [
-				'label' => __( 'Badge', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::SELECT,
-				'default' => 'none',
-				'options' => [
-					'none'  => __( 'None', 'duurzaamthuis' ),
-					'best_choise' => __( 'Beste Keuze', 'duurzaamthuis' ),
-					'reading_tip' => __( 'Leestip', 'duurzaamthuis' ),
-				],
-			] );
-			$this->add_control( 'size', [
-				'label' => __( 'Size', 'plugin-domain' ),
-				'type' => Elementor\Controls_Manager::SELECT,
-				'default' => 'h2',
-				'options' => [
-					'h1'  => __( 'H1', 'plugin-domain' ),
-					'h2' => __( 'H2', 'plugin-domain' ),
-					'h3' => __( 'H3', 'plugin-domain' ),
-					'h4' => __( 'H4', 'plugin-domain' ),
-				],
-			] );
-		$this->end_controls_section(); 
-
-
-
+	protected function register_controls() {
+      DH_Widgets_Content_Controls::get_dh_number_heading_controls( $this );
 	}
 
 	protected function render() { // php template
 		$settings = $this->get_settings_for_display();
-		$add_class = $settings['badge'] != 'none' ? ' with-badge' : '';
-      echo '<' . $settings['size'] . ' class="dh-number-heading' . $add_class . '">';
-         echo '<div class="dh-number">' . $settings['number'] . '</div>';
-         echo '<div class="dh-heading">' . $settings['heading'] . '</div>';
-			if ( $settings['badge'] ) {
-				switch ( $settings['badge'] ) {
-					case 'best_choise':
-						echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Beste keuze</span></div>';
-						break;
-					case 'reading_tip':
-						echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Leestip</span></div>';
-						break;
+		?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+
+			$add_class = $settings['dh_number_heading_badge'] != 'none' ? ' with-badge' : '';
+			echo '<' . $settings['dh_number_heading_size'] . ' class="dh-number-heading' . $add_class . '">';
+				echo '<div class="dh-number">' . $settings['dh_number_heading_number'] . '</div>';
+				echo '<div class="dh-heading">' . $settings['dh_number_heading_heading'] . '</div>';
+				if ( $settings['dh_number_heading_badge'] ) {
+					switch ( $settings['dh_number_heading_badge'] ) {
+						case 'best_choise':
+							echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Beste keuze</span></div>';
+							break;
+						case 'reading_tip':
+							echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Leestip</span></div>';
+							break;
+					}
 				}
-			}
-      echo '</' . $settings['size'] . '>';
+			echo '</' . $settings['dh_number_heading_size'] . '>';
+		?></div><?php
 	}
 
 	protected function content_template() { // php template
 
       ?>
-			<# var add_class = settings.badge != 'none' ? ' with-badge' : ''; #>
-         <{{{ settings.size }}} class="dh-number-heading{{{ add_class }}}">
-            <div class="dh-number">{{{ settings.number }}}</div>
-            <div class="dh-heading">{{{ settings.heading }}}</div>
-				<#
-					if(settings.badge) {
-						switch(settings.badge) {
-							case 'best_choise': #>
-								<div class="dh-heading-badge dh-heading-choise-badge"><span>Beste keuze</span></div>
-								<# break;
-							case 'reading_tip': #>
-								<div class="dh-heading-badge dh-heading-choise-badge"><span>Leestip</span></div>
-								<# break;
-						}
+			<# 
+				var classes = [];
+				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
+					if ( value.add_widget_class && settings[index] && value.section == 'dh_impact_content' ) {
+						classes.push( value.add_widget_class + settings[index] );
 					}
-				#>
-         </{{{ settings.size }}}>
+				} ); 
+				classes = ' ' + classes.join( ' ' );
+			#>
+			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
+				<# var add_class = settings.dh_number_heading_badge != 'none' ? ' with-badge' : ''; #>
+				<{{{ settings.dh_number_heading_size }}} class="dh-number-heading{{{ add_class }}}">
+					<div class="dh-number">{{{ settings.dh_number_heading_number }}}</div>
+					<div class="dh-heading">{{{ settings.dh_number_heading_heading }}}</div>
+					<#
+						if(settings.dh_number_heading_badge) {
+							switch(settings.dh_number_heading_badge) {
+								case 'best_choise': #>
+									<div class="dh-heading-badge dh-heading-choise-badge"><span>Beste keuze</span></div>
+									<# break;
+								case 'reading_tip': #>
+									<div class="dh-heading-badge dh-heading-choise-badge"><span>Leestip</span></div>
+									<# break;
+							}
+						}
+					#>
+				</{{{ settings.dh_number_heading_size }}}>
+			</div>
       <?php
 
 	}

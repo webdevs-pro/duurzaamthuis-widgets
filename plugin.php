@@ -419,8 +419,8 @@ class DH_Widgets_Content_Controls {
 		$controls = $widget->get_controls();
 		$class_settings = [];
 		foreach ( $settings as $setting_key => $setting ) {
-			if ( isset( $controls[ $setting_key ]['add_widget_class'] ) && $setting ) {
-				$class_settings[] = $controls[ $setting_key ]['add_widget_class'] . $setting;
+			if ( isset( $controls[ $setting_key ]['prefix_class'] ) && $setting ) {
+				$class_settings[] = $controls[ $setting_key ]['prefix_class'] . $setting;
 			}
 		}
 		return ' ' . implode( ' ', $class_settings );
@@ -492,7 +492,7 @@ class DH_Widgets_Content_Controls {
 				],
 				'default' => 'left',
 				'toggle' => false,
-				'add_widget_class' => 'dh-image-align-',
+				'prefix_class' => 'dh-image-align-',
 			] );
 			$widget->add_control( 'dh_image_heading_image_width', [ // image_width
 				'label' => __( 'Image Column Width', 'duurzaamthuis' ),
@@ -503,7 +503,7 @@ class DH_Widgets_Content_Controls {
 					'50' => __( '50%', 'duurzaamthuis' ),
 					'66' => __( '66%', 'duurzaamthuis' ),
 				],
-				'add_widget_class' => 'dh-image-width-',
+				'prefix_class' => 'dh-image-width-',
 			] );
 			$widget->add_control( 'dh_image_heading_image_reverse', [ // image_reverse
 				'label' => __( 'Mobile Columns Reverse', 'duurzaamthuis' ),
@@ -511,7 +511,7 @@ class DH_Widgets_Content_Controls {
 				'label_on' => __( 'Yes', 'your-plugin' ),
 				'label_off' => __( 'No', 'your-plugin' ),					
 				'return_value' => 'columns',
-				'add_widget_class' => 'dh-reverse-',
+				'prefix_class' => 'dh-reverse-',
 			] );
 			$widget->add_control( 'dh_image_heading_heading', [ // heading
 				'label' => __( 'Heading', 'duurzaamthuis' ),
@@ -806,7 +806,7 @@ class DH_Widgets_Content_Controls {
 					'size' => 10,
 				],
 				'condition' => [
-					'align_items!' => 'justify',
+					'dh_mega_menu_align_items!' => 'justify',
 				],
 				'selectors' => [
 					'{{WRAPPER}} .dh-menu-top-item:not(:last-child)' => 'margin-right: {{SIZE}}{{UNIT}};',
@@ -1001,6 +1001,373 @@ class DH_Widgets_Content_Controls {
                '{{WRAPPER}} .dh-page-header-meta-item i' => 'color: {{VALUE}}',
             ],
          ] );
+		$widget->end_controls_section(); 
+	}
+
+	public static function get_dh_product_comparition_sustainability_score_controls( $widget ) {
+		$widget->start_controls_section( 'dh_product_comparition_sustainability_score_section_content', [
+         'label' => __( 'Content', 'duurzaamthuis' ),
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
+      ] );
+         $widget->add_control( 'dh_product_comparition_sustainability_score_skin', [
+            'label' => __( 'Skin', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::SELECT,
+            'default' => 'horizontal',
+            'options' => [
+               'horizontal'  => __( 'Horizontal', 'duurzaamthuis' ),
+               'vertical' => __( 'Vertical', 'duurzaamthuis' ),
+            ],
+         ] );
+         $widget->add_responsive_control( 'dh_product_comparition_sustainability_score_columns_count', [
+				'label' => __( 'Columns', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 6,
+				'step' => 1,
+				'default' => 3,
+				'tablet_default' => 2,
+				'mobile_default' => 1,
+				'selectors' => [
+					'{{WRAPPER}} .dh-products-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+				],   
+            'condition' => [
+               'dh_product_comparition_sustainability_score_skin' => 'vertical',
+            ]      
+			] );
+         $widget->add_control( 'dh_product_comparition_sustainability_score_logo_url', [
+            'type' => Elementor\Controls_Manager::HIDDEN,
+            'default' => $widget::get_site_logo(),
+         ] );
+         $repeater = new \Elementor\Repeater();
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_title', [
+               'label' => __( 'Title', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => __( 'Product title' , 'duurzaamthuis' ),
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_badge', [
+               'label' => __( 'Badge', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::SELECT,
+               'default' => 'none',
+               'options' => [
+                  'none'  => __( 'None', 'duurzaamthuis' ),
+                  'best_price' => __( 'Beste prijs', 'duurzaamthuis' ),
+                  'best_quality' => __( 'Beste Kwaliteit', 'duurzaamthuis' ),
+                  'eco_choice' => __( 'Beste eco keuze', 'duurzaamthuis' ),
+               ],
+               'classes' => "extended-skin-control",
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_image', [
+               'label' => __( 'Image', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::MEDIA,
+               'default' => [
+                  'url' => Elementor\Utils::get_placeholder_image_src(),
+               ],
+               'separator' => 'after',
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_quality', [
+               'label' => __( 'Quality', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '9,6',
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_quality_tooltip', [
+               'label' => __( 'Tooltip', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '',
+               'separator' => 'after',
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_co2_custom_label', [
+               'label' => __( 'Custom label', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'description' => 'Will be used instead "CO<sub>2</sub>-afdruk"',
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_co2', [
+               'label' => __( 'CO<sub>2</sub>-afdruk', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '150',
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_co2_tooltip', [
+               'label' => __( 'Tooltip', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '',
+               'separator' => 'after',
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_price', [
+               'label' => __( 'Price', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '26,50',
+               'description' => 'If empty, the lowest price from datafeedr will be taken',
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_price_tooltip', [
+               'label' => __( 'Tooltip', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '',
+               'separator' => 'after',
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_rating', [
+               'label' => __( 'Rating', 'elementor' ),
+               'type' => Elementor\Controls_Manager::NUMBER,
+               'min' => 0,
+               'max' => 10,
+               'step' => 1,
+               'default' => 8,
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_rating_tooltip', [
+               'label' => __( 'Tooltip', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '',
+               'separator' => 'after',
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_pros', [
+               'label' => 'Pros',
+               'label_block' => false,
+               'button_title' => __( 'Edit Pros', 'duurzaamthuis' ),
+               'type' => 'dh-table-control',
+               'separator' => 'before',
+               'allow_columns' => false,
+               'table_classes' => 'repeater',
+               'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
+               'max' => 5,
+               'default' => '[["Advantage 1"],["Advantage 2"],["Advantage 3"],["Advantage 4"]]',
+               ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_cons', [
+               'label' => 'Cons',
+               'type' => 'dh-table-control',
+               'label_block' => false,
+               'button_title' => __( 'Edit Cons', 'duurzaamthuis' ),
+               'allow_columns' => false,
+               'table_classes' => 'repeater',
+               'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
+               'max' => 3,
+               'default' => '[["Disadvantage 1"],["Disadvantage 2"]]',
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_description', [
+               'label' => __( 'Description', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXTAREA,
+               'rows' => 10,
+               'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'duurzaamthuis' ),
+               'placeholder' => __( 'Type your description here', 'duurzaamthuis' ),
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_shortcode', [
+                  'label' => esc_html__( 'Enter your shortcode or text', 'elementor' ),
+                  'type' => Elementor\Controls_Manager::TEXTAREA,
+                  'dynamic' => [
+                     'active' => true,
+                  ],
+                  'placeholder' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
+                  'description' => 'HTML allowed. Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
+                  'default' => '',
+               ]
+            );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_last_updated_text', [
+               'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_button_text', [
+               'label' => __( 'Button Text', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'separator' => 'before',
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_button_link', [
+               'label' => __( 'Button Link', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '#',
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_sponsored',[
+               'label' => __( 'Sponsored', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::SWITCHER,
+               'label_on' => __( 'Yes', 'your-plugin' ),
+               'label_off' => __( 'No', 'your-plugin' ),
+               'return_value' => 'yes',
+               'default' => 'yes',
+               'render_type' => 'ui',
+            ] );
+         $widget->add_control( 'dh_product_comparition_sustainability_score_products', [
+            'label' => __( 'Products', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::REPEATER,
+            'fields' => $repeater->get_controls(),
+            'default' => [
+               [
+                  'title' => __( 'Product title', 'duurzaamthuis' ),
+               ],
+            ],
+            'title_field' => '{{{ dh_product_comparition_sustainability_score_title }}}',
+         ] );
+		$widget->end_controls_section(); 
+	}
+
+	public static function get_dh_related_content_controls( $widget ) {
+		ob_start(); ?>
+			<# 
+				(function($) { 
+					var id = Math.floor(Math.random()*9000000) + 1000000; 
+					print('<span id="dh-repeater-item-' + id + '"></span>'); 
+					var counter = 0;
+					var timer = setInterval(function() {
+						var repeater_item = $('#dh-repeater-item-' + id).closest('.elementor-repeater-fields');
+						if(repeater_item.length) {
+							var title = $(repeater_item).find('.select2-selection__rendered').attr('title');
+							if(title) {
+								clearInterval(timer);
+								$(repeater_item).find('.elementor-repeater-row-item-title').text(title);
+							} else {
+								counter++;
+								if(counter > 30) {
+									clearInterval(timer);
+								}
+							}
+						}
+					}, 100);		
+				})(jQuery);
+			#>
+		<?php $script = ob_get_clean();
+		$widget->start_controls_section( 'dh_related_content_section_content', [
+         'label' => __( 'Content', 'duurzaamthuis' ),
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
+      ] );
+         $widget->add_control( 'dh_related_content_type', [
+            'label' => __( 'Query', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::SELECT,
+            'default' => 'manual',
+            'options' => [
+               'manual'  => __( 'Manual', 'duurzaamthuis' ),
+               'related' => __( 'Related', 'duurzaamthuis' ),
+            ],
+         ] );
+         $widget->add_responsive_control( 'dh_related_content_columns_count', [
+            'label' => __( 'Columns', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::NUMBER,
+            'min' => 1,
+            'max' => 6,
+            'step' => 1,
+            'default' => 3,
+            'tablet_default' => 2,
+            'mobile_default' => 1,
+            'selectors' => [
+               '{{WRAPPER}} .dh-related-content-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+            ],         
+         ] );
+         $widget->add_control( 'dh_related_content_posts_count', [
+            'label' => __( 'Posts Count', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::NUMBER,
+            'min' => 1,
+            'max' => 9,
+            'step' => 1,
+            'default' => 3,
+            'condition' => [
+               'dh_related_content_type' => 'related',
+            ],         
+         ] );
+         $widget->add_control( 'dh_related_content_show_excerpt',[
+            'label' => __( 'Show Exerpt', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::SWITCHER,
+            'label_on' => __( 'Yes', 'your-plugin' ),
+            'label_off' => __( 'No', 'your-plugin' ),
+            'return_value' => 'yes',
+         ] );
+         $repeater = new \Elementor\Repeater();
+            $repeater->add_control( 'dh_related_content_id', [
+               'label' => __( 'Search & Select', 'elementor-pro' ),
+               'type' => ElementorPro\Modules\QueryControl\Module::QUERY_CONTROL_ID,
+               'options' => [],
+               'label_block' => true,
+               'multiple' => false,
+               'autocomplete' => [
+                  'object' => ElementorPro\Modules\QueryControl\Module::QUERY_OBJECT_POST,
+                  'display' => 'dh_custom',
+                  'query' => [
+                     'post_type' => ['post', 'page' ],
+                     'post_status' => 'publish',
+                  ],
+               ],
+            ] );
+            $repeater->add_control( 'dh_related_content_badge', [
+               'label' => __( 'Badge', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::SELECT,
+               'default' => 'none',
+               'options' => [
+                  'none'  => __( 'None', 'duurzaamthuis' ),
+                  'best_choise' => __( 'Beste Keuze', 'duurzaamthuis' ),
+                  'reading_tip' => __( 'Leestip', 'duurzaamthuis' ),
+               ],
+            ] );
+         $widget->add_control( 'dh_related_content_posts', [
+            'label' => __( 'Posts', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::REPEATER,
+            'fields' => $repeater->get_controls(),
+				'title_field' => $script,
+				'condition' => [
+					'dh_related_content_type' => 'manual',
+				],
+				'show_label' => false,
+				'prevent_empty' => false,
+         ] );
+		$widget->end_controls_section(); 
+	}
+
+	public static function get_dh_table_controls( $widget ) {
+		$widget->start_controls_section( 'dh_table_section_content', [
+         'label' => __( 'Content', 'duurzaamthuis' ),
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
+      ] );
+         $widget->add_control( 'dh_table_table', [
+            'label' => 'Table',
+            'label_block' => true,
+            'type' => 'dh-table-control',
+            'button_title' => 'Edit Table',
+            'label_block' => false,
+            'allow_columns' => true,
+            'table_classes' => 'table',
+            'add_row_title' => __( 'Add Row', 'duurzaamthuis' ),
+            'add_column_title' => __( 'Add Column', 'duurzaamthuis' ),
+            'default' => '[["Column 1 heading","Column 2 heading"],["Some text","Some text"]]',
+         ] );
+		$widget->end_controls_section(); 
+	}
+
+	public static function get_dh_number_heading_controls( $widget ) {
+		$widget->start_controls_section( 'dh_number_heading_section_content', [
+         'label' => __( 'Content', 'duurzaamthuis' ),
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
+      ] );
+			$widget->add_control( 'dh_number_heading_number', [
+				'label' => __( 'Number', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 100,
+				'step' => 1,
+				'default' => 1,
+			] );
+			$widget->add_control( 'dh_number_heading_heading', [
+				'label' => __( 'Heading', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 3,
+				'default' => __( 'Default heading', 'duurzaamthuis' ),
+			] );
+			$widget->add_control( 'dh_number_heading_badge', [
+				'label' => __( 'Badge', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SELECT,
+				'default' => 'none',
+				'options' => [
+					'none'  => __( 'None', 'duurzaamthuis' ),
+					'best_choise' => __( 'Beste Keuze', 'duurzaamthuis' ),
+					'reading_tip' => __( 'Leestip', 'duurzaamthuis' ),
+				],
+			] );
+			$widget->add_control( 'dh_number_heading_size', [
+				'label' => __( 'Size', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SELECT,
+				'default' => 'h2',
+				'options' => [
+					'h1'  => __( 'H1', 'duurzaamthuis' ),
+					'h2' => __( 'H2', 'duurzaamthuis' ),
+					'h3' => __( 'H3', 'duurzaamthuis' ),
+					'h4' => __( 'H4', 'duurzaamthuis' ),
+				],
+			] );
 		$widget->end_controls_section(); 
 	}
 

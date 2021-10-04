@@ -60,7 +60,6 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 
 
   protected function render() {
-
 		$settings = $this->get_settings_for_display();
 
 		if ( ! $settings['dh_mega_menu_menu'] ) {
@@ -179,9 +178,6 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 			echo '</ul></nav>';  
 		}
 		echo '</div>';
-
-
-
 	}
 
 }

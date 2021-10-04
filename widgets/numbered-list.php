@@ -23,12 +23,11 @@ class DH_Numbered_List extends \Elementor\Widget_Base {
 		return [ 'dh-widgets' ];
 	}
 
-	protected function _register_controls() {
+	protected function register_controls() {
       DH_Widgets_Content_Controls::get_dh_numbered_list_controls( $this );
 	}
 
 	protected function render() { // php template
-
 		$settings = $this->get_settings_for_display();
 
 		if ( $settings['dh_numbered_list_items'] ) {
