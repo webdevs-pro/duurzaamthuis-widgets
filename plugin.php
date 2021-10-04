@@ -492,6 +492,7 @@ class DH_Widgets_Content_Controls {
 				],
 				'default' => 'left',
 				'toggle' => false,
+				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-image-align-',
 			] );
 			$widget->add_control( 'dh_image_heading_image_width', [ // image_width
@@ -503,6 +504,7 @@ class DH_Widgets_Content_Controls {
 					'50' => __( '50%', 'duurzaamthuis' ),
 					'66' => __( '66%', 'duurzaamthuis' ),
 				],
+				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-image-width-',
 			] );
 			$widget->add_control( 'dh_image_heading_image_reverse', [ // image_reverse
@@ -511,6 +513,7 @@ class DH_Widgets_Content_Controls {
 				'label_on' => __( 'Yes', 'your-plugin' ),
 				'label_off' => __( 'No', 'your-plugin' ),					
 				'return_value' => 'columns',
+				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-reverse-',
 			] );
 			$widget->add_control( 'dh_image_heading_heading', [ // heading
@@ -788,6 +791,7 @@ class DH_Widgets_Content_Controls {
 				],
 				'toggle' => false,
 				'default' => 'justify',
+				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-menu-align-',
 			] );
 			$widget->add_control( 'dh_mega_menu_space_between', [
@@ -885,6 +889,7 @@ class DH_Widgets_Content_Controls {
 				],
 				'toggle' => false,
 				'default' => 'right',
+				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-mobile-toggle-align-',
 			] );
 			$widget->add_control( 'dh_mega_menu_offset_mobile', [

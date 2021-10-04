@@ -295,8 +295,8 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
             <# 
                var classes = [];
                jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
-                  if ( value.add_widget_class && settings[index] && value.section == 'dh_impact_content' ) {
-                     classes.push( value.add_widget_class + settings[index] );
+                  if ( value.prefix_class && settings[index] && value.section == 'dh_impact_content' ) {
+                     classes.push( value.prefix_class + settings[index] );
                   }
                } ); 
                classes = ' ' + classes.join( ' ' );

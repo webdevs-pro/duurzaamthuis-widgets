@@ -68,8 +68,8 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
 				// console.log('dh-anchor-navigation', view.model.attributes.settings.controls);
 				var classes = [];
 				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
-					if ( value.add_widget_class && settings[index] && value.section == 'dh_anchor_navigation_section_content' ) {
-						classes.push( value.add_widget_class + settings[index] );
+					if ( value.prefix_class && settings[index] && value.section == 'dh_anchor_navigation_section_content' ) {
+						classes.push( value.prefix_class + settings[index] );
 					}
 				} ); 
 				classes = ' ' + classes.join( ' ' );

@@ -35,8 +35,8 @@ class DH_Template2 extends \Elementor\Widget_Base {
    public function get_widgets() {
       return array(
          'dh-anchor-navigation' => 'DH_Anchor_Navigation',
-         'dh-image-heading-text' => 'DH_Image_Heading_Text',
          'dh-product-comparition' => 'DH_Product_Comparison',
+         'dh-image-heading-text' => 'DH_Image_Heading_Text',
          'dh-impact' => 'DH_Impact',
       );
    }
