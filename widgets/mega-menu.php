@@ -66,11 +66,11 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 			return;
 		}
 
+		?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
 		$items = wp_get_nav_menu_items( $settings['dh_mega_menu_menu'] );
 		if ( $items ) {
 			$items_tree = $this->build_menu_tree( $items );  
 			// error_log( "items_tree\n" . print_r($items_tree, true) . "\n" );    
-         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
 
 			echo '<nav><ul class="dh-menu">';
 				foreach ( $items_tree as $top_level_item ) {
@@ -174,10 +174,9 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 					echo '</li>';
 				}
 
-
 			echo '</ul></nav>';  
 		}
-		echo '</div>';
+		?></div><?php
 	}
 
 }
