@@ -38,9 +38,9 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 
 	protected function render() { // php template
 		$settings = $this->get_settings_for_display();
-		$image = $settings['dh_image_heading_image'];
-		$heading = $settings['dh_image_heading_heading'];
-		$content = $this->parse_text_editor( $settings['dh_image_heading_content'] );
+		$image = $settings['dh_image_heading_text_image'];
+		$heading = $settings['dh_image_heading_text_heading'];
+		$content = $this->parse_text_editor( $settings['dh_image_heading_text_content'] );
 
 		?>
          <div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>">
@@ -67,7 +67,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 			<# 
 				var classes = [];
 				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
-					if ( value.prefix_class && settings[index] && value.section == 'dh_image_heading_text_content' ) {
+					if ( value.prefix_class && settings[index] && value.section == 'dh_image_heading_text_content_section' ) {
 						classes.push( value.prefix_class + settings[index] );
 					}
 				} ); 
@@ -76,15 +76,15 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
          <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<div class="dh-wrapper">
 					<div class="dh-image-column">
-						<img src="{{ settings.dh_image_heading_image.url }}">
+						<img src="{{ settings.dh_image_heading_text_image.url }}">
 					</div>
 					<div class="dh-gap-column"></div>
 					<div class="dh-content-column">
 						<h2>
-							{{{ settings.dh_image_heading_heading }}}
+							{{{ settings.dh_image_heading_text_heading }}}
 						</h2>
 						<div class="dh-content">
-							{{{ settings.dh_image_heading_content }}}
+							{{{ settings.dh_image_heading_text_content }}}
 						</div>
 					</div>
 				</div>
