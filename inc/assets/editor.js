@@ -99,10 +99,10 @@
          $.each(row, function(col_index, cell) {
             var control_html = '';
             if(row_index == 0) {
-               control_html += '<div class="dh-col-control" data-col-index="'+col_index+'"><i class="fas fa-times"></i></div>';
+               control_html += '<div class="dh-col-control" data-col-index="'+col_index+'"><i class="eicon-plus"></i></div>';
             }
             if(col_index == row.length-1 ) {
-               control_html += '<div class="dh-row-control" data-row-index="'+row_index+'"><i class="fas fa-times"></i></div>';
+               control_html += '<div class="dh-row-control" data-row-index="'+row_index+'"><i class="eicon-plus"></i></div>';
             }
             table_html += '<td><span contenteditable="true">'+cell+'</span>'+control_html+'</td>';
             
@@ -211,6 +211,7 @@
 
    // hover
    $(document).on('mouseenter', 'table td', function() {
+      console.log('boom');
       var cellIndex = this.cellIndex;
       var rowIndex = this.parentNode.rowIndex;
       $('.dh-col-control[data-col-index="'+cellIndex+'"]').addClass('active');

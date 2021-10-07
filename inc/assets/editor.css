@@ -135,8 +135,10 @@
 .dh-control-popup-content .dh-row-control.active {
    opacity: 1;
 }
-.dh-control-popup-content i {
+.dh-control-popup-content .dh-col-control i.eicon-plus,
+.dh-control-popup-content .dh-row-control i.eicon-plus {
    color: red;
+   transform: rotate(45deg);
    cursor: pointer;
 }
 

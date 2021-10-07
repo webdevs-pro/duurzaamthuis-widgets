@@ -19,20 +19,13 @@ class DH_Popup_Control extends \Elementor\Base_Data_Control {
             <# if ( data.label ) {#>
                <div class="elementor-control-title">{{{ data.label }}}</div>
             <# } #>
-
             <div class="elementor-control-input-wrapper">
-
                <input id="<?php echo $control_uid; ?>" type="hidden" data-setting="{{{ data.name }}}" />
-
                <# var json = JSON.stringify(data); #>
                <div class="elementor-button-wrapper">
                   <button class="elementor-button elementor-button-default dh-control-popup-open" data-settings="{{ json }}" type="button">{{{ data.button_title }}}</button>
                </div>
-
             </div>
-
-
-
          </div>
          <# if ( data.description ) { #>
             <div class="elementor-control-field-description">{{{ data.description }}}</div>
@@ -66,9 +59,9 @@ add_action( 'elementor/editor/footer', function() {
                </div>
                <div class="dh-control-popup-content">
                   <table class="dh-table-{{{ data._cid }}} {{{ data.table_classes }}}" data-table-id="{{{ data._cid }}}"></table>
-                  <button class="dh-add-row"><i class="fas fa-plus"></i>{{{ data.add_row_title }}}</button>
+                  <button class="dh-add-row"><i class="eicon-plus"></i>{{{ data.add_row_title }}}</button>
                   <# if ( data.allow_columns ) {#>
-                     <button class="dh-add-column"><i class="fas fa-plus"></i>{{{ data.add_column_title }}}</button>
+                     <button class="dh-add-column"><i class="eicon-plus"></i>{{{ data.add_column_title }}}</button>
                   <# } else { #>
                      <style>.dh-col-control { display: none !important; }</style>
                   <# } #>
