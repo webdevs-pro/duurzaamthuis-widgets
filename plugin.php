@@ -743,11 +743,11 @@ class DH_Widgets_Content_Controls {
 
 	public static function get_dh_mega_menu_controls( $widget ) {
 		$widget->start_controls_section( 'dh_mega_menu_section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
+         'label' => __( 'Mega Menu', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
 
-			$menus = $widget::get_available_menus();
+			$menus = DH_Mega_Menu::get_available_menus();
 
 			$widget->add_control( 'dh_mega_menu_menu', [
 				'label' => __( 'Menu', 'duurzaamthuis' ),
@@ -916,7 +916,7 @@ class DH_Widgets_Content_Controls {
 
 	public static function get_dh_numbered_list_controls( $widget ) {
 		$widget->start_controls_section( 'dh_numbered_list_section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
+         'label' => __( 'Numbered List', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
 			$repeater = new \Elementor\Repeater();
@@ -946,7 +946,7 @@ class DH_Widgets_Content_Controls {
 
 	public static function get_dh_page_header_controls( $widget ) {
 		$widget->start_controls_section( 'dh_page_header_section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
+         'label' => __( 'Page Header', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
          $widget->add_control( 'dh_page_header_important_note',[
@@ -1011,7 +1011,7 @@ class DH_Widgets_Content_Controls {
 
 	public static function get_dh_product_comparition_sustainability_score_controls( $widget ) {
 		$widget->start_controls_section( 'dh_product_comparition_sustainability_score_section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
+         'label' => __( 'Product Comparison Sustainability Score', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
          $widget->add_control( 'dh_product_comparition_sustainability_score_skin', [
@@ -1041,7 +1041,7 @@ class DH_Widgets_Content_Controls {
 			] );
          $widget->add_control( 'dh_product_comparition_sustainability_score_logo_url', [
             'type' => Elementor\Controls_Manager::HIDDEN,
-            'default' => $widget::get_site_logo(),
+            'default' => DH_Product_Comparition_Sustainability_Score::get_site_logo(),
          ] );
          $repeater = new \Elementor\Repeater();
             $repeater->add_control( 'dh_product_comparition_sustainability_score_title', [
@@ -1230,7 +1230,7 @@ class DH_Widgets_Content_Controls {
 			#>
 		<?php $script = ob_get_clean();
 		$widget->start_controls_section( 'dh_related_content_section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
+         'label' => __( 'Related Content', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
          $widget->add_control( 'dh_related_content_type', [
@@ -1315,7 +1315,7 @@ class DH_Widgets_Content_Controls {
 
 	public static function get_dh_table_controls( $widget ) {
 		$widget->start_controls_section( 'dh_table_section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
+         'label' => __( 'Table', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
          $widget->add_control( 'dh_table_table', [
@@ -1335,7 +1335,7 @@ class DH_Widgets_Content_Controls {
 
 	public static function get_dh_number_heading_controls( $widget ) {
 		$widget->start_controls_section( 'dh_number_heading_section_content', [
-         'label' => __( 'Content', 'duurzaamthuis' ),
+         'label' => __( 'Humber Heading', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
 			$widget->add_control( 'dh_number_heading_number', [

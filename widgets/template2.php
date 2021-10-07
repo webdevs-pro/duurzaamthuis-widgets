@@ -38,6 +38,13 @@ class DH_Template2 extends \Elementor\Widget_Base {
          'dh-product-comparition' => 'DH_Product_Comparison',
          'dh-image-heading-text' => 'DH_Image_Heading_Text',
          'dh-impact' => 'DH_Impact',
+         'dh-table' => 'DH_Table',
+         'dh-number-heading' => 'DH_Number_Heading',
+         'dh-mega-menu' => 'DH_Mega_Menu',
+         'dh-numbered-list' => 'DH_Numbered_List',
+         'dh-page-header' => 'DH_Page_Header',
+         'dh-product-comparition-sustainability-score' => 'DH_Product_Comparition_Sustainability_Score',
+         'dh-related-content' => 'DH_Related_Posts',
       );
    }
 
