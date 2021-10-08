@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.7.10
+ * Version:     0.7.11
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -186,7 +186,7 @@ function duurza_archive_title( $title ) {
 add_filter( 'post_row_actions', 'filter_function_name_2859', 10, 2 );
 function filter_function_name_2859( $actions, $post ){
     // Check for your post type.
-	if ( in_array( $post->post_type, ['post', 'page', 'elementor_library'] ) ) {
+	if ( in_array( $post->post_type, ['elementor_library'] ) ) {
 		$url = esc_url( add_query_arg( array(
 				'paged' => get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1,
 				'post_type' => get_query_var( 'post_type' ) ? get_query_var( 'post_type' ) : '',
