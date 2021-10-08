@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.7.9
+ * Version:     0.7.10
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -179,3 +179,198 @@ function duurza_archive_title( $title ) {
 // }, 20 );
 
 
+
+
+
+/* add swap images post action */
+add_filter( 'post_row_actions', 'filter_function_name_2859', 10, 2 );
+function filter_function_name_2859( $actions, $post ){
+    // Check for your post type.
+	if ( in_array( $post->post_type, ['post', 'page', 'elementor_library'] ) ) {
+		$url = esc_url( add_query_arg( array(
+				'paged' => get_query_var( 'paged' ) ? get_query_var( 'paged' ) : 1,
+				'post_type' => get_query_var( 'post_type' ) ? get_query_var( 'post_type' ) : '',
+				'tabs_group' => get_query_var( 'tabs_group' ) ? get_query_var( 'tabs_group' ) : '',
+				'update_controls' => $post->ID, 
+			),
+			admin_url( 'edit.php' )
+		) );
+		$actions['update_controls'] = sprintf( '<a href="%s">Update controls</a>', $url );
+	}
+	
+	return $actions;
+}
+add_action('admin_init', function() {
+	if( isset( $_GET['update_controls']) ) {
+		$post_id = $_GET['update_controls'];
+		$elementor_data = get_post_meta( $post_id, '_elementor_data', true );
+		$elementor_data = json_decode( $elementor_data );
+		if ( ! $elementor_data ) return;
+		$new_elementor_data = dh_update_controls( $elementor_data );
+		$json_value = wp_slash( wp_json_encode( $new_elementor_data ) );
+		update_metadata( 'post', $post_id, '_elementor_data', $json_value );
+	}
+});
+
+
+function dh_update_controls( $elements ) {
+   $new_elements = array();
+   foreach ( $elements as $element_index => $element ) {
+      
+      foreach ( $element as $key => $value ) {
+
+         if ( $key == 'elements' && ! empty( $value ) ) {
+            $new_elements[$element_index][$key] = dh_update_controls( $value );
+         } else {
+            if ( $key == 'settings' ) {
+               $new_elements[$element_index][$key] = dh_update_settings( $value, $element );
+            } else {
+               $new_elements[$element_index][$key] = $value;
+            }
+         }
+      }
+
+
+   }
+   return $new_elements;
+}
+
+function dh_update_settings( $settings, $element ) {
+   $widgets = array(
+      'dh-anchor-navigation' => [
+         'heading',
+         'items',
+         'title',
+         'anchor'
+      ],
+      'dh-image-heading-text' => [
+         'image',
+         'image_align',
+         'image_width',
+         'image_reverse',
+         'heading',
+         'content'
+      ],
+      'dh-product-comparition' => [
+         'skin',
+         'controls_conditions',
+         'columns_count',
+         'title',
+         'badge',
+         'image',
+         'star_rating',
+         'text_rating',
+         'price',
+         'order_by',
+         'button_text',
+         'button_link',
+         'sponsored',
+         'pros',
+         'cons',
+         'description',
+         'products'
+      ],
+      'dh-impact' => [
+         'milieuwinst',
+         'prijs',
+         'terugverdientijd',
+         'gemak',
+         'vervuiling',
+         'subsidie',
+         'calculations_text',
+      ],
+      'dh-mega-menu' => [
+         'menu',
+         'mobile_menu',
+         'align_items',
+         'space_between',
+         'offset',
+         'color',
+         'align_toggle',
+         'offset_mobile',
+      ],
+      'dh-numbered-list' => [
+         'text',
+         'items',
+      ],
+      'dh-product-comparition-sustainability-score' => [
+         'skin',
+         'columns_count',
+         'logo_url',
+         'title',
+         'badge',
+         'image',
+         'quality',
+         'quality_tooltip',
+         'co2_custom_label',
+         'co2',
+         'co2_tooltip',
+         'price',
+         'price_tooltip',
+         'rating',
+         'rating_tooltip',
+         'pros',
+         'cons',
+         'description',
+         'shortcode',
+         'last_updated_text',
+         'button_text',
+         'button_link',
+         'sponsored',
+         'products',
+      ],
+      'dh-related-content' => [
+         'type',
+         'columns_count',
+         'posts_count',
+         'show_excerpt',
+         'id',
+         'badge',
+         'posts',
+      ],
+      'dh-table' => [
+         'table'
+      ],
+      'dh-number-heading' => [
+         'number',
+         'heading',
+         'badge',
+         'size'
+      ],
+      'dh-template' => [
+         'post_id',
+         'button'
+      ],
+   );
+
+   $config = array();
+   foreach ( $widgets as $widget => $controls ) {
+      foreach ( $controls as $control ) {
+         $config[$widget][$control] = array(
+            'old_name' => $control,
+            'new_name' => str_replace( '-', '_', $widget ) . '_' . $control
+         );
+      }
+   }
+
+   $new_settings = (object) array();
+   if ( $element->elType == 'widget' && array_key_exists( $element->widgetType ?? '', $config ) ) {
+      foreach ( $settings as $setting_name => $value ) { 
+         if ( is_array( $value ) ) {
+            foreach( $value as $index => $item ) {
+               @$new_settings->{$config[$element->widgetType][$setting_name]['new_name']}[$index] = dh_update_settings( $value[$index], $element );
+            }
+         } else {
+            if ( array_key_exists( $setting_name, $config[$element->widgetType] ) ) {
+               $new_settings->{$config[$element->widgetType][$setting_name]['new_name']} = $settings->{$config[$element->widgetType][$setting_name]['old_name']};
+            } else {
+               $new_settings->$setting_name = $settings->$setting_name;
+            }
+         }
+      }
+   } else {
+      $new_settings = $settings;
+   }
+
+   return $new_settings;
+}
