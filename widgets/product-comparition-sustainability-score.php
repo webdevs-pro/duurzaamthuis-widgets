@@ -135,8 +135,9 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               echo '</div>'; // dh-product-co2
                            }
                            $price = $item['dh_product_comparition_sustainability_score_price'] ?: $this->price;
-                           if ( $price ) {
-                              echo '<div class="dh-product-price">';
+                           echo '<div class="dh-product-price">';
+                              if ( $price ) {
+
                                  echo '<div>Prijs</div>';
                                  echo '<div>';
                                  echo '€' . $price;
@@ -145,8 +146,8 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                     echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $last_updated . '"></i>';
                                  }
                                  echo '</div>';
-                              echo '</div>';
-                           }
+                              }
+                           echo '</div>';
                            echo '<div class="dh-product-score">';
                               echo '<img src="' . $settings['dh_product_comparition_sustainability_score_logo_url'] . '">';
                               echo '<div>';

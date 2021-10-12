@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.7.11
+ * Version:     0.7.12
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -182,7 +182,7 @@ function duurza_archive_title( $title ) {
 
 
 
-/* add swap images post action */
+
 add_filter( 'post_row_actions', 'filter_function_name_2859', 10, 2 );
 function filter_function_name_2859( $actions, $post ){
     // Check for your post type.
@@ -211,8 +211,6 @@ add_action('admin_init', function() {
 		update_metadata( 'post', $post_id, '_elementor_data', $json_value );
 	}
 });
-
-
 function dh_update_controls( $elements ) {
    $new_elements = array();
    foreach ( $elements as $element_index => $element ) {
@@ -234,7 +232,6 @@ function dh_update_controls( $elements ) {
    }
    return $new_elements;
 }
-
 function dh_update_settings( $settings, $element ) {
    $widgets = array(
       'dh-anchor-navigation' => [
@@ -374,3 +371,11 @@ function dh_update_settings( $settings, $element ) {
 
    return $new_settings;
 }
+
+if ( get_option( 'dfrcs_options' )['display_method'] != 'php' ) {
+   add_filter( 'dfrcs_template', function( $template ) {
+      return DH_PLUGIN_DIR . '\inc\datafeedr-template.php';
+   }, 10 );
+}
+
+
