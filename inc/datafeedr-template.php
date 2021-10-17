@@ -56,8 +56,9 @@
 
 <?php endif; ?>
 <?php
-   $key = array_key_first( $dfrcs_products );
-   $price = Dfrapi_Currency::currencies()[$dfrcs_products[$key]['currency']]['symbol'] . number_format( ( $dfrcs_products[$key]['finalprice'] / 100 ), 2, ',', '.' );
+    if ( ! $dfrcs_products ) return;
+    $key = array_key_first( $dfrcs_products );
+    $price = Dfrapi_Currency::currencies()[$dfrcs_products[$key]['currency']]['symbol'] . number_format( ( $dfrcs_products[$key]['finalprice'] / 100 ), 2, ',', '.' );
 ?>
 <script>
     (function($){

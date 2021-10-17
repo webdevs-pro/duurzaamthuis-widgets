@@ -374,7 +374,7 @@ function dh_update_settings( $settings, $element ) {
 
 if ( get_option( 'dfrcs_options' )['display_method'] != 'php' ) {
    add_filter( 'dfrcs_template', function( $template ) {
-      return DH_PLUGIN_DIR . '\inc\datafeedr-template.php';
+      return DH_PLUGIN_DIR . '/inc/datafeedr-template.php';
    }, 10 );
 }
 
