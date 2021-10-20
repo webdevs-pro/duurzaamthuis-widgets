@@ -471,13 +471,23 @@ class DH_Widgets_Content_Controls {
 			'label' => __( 'Image with heading and text', 'duurzaamthuis' ),
 			'tab' => Elementor\Controls_Manager::TAB_CONTENT,
 		] );
-
+			$widget->add_control( 'dh_image_heading_text_image_show_image', [ // image_reverse
+				'label' => __( 'Show Image', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'your-plugin' ),
+				'label_off' => __( 'No', 'your-plugin' ),		
+				'return_value' => 'yes',
+				'default' => 'yes',		
+			] );
 			$widget->add_control( 'dh_image_heading_text_image', [ // image
 				'label' => __( 'Choose Image', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::MEDIA,
 				'default' => [
 					'url' => Elementor\Utils::get_placeholder_image_src(),
 				],
+				'condition' => [
+					'dh_image_heading_text_image_show_image' => 'yes',
+				]
 			] );
 			$widget->add_control( 'dh_image_heading_text_image_align', [ // image_align
 				'label' => __( 'Image Column Alignment', 'duurzaamthuis' ),
@@ -496,6 +506,9 @@ class DH_Widgets_Content_Controls {
 				'toggle' => false,
 				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-image-align-',
+				'condition' => [
+					'dh_image_heading_text_image_show_image' => 'yes',
+				]
 			] );
 			$widget->add_control( 'dh_image_heading_text_image_width', [ // image_width
 				'label' => __( 'Image Column Width', 'duurzaamthuis' ),
@@ -508,6 +521,9 @@ class DH_Widgets_Content_Controls {
 				],
 				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-image-width-',
+				'condition' => [
+					'dh_image_heading_text_image_show_image' => 'yes',
+				]
 			] );
 			$widget->add_control( 'dh_image_heading_text_image_reverse', [ // image_reverse
 				'label' => __( 'Mobile Columns Reverse', 'duurzaamthuis' ),
@@ -517,19 +533,75 @@ class DH_Widgets_Content_Controls {
 				'return_value' => 'columns',
 				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-reverse-',
+				'condition' => [
+					'dh_image_heading_text_image_show_image' => 'yes',
+				]
+			] );
+			$widget->add_control( 'dh_image_heading_text_image_show_heading', [ // image_reverse
+				'label' => __( 'Show Heading', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'your-plugin' ),
+				'label_off' => __( 'No', 'your-plugin' ),		
+				'return_value' => 'yes',
+				'default' => 'yes',		
+				'separator' => 'before',
 			] );
 			$widget->add_control( 'dh_image_heading_text_heading', [ // heading
 				'label' => __( 'Heading', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
 				'default' => __( 'Heading text', 'duurzaamthuis' ),
 				'label_block' => true,
-				'separator' => 'before'
+				'condition' => [
+					'dh_image_heading_text_image_show_heading' => 'yes',
+				]
+			] );
+			$widget->add_control( 'dh_image_heading_text_image_show_text', [ // image_reverse
+				'label' => __( 'Show Text', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'your-plugin' ),
+				'label_off' => __( 'No', 'your-plugin' ),		
+				'return_value' => 'yes',
+				'default' => 'yes',		
+				'separator' => 'before',
 			] );
 			$widget->add_control( 'dh_image_heading_text_content', [ // content
 				'label' => __( 'Content', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::WYSIWYG,
 				'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'duurzaamthuis' ),
+				'condition' => [
+					'dh_image_heading_text_image_show_text' => 'yes',
+				]
 			] );
+			$widget->add_control( 'dh_image_heading_text_image_show_button', [ // image_reverse
+				'label' => __( 'Show Button', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'your-plugin' ),
+				'label_off' => __( 'No', 'your-plugin' ),		
+				'return_value' => 'yes',
+				'default' => 'yes',		
+				'separator' => 'before',
+			] );
+			$widget->add_control( 'dh_image_heading_text_button_text', [ // heading
+				'label' => __( 'Text', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => __( 'Button', 'duurzaamthuis' ),
+				'label_block' => true,
+				'condition' => [
+					'dh_image_heading_text_image_show_heading' => 'yes',
+				]
+			] );
+			$widget->add_control( 'dh_image_heading_text_button_url', [
+				'label' => __( 'Link', 'duurzaamthuis' ),
+				'type' => \Elementor\Controls_Manager::URL,
+				'placeholder' => __( 'https://your-link.com', 'plugin-domain' ),
+				'show_external' => true,
+				'default' => [
+					'url' => '',
+					'is_external' => true,
+					'nofollow' => true,
+				],
+			] );
+
 		$widget->end_controls_section(); 
 	}
 
@@ -1035,7 +1107,7 @@ class DH_Widgets_Content_Controls {
 				'tablet_default' => 2,
 				'mobile_default' => 1,
 				'selectors' => [
-					'{{WRAPPER}} .dh-products-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+					'{{WRAPPER}} .dh-products-score-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
 				],   
             'condition' => [
                'dh_product_comparition_sustainability_score_skin' => 'vertical',
@@ -1380,3 +1452,25 @@ class DH_Widgets_Content_Controls {
 
 }
 
+
+
+
+
+
+
+
+if( function_exists('acf_add_options_page') ) {
+	
+	acf_add_options_page(array(
+		'page_title' 	=> 'Widget Builder',
+		'menu_title'	=> 'Widget Builder',
+		'menu_slug' 	=> 'duurzaamthuis-templates',
+		'capability'	=> 'edit_posts',
+		'icon_url' => 'dashicons-excerpt-view',
+		'redirect'		=> false
+	));
+	
+}
+
+// $templates = get_field( 'templates', 'option' );
+// error_log( "templates\n" . print_r( $templates, true ) . "\n" );

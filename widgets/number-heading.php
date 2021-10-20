@@ -53,15 +53,18 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 
       ?>
 			<# 
-				var classes = [];
-				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
-					if ( value.prefix_class && settings[index] && value.section == 'dh_impact_content' ) {
-						classes.push( value.prefix_class + settings[index] );
-					}
-				} ); 
-				classes = ' ' + classes.join( ' ' );
+				setTimeout(function() {
+					var classes = [];
+					jQuery.each( view.el.classList, function( index, value ) {
+						if ( value.startsWith('dh-') ) {	
+							classes.push( value );
+						}
+					} );
+					classes = ' ' + classes.join( ' ' );
+					view.$el.find( '.<?php echo 'dh-widget-' . $this->get_name(); ?>' ).addClass(classes);
+				}, 10 );
 			#>
-			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
+			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>">
 				<# var add_class = settings.dh_number_heading_badge != 'none' ? ' with-badge' : ''; #>
 				<{{{ settings.dh_number_heading_size }}} class="dh-number-heading{{{ add_class }}}">
 					<div class="dh-number">{{{ settings.dh_number_heading_number }}}</div>

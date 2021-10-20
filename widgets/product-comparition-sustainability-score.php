@@ -294,15 +294,18 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 
          <# if ( settings.dh_product_comparition_sustainability_score_products.length ) { #>
             <# 
-               var classes = [];
-               jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
-                  if ( value.prefix_class && settings[index] && value.section == 'dh_impact_content' ) {
-                     classes.push( value.prefix_class + settings[index] );
-                  }
-               } ); 
-               classes = ' ' + classes.join( ' ' );
-            #>
-            <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
+				setTimeout(function() {
+					var classes = [];
+					jQuery.each( view.el.classList, function( index, value ) {
+						if ( value.startsWith('dh-') ) {	
+							classes.push( value );
+						}
+					} );
+					classes = ' ' + classes.join( ' ' );
+					view.$el.find( '.<?php echo 'dh-widget-' . $this->get_name(); ?>' ).addClass(classes);
+				}, 10 );
+			#>
+            <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>">
                <div class="dh-products-grid dh-products-{{{ settings.dh_product_comparition_sustainability_score_skin }}}-skin">
                   <# _.each( settings.dh_product_comparition_sustainability_score_products, function( item, index ) { #>
                      <div class="dh-product dh-product-{{ item.dh_product_comparition_sustainability_score__id }}">

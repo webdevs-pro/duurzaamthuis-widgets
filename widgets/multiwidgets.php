@@ -6,29 +6,48 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DH_Multiwidgets {
 
-	const TEMPLATES = array(
-		'template_1' => [
-			'label' => 'Template 1',
-			'widgets' => [
-				'dh-anchor-navigation' => 'DH_Anchor_Navigation',
-				'dh-image-heading-text' => 'DH_Image_Heading_Text',
-			]
-		],
-		'template_2' => [
-			'label' => 'Template 2',
-			'widgets' => [
-				'dh-numbered-list' => 'DH_Numbered_List',
-				'dh-number-heading' => 'DH_Number_Heading',
-			]
-		],
-	);
-
 	public function __construct() {
 		$this->register_multiwidgets();
 	}
 
+   public function get_templates() {
+      if ( ! function_exists( 'get_field' ) ) return array();
+
+      $templates = get_field( 'templates', 'option' );
+      if ( ! $templates ) return araay();
+
+      $temp = array();
+      foreach ( $templates as $template ) {
+         $key = strtolower( str_replace( array( ' ', '-' ), '_', $template['label'] ) );
+         $temp[$key] = array(
+            'label' => $template['label'],
+         );
+         foreach ( $template['widgets'] as $widget ) {
+            $temp[$key]['widgets'][$widget['widget']] = $this->get_widget_class_name( $widget['widget'] );
+         }
+      }
+      return $temp;
+   }
+
+   public function get_widget_class_name( $widget_name ) {
+      $widgets = array(
+         'dh-anchor-navigation' => 'DH_Anchor_Navigation',
+         'dh-image-heading-text' => 'DH_Image_Heading_Text',
+         'dh-impact' => 'DH_Impact',
+         'dh-mega-menu' => 'DH_Mega_Menu',
+         'dh-number-heading' => 'DH_Number_Heading',
+         'dh-numbered-list' => 'DH_Numbered_List',
+         'dh-page-header' => 'DH_Page_Header',
+         'dh-product-comparition' => 'DH_Product_Comparison',
+         'dh-product-comparition-sustainability-score' => 'DH_Product_Comparition_Sustainability_Score',
+         'dh-related-content' => 'DH_Related_Posts',
+         'dh-table' => 'DH_Table',
+      );
+      return $widgets[$widget_name];
+   }
+
 	public function register_multiwidgets() {
-		foreach ( self::TEMPLATES as $index => $template_widget ) {
+		foreach ( $this->get_templates() as $index => $template_widget ) {
          $php = "
             class {$index} extends Elementor\Widget_Base {
                public function get_name() {
@@ -41,7 +60,7 @@ class DH_Multiwidgets {
                   return 'eicon-single-page';
                }
                public function get_categories() {
-                  return [ 'dh-widgets' ];
+                  return [ 'dh-multiwidgets' ];
                }
                public function get_widgets() {
                   return " . var_export( $template_widget['widgets'], true ) . ";

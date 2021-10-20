@@ -41,21 +41,37 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 		$image = $settings['dh_image_heading_text_image'];
 		$heading = $settings['dh_image_heading_text_heading'];
 		$content = $this->parse_text_editor( $settings['dh_image_heading_text_content'] );
+		$button_text = $settings['dh_image_heading_text_button_text'];
+		$button_link = $settings['dh_image_heading_text_button_url'];
+
+
 
 		?>
          <div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>">
 				<div class="dh-wrapper">
-					<div class="dh-image-column">
-						<img src="<?php echo $image['url']; ?>">
-					</div>
-					<div class="dh-gap-column"></div>
-					<div class="dh-content-column">
-						<h2>
-							<?php echo $heading; ?>
-						</h2>
-						<div class="dh-content">
-							<?php echo $content; ?>
+					<?php if ( $settings['dh_image_heading_text_image_show_image'] == 'yes' ) { ?>
+						<div class="dh-image-column">
+							<img src="<?php echo $image['url']; ?>">
 						</div>
+						<div class="dh-gap-column"></div>
+					<?php } ?>
+					<div class="dh-content-column">
+						<?php if ( $settings['dh_image_heading_text_image_show_heading'] == 'yes' ) { ?>
+							<h2>
+								<?php echo $heading; ?>
+							</h2>
+						<?php } ?>
+						<?php if ( $settings['dh_image_heading_text_image_show_text'] == 'yes' ) { ?>
+							<div class="dh-content">
+								<?php echo $content; ?>
+							</div>
+						<?php } ?>
+						<?php if ( $settings['dh_image_heading_text_image_show_button'] == 'yes' ) { ?>
+							<a class="elementor-button-link elementor-button elementor-size-sm" href="<?php echo $button_link; ?>">
+								<?php echo $button_text; ?>
+							</a>
+						<?php } ?>
+
 					</div>
 				</div>
 			</div>
@@ -65,27 +81,44 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 	protected function content_template() {
 		?>
 			<# 
-				var classes = [];
-				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
-					if ( value.prefix_class && settings[index] && value.section == 'dh_image_heading_text_content_section' ) {
-						classes.push( value.prefix_class + settings[index] );
-					}
-				} ); 
-				classes = ' ' + classes.join( ' ' );
+				setTimeout(function() {
+					var classes = [];
+					jQuery.each( view.el.classList, function( index, value ) {
+						if ( value.startsWith('dh-') ) {	
+							classes.push( value );
+						}
+					} );
+					classes = ' ' + classes.join( ' ' );
+					view.$el.find( '.<?php echo 'dh-widget-' . $this->get_name(); ?>' ).addClass(classes);
+					console.log('settings.dh_image_heading_text_image', settings.dh_image_heading_text_image);
+				}, 10 );
 			#>
-         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
+         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>">
 				<div class="dh-wrapper">
-					<div class="dh-image-column">
-						<img src="{{ settings.dh_image_heading_text_image.url }}">
-					</div>
-					<div class="dh-gap-column"></div>
-					<div class="dh-content-column">
-						<h2>
-							{{{ settings.dh_image_heading_text_heading }}}
-						</h2>
-						<div class="dh-content">
-							{{{ settings.dh_image_heading_text_content }}}
+					<# if ( settings.dh_image_heading_text_image_show_image == 'yes' ) { #>
+						<div class="dh-image-column">
+							<img src="{{ settings.dh_image_heading_text_image.url }}">
 						</div>
+						<div class="dh-gap-column"></div>
+					<# } #>
+					<div class="dh-content-column">
+						<# if ( settings.dh_image_heading_text_image_show_heading == 'yes' ) { #>
+							<h2>
+								{{{ settings.dh_image_heading_text_heading }}}
+							</h2>
+							<# } #>
+							
+							<# if ( settings.dh_image_heading_text_image_show_text == 'yes' ) { #>
+								<div class="dh-content">
+									{{{ settings.dh_image_heading_text_content }}}
+								</div>
+							<# } #>
+
+							<# if ( settings.dh_image_heading_text_image_show_button == 'yes' ) { #>
+								<a class="elementor-button-link elementor-button elementor-size-sm" href="{{{ settings.dh_image_heading_text_button_url }}}">
+									{{{ settings.dh_image_heading_text_button_text }}}
+								</a>
+							<# } #>
 					</div>
 				</div>
 			</div>

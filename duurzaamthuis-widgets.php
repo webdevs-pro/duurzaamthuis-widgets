@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.7.12
+ * Version:     0.8
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -58,11 +58,14 @@ final class Duurzaamthuis_Widgets {
 		add_action( 'elementor/elements/categories_registered', function( \Elementor\Elements_Manager $elements_manager ) {
 			//https://github.com/elementor/elementor/issues/7445#issuecomment-692123467
 			$categories = [];
-			$categories['dh-widgets'] =
-				[
-					'title' =>  __( 'Duurzaamthuis Widgets', 'duurzaamthuis' ),
-					'icon'  => 'fa fa-plug',
-				];
+			$categories['dh-widgets'] = [
+            'title' =>  __( 'Duurzaamthuis Widgets', 'duurzaamthuis' ),
+            'icon'  => 'fa fa-plug',
+         ];
+			$categories['dh-multiwidgets'] = [
+            'title' =>  __( 'Duurzaamthuis Multiwidgets', 'duurzaamthuis' ),
+            'icon'  => 'fa fa-plug',
+         ];
 
 			$old_categories = $elements_manager->get_categories();
 			$categories = array_merge($categories, $old_categories);
@@ -372,6 +375,9 @@ function dh_update_settings( $settings, $element ) {
    return $new_settings;
 }
 
+
+
+// chanhe datafeedr template to custmo included in our plugin
 if ( get_option( 'dfrcs_options' )['display_method'] != 'php' ) {
    add_filter( 'dfrcs_template', function( $template ) {
       return DH_PLUGIN_DIR . '/inc/datafeedr-template.php';
@@ -379,3 +385,13 @@ if ( get_option( 'dfrcs_options' )['display_method'] != 'php' ) {
 }
 
 
+// add button to image heading text widget
+// make image optional in heading text widget
+
+
+// allow comments for pages by default
+add_filter( 'wp_insert_post_data', 'filter_function_name_11', 10, 2 );
+function filter_function_name_11( $data, $postarr ) {
+   $data['comment_status'] = 'open';
+	return $data;
+}

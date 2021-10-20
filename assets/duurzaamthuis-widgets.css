@@ -56,6 +56,18 @@
 .dh-widget-dh-image-heading-text img {
    border-radius: 16px;
 }
+.dh-widget-dh-image-heading-text .dh-button {
+   padding: 14px 34px;
+   border-radius: 8px;
+   color: #FFF;
+   background-color: #DEAC30;
+}
+.dh-widget-dh-image-heading-text .dh-button:hover {
+   background-color: #505050;
+}
+
+
+
 
 
 
@@ -1205,7 +1217,7 @@ i[data-dh-tooltip]:hover:after {
 
 
 /* product comparison sustainability score */
-.dh-widget-dh-product-comparition-sustainability-score .dh-products-grid {
+.dh-widget-dh-product-comparition-sustainability-score .dh-products-score-grid {
    display: grid;
    column-gap: 30px;
    row-gap: 30px;
@@ -1610,4 +1622,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition-sustainability-score .dh-
 }
 body.test .type-elementor_library > header {
    display: none;
+}
+.elementor-widget-container > .elementor-widget-container:not(:last-child) {
+   margin-bottom: 20px;
 }

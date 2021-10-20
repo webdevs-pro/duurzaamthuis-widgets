@@ -65,16 +65,18 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
 	protected function content_template() {
       ?>
 			<# 
-				// console.log('dh-anchor-navigation', view.model.attributes.settings.controls);
-				var classes = [];
-				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
-					if ( value.prefix_class && settings[index] && value.section == 'dh_anchor_navigation_section_content' ) {
-						classes.push( value.prefix_class + settings[index] );
-					}
-				} ); 
-				classes = ' ' + classes.join( ' ' );
+            setTimeout(function() {
+					var classes = [];
+					jQuery.each( view.el.classList, function( index, value ) {
+						if ( value.startsWith('dh-') ) {	
+							classes.push( value );
+						}
+					} );
+					classes = ' ' + classes.join( ' ' );
+					view.$el.find( '.<?php echo 'dh-widget-' . $this->get_name(); ?>' ).addClass(classes);
+				}, 10 );
 			#>
-         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
+         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>">
             <h2 class="dh-heading">
                {{{ settings.dh_anchor_navigation_heading }}}
             </h2>
