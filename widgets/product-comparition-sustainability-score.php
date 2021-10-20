@@ -76,7 +76,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
       
 		if ( $settings['dh_product_comparition_sustainability_score_products'] ) :
          ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
-            echo '<div class="dh-products-grid dh-products-' . $settings['dh_product_comparition_sustainability_score_skin'] . '-skin">';
+            echo '<div class="dh-products-score-grid dh-products-' . $settings['dh_product_comparition_sustainability_score_skin'] . '-skin">';
                foreach ( $settings['dh_product_comparition_sustainability_score_products'] as $index => $item ) :
                   $shortcode = $this->render_shortcode( $item['dh_product_comparition_sustainability_score_shortcode'] );
                   echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
@@ -213,7 +213,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                      echo '</div>'; // dh-product-wrapper
                   echo '</div>'; // dh-product
                endforeach;
-            echo '</div>'; // dh-products-grid
+            echo '</div>'; // dh-products-score-grid
          ?></div><?php
       endif;
 	}
@@ -306,7 +306,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 				}, 10 );
 			#>
             <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>">
-               <div class="dh-products-grid dh-products-{{{ settings.dh_product_comparition_sustainability_score_skin }}}-skin">
+               <div class="dh-products-score-grid dh-products-{{{ settings.dh_product_comparition_sustainability_score_skin }}}-skin">
                   <# _.each( settings.dh_product_comparition_sustainability_score_products, function( item, index ) { #>
                      <div class="dh-product dh-product-{{ item.dh_product_comparition_sustainability_score__id }}">
                         <div class="dh-product-wrapper">

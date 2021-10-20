@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.8
+ * Version:     0.8.1
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -395,3 +395,7 @@ function filter_function_name_11( $data, $postarr ) {
    $data['comment_status'] = 'open';
 	return $data;
 }
+
+
+// image text - add image 100% width
+// n umber heading - do not render if empty
