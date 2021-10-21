@@ -779,6 +779,7 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_impact_milieuwinst', [ // milieuwinst
 				'label' => __( 'Milieuwinst', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => '100',
 				'classes' => "dh-max-chars-restriction",
 			] );
 			$widget->add_control( 'dh_impact_prijs', [ // prijs
@@ -1311,6 +1312,13 @@ class DH_Widgets_Content_Controls {
          'label' => __( 'Related Content', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
+			$widget->add_control( 'dh_related_content_heading', [
+				'label' => __( 'Heading', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => '',
+				'label_block' => true,
+				'separator' => 'before'
+			] );
          $widget->add_control( 'dh_related_content_type', [
             'label' => __( 'Query', 'duurzaamthuis' ),
             'type' => Elementor\Controls_Manager::SELECT,
@@ -1385,6 +1393,17 @@ class DH_Widgets_Content_Controls {
 				'title_field' => $script,
 				'condition' => [
 					'dh_related_content_type' => 'manual',
+				],
+				'default' => [
+					[
+						'dh_related_content_id' => '0',
+					],
+					[
+						'dh_related_content_id' => '0',
+					],
+					[
+						'dh_related_content_id' => '0',
+					],
 				],
 				'show_label' => false,
 				'prevent_empty' => false,

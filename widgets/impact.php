@@ -64,7 +64,7 @@ class DH_Impact extends \Elementor\Widget_Base {
 		$subsidie = $settings['dh_impact_subsidie'];
 		$calculations_text = $settings['dh_impact_calculations_text'];
 
-		if ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling || \Elementor\Plugin::$instance->editor->is_edit_mode() ) : ?>
+		if ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling ) : ?>
          <div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>">
 				<div class="dh-impact">
 					<div class="dh-impact-features-section">
@@ -163,6 +163,8 @@ class DH_Impact extends \Elementor\Widget_Base {
 				var subsidie = settings.dh_impact_subsidie;
 
 				var calculations_text = settings.dh_impact_calculations_text;
+
+				if ( milieuwinst || prijs || terugverdientijd || gemak || subsidie || vervuiling ) {
 			#>
 			<# 
 				var classes = [];
@@ -246,6 +248,7 @@ class DH_Impact extends \Elementor\Widget_Base {
 					<# } #>
 				</div>
 			</div>
+			<# } #>
 		<?php
 	}
 
