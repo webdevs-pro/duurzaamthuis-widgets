@@ -579,7 +579,7 @@ class DH_Widgets_Content_Controls {
 				'label_on' => __( 'Yes', 'your-plugin' ),
 				'label_off' => __( 'No', 'your-plugin' ),		
 				'return_value' => 'yes',
-				'default' => 'yes',		
+				'default' => '',		
 				'separator' => 'before',
 			] );
 			$widget->add_control( 'dh_image_heading_text_button_text', [
