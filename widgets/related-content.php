@@ -124,5 +124,21 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
       }
 
 	}
+
+	protected function content_template() {
+		?>
+			<#
+				var cache = jQuery(view.model.attributes.htmlCache);
+				var related_content = cache.find('.dh-widget-dh-related-content');
+				var content = related_content[0].innerHTML;
+				jQuery('.elementor-control-dh_related_content_posts_button').on('click', function() {
+					view.model.renderRemoteServer();
+				});
+
+			#>
+			<div class="dh-widget-dh-related-content">{{{content}}}</div>
+			
+		<?php
+	}
 	
 }

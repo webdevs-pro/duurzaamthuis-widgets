@@ -1367,6 +1367,7 @@ class DH_Widgets_Content_Controls {
                   ],
                ],
             ] );
+
             $repeater->add_control( 'dh_related_content_badge', [
                'label' => __( 'Badge', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::SELECT,
@@ -1388,6 +1389,13 @@ class DH_Widgets_Content_Controls {
 				'show_label' => false,
 				'prevent_empty' => false,
          ] );
+			$widget->add_control( 'dh_related_content_posts_button', [
+				'label' => __( 'Reload Template', 'duurzaamthuis' ),
+				'description' => 'Click "Reload" button to see Related Content widget changes',
+				'type' => \Elementor\Controls_Manager::BUTTON,
+				'button_type' => 'success',
+				'text' => __( '&nbsp;Reload&nbsp;', 'duurzaamthuis' ),
+			] );
 		$widget->end_controls_section(); 
 	}
 

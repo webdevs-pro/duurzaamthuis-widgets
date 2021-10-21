@@ -100,13 +100,12 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 					width = window[id].width;
 					height = window[id].height;
 				}
-
 			#>
          <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<div class="dh-wrapper">
 					<# if ( settings.dh_image_heading_text_image_show_image == 'yes' ) { #>
 						<div class="dh-image-column">
-							<img id="{{{id}}}" src="{{ settings.dh_image_heading_text_image.url }}" width="{{{width}}}" height="{{{height}}}" onload="javascript: window.{{{id}}} = { 'width': this.naturalWidth, 'height': this.naturalHeight }">
+							<img src="{{ settings.dh_image_heading_text_image.url }}" width="{{{width}}}" height="{{{height}}}" onload="javascript: window.{{{id}}} = { 'width': this.naturalWidth, 'height': this.naturalHeight }">
 						</div>
 						<div class="dh-gap-column"></div>
 					<# } #>
