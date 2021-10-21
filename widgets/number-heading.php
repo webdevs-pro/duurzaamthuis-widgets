@@ -29,42 +29,48 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 
 	protected function render() { // php template
 		$settings = $this->get_settings_for_display();
-		?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+		if ( $settings['dh_number_heading_heading'] ) {
+			?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
 
-			$add_class = $settings['dh_number_heading_badge'] != 'none' ? ' with-badge' : '';
-			echo '<' . $settings['dh_number_heading_size'] . ' class="dh-number-heading' . $add_class . '">';
-				echo '<div class="dh-number">' . $settings['dh_number_heading_number'] . '</div>';
-				echo '<div class="dh-heading">' . $settings['dh_number_heading_heading'] . '</div>';
-				if ( $settings['dh_number_heading_badge'] ) {
-					switch ( $settings['dh_number_heading_badge'] ) {
-						case 'best_choise':
-							echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Beste keuze</span></div>';
-							break;
-						case 'reading_tip':
-							echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Leestip</span></div>';
-							break;
+				$add_class = $settings['dh_number_heading_badge'] != 'none' ? ' with-badge' : '';
+				echo '<' . $settings['dh_number_heading_size'] . ' class="dh-number-heading' . $add_class . '">';
+					echo '<div class="dh-number">' . $settings['dh_number_heading_number'] . '</div>';
+					echo '<div class="dh-heading">' . $settings['dh_number_heading_heading'] . '</div>';
+					if ( $settings['dh_number_heading_badge'] ) {
+						switch ( $settings['dh_number_heading_badge'] ) {
+							case 'best_choise':
+								echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Beste keuze</span></div>';
+								break;
+							case 'reading_tip':
+								echo '<div class="dh-heading-badge dh-heading-choise-badge"><span>Leestip</span></div>';
+								break;
+						}
 					}
-				}
-			echo '</' . $settings['dh_number_heading_size'] . '>';
-		?></div><?php
+				echo '</' . $settings['dh_number_heading_size'] . '>';
+			?></div><?php
+		}
 	}
 
 	protected function content_template() { // php template
-
       ?>
 			<# 
-				setTimeout(function() {
-					var classes = [];
-					jQuery.each( view.el.classList, function( index, value ) {
-						if ( value.startsWith('dh-') ) {	
-							classes.push( value );
+				var classes = [];
+				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
+					if ( value.prefix_class && settings[index] && value.section == 'dh_number_heading_section_content' ) {
+						if ( value.condition ) {
+							var condition = Object.entries(value.condition)[0];
+							if ( settings[condition[0]] ) {
+								classes.push( value.prefix_class + settings[index] );
+							}
+						} else {
+							classes.push( value.prefix_class + settings[index] );
 						}
-					} );
-					classes = ' ' + classes.join( ' ' );
-					view.$el.find( '.<?php echo 'dh-widget-' . $this->get_name(); ?>' ).addClass(classes);
-				}, 10 );
+					}
+				} ); 
+				classes = ' ' + classes.join( ' ' );
 			#>
-			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>">
+			<# if ( settings.dh_number_heading_heading ) { #>
+			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<# var add_class = settings.dh_number_heading_badge != 'none' ? ' with-badge' : ''; #>
 				<{{{ settings.dh_number_heading_size }}} class="dh-number-heading{{{ add_class }}}">
 					<div class="dh-number">{{{ settings.dh_number_heading_number }}}</div>
@@ -83,8 +89,8 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 					#>
 				</{{{ settings.dh_number_heading_size }}}>
 			</div>
+			<# } #>
       <?php
-
 	}
 	
 }

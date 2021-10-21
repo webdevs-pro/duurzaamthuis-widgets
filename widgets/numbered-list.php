@@ -52,18 +52,22 @@ class DH_Numbered_List extends \Elementor\Widget_Base {
       ?>
 		<# if ( settings.dh_numbered_list_items ) { #>
 			<# 
-				setTimeout(function() {
-					var classes = [];
-					jQuery.each( view.el.classList, function( index, value ) {
-						if ( value.startsWith('dh-') ) {	
-							classes.push( value );
+				var classes = [];
+				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
+					if ( value.prefix_class && settings[index] && value.section == 'dh_numbered_list_section_content' ) {
+						if ( value.condition ) {
+							var condition = Object.entries(value.condition)[0];
+							if ( settings[condition[0]] ) {
+								classes.push( value.prefix_class + settings[index] );
+							}
+						} else {
+							classes.push( value.prefix_class + settings[index] );
 						}
-					} );
-					classes = ' ' + classes.join( ' ' );
-					view.$el.find( '.<?php echo 'dh-widget-' . $this->get_name(); ?>' ).addClass(classes);
-				}, 10 );
+					}
+				} ); 
+				classes = ' ' + classes.join( ' ' );
 			#>
-			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>">
+			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<div class="dh-numbered-list">
 					<# _.each( settings.dh_numbered_list_items, function( item, index ) { #>
 						<div class="dh-numbered-list-item">

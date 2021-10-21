@@ -32,6 +32,13 @@
    flex-basis: calc(33.333% - 15px);
 }
 
+.dh-widget-dh-image-heading-text.dh-image-width-100 .dh-wrapper {
+   flex-direction: column;
+}
+.dh-widget-dh-image-heading-text.dh-image-width-100 .dh-gap-column {
+   display: none;
+}
+
 .dh-widget-dh-image-heading-text.dh-image-align-right .dh-wrapper {
    flex-direction: row-reverse;
 }

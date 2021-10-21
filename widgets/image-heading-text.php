@@ -44,8 +44,6 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 		$button_text = $settings['dh_image_heading_text_button_text'];
 		$button_link = $settings['dh_image_heading_text_button_url'];
 
-
-
 		?>
          <div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>">
 				<div class="dh-wrapper">
@@ -67,7 +65,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 							</div>
 						<?php } ?>
 						<?php if ( $settings['dh_image_heading_text_image_show_button'] == 'yes' ) { ?>
-							<a class="elementor-button-link elementor-button elementor-size-sm" href="<?php echo $button_link; ?>">
+							<a class="elementor-button-link elementor-button elementor-size-sm" href="<?php echo $button_link['url']; ?>">
 								<?php echo $button_text; ?>
 							</a>
 						<?php } ?>
@@ -81,23 +79,34 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 	protected function content_template() {
 		?>
 			<# 
-				setTimeout(function() {
-					var classes = [];
-					jQuery.each( view.el.classList, function( index, value ) {
-						if ( value.startsWith('dh-') ) {	
-							classes.push( value );
+				var classes = [];
+				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
+					if ( value.prefix_class && settings[index] && value.section == 'dh_image_heading_text_content_section' ) {
+						if ( value.condition ) {
+							var condition = Object.entries(value.condition)[0];
+							if ( settings[condition[0]] ) {
+								classes.push( value.prefix_class + settings[index] );
+							}
+						} else {
+							classes.push( value.prefix_class + settings[index] );
 						}
-					} );
-					classes = ' ' + classes.join( ' ' );
-					view.$el.find( '.<?php echo 'dh-widget-' . $this->get_name(); ?>' ).addClass(classes);
-					console.log('settings.dh_image_heading_text_image', settings.dh_image_heading_text_image);
-				}, 10 );
+					}
+				} ); 
+				classes = ' ' + classes.join( ' ' );
+
+				var width;
+				var height;
+				if ( typeof window[id] !== 'undefined' ) {
+					width = window[id].width;
+					height = window[id].height;
+				}
+
 			#>
-         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>">
+         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<div class="dh-wrapper">
 					<# if ( settings.dh_image_heading_text_image_show_image == 'yes' ) { #>
 						<div class="dh-image-column">
-							<img src="{{ settings.dh_image_heading_text_image.url }}">
+							<img id="{{{id}}}" src="{{ settings.dh_image_heading_text_image.url }}" width="{{{width}}}" height="{{{height}}}" onload="javascript: window.{{{id}}} = { 'width': this.naturalWidth, 'height': this.naturalHeight }">
 						</div>
 						<div class="dh-gap-column"></div>
 					<# } #>
@@ -115,7 +124,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 							<# } #>
 
 							<# if ( settings.dh_image_heading_text_image_show_button == 'yes' ) { #>
-								<a class="elementor-button-link elementor-button elementor-size-sm" href="{{{ settings.dh_image_heading_text_button_url }}}">
+								<a class="elementor-button-link elementor-button elementor-size-sm" href="{{{ settings.dh_image_heading_text_button_url.url }}}">
 									{{{ settings.dh_image_heading_text_button_text }}}
 								</a>
 							<# } #>

@@ -165,18 +165,22 @@ class DH_Impact extends \Elementor\Widget_Base {
 				var calculations_text = settings.dh_impact_calculations_text;
 			#>
 			<# 
-				setTimeout(function() {
-					var classes = [];
-					jQuery.each( view.el.classList, function( index, value ) {
-						if ( value.startsWith('dh-') ) {	
-							classes.push( value );
+				var classes = [];
+				jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
+					if ( value.prefix_class && settings[index] && value.section == 'dh_impact_content' ) {
+						if ( value.condition ) {
+							var condition = Object.entries(value.condition)[0];
+							if ( settings[condition[0]] ) {
+								classes.push( value.prefix_class + settings[index] );
+							}
+						} else {
+							classes.push( value.prefix_class + settings[index] );
 						}
-					} );
-					classes = ' ' + classes.join( ' ' );
-					view.$el.find( '.<?php echo 'dh-widget-' . $this->get_name(); ?>' ).addClass(classes);
-				}, 10 );
+					}
+				} ); 
+				classes = ' ' + classes.join( ' ' );
 			#>
-         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>">
+         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<div class="dh-impact">
 					<div class="dh-impact-features-section">
 						<div class="dh-impact-features-title">Impact</div>
