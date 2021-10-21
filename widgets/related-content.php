@@ -130,10 +130,12 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 			<#
 				var cache = jQuery(view.model.attributes.htmlCache);
 				var related_content = cache.find('.dh-widget-dh-related-content');
-				var content = related_content[0].innerHTML;
-				jQuery('.elementor-control-dh_related_content_posts_button').on('click', function() {
-					view.model.renderRemoteServer();
-				});
+				if ( related_content.length ) {
+					var content = related_content[0].innerHTML;
+					jQuery('.elementor-control-dh_related_content_posts_button').on('click', function() {
+						view.model.renderRemoteServer();
+					});
+				}
 
 			#>
 			<div class="dh-widget-dh-related-content">{{{content}}}</div>
