@@ -1394,17 +1394,6 @@ class DH_Widgets_Content_Controls {
 				'condition' => [
 					'dh_related_content_type' => 'manual',
 				],
-				'default' => [
-					[
-						'dh_related_content_id' => '0',
-					],
-					[
-						'dh_related_content_id' => '0',
-					],
-					[
-						'dh_related_content_id' => '0',
-					],
-				],
 				'show_label' => false,
 				'prevent_empty' => false,
          ] );

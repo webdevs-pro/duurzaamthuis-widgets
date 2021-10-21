@@ -100,35 +100,31 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
       if ( isset( $posts_ids ) && ! empty( $posts_ids ) ) {
             echo '<div class="dh-related-content-grid dh-related-content-' . $settings['dh_related_content_type'] . '-skin">';
                foreach ( $posts_ids as $post ) {
-						if ( $post['dh_related_content_id'] == 0 ) {
-							echo '<a class="dh-related-post post-id-0" href=""><div class="dh-related-post-image"><div class="dh-related-post-image-wrapper"><img src="' . ELEMENTOR_ASSETS_URL . 'images/placeholder.png' . '"></div></div><h3 class="dh-related-post-title">Example Post</h3></a>';
-						} else {
-							echo '<a class="dh-related-post post-id-' . $post['dh_related_content_id'] . '" href="' . get_the_permalink( $post['dh_related_content_id'] ) . '">';
-								if ( $post['dh_related_content_badge'] ) {
-									switch ( $post['dh_related_content_badge'] ) {
-										case 'best_choise':
-											echo '<div class="dh-related-post-badge dh-heading-choise-badge"><span>Beste keuze</span></div>';
-											break;
-										case 'reading_tip':
-											echo '<div class="dh-related-post-badge dh-heading-choise-badge"><span>Leestip</span></div>';
-											break;
-									}
+						echo '<a class="dh-related-post post-id-' . $post['dh_related_content_id'] . '" href="' . get_the_permalink( $post['dh_related_content_id'] ) . '">';
+							if ( $post['dh_related_content_badge'] ) {
+								switch ( $post['dh_related_content_badge'] ) {
+									case 'best_choise':
+										echo '<div class="dh-related-post-badge dh-heading-choise-badge"><span>Beste keuze</span></div>';
+										break;
+									case 'reading_tip':
+										echo '<div class="dh-related-post-badge dh-heading-choise-badge"><span>Leestip</span></div>';
+										break;
 								}
-								echo '<div class="dh-related-post-image">';
-									echo '<div class="dh-related-post-image-wrapper">';
-										echo '<img src="' . get_the_post_thumbnail_url( $post['dh_related_content_id'], 'medium' ) . '">';
-									echo '</div>';
+							}
+							echo '<div class="dh-related-post-image">';
+								echo '<div class="dh-related-post-image-wrapper">';
+									echo '<img src="' . get_the_post_thumbnail_url( $post['dh_related_content_id'], 'medium' ) . '">';
 								echo '</div>';
-								echo '<h3 class="dh-related-post-title">' . get_the_title( $post['dh_related_content_id'] ) . '</h3>';
-								if ( $settings['dh_related_content_show_excerpt'] ) {
-									// $exerpt = get_yoast_derfve
-									// inhinh
-									// EBML_ID_TARGETSetgb
+							echo '</div>';
+							echo '<h3 class="dh-related-post-title">' . get_the_title( $post['dh_related_content_id'] ) . '</h3>';
+							if ( $settings['dh_related_content_show_excerpt'] ) {
+								// $exerpt = get_yoast_derfve
+								// inhinh
+								// EBML_ID_TARGETSetgb
 
-									echo '<div class="dh-related-post-exerpt">' . get_the_excerpt( $post['dh_related_content_id'] ) . '</div>';
-								}
-							echo '</a>';
-						}
+								echo '<div class="dh-related-post-exerpt">' . get_the_excerpt( $post['dh_related_content_id'] ) . '</div>';
+							}
+						echo '</a>';
                }
 					?></div><?php
             echo '</div>';
@@ -141,7 +137,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 			<#
 				var cache = jQuery(view.model.attributes.htmlCache);
 				var related_content = cache.find('.dh-widget-dh-related-content');
-				var content = '<div class="dh-related-content-grid"><a class="dh-related-post post-id-0" href=""><div class="dh-related-post-image"><div class="dh-related-post-image-wrapper"><img src="<?php echo ELEMENTOR_ASSETS_URL . 'images/placeholder.png'; ?>"></div></div><h3 class="dh-related-post-title">Example Post</h3></a><a class="dh-related-post post-id-0" href=""><div class="dh-related-post-image"><div class="dh-related-post-image-wrapper"><img src="<?php echo ELEMENTOR_ASSETS_URL . 'images/placeholder.png'; ?>"></div></div><h3 class="dh-related-post-title">Example Post</h3></a><a class="dh-related-post post-id-0" href=""><div class="dh-related-post-image"><div class="dh-related-post-image-wrapper"><img src="<?php echo ELEMENTOR_ASSETS_URL . 'images/placeholder.png'; ?>"></div></div><h3 class="dh-related-post-title">Example Post</h3></a></div>';
+				var content = ' ';
 				if ( related_content.length > 0 ) {
 					content = related_content[0].innerHTML;
 				}

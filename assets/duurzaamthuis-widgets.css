@@ -979,6 +979,8 @@
    font-size: 14px;
    line-height: 21px;
    color: #2D3745;
+   word-wrap: break-word;
+   overflow-wrap: break-word;
 }
 .dh-widget-dh-related-content .dh-related-content-grid .dh-related-post-exerpt {
    margin: 10px 20px 20px 20px;;
