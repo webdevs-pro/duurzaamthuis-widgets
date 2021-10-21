@@ -89,8 +89,8 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
          }
       }
 
+		?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
       if ( isset( $posts_ids ) && ! empty( $posts_ids ) ) {
-         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
             echo '<div class="dh-related-content-grid dh-related-content-' . $settings['dh_related_content_type'] . '-skin">';
                foreach ( $posts_ids as $post ) {
                   echo '<a class="dh-related-post post-id-' . $post['dh_related_content_id'] . '" href="' . get_the_permalink( $post['dh_related_content_id'] ) . '">';
@@ -119,8 +119,8 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
                      }
                   echo '</a>';
                }
+					?></div><?php
             echo '</div>';
-			?></div><?php
       }
 
 	}
@@ -130,12 +130,13 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 			<#
 				var cache = jQuery(view.model.attributes.htmlCache);
 				var related_content = cache.find('.dh-widget-dh-related-content');
-				if ( related_content.length ) {
-					var content = related_content[0].innerHTML;
-					jQuery('.elementor-control-dh_related_content_posts_button').on('click', function() {
-						view.model.renderRemoteServer();
-					});
+				var content = ' ';
+				if ( related_content.length > 0 ) {
+					content = related_content[0].innerHTML;
 				}
+				jQuery('.elementor-control-dh_related_content_posts_button').on('click', function() {
+					view.model.renderRemoteServer();
+				});
 
 			#>
 			<div class="dh-widget-dh-related-content">{{{content}}}</div>
