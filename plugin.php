@@ -210,8 +210,8 @@ class DH_Impact_Fields {
 			$post->add_control( 'subsidie', [
 				'label' => __( 'Subsidie', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Ja', 'your-plugin' ),
-				'label_off' => __( 'Nee', 'your-plugin' ),
+				'label_on' => __( 'Ja', 'duurzaamthuis' ),
+				'label_off' => __( 'Nee', 'duurzaamthuis' ),
 				'return_value' => 'yes',
 			] );
 			$post->add_control( 'calculations_text', [
@@ -474,8 +474,8 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_image_heading_text_image_show_image', [
 				'label' => __( 'Show Image', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'your-plugin' ),
-				'label_off' => __( 'No', 'your-plugin' ),		
+				'label_on' => __( 'Yes', 'duurzaamthuis' ),
+				'label_off' => __( 'No', 'duurzaamthuis' ),		
 				'return_value' => 'yes',
 				'default' => 'yes',		
 			] );
@@ -529,8 +529,8 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_image_heading_text_image_reverse', [
 				'label' => __( 'Mobile Columns Reverse', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'your-plugin' ),
-				'label_off' => __( 'No', 'your-plugin' ),					
+				'label_on' => __( 'Yes', 'duurzaamthuis' ),
+				'label_off' => __( 'No', 'duurzaamthuis' ),					
 				'return_value' => 'columns',
 				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-reverse-',
@@ -541,8 +541,8 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_image_heading_text_image_show_heading', [
 				'label' => __( 'Show Heading', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'your-plugin' ),
-				'label_off' => __( 'No', 'your-plugin' ),		
+				'label_on' => __( 'Yes', 'duurzaamthuis' ),
+				'label_off' => __( 'No', 'duurzaamthuis' ),		
 				'return_value' => 'yes',
 				'default' => 'yes',		
 				'separator' => 'before',
@@ -559,8 +559,8 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_image_heading_text_image_show_text', [
 				'label' => __( 'Show Text', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'your-plugin' ),
-				'label_off' => __( 'No', 'your-plugin' ),		
+				'label_on' => __( 'Yes', 'duurzaamthuis' ),
+				'label_off' => __( 'No', 'duurzaamthuis' ),		
 				'return_value' => 'yes',
 				'default' => 'yes',		
 				'separator' => 'before',
@@ -576,8 +576,8 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_image_heading_text_image_show_button', [
 				'label' => __( 'Show Button', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'your-plugin' ),
-				'label_off' => __( 'No', 'your-plugin' ),		
+				'label_on' => __( 'Yes', 'duurzaamthuis' ),
+				'label_off' => __( 'No', 'duurzaamthuis' ),		
 				'return_value' => 'yes',
 				'default' => '',		
 				'separator' => 'before',
@@ -709,8 +709,8 @@ class DH_Widgets_Content_Controls {
             $repeater->add_control( 'dh_product_comparition_sponsored',[ // sponsored
                'label' => __( 'Sponsored', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::SWITCHER,
-               'label_on' => __( 'Yes', 'your-plugin' ),
-               'label_off' => __( 'No', 'your-plugin' ),
+               'label_on' => __( 'Yes', 'duurzaamthuis' ),
+               'label_off' => __( 'No', 'duurzaamthuis' ),
                'return_value' => 'yes',
                'default' => 'yes',
                'render_type' => 'ui',
@@ -805,8 +805,8 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_impact_subsidie', [ // subsidie
 				'label' => __( 'Subsidie', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Ja', 'your-plugin' ),
-				'label_off' => __( 'Nee', 'your-plugin' ),
+				'label_on' => __( 'Ja', 'duurzaamthuis' ),
+				'label_off' => __( 'Nee', 'duurzaamthuis' ),
 				'return_value' => 'yes',
 			] );
 			$widget->add_control( 'dh_impact_calculations_text', [ // calculations_text
@@ -1263,8 +1263,8 @@ class DH_Widgets_Content_Controls {
             $repeater->add_control( 'dh_product_comparition_sustainability_score_sponsored',[
                'label' => __( 'Sponsored', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::SWITCHER,
-               'label_on' => __( 'Yes', 'your-plugin' ),
-               'label_off' => __( 'No', 'your-plugin' ),
+               'label_on' => __( 'Yes', 'duurzaamthuis' ),
+               'label_off' => __( 'No', 'duurzaamthuis' ),
                'return_value' => 'yes',
                'default' => 'yes',
                'render_type' => 'ui',
@@ -1355,13 +1355,14 @@ class DH_Widgets_Content_Controls {
          $widget->add_control( 'dh_related_content_show_excerpt',[
             'label' => __( 'Show Exerpt', 'duurzaamthuis' ),
             'type' => Elementor\Controls_Manager::SWITCHER,
-            'label_on' => __( 'Yes', 'your-plugin' ),
-            'label_off' => __( 'No', 'your-plugin' ),
+            'label_on' => __( 'Yes', 'duurzaamthuis' ),
+            'label_off' => __( 'No', 'duurzaamthuis' ),
+            'default' => 'yes',
             'return_value' => 'yes',
          ] );
          $repeater = new \Elementor\Repeater();
             $repeater->add_control( 'dh_related_content_id', [
-               'label' => __( 'Search & Select', 'elementor-pro' ),
+               'label' => __( 'Search & Select', 'duurzaamthuis' ),
                'type' => ElementorPro\Modules\QueryControl\Module::QUERY_CONTROL_ID,
                'options' => [],
                'label_block' => true,
