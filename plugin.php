@@ -202,17 +202,30 @@ class DH_Impact_Fields {
 				'type' => Elementor\Controls_Manager::TEXT,
 				'classes' => "dh-max-chars-restriction",
 			] );
-			$post->add_control( 'vervuiling', [
-				'label' => __( 'Vervuiling', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::TEXT,
-				'classes' => "dh-max-chars-restriction",
-			] );
+			// $post->add_control( 'vervuiling', [
+			// 	'label' => __( 'Vervuiling', 'duurzaamthuis' ),
+			// 	'type' => Elementor\Controls_Manager::TEXT,
+			// 	'classes' => "dh-max-chars-restriction",
+			// ] );
 			$post->add_control( 'subsidie', [
 				'label' => __( 'Subsidie', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
 				'label_on' => __( 'Ja', 'duurzaamthuis' ),
 				'label_off' => __( 'Nee', 'duurzaamthuis' ),
 				'return_value' => 'yes',
+			] );
+			$post->add_control( 'subsidie_type2', [ // subsidie type
+				'label' => __( 'Subsidie Type', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SELECT,
+				'default' => 'yes',
+				'options' => [
+					'yes2'  => __( 'Ja', 'duurzaamthuis' ), // strange bug so value is 'yes2'
+					'no' => __( 'Nee', 'duurzaamthuis' ),
+				],
+				'classes' => "dh-max-chars-restriction",
+				'condition' => [
+					'subsidie' => 'yes'
+				]
 			] );
 			$post->add_control( 'calculations_text', [
 				'label' => __( 'Toelichting', 'duurzaamthuis' ),
@@ -236,7 +249,8 @@ class DH_Impact_Fields {
 		update_post_meta( $post_id, 'terugverdientijd', $settings['terugverdientijd'] ?? '' );
 		update_post_meta( $post_id, 'gemak', $settings['gemak'] ?? '' );
 		update_post_meta( $post_id, 'subsidie', $settings['subsidie'] ?? '' );
-		update_post_meta( $post_id, 'vervuiling', $settings['vervuiling'] ?? '' );
+		update_post_meta( $post_id, 'subsidie_type', $settings['subsidie_type2'] ?? '' );
+		// update_post_meta( $post_id, 'vervuiling', $settings['vervuiling'] ?? '' );
 		update_post_meta( $post_id, 'calculations-text', $settings['calculations_text'] ?? '' );
 	}
 }
@@ -797,17 +811,30 @@ class DH_Widgets_Content_Controls {
 				'type' => Elementor\Controls_Manager::TEXT,
 				'classes' => "dh-max-chars-restriction",
 			] );
-			$widget->add_control( 'dh_impact_vervuiling', [ // vervuiling
-				'label' => __( 'Vervuiling', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::TEXT,
-				'classes' => "dh-max-chars-restriction",
-			] );
+			// $widget->add_control( 'dh_impact_vervuiling', [ // vervuiling
+			// 	'label' => __( 'Vervuiling', 'duurzaamthuis' ),
+			// 	'type' => Elementor\Controls_Manager::TEXT,
+			// 	'classes' => "dh-max-chars-restriction",
+			// ] );
 			$widget->add_control( 'dh_impact_subsidie', [ // subsidie
 				'label' => __( 'Subsidie', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
 				'label_on' => __( 'Ja', 'duurzaamthuis' ),
 				'label_off' => __( 'Nee', 'duurzaamthuis' ),
 				'return_value' => 'yes',
+			] );
+			$widget->add_control( 'dh_impact_subsidie_type', [ // subsidie type
+				'label' => __( 'Subsidie Type', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SELECT,
+				'default' => 'yes',
+				'options' => [
+					'yes'  => __( 'Ja', 'duurzaamthuis' ),
+					'no' => __( 'Nee', 'duurzaamthuis' ),
+				],
+				'classes' => "dh-max-chars-restriction",
+				'condition' => [
+					'dh_impact_subsidie' => 'yes'
+				]
 			] );
 			$widget->add_control( 'dh_impact_calculations_text', [ // calculations_text
 				'label' => __( 'Toelichting', 'duurzaamthuis' ),

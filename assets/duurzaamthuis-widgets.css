@@ -1023,7 +1023,28 @@ i[data-dh-tooltip]:after {
 i[data-dh-tooltip]:hover:after {
    visibility: visible;
 }
+i.dh-has-tooltip {
+   position: relative;
+}
+i.dh-has-tooltip:hover span.dh-tooltip {
+   display: inline-block;
+}
+span.dh-tooltip {
+   display: none;
+   position: absolute;
+   top: 2px;
+   left: 50%;
+   transform: translate(-50%, -100%);
+   font-family: Sans-Serif;
+   color: #878F9A;
+   border: 1px solid #878F9A;
+   border-radius: 3px;
+   padding: 3px;
+   background-color: #fff;
+   width: max-content;
+   padding: 5px 10px;
 
+}
 
 
 

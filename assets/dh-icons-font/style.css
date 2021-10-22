@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'dh-icons';
   src:
-    url('fonts/dh-icons.ttf?3dbapw') format('truetype'),
-    url('fonts/dh-icons.woff?3dbapw') format('woff'),
-    url('fonts/dh-icons.svg?3dbapw#dh-icons') format('svg');
+    url('fonts/dh-icons.ttf?q93ln6') format('truetype'),
+    url('fonts/dh-icons.woff?q93ln6') format('woff'),
+    url('fonts/dh-icons.svg?q93ln6#dh-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dh-icon-euro-sign-solid:before {
+  content: "\e91d";
+}
+.dh-icon-clock-solid:before {
+  content: "\e91e";
+}
+.dh-icon-chevron-circle-down-solid:before {
+  content: "\e91f";
+}
 .dh-icon-menu:before {
   content: "\e91c";
 }

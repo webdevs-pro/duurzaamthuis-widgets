@@ -97,6 +97,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                      $advies = get_post_meta( $post_id, 'advies', true );
 
                      $subsidie = get_post_meta( $post_id, 'subsidie', true );
+                     $subsidie_type = get_post_meta( $post_id, 'subsidie_type', true );
 
                      $calculations_text = get_post_meta( $post_id, 'calculations-text', true );
 
@@ -117,31 +118,31 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
                               <?php if ( $prijs ) { ?>
                                  <div class="dh-page-header-feature">
-                                    <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-price"></i>Kosten</div>
+                                    <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-euro-sign-solid"></i>Kosten</div>
                                     <div class="dh-page-header-feature-value"><?php echo $prijs; ?></div>
                                  </div>
                               <?php } ?>
 
                               <?php if ( $terugverdientijd ) { ?>
                                  <div class="dh-page-header-feature">
-                                    <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-payback"></i>Terugverdientijd</div>
+                                    <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-clock-solid"></i>Terugverdientijd</div>
                                     <div class="dh-page-header-feature-value"><?php echo $terugverdientijd; ?></div>
                                  </div>
                               <?php } ?>
 
                               <?php if ( $gemak ) { ?>
                                  <div class="dh-page-header-feature">
-                                    <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-convenience"></i>Gemak</div>
+                                    <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-chevron-circle-down-solid"></i>Gemak</div>
                                     <div class="dh-page-header-feature-value"><?php echo $gemak; ?></div>
                                  </div>
                               <?php } ?>
 
-                              <?php if ( $vervuiling ) { ?>
+                              <!-- <?php if ( $vervuiling ) { ?>
                                  <div class="dh-page-header-feature">
                                     <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-convenience"></i>Vervuiling</div>
                                     <div class="dh-page-header-feature-value"><?php echo $vervuiling; ?></div>
                                  </div>
-                              <?php } ?>
+                              <?php } ?> -->
 
                               <?php if ( $advies ) { ?>
                                  <div class="dh-page-header-feature">
@@ -152,8 +153,8 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
                               <?php if ( $subsidie ) { ?>
                                  <div class="dh-page-header-feature">
-                                    <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<i class="dh-icon dh-icon-info" data-dh-tooltip="Zie toelichting"></i></div>
-                                    <div class="dh-page-header-feature-value">Ja</div>
+                                    <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<?php echo $subsidie_type == 'yes2' ? '<i class="dh-icon dh-icon-info dh-has-tooltip"><span class="dh-tooltip">Zie toelichting, of de <a href="/subsidies">subsidiepagina</a></i></span>' : ''; ?></div>
+                                    <div class="dh-page-header-feature-value"><?php echo $subsidie_type == 'yes2' ? 'Ja' : 'Nee'; ?></div>
                                  </div>
                               <?php } ?>
                            </div>

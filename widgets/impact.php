@@ -60,8 +60,9 @@ class DH_Impact extends \Elementor\Widget_Base {
 			$gemak = $gemak . ' uur';
 		} 
 
-		$vervuiling = $settings['dh_impact_vervuiling'];
+		$vervuiling = $settings['dh_impact_vervuiling'] ?? '';
 		$subsidie = $settings['dh_impact_subsidie'];
+		$subsidie_type = $settings['dh_impact_subsidie_type'];
 		$calculations_text = $settings['dh_impact_calculations_text'];
 
 		if ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling ) : ?>
@@ -79,21 +80,21 @@ class DH_Impact extends \Elementor\Widget_Base {
 
 							<?php if ( $prijs ) { ?>
 								<div class="dh-impact-feature">
-									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-price"></i>Kosten</div>
+									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-euro-sign-solid"></i>Kosten</div>
 									<div class="dh-impact-feature-value"><?php echo $prijs; ?></div>
 								</div>
 							<?php } ?>
 
 							<?php if ( $terugverdientijd ) { ?>
 								<div class="dh-impact-feature">
-									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-payback"></i>Terugverdientijd</div>
+									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-clock-solid"></i>Terugverdientijd</div>
 									<div class="dh-impact-feature-value"><?php echo $terugverdientijd; ?></div>
 								</div>
 							<?php } ?>
 
 							<?php if ( $gemak ) { ?>
 								<div class="dh-impact-feature">
-									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-convenience"></i>Gemak</div>
+									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-chevron-circle-down-solid"></i>Gemak</div>
 									<div class="dh-impact-feature-value"><?php echo $gemak; ?></div>
 								</div>
 							<?php } ?>
@@ -107,8 +108,8 @@ class DH_Impact extends \Elementor\Widget_Base {
 
 							<?php if ( $subsidie ) { ?>
 								<div class="dh-impact-feature">
-									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<i class="dh-icon dh-icon-info" data-dh-tooltip="Zie toelichting"></i></div>
-									<div class="dh-impact-feature-value">Ja</div>
+									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<?php echo $subsidie_type == 'yes' ? '<i class="dh-icon dh-icon-info dh-has-tooltip"><span class="dh-tooltip">Zie toelichting, of de <a href="/subsidies">subsidiepagina</a></i></span>' : ''; ?></div>
+									<div class="dh-impact-feature-value"><?php echo $subsidie_type == 'yes' ? 'Ja' : 'Nee'; ?></div>
 								</div>
 							<?php } ?>
 						</div>
@@ -161,6 +162,7 @@ class DH_Impact extends \Elementor\Widget_Base {
 				var advies = settings.dh_impact_advies;
 
 				var subsidie = settings.dh_impact_subsidie;
+				var subsidie_type = settings.dh_impact_subsidie_type;
 
 				var calculations_text = settings.dh_impact_calculations_text;
 
@@ -231,8 +233,8 @@ class DH_Impact extends \Elementor\Widget_Base {
 
 							<# if(subsidie) { #>
 								<div class="dh-impact-feature">
-									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<i class="dh-icon dh-icon-info" data-dh-tooltip="Zie toelichting"></i></div>
-									<div class="dh-impact-feature-value">Ja</div>
+									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<# subsidie_type == 'yes' ? print('<i class="dh-icon dh-icon-info dh-has-tooltip"><span class="dh-tooltip">Zie toelichting, of de <a href="/subsidies">subsidiepagina</a></i></span>') : print() #></div>
+									<div class="dh-impact-feature-value"><# subsidie_type == 'yes' ? print('Ja') : print('Nee') #></div>
 								</div>
 							<# } #>
 						</div>
