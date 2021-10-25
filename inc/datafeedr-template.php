@@ -10,6 +10,12 @@
     <ul class="dfrcs_compset <?php echo 'set-' . $set_id; ?>">
 		<?php if ( $dfrcs_products = dfrcs_products() ) : global $dfrcs_product;
 
+        foreach ( $dfrcs_products as $key => $value ) {
+            if ( isset( $value['_removed'] ) && $value['_removed'] == '1' ) {
+                unset( $dfrcs_products[$key] );
+            }
+        }
+
          $dfrcs_products = array_slice( $dfrcs_products, 0, 15 );
          foreach ( $dfrcs_products as $index => $product ) {
             if ( $dfrcs_products[$index]['finalprice'] < 90 ) {

@@ -303,7 +303,6 @@ class DH_Intro_Field {
 		$settings = $data['settings'];
 
 		update_post_meta( $post_id, 'intro-text', $settings['intro_text'] ?? '' );
-
 	}
 }
 new DH_Intro_Field();

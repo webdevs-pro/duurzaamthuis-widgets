@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.8.11
+ * Version:     0.8.13
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -390,11 +390,13 @@ if ( get_option( 'dfrcs_options' )['display_method'] != 'php' ) {
 
 
 // allow comments for pages by default
-add_filter( 'wp_insert_post_data', 'filter_function_name_11', 10, 2 );
-function filter_function_name_11( $data, $postarr ) {
-   $data['comment_status'] = 'open';
-	return $data;
+function emable_comments_for_pages_default( $status, $post_type, $comment_type ) {
+   if ( $post_type == 'page') {
+       return 'open';
+   }
+   return $status;
 }
+add_filter( 'get_default_comment_status', 'emable_comments_for_pages_default', 1, 3 );
 
 
 // image text - add image 100% width
