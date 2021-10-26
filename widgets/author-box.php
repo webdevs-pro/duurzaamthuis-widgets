@@ -54,7 +54,7 @@ class DH_Author_Box extends \Elementor\Widget_Base {
          $avatar_url = DH_PLUGIN_DIR_URL . 'assets/duurzaamthuis-logo-small.png';
       }
 
-      $name = get_the_author_meta( 'display_name', $author_id );
+      $name = get_the_author_meta( 'first_name', $author_id ) . ' ' . get_the_author_meta( 'last_name', $author_id );
 
       if ( function_exists( 'get_field' ) ) {
          $expertises = get_field( 'dh-user-expertise', 'user_' . $author_id );
@@ -103,6 +103,7 @@ class DH_Author_Box extends \Elementor\Widget_Base {
 
             <div class="dh-author-box-social-networks">
                <?php
+
                   $fasebook = get_user_meta( $author_id, 'facebook', true );
                   if ( $fasebook ) {
                      echo '<a class="dh-author-box-social-network dh-user-facebook" href="' . $fasebook . '" target="_blank"><i class="dh-icon dh-icon-facebook-f-brands"></i></a>';
@@ -112,7 +113,7 @@ class DH_Author_Box extends \Elementor\Widget_Base {
                      echo '<a class="dh-author-box-social-network dh-user-instagram" href="' . $instagram . '" target="_blank"><i class="dh-icon dh-icon-instagram-brands"></i></a>';
                   }
                   $linkedin = get_user_meta( $author_id, 'linkedin', true );
-                  if ( $instagram ) {
+                  if ( $linkedin ) {
                      echo '<a class="dh-author-box-social-network dh-user-linkedin" href="' . $linkedin . '" target="_blank"><i class="dh-icon dh-icon-linkedin-in-brands"></i></a>';
                   }
                   $pinterest = get_user_meta( $author_id, 'pinterest', true );
