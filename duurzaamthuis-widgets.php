@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.8.13
+ * Version:     0.9
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -385,19 +385,18 @@ if ( get_option( 'dfrcs_options' )['display_method'] != 'php' ) {
 }
 
 
-// add button to image heading text widget
-// make image optional in heading text widget
-
-
 // allow comments for pages by default
-function emable_comments_for_pages_default( $status, $post_type, $comment_type ) {
+add_filter( 'get_default_comment_status', function( $status, $post_type, $comment_type ) {
    if ( $post_type == 'page') {
        return 'open';
    }
    return $status;
-}
-add_filter( 'get_default_comment_status', 'emable_comments_for_pages_default', 1, 3 );
+}, 1, 3 );
 
 
-// image text - add image 100% width
-// n umber heading - do not render if empty
+// hide expertise repeater for non admin
+add_action( 'admin_footer', function() {
+   if ( ! current_user_can( 'administrator' ) ) {
+      echo '<style>.hide-non-admin{display:none;}</style>';
+   }
+} );

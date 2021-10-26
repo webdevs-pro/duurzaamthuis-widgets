@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'dh-icons';
   src:
-    url('fonts/dh-icons.ttf?q93ln6') format('truetype'),
-    url('fonts/dh-icons.woff?q93ln6') format('woff'),
-    url('fonts/dh-icons.svg?q93ln6#dh-icons') format('svg');
+    url('fonts/dh-icons.ttf?12iwcd') format('truetype'),
+    url('fonts/dh-icons.woff?12iwcd') format('woff'),
+    url('fonts/dh-icons.svg?12iwcd#dh-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -24,6 +24,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.dh-icon-youtube-brands:before {
+  content: "\e925";
+}
+.dh-icon-facebook-f-brands:before {
+  content: "\e920";
+}
+.dh-icon-instagram-brands:before {
+  content: "\e921";
+}
+.dh-icon-linkedin-in-brands:before {
+  content: "\e922";
+}
+.dh-icon-pinterest-p-brands:before {
+  content: "\e923";
+}
+.dh-icon-twitter-brands:before {
+  content: "\e924";
+}
 .dh-icon-euro-sign-solid:before {
   content: "\e91d";
 }

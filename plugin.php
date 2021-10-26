@@ -45,6 +45,7 @@ class DH_Register_Widgets {
 		// require __DIR__ . '/widgets/template.php';
 		// require __DIR__ . '/widgets/template2.php';
 		require __DIR__ . '/widgets/multiwidgets.php';
+		require __DIR__ . '/widgets/author-box.php';
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Anchor_Navigation() );
@@ -59,6 +60,7 @@ class DH_Register_Widgets {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Product_Comparition_Sustainability_Score() );
 		// \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Template() );
 		// \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Template2() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Author_Box() );
 		new DH_Multiwidgets();
 	}
 }
