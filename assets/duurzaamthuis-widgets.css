@@ -521,6 +521,9 @@
 .dh-widget-dh-product-comparition .dh-products-extended-skin .dh-product-quality-badge {
    background: #769179;
 }
+.dh-widget-dh-product-comparition .dh-products-extended-skin .dh-product-our-badge {
+   background: #769179;
+}
 .dh-widget-dh-product-comparition .dh-products-extended-skin .dh-product-eco-badge {
    background: #769179;
 }
@@ -1354,6 +1357,9 @@ span.dh-tooltip {
 .dh-widget-dh-product-comparition-sustainability-score .dh-product-quality-badge {
    background: #769179;
 }
+.dh-widget-dh-product-comparition-sustainability-score .dh-product-our-badge {
+   background: #769179;
+}
 .dh-widget-dh-product-comparition-sustainability-score .dh-product-eco-badge {
    background: #769179;
 }
@@ -1707,10 +1713,26 @@ body.test .type-elementor_library > header {
    height: 120px;
    border-radius: 1000px;
    overflow: hidden;
+   position: relative;
 }
 .dh-author-box .dh-author-box-image img {
    object-fit: cover;
 }
+
+/* fix for picture */
+.dh-author-box .dh-author-box-image > picture {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+}
+.dh-author-box .dh-author-box-image > picture > img {
+   object-fit: cover;
+   width: 100%;
+}
+
 .dh-author-box .dh-author-box-expertises {
    grid-area: e;
    display: flex;

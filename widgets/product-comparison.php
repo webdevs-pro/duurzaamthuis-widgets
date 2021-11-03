@@ -128,6 +128,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                  case 'best_quality':
                                     echo '<div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>';
                                     break;
+                                 case 'our_choice':
+                                    echo '<div class="dh-product-badge dh-product-our-badge">Onze keuze</div>';
+                                    break;
                                  case 'eco_choice':
                                     echo '<div class="dh-product-badge dh-product-eco-badge">Beste eco keuze</div>';
                                     break;
@@ -297,6 +300,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                           <# break;
                                        case 'best_quality': #>
                                           <div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>
+                                          <# break;
+                                       case 'our_choice': #>
+                                          <div class="dh-product-badge dh-product-our-badge">Onze keuze</div>
                                           <# break;
                                        case 'eco_choice': #>
                                           <div class="dh-product-badge dh-product-eco-badge">Beste eco keuze</div>

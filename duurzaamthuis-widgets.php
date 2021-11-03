@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     0.9.1
+ * Version:     0.9.2
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -157,13 +157,7 @@ $myUpdateChecker->setBranch('main');
 
 
 
-add_filter( 'elementor/utils/get_the_archive_title', 'duurza_archive_title' );
-function duurza_archive_title( $title ) {
-	if ( is_search() ) {
-		return 'Zoekresultaten: ' . get_search_query();
-	}
-	return $title;
-}
+
 
 
 // add_filter( 'dfrcs_products', function( $filtered_products, $compset ) {
@@ -385,13 +379,7 @@ if ( get_option( 'dfrcs_options' )['display_method'] != 'php' ) {
 }
 
 
-// allow comments for pages by default
-add_filter( 'get_default_comment_status', function( $status, $post_type, $comment_type ) {
-   if ( $post_type == 'page') {
-       return 'open';
-   }
-   return $status;
-}, 1, 3 );
+
 
 
 // hide expertise repeater for non admin
@@ -400,3 +388,17 @@ add_action( 'admin_footer', function() {
       echo '<style>.hide-non-admin{display:none;}</style>';
    }
 } );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
