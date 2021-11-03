@@ -1717,6 +1717,7 @@ body.test .type-elementor_library > header {
 }
 .dh-author-box .dh-author-box-image img {
    object-fit: cover;
+   width: 100%;
 }
 
 /* fix for picture */
