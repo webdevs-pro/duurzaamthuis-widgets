@@ -995,64 +995,6 @@
 
 
 
-/* tooltips */
-i[data-dh-tooltip] {
-   position: relative;
-   cursor: pointer;
-   margin-left: 5px;
-}
-i[data-dh-tooltip]:after {
-   content: attr(data-dh-tooltip);
-   position: absolute;
-   top: 0;
-   left: 50%;
-   transform: translate(-50%, -100%);
-   visibility: hidden;
-   font-family: Sans-Serif;
-   color: #878F9A;
-   border: 1px solid #878F9A;
-   border-radius: 3px;
-   padding: 3px;
-   background-color: #fff;
-   display: inline-block;
-   width: max-content;
-   padding: 5px 10px;
-   max-width: 200px;
-}
-i[data-dh-tooltip]:hover:after {
-   visibility: visible;
-}
-i.dh-has-tooltip {
-   position: relative;
-}
-i.dh-has-tooltip:hover span.dh-tooltip {
-   display: inline-block;
-}
-span.dh-tooltip {
-   display: none;
-   position: absolute;
-   top: 2px;
-   left: 50%;
-   transform: translate(-50%, -100%);
-   font-family: Sans-Serif;
-   color: #878F9A;
-   border: 1px solid #878F9A;
-   border-radius: 3px;
-   padding: 3px;
-   background-color: #fff;
-   width: max-content;
-   padding: 5px 10px;
-
-}
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1790,3 +1732,70 @@ body.test .type-elementor_library > header {
 .dh-author-box .dh-author-box-social-networks .dh-icon-youtube-brands {
    background-color: #FF0000;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* tooltips */
+[data-dh-tooltip] {
+   position: relative;
+   display: inline-block;
+   padding-bottom: 5px;
+   cursor: pointer;
+   padding-left: 3px;
+}
+[data-dh-tooltip] .tooltip {
+   position: absolute;
+   top: -2px;
+   left: 50%;
+   transform: translate( -50%, -100% );
+   z-index: 10;
+   filter: drop-shadow( 0 0 1px #000 );
+   font-family: var( --e-global-typography-text-font-family );
+   animation: dhTooltipFadeIn 200ms forwards;
+}
+
+[data-dh-tooltip] .tooltip .tooltip-wrapper {
+   width: 300px;
+   max-width: 300px;
+   color: #222;
+   padding: 10px;
+   text-align: left;
+   border-radius: 10px;
+   font-size: 13px;
+   line-height: 1.4em;
+   background: #fff;
+   padding-bottom: 10px;
+}
+[data-dh-tooltip] .tooltip .tooltip-wrapper a {
+   text-decoration: underline;
+}
+
+[data-dh-tooltip] .tooltip .tooltip-trangle {
+   position: absolute;
+   bottom: 0;
+   left: 50%;
+   transform: translate( -50%, 50%) rotate( 45deg );
+   height: 10px;
+   width: 10px;
+   background-color: #fff;
+}
+@keyframes dhTooltipFadeIn{
+   from {
+      opacity: 0;
+   }
+   to {
+      opacity: 1;
+   }
+}
+
+

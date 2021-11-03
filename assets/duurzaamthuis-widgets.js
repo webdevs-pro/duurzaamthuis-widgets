@@ -136,6 +136,7 @@
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-impact.default', DH_Impact );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-mega-menu.default', DH_Mega_Menu );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-product-comparition-sustainability-score.default', DH_Product_Comparition_Sustainability_Score );
+		initDHtooltips();
 	} );
 
 
@@ -148,6 +149,70 @@
 	// 		elementor.reloadPreview();
 	// 	});
 	// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+	function initDHtooltips() {
+		// tolltips
+		$( document ).on( 'mouseenter', '[data-dh-tooltip]', function() {
+
+			clearTimeout( $( this ).data( 'timeoutId' ) );
+
+			var prevTooltip = $( this ).find( '.tooltip' );
+			if ( prevTooltip.length > 0 ) return false;
+
+			$( this ).append( '<div class="tooltip"><div class="tooltip-wrapper"><span>' + $( this ).data( 'dh-tooltip' ) + '</span></div><div class="tooltip-trangle"></div></div>' );
+			var tooltip = $( this ).find( '.tooltip' );
+			var innerWidth = getInnerWidth( $( tooltip ).find( '.tooltip-wrapper > span' )[0] ) + 21;
+			console.log('innerWidth', innerWidth);
+
+			$( tooltip ).find( '.tooltip-wrapper' ).css({ 
+				'width': innerWidth
+			});
+
+			var overflow = tooltip.offset().left + tooltip.width() - $( window ).width();
+			if( overflow > 0 ) {
+				var pos = overflow + 10;
+				$( tooltip ).find( '.tooltip-wrapper' ).css({ 
+					'transform': 'translateX(-' + pos + 'px)'
+				});
+			}
+		});
+		$( document ).on( 'mouseleave', '[data-dh-tooltip]', function() {
+			var element = $( this );
+			var timeoutId = setTimeout( function() {
+				element.find( '.tooltip' ).remove();
+				}, 500);
+			element.data( 'timeoutId', timeoutId ); 
+		});
+
+		function getInnerWidth(element) {
+			var wrapper = document.createElement('span'),
+				result;
+			while ( element.firstChild ) {
+				wrapper.appendChild( element.firstChild );
+			}
+			element.appendChild( wrapper );
+			result = wrapper.offsetWidth;
+			element.removeChild( wrapper );
+			while ( wrapper.firstChild ) {
+				element.appendChild( wrapper.firstChild );
+			}
+			return result;
+	}
+}
+
+
 
 
 

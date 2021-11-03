@@ -117,7 +117,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  echo '<div>';
                                     echo $item['dh_product_comparition_sustainability_score_quality'];
                                     if ( $item['dh_product_comparition_sustainability_score_quality_tooltip'] ) {
-                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $item['dh_product_comparition_sustainability_score_quality_tooltip'] . '"></i>';
+                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_product_comparition_sustainability_score_quality_tooltip'] ) . '"></i>';
                                     }
                                  echo '</div>';
                               echo '</div>';
@@ -132,7 +132,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                     } 
                                     echo $co2;
                                     if ( $item['dh_product_comparition_sustainability_score_co2_tooltip'] ) {
-                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $item['dh_product_comparition_sustainability_score_co2_tooltip'] . '"></i>';
+                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_product_comparition_sustainability_score_co2_tooltip'] ) . '"></i>';
                                     }
                                  echo '</div>';
                               echo '</div>'; // dh-product-co2
@@ -157,7 +157,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  echo '<div class="dh-product-rating-heading">';
                                     echo 'Duurzaam Thuis Score';
                                     if ( $item['dh_product_comparition_sustainability_score_rating_tooltip'] ) {
-                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $item['dh_product_comparition_sustainability_score_rating_tooltip'] . '"></i>';
+                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_product_comparition_sustainability_score_rating_tooltip'] ) . '"></i>';
                                     }
                                  echo '</div>';
                                  echo '<div class="dh-product-rating">';
@@ -351,7 +351,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                     <div>
                                        {{{ item.dh_product_comparition_sustainability_score_quality }}}
                                        <# if ( item.dh_product_comparition_sustainability_score_quality_tooltip ) { #>
-                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{{ item.dh_product_comparition_sustainability_score_quality_tooltip }}}"></i>
+                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_comparition_sustainability_score_quality_tooltip }}"></i>
                                        <# } #>
                                     </div>
                                  </div>
@@ -372,7 +372,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                        } #>
                                        {{{ co2 }}}
                                        <# if ( item.dh_product_comparition_sustainability_score_co2_tooltip ) { #>
-                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{{ item.dh_product_comparition_sustainability_score_co2_tooltip }}}"></i>
+                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_comparition_sustainability_score_co2_tooltip }}"></i>
                                        <# } #>
                                     </div>
                                  </div>
@@ -383,7 +383,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                     <div>
                                        €{{{ item.dh_product_comparition_sustainability_score_price }}}
                                        <# if ( item.dh_product_comparition_sustainability_score_price_tooltip ) { #>
-                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{{ item.dh_product_comparition_sustainability_score_price_tooltip }}}"></i>
+                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_comparition_sustainability_score_price_tooltip }}"></i>
                                        <# } #>
                                     </div>
                                  </div>
@@ -394,7 +394,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                     <div class="dh-product-rating-heading">
                                        Duurzaam Thuis Score
                                        <# if ( item.dh_product_comparition_sustainability_score_rating_tooltip ) { #>
-                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{{ item.dh_product_comparition_sustainability_score_rating_tooltip }}}"></i>
+                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_comparition_sustainability_score_rating_tooltip }}"></i>
                                        <# } #>
                                     </div>
                                     <div class="dh-product-rating">

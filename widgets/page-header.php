@@ -153,7 +153,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
                               <?php if ( $subsidie ) { ?>
                                  <div class="dh-page-header-feature">
-                                    <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<?php echo $subsidie_type == 'yes2' ? '<i class="dh-icon dh-icon-info dh-has-tooltip"><span class="dh-tooltip">Zie toelichting, of de <a href="/subsidies">subsidiepagina</a></i></span>' : ''; ?></div>
+                                    <div class="dh-page-header-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<?php echo $subsidie_type == 'yes2' ? '<i class="dh-icon dh-icon-info dh-has-tooltip" data-dh-tooltip="' . esc_html( 'Zie toelichting, of de <a href="/subsidies">subsidiepagina</a>' ). '"></i>' : ''; ?></div>
                                     <div class="dh-page-header-feature-value"><?php echo $subsidie_type == 'yes2' ? 'Ja' : 'Nee'; ?></div>
                                  </div>
                               <?php } ?>

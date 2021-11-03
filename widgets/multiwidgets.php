@@ -14,7 +14,7 @@ class DH_Multiwidgets {
       if ( ! function_exists( 'get_field' ) ) return array();
 
       $templates = get_field( 'templates', 'option' );
-      if ( ! $templates ) return araay();
+      if ( ! $templates ) return array();
 
       $temp = array();
       foreach ( $templates as $template ) {
