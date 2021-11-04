@@ -118,10 +118,9 @@
 		var products = $scope.find( '.dh-product' );
 
 
-			$( products ).each( function() {
-				var last_updated = $( this ).find( '.dfrcs_last_updated' ).text();
-				console.log('last_updated', last_updated);
-			} );
+		$( products ).each( function() {
+			var last_updated = $( this ).find( '.dfrcs_last_updated' ).text();
+		} );
 		
 
 	}
@@ -166,7 +165,7 @@
 		// tolltips
 		$( document ).on( 'mouseenter', '[data-dh-tooltip]', function() {
 
-			clearTimeout( $( this ).data( 'timeoutId' ) );
+			clearTimeout( $( this ).data( 'dh-tooltip-timeout-id' ) );
 
 			var prevTooltip = $( this ).find( '.tooltip' );
 			if ( prevTooltip.length > 0 ) return false;
@@ -174,7 +173,6 @@
 			$( this ).append( '<div class="tooltip"><div class="tooltip-wrapper"><span>' + $( this ).data( 'dh-tooltip' ) + '</span></div><div class="tooltip-trangle"></div></div>' );
 			var tooltip = $( this ).find( '.tooltip' );
 			var innerWidth = getInnerWidth( $( tooltip ).find( '.tooltip-wrapper > span' )[0] ) + 21;
-			console.log('innerWidth', innerWidth);
 
 			$( tooltip ).find( '.tooltip-wrapper' ).css({ 
 				'width': innerWidth
@@ -187,13 +185,16 @@
 					'transform': 'translateX(-' + pos + 'px)'
 				});
 			}
+
 		});
 		$( document ).on( 'mouseleave', '[data-dh-tooltip]', function() {
 			var element = $( this );
 			var timeoutId = setTimeout( function() {
-				element.find( '.tooltip' ).remove();
-				}, 500);
-			element.data( 'timeoutId', timeoutId ); 
+				element.find( '.tooltip' ).css( 'animation', 'none' ).fadeOut( 200, function() {
+					$( this ).remove();
+				} );
+			}, 200 );
+			element.data( 'dh-tooltip-timeout-id', timeoutId ); 
 		});
 
 		function getInnerWidth(element) {
@@ -209,8 +210,8 @@
 				element.appendChild( wrapper.firstChild );
 			}
 			return result;
+		}
 	}
-}
 
 
 

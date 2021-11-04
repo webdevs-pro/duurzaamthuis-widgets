@@ -46,6 +46,7 @@ class DH_Register_Widgets {
 		// require __DIR__ . '/widgets/template2.php';
 		require __DIR__ . '/widgets/multiwidgets.php';
 		require __DIR__ . '/widgets/author-box.php';
+		require __DIR__ . '/widgets/product-review.php';
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Anchor_Navigation() );
@@ -61,6 +62,7 @@ class DH_Register_Widgets {
 		// \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Template() );
 		// \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Template2() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Author_Box() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Product_Review() );
 		new DH_Multiwidgets();
 	}
 }
@@ -777,6 +779,246 @@ class DH_Widgets_Content_Controls {
          ] );
 		$widget->end_controls_section(); 
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	public static function get_dh_product_review_controls( $widget ) {
+		$widget->start_controls_section( 'dh_product_review_section_content', [
+         'label' => __( 'Product Comparison Sustainability Score', 'duurzaamthuis' ),
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
+      ] );
+         $widget->add_control( 'dh_product_review_skin', [
+            'label' => __( 'Skin', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::SELECT,
+            'default' => 'horizontal',
+            'options' => [
+               'horizontal'  => __( 'Horizontal', 'duurzaamthuis' ),
+               'vertical' => __( 'Vertical', 'duurzaamthuis' ),
+            ],
+         ] );
+         $widget->add_responsive_control( 'dh_product_review_columns_count', [
+				'label' => __( 'Columns', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 6,
+				'step' => 1,
+				'default' => 3,
+				'tablet_default' => 2,
+				'mobile_default' => 1,
+				'selectors' => [
+					'{{WRAPPER}} .dh-products-score-grid' => 'grid-template-columns: repeat({{VALUE}}, 1fr);',
+				],   
+            'condition' => [
+               'dh_product_review_skin' => 'vertical',
+            ]      
+			] );
+         $widget->add_control( 'dh_product_review_logo_url', [
+            'type' => Elementor\Controls_Manager::HIDDEN,
+            'default' => DH_Product_Comparition_Sustainability_Score::get_site_logo(),
+         ] );
+         $repeater = new \Elementor\Repeater();
+            $repeater->add_control( 'dh_product_review_title', [
+               'label' => __( 'Title', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => __( 'Product title' , 'duurzaamthuis' ),
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'dh_product_review_badge', [
+               'label' => __( 'Badge', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::SELECT,
+               'default' => 'none',
+               'options' => [
+                  'none'  => __( 'None', 'duurzaamthuis' ),
+                  'best_price' => __( 'Beste prijs', 'duurzaamthuis' ),
+                  'best_quality' => __( 'Beste Kwaliteit', 'duurzaamthuis' ),
+                  'our_choice' => __( 'Onze keuze', 'duurzaamthuis' ),
+                  'eco_choice' => __( 'Beste eco keuze', 'duurzaamthuis' ),
+               ],
+               'classes' => "extended-skin-control",
+            ] );
+            $repeater->add_control( 'dh_product_review_image', [
+               'label' => __( 'Image', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::MEDIA,
+               'default' => [
+                  'url' => Elementor\Utils::get_placeholder_image_src(),
+               ],
+               'separator' => 'after',
+            ] );
+            $repeater->add_control( 'dh_product_review_quality', [
+               'label' => __( 'Quality', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '9,6',
+            ] );
+            $repeater->add_control( 'dh_product_review_quality_tooltip', [
+               'label' => __( 'Tooltip', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '',
+               'separator' => 'after',
+            ] );
+            $repeater->add_control( 'dh_product_review_co2_custom_label', [
+               'label' => __( 'Custom label', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'description' => 'Will be used instead "CO<sub>2</sub>-afdruk"',
+            ] );
+            $repeater->add_control( 'dh_product_review_co2', [
+               'label' => __( 'CO<sub>2</sub>-afdruk', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '150',
+            ] );
+            $repeater->add_control( 'dh_product_review_co2_tooltip', [
+               'label' => __( 'Tooltip', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '',
+               'separator' => 'after',
+            ] );
+            $repeater->add_control( 'dh_product_review_price', [
+               'label' => __( 'Price', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '26,50',
+               'description' => 'If empty, the lowest price from datafeedr will be taken',
+            ] );
+            $repeater->add_control( 'dh_product_review_price_tooltip', [
+               'label' => __( 'Tooltip', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '',
+               'separator' => 'after',
+            ] );
+            $repeater->add_control( 'dh_product_review_rating', [
+               'label' => __( 'Rating', 'elementor' ),
+               'type' => Elementor\Controls_Manager::NUMBER,
+               'min' => 0,
+               'max' => 10,
+               'step' => 1,
+               'default' => 8,
+            ] );
+            $repeater->add_control( 'dh_product_review_rating_tooltip', [
+               'label' => __( 'Tooltip', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '',
+               'separator' => 'after',
+            ] );
+            $repeater->add_control( 'dh_product_review_pros', [
+               'label' => 'Pros',
+               'label_block' => false,
+               'button_title' => __( 'Edit Pros', 'duurzaamthuis' ),
+               'type' => 'dh-table-control',
+               'separator' => 'before',
+               'allow_columns' => false,
+               'table_classes' => 'repeater',
+               'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
+               'max' => 5,
+               'default' => '[["Advantage 1"],["Advantage 2"],["Advantage 3"],["Advantage 4"]]',
+               ] );
+            $repeater->add_control( 'dh_product_review_cons', [
+               'label' => 'Cons',
+               'type' => 'dh-table-control',
+               'label_block' => false,
+               'button_title' => __( 'Edit Cons', 'duurzaamthuis' ),
+               'allow_columns' => false,
+               'table_classes' => 'repeater',
+               'add_row_title' => __( 'Add Item', 'duurzaamthuis' ),
+               'max' => 3,
+               'default' => '[["Disadvantage 1"],["Disadvantage 2"]]',
+            ] );
+            $repeater->add_control( 'dh_product_review_description', [
+               'label' => __( 'Description', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXTAREA,
+               'rows' => 10,
+               'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'duurzaamthuis' ),
+               'placeholder' => __( 'Type your description here', 'duurzaamthuis' ),
+            ] );
+            $repeater->add_control( 'dh_product_review_shortcode', [
+                  'label' => esc_html__( 'Enter your shortcode or text', 'elementor' ),
+                  'type' => Elementor\Controls_Manager::TEXTAREA,
+                  'dynamic' => [
+                     'active' => true,
+                  ],
+                  'placeholder' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
+                  'description' => 'HTML allowed. Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
+                  'default' => '',
+               ]
+            );
+            $repeater->add_control( 'dh_product_review_last_updated_text', [
+               'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'dh_product_review_button_text', [
+               'label' => __( 'Button Text', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'separator' => 'before',
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'dh_product_review_button_link', [
+               'label' => __( 'Button Link', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '#',
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'dh_product_review_sponsored',[
+               'label' => __( 'Sponsored', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::SWITCHER,
+               'label_on' => __( 'Yes', 'duurzaamthuis' ),
+               'label_off' => __( 'No', 'duurzaamthuis' ),
+               'return_value' => 'yes',
+               'default' => 'yes',
+               'render_type' => 'ui',
+            ] );
+         $widget->add_control( 'dh_product_review_products', [
+            'label' => __( 'Products', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::REPEATER,
+            'fields' => $repeater->get_controls(),
+            'default' => [
+               [
+                  'title' => __( 'Product title', 'duurzaamthuis' ),
+               ],
+            ],
+            'title_field' => '{{{ dh_product_review_title }}}',
+         ] );
+		$widget->end_controls_section(); 
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	public static function get_dh_impact_controls( $widget ) {
 		ob_start(); ?>
