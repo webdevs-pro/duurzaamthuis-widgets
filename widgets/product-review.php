@@ -6,9 +6,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DH_Product_Review extends \Elementor\Widget_Base {
 
-   public $price;
-   public $last_updated;
-
 	public function get_name() {
 		return 'dh-product-review';
 	}
@@ -74,182 +71,119 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 	protected function render() { // php template
 		$settings = $this->get_settings_for_display();
       
-		if ( $settings['dh_product_review_products'] ) :
-         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
-            echo '<div class="dh-products-score-grid dh-products-' . $settings['dh_product_review_skin'] . '-skin">';
-               foreach ( $settings['dh_product_review_products'] as $index => $item ) :
-                  $shortcode = $this->render_shortcode( $item['dh_product_review_shortcode'] );
-                  echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
-                     echo '<div class="dh-product-wrapper">';
-                        echo '<div class="dh-product-column">';
-                           echo '<h3 class="dh-product-heading">';
-                              echo '<div class="dh-number">' . ( $index + 1 ) . '</div>';
-                              echo '<div class="dh-heading">' . $item['dh_product_review_title'] . '</div>';
-                           echo '</h3>'; // dh-product-heading
-                           echo '<div class="dh-product-image">';
-                              if ( $item['dh_product_review_badge'] ) {
-                                 switch ( $item['dh_product_review_badge'] ) {
-                                    case 'best_price':
-                                       echo '<div class="dh-product-badge dh-product-price-badge">Beste prijs</div>';
-                                       break;
-                                    case 'best_quality':
-                                       echo '<div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>';
-                                       break;
-                                    case 'our_choice':
-                                       echo '<div class="dh-product-badge dh-product-our-badge">Onze keuze</div>';
-                                       break;
-                                    case 'eco_choice':
-                                       echo '<div class="dh-product-badge dh-product-eco-badge">Beste eco keuze</div>';
-                                       break;
-                                 }
-                              }
-                              echo '<div class="dh-product-image-wrapper">';
-                                 if ( $item['dh_product_review_image']['id'] ) {
-                                    echo wp_get_attachment_image( $item['dh_product_review_image']['id'], 'medium' );
-                                 } else {
-                                    echo '<img src="' . Elementor\Utils::get_placeholder_image_src() . '">';
-                                 }
-                              echo '</div>'; // dh-product-image-wrapper
-                           echo '</div>'; // dh-product-image
-                           if ( $item['dh_product_review_quality'] ) {
-                              echo '<div class="dh-product-quality">';
-                                 echo '<div>Kwaliteit</div>';
-                                 echo '<div>';
-                                    echo $item['dh_product_review_quality'];
-                                    if ( $item['dh_product_review_quality_tooltip'] ) {
-                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_product_review_quality_tooltip'] ) . '"></i>';
-                                    }
-                                 echo '</div>';
-                              echo '</div>';
-                           }
-                           if ( $item['dh_product_review_co2'] || $item['dh_product_review_co2_custom_label'] ) {
-                              echo '<div class="dh-product-co2">';
-                                 echo '<div>' . ( $item['dh_product_review_co2_custom_label'] ?: 'CO<sub>2</sub>-afdruk' ) . '</div>';
-                                 echo '<div>';
-                                    $co2 = $item['dh_product_review_co2'];
-                                    if ( ! $item['dh_product_review_co2_custom_label'] && $this->is_number( $co2 ) ) {
-                                       $co2 = $co2 . 'kg CO<sub>2</sub> p/j';
-                                    } 
-                                    echo $co2;
-                                    if ( $item['dh_product_review_co2_tooltip'] ) {
-                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_product_review_co2_tooltip'] ) . '"></i>';
-                                    }
-                                 echo '</div>';
-                              echo '</div>'; // dh-product-co2
-                           }
-                           $price = $item['dh_product_review_price'] ?: $this->price;
-                           echo '<div class="dh-product-price">';
-                              if ( $price ) {
 
-                                 echo '<div>Prijs</div>';
-                                 echo '<div>';
-                                 echo '€' . $price;
-                                 $last_updated = $item['dh_product_review_price_tooltip'] ?: 'Laatste update: ' . $this->last_updated;
-                                 if ( $last_updated ) {
-                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $last_updated . '"></i>';
-                                 }
-                                 echo '</div>';
+      ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+         echo '<div class="dh-products-review-grid dh-products-' . $settings['dh_product_review_skin'] . '-skin">';
+
+            echo '<div class="dh-product">';
+               echo '<div class="dh-product-wrapper">';
+                  echo '<div class="dh-product-column">';
+                     echo '<div class="dh-product-score-heading">Duurzaam Thuis Score</div>';
+                     if ( $settings['dh_product_review_quality'] ) {
+                        echo '<div class="dh-product-quality">';
+                           echo '<div>Kwaliteit</div>';
+                           echo '<div>';
+                              echo $settings['dh_product_review_quality'];
+                              if ( $settings['dh_product_review_quality_tooltip'] ) {
+                                 echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $settings['dh_product_review_quality_tooltip'] ) . '"></i>';
                               }
                            echo '</div>';
-                           echo '<div class="dh-product-score">';
-                              echo '<img src="' . $settings['dh_product_review_logo_url'] . '">';
-                              echo '<div>';
-                                 echo '<div class="dh-product-rating-heading">';
-                                    echo 'Duurzaam Thuis Score';
-                                    if ( $item['dh_product_review_rating_tooltip'] ) {
-                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_product_review_rating_tooltip'] ) . '"></i>';
-                                    }
-                                 echo '</div>';
-                                 echo '<div class="dh-product-rating">';
-                                    echo '<div class="dh-text-rating">' . $item['dh_product_review_rating'] .'/10</div>';
-                                    echo '<div class="dh-list-rating">';
-                                       echo $this->render_rating( $item['dh_product_review_rating'] );
-                                    echo '</div>';
-                                 echo '</div>';
+                        echo '</div>';
+                     }
+                     if ( $settings['dh_product_review_co2'] || $settings['dh_product_review_co2_custom_label'] ) {
+                        echo '<div class="dh-product-co2">';
+                           echo '<div>' . ( $settings['dh_product_review_co2_custom_label'] ?: 'CO<sub>2</sub>-afdruk' ) . '</div>';
+                           echo '<div>';
+                              $co2 = $settings['dh_product_review_co2'];
+                              if ( ! $settings['dh_product_review_co2_custom_label'] && $this->is_number( $co2 ) ) {
+                                 $co2 = $co2 . 'kg CO<sub>2</sub> p/j';
+                              } 
+                              echo $co2;
+                              if ( $settings['dh_product_review_co2_tooltip'] ) {
+                                 echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $settings['dh_product_review_co2_tooltip'] ) . '"></i>';
+                              }
+                           echo '</div>';
+                        echo '</div>'; // dh-product-co2
+                     }
+                     $price = $settings['dh_product_review_price'];
+                     echo '<div class="dh-product-price">';
+                        if ( $price ) {
+
+                           echo '<div>Prijs</div>';
+                           echo '<div>';
+                           echo '€' . $price;
+                           $last_updated = $settings['dh_product_review_price_tooltip'];
+                           if ( $last_updated ) {
+                              echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $last_updated . '"></i>';
+                           }
+                           echo '</div>';
+                        }
+                     echo '</div>';
+                     echo '<div class="dh-product-score">';
+                        echo '<img src="' . $settings['dh_product_review_logo_url'] . '">';
+                        echo '<div>';
+                           echo '<div class="dh-product-rating-heading">';
+                              echo 'Duurzaam Thuis Score';
+                              if ( $settings['dh_product_review_rating_tooltip'] ) {
+                                 echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $settings['dh_product_review_rating_tooltip'] ) . '"></i>';
+                              }
+                           echo '</div>';
+                           echo '<div class="dh-product-rating">';
+                              echo '<div class="dh-text-rating">' . $settings['dh_product_review_rating'] .'/10</div>';
+                              echo '<div class="dh-list-rating">';
+                                 echo $this->render_rating( $settings['dh_product_review_rating'] );
                               echo '</div>';
                            echo '</div>';
-                        echo '</div>'; // dh-product-column
-                        echo '<div class="dh-product-column">';
-                           $pros = json_decode( $item['dh_product_review_pros'] );
-                           if ( ! empty( $pros ) ) {
-                              echo '<div class="dh-product-pros">';
-                                 echo '<div class="dh-product-pros-heading">Voordelen</div>';
-                                 foreach ( $pros as $pros_item ) {
-                                    echo '<div class="dh-product-pros-item">';
-                                       echo '<i class="dh-icon dh-icon-check"></i>';
-                                       echo '<div class="dh-product-pros-item-text">' . $pros_item[0] . '</div>';
-                                    echo '</div>';
-                                 }
+                        echo '</div>';
+                     echo '</div>';
+                  echo '</div>'; // dh-product-column
+                  echo '<div class="dh-product-column">';
+                     $pros = json_decode( $settings['dh_product_review_pros'] );
+                     if ( ! empty( $pros ) ) {
+                        echo '<div class="dh-product-pros">';
+                           echo '<div class="dh-product-pros-heading">Voordelen</div>';
+                           foreach ( $pros as $pros_item ) {
+                              echo '<div class="dh-product-pros-item">';
+                                 echo '<i class="dh-icon dh-icon-check"></i>';
+                                 echo '<div class="dh-product-pros-item-text">' . $pros_item[0] . '</div>';
                               echo '</div>';
                            }
-                           $cons = json_decode( $item['dh_product_review_cons'] );
-                           if ( ! empty( $cons ) ) {
-                              echo '<div class="dh-product-cons">';
-                                 echo '<div class="dh-product-cons-heading">Nadelen</div>';
-                                 foreach ( $cons as $cons_item ) {
-                                    echo '<div class="dh-product-cons-item">';
-                                       echo '<i class="dh-icon dh-icon-times"></i>';
-                                       echo '<div class="dh-product-cons-item-text">' . $cons_item[0] . '</div>';
-                                    echo '</div>';
-                                 }
+                        echo '</div>';
+                     }
+                  echo '</div>';  // dh-product-column
+
+                  echo '<div class="dh-product-column">';
+                     $cons = json_decode( $settings['dh_product_review_cons'] );
+                     if ( ! empty( $cons ) ) {
+                        echo '<div class="dh-product-cons">';
+                           echo '<div class="dh-product-cons-heading">Nadelen</div>';
+                           foreach ( $cons as $cons_item ) {
+                              echo '<div class="dh-product-cons-item">';
+                                 echo '<i class="dh-icon dh-icon-times"></i>';
+                                 echo '<div class="dh-product-cons-item-text">' . $cons_item[0] . '</div>';
                               echo '</div>';
                            }
-                           echo '<div class="dh-product-description-heading">Omschrijving</div>';
-                           echo '<div class="dh-product-description">';
-                              echo '<div class="dh-product-description-content">' . $item['dh_product_review_description'] . '</div>';
-                              echo '<div class="dh-product-description-toggle">';
-                                 echo '<div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>';
-                                 echo '<div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>';
-                              echo '</div>';
-                           echo '</div>';
-                        echo '</div>';  // dh-product-column
-                        echo '<div class="dh-product-column">';
-                           echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
-                           echo '<div class="dh-product-shortcode">' . $shortcode . '</div>';
-                           $last_updated_text = $item['dh_product_review_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
-                           echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
-                           if ( $item['dh_product_review_button_text'] ) {
-                              $rel = isset( $item['dh_product_review_sponsored'] ) ? ' rel="sponsored"' : '';
-                              echo '<a target="_blank" class="dh-product-button" href="' . $item['dh_product_review_button_link'] . '"' . $rel . '>' . $item['dh_product_review_button_text'] . '</a>';
-                           }
-                        echo '</div>'; // dh-product-column
-                     echo '</div>'; // dh-product-wrapper
-                  echo '</div>'; // dh-product
-               endforeach;
-            echo '</div>'; // dh-products-score-grid
-         ?></div><?php
-      endif;
+                        echo '</div>';
+                     }
+                  echo '</div>'; // dh-product-column
+
+                  echo '<div class="dh-product-column dh-product-fullwidth-column">';
+                     echo '<div class="dh-product-description">';
+                        echo '<div class="dh-product-description-content">' . $settings['dh_product_review_description'] . '</div>';
+                        echo '<div class="dh-product-description-toggle">';
+                           echo '<div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>';
+                           echo '<div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>';
+                        echo '</div>';
+                     echo '</div>';
+                  echo '</div>';  // dh-product-column
+
+               echo '</div>'; // dh-product-wrapper
+            echo '</div>'; // dh-product
+
+         echo '</div>'; // dh-products-review-grid
+      ?></div><?php
+
 	}
-
-
-   public function filter_products( $products ) {
-	   $products = array_slice( $products, 0, 15 );
-      foreach ( $products as $index => $product ) {
-         if ( $products[$index]['finalprice'] < 90 ) {
-            unset( $products[$index] );
-         }
-      }
-	   $products = array_slice( $products, 0, 5 );
-      $key = array_key_first( $products );
-      $this->price = number_format( ( $products[$key]['finalprice'] / 100 ), 2, ',', '.' );
-      return $products;
-   }
-
-
-   public function last_updated( $text, $instance ) {
-      $this->last_updated = $instance->date_updated;
-      return $text;
-   }
-
-
-   public function render_shortcode( $shorcode ) {
-      add_filter( 'dfrcs_products', [ $this, 'filter_products'], 100);
-      add_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100, 2 );
-      $content = do_shortcode( shortcode_unautop( $shorcode ) );
-      remove_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100 );
-      remove_filter( 'dfrcs_products', [ $this, 'filter_products'], 100 );
-      return $content;
-   }
 
 
    protected function content_template() {
@@ -295,164 +229,135 @@ class DH_Product_Review extends \Elementor\Widget_Base {
             }
          #>
 
-         <# if ( settings.dh_product_review_products.length ) { #>
-            <# 
-               var classes = [];
-               jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
-                  if ( value.prefix_class && settings[index] && value.section == 'dh_product_review_section_content' ) {
-                     if ( value.condition ) {
-                        var condition = Object.entries(value.condition)[0];
-                        if ( settings[condition[0]] ) {
-                           classes.push( value.prefix_class + settings[index] );
-                        }
-                     } else {
+
+         <# 
+            var classes = [];
+            jQuery.each( view.model.attributes.settings.controls, function( index, value ) {
+               if ( value.prefix_class && settings[index] && value.section == 'dh_product_review_section_content' ) {
+                  if ( value.condition ) {
+                     var condition = Object.entries(value.condition)[0];
+                     if ( settings[condition[0]] ) {
                         classes.push( value.prefix_class + settings[index] );
                      }
+                  } else {
+                     classes.push( value.prefix_class + settings[index] );
                   }
-               } ); 
-               classes = ' ' + classes.join( ' ' );
-            #>
-            <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
-               <div class="dh-products-score-grid dh-products-{{{ settings.dh_product_review_skin }}}-skin">
-                  <# _.each( settings.dh_product_review_products, function( item, index ) { #>
-                     <div class="dh-product dh-product-{{ item.dh_product_review__id }}">
-                        <div class="dh-product-wrapper">
-                           <div class="dh-product-column">
-                              <h3 class="dh-product-heading dh-number-heading">
-                                 <div class="dh-number">{{{ index + 1 }}}</div>
-                                 <div class="dh-heading">{{{ item.dh_product_review_title }}}</div>
-                              </h3>
-                              <div class="dh-product-image">
-                                 <#
-                                    if(item.dh_product_review_badge) {
-                                       switch(item.dh_product_review_badge) {
-                                          case 'best_price': #>
-                                             <div class="dh-product-badge dh-product-price-badge">Beste prijs</div>
-                                             <# break;
-                                          case 'best_quality': #>
-                                             <div class="dh-product-badge dh-product-quality-badge">Beste kwaliteit</div>
-                                             <# break;
-                                          case 'our_choice': #>
-                                             <div class="dh-product-badge dh-product-our-badge">Onze keuze</div>
-                                             <# break;
-                                          case 'eco_choice': #>
-                                             <div class="dh-product-badge dh-product-eco-badge">Beste eco keuze</div>
-                                             <# break;
-                                       }
-                                    }
-                                 #>
-                                 <div class="dh-product-image-wrapper">
-                                       <img src="{{ item.dh_product_review_image.url }}">
-                                 </div>
-                              </div>
-                              <# if ( item.dh_product_review_quality ) { #>
-                                 <div class="dh-product-quality">
-                                    <div>Kwaliteit</div>
-                                    <div>
-                                       {{{ item.dh_product_review_quality }}}
-                                       <# if ( item.dh_product_review_quality_tooltip ) { #>
-                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_review_quality_tooltip }}"></i>
-                                       <# } #>
-                                    </div>
-                                 </div>
-                              <# } #>
-                              <# if ( item.dh_product_review_co2 || item.dh_product_review_co2_custom_label ) { #>
-                                 <div class="dh-product-co2">
-                                    <div>
-                                    <# if ( item.dh_product_review_co2_custom_label ) { #>
-                                       {{{ item.dh_product_review_co2_custom_label }}}
-                                    <# } else { #>
-                                       CO<sub>2</sub>-afdruk
-                                    <# } #>
-                                    </div>
-                                    <div>
-                                       <# var co2 = item.dh_product_review_co2; 
-                                       if ( ! item.dh_product_review_co2_custom_label && is_number( co2 ) ) {
-                                          co2 = co2 + 'kg CO<sub>2</sub>';
-                                       } #>
-                                       {{{ co2 }}}
-                                       <# if ( item.dh_product_review_co2_tooltip ) { #>
-                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_review_co2_tooltip }}"></i>
-                                       <# } #>
-                                    </div>
-                                 </div>
-                              <# } #>
-                              <# if ( item.dh_product_review_price ) { #>
-                                 <div class="dh-product-price">
-                                    <div>Prijs</div>
-                                    <div>
-                                       €{{{ item.dh_product_review_price }}}
-                                       <# if ( item.dh_product_review_price_tooltip ) { #>
-                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_review_price_tooltip }}"></i>
-                                       <# } #>
-                                    </div>
-                                 </div>
-                              <# } #>
-                              <div class="dh-product-score">
-                                 <img src="{{{ settings.dh_product_review_logo_url }}}">
-                                 <div>
-                                    <div class="dh-product-rating-heading">
-                                       Duurzaam Thuis Score
-                                       <# if ( item.dh_product_review_rating_tooltip ) { #>
-                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_review_rating_tooltip }}"></i>
-                                       <# } #>
-                                    </div>
-                                    <div class="dh-product-rating">
-                                       <div class="dh-text-rating">{{{ item.dh_product_review_rating }}}/10</div>
-                                       <div class="dh-list-rating">
-                                       {{{ renderRating( item.dh_product_review_rating ) }}}
-                                       </div>
-                                    </div>
-                                 </div>
+               }
+            } ); 
+            classes = ' ' + classes.join( ' ' );
+         #>
+         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
+            <div class="dh-products-review-grid dh-products-{{{ settings.dh_product_review_skin }}}-skin">
+
+               <div class="dh-product">
+                  <div class="dh-product-wrapper">
+                     <div class="dh-product-column">
+                        <div class="dh-product-score-heading">Duurzaam Thuis Score</div>
+                        <# if ( settings.dh_product_review_quality ) { #>
+                           <div class="dh-product-quality">
+                              <div>Kwaliteit</div>
+                              <div>
+                                 {{{ settings.dh_product_review_quality }}}
+                                 <# if ( settings.dh_product_review_quality_tooltip ) { #>
+                                    <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ settings.dh_product_review_quality_tooltip }}"></i>
+                                 <# } #>
                               </div>
                            </div>
-                           <div class="dh-product-column">
-                              <# var pros = check_and_parse_json( item.dh_product_review_pros );  #>
-                              <# if ( pros.length ) { #>
-                                 <div class="dh-product-pros">
-                                    <div class="dh-product-pros-heading">Voordelen</div>
-                                    <# _.each( pros, function(pros_item) { #>
-                                       <div class="dh-product-pros-item">
-                                          <i class="dh-icon dh-icon-check"></i>
-                                          <div class="dh-product-pros-item-text">{{{ pros_item[0] }}}</div>
-                                       </div>
-                                    <# } ); #>
-                                 </div>
+                        <# } #>
+                        <# if ( settings.dh_product_review_co2 || settings.dh_product_review_co2_custom_label ) { #>
+                           <div class="dh-product-co2">
+                              <div>
+                              <# if ( settings.dh_product_review_co2_custom_label ) { #>
+                                 {{{ settings.dh_product_review_co2_custom_label }}}
+                              <# } else { #>
+                                 CO<sub>2</sub>-afdruk
                               <# } #>
-                              <# var cons = check_and_parse_json( item.dh_product_review_cons );  #>
-                              <# if ( cons.length ) { #>
-                                 <div class="dh-product-cons">
-                                    <div class="dh-product-cons-heading">Nadelen</div>
-                                    <# _.each( cons, function( cons_item ) { #>
-                                       <div class="dh-product-cons-item">
-                                          <i class="dh-icon dh-icon-times"></i>
-                                          <div class="dh-product-cons-item-text">{{{ cons_item[0] }}}</div>
-                                       </div>
-                                    <# } ); #>
-                                 </div>
-                              <# } #>
-                              <div class="dh-product-description-heading">Omschrijving</div>
-                              <div class="dh-product-description">
-                                 <div class="dh-product-description-content">{{{ item.dh_product_review_description }}}</div>
-                                    <div class="dh-product-description-toggle">
-                                    <div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>
-                                    <div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>
-                                 </div>
+                              </div>
+                              <div>
+                                 <# var co2 = settings.dh_product_review_co2; 
+                                 if ( ! settings.dh_product_review_co2_custom_label && is_number( co2 ) ) {
+                                    co2 = co2 + 'kg CO<sub>2</sub> p/j';
+                                 } #>
+                                 {{{ co2 }}}
+                                 <# if ( settings.dh_product_review_co2_tooltip ) { #>
+                                    <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ settings.dh_product_review_co2_tooltip }}"></i>
+                                 <# } #>
                               </div>
                            </div>
-                           <div class="dh-product-column">
-                              <div class="dh-product-shortcode-heading">Beste prijs</div>
-                              <div class="dh-product-shortcode">{{{ item.dh_product_review_shortcode }}}</div>
-                              <# if ( item.dh_product_review_button_text ) { #>
-                                 <a target="_blank" class="dh-product-button" href="{{{ item.dh_product_review_button_link }}}">{{{ item.dh_product_review_button_text }}}</a>
-                              <# } #>
+                        <# } #>
+                        <# if ( settings.dh_product_review_price ) { #>
+                           <div class="dh-product-price">
+                              <div>Prijs</div>
+                              <div>
+                                 €{{{ settings.dh_product_review_price }}}
+                                 <# if ( settings.dh_product_review_price_tooltip ) { #>
+                                    <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ settings.dh_product_review_price_tooltip }}"></i>
+                                 <# } #>
+                              </div>
+                           </div>
+                        <# } #>
+                        <div class="dh-product-score">
+                           <img src="{{{ settings.dh_product_review_logo_url }}}">
+                           <div>
+                              <div class="dh-product-rating-heading">
+                                 Duurzaam Thuis Score
+                                 <# if ( settings.dh_product_review_rating_tooltip ) { #>
+                                    <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ settings.dh_product_review_rating_tooltip }}"></i>
+                                 <# } #>
+                              </div>
+                              <div class="dh-product-rating">
+                                 <div class="dh-text-rating">{{{ settings.dh_product_review_rating }}}/10</div>
+                                 <div class="dh-list-rating">
+                                 {{{ renderRating( settings.dh_product_review_rating ) }}}
+                                 </div>
+                              </div>
                            </div>
                         </div>
                      </div>
-                  <# } ); #>
+                     <div class="dh-product-column">
+                        <# var pros = check_and_parse_json( settings.dh_product_review_pros );  #>
+                        <# if ( pros.length ) { #>
+                           <div class="dh-product-pros">
+                              <div class="dh-product-pros-heading">Voordelen</div>
+                              <# _.each( pros, function(pros_item) { #>
+                                 <div class="dh-product-pros-item">
+                                    <i class="dh-icon dh-icon-check"></i>
+                                    <div class="dh-product-pros-item-text">{{{ pros_item[0] }}}</div>
+                                 </div>
+                              <# } ); #>
+                           </div>
+                        <# } #>
+                     </div>
+
+                     <div class="dh-product-column">
+                        <# var cons = check_and_parse_json( settings.dh_product_review_cons );  #>
+                        <# if ( cons.length ) { #>
+                           <div class="dh-product-cons">
+                              <div class="dh-product-cons-heading">Nadelen</div>
+                              <# _.each( cons, function( cons_item ) { #>
+                                 <div class="dh-product-cons-item">
+                                    <i class="dh-icon dh-icon-times"></i>
+                                    <div class="dh-product-cons-item-text">{{{ cons_item[0] }}}</div>
+                                 </div>
+                              <# } ); #>
+                           </div>
+                        <# } #>
+                     </div>
+
+                     <div class="dh-product-column dh-product-fullwidth-column">
+                        <div class="dh-product-description">
+                           <div class="dh-product-description-content">{{{ settings.dh_product_review_description }}}</div>
+                              <div class="dh-product-description-toggle">
+                              <div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>
+                              <div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>
+                           </div>
+                        </div>
+                     </div>
+                     
+                  </div>
                </div>
             </div>
-         <# } #>
+         </div>
 		<?php
 	}
 }

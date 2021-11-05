@@ -368,7 +368,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                     <div>
                                        <# var co2 = item.dh_product_comparition_sustainability_score_co2; 
                                        if ( ! item.dh_product_comparition_sustainability_score_co2_custom_label && is_number( co2 ) ) {
-                                          co2 = co2 + 'kg CO<sub>2</sub>';
+                                          co2 = co2 + 'kg CO<sub>2</sub> p/j';
                                        } #>
                                        {{{ co2 }}}
                                        <# if ( item.dh_product_comparition_sustainability_score_co2_tooltip ) { #>

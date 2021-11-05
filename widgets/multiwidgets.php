@@ -40,6 +40,7 @@ class DH_Multiwidgets {
          'dh-page-header' => 'DH_Page_Header',
          'dh-product-comparition' => 'DH_Product_Comparison',
          'dh-product-comparition-sustainability-score' => 'DH_Product_Comparition_Sustainability_Score',
+         'dh-product-review' => 'DH_Product_Review',
          'dh-related-content' => 'DH_Related_Posts',
          'dh-table' => 'DH_Table',
       );
