@@ -12,7 +12,6 @@ function icons_font_styles() {
 
 
 
-
 // register widgets
 class DH_Register_Widgets {
 	public function __construct() {
@@ -861,7 +860,7 @@ class DH_Widgets_Content_Controls {
 				'type' => Elementor\Controls_Manager::NUMBER,
 				'min' => 0,
 				'max' => 10,
-				'step' => 1,
+				'step' => 0.1,
 				'default' => 8,
 			] );
 			$widget->add_control( 'dh_product_review_rating_tooltip', [
@@ -1407,10 +1406,10 @@ class DH_Widgets_Content_Controls {
             $repeater->add_control( 'dh_product_comparition_sustainability_score_rating', [
                'label' => __( 'Rating', 'elementor' ),
                'type' => Elementor\Controls_Manager::NUMBER,
-               'min' => 0,
-               'max' => 10,
-               'step' => 1,
-               'default' => 8,
+					'min' => 0,
+					'max' => 10,
+					'step' => 0.1,
+					'default' => 8,
             ] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_rating_tooltip', [
                'label' => __( 'Tooltip', 'duurzaamthuis' ),

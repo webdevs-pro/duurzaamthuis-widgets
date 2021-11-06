@@ -56,21 +56,21 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
    }
    
    protected function render_stars( $rating ) {
-      $rating = (float) $rating;
-      $floored_rating = floor( $rating );
-      $stars_html = '';
-
-      for ( $stars = 1.0; $stars <= 5; $stars++ ) {
-         if ( $stars <= $floored_rating ) {
-            $stars_html .= '<i class="elementor-star-full">&#xE934;</i>';
-         } elseif ( $floored_rating + 1 === $stars && $rating !== $floored_rating ) {
-            $stars_html .= '<i class="elementor-star-' . ( $rating - $floored_rating ) * 10 . '">&#xE934;</i>';
-         } else {
-            $stars_html .= '<i class="elementor-star-empty">&#xE934;</i>';
-         }
-      }
-
-      return $stars_html;
+      $rating = $rating * 20;
+      ob_start();
+      echo '<div class="dh-rating">';
+         echo '<div class="dh-rating-bg">';
+            for ( $stars = 1; $stars <= 5; $stars++ ) {
+               echo '<i class="eicon-star"></i>';
+            }
+         echo '</div>';
+         echo '<div class="dh-rating-fg" style="width: ' . $rating . '%">';
+            for ( $stars = 1; $stars <= 5; $stars++ ) {
+               echo '<i class="eicon-star"></i>';
+            }
+         echo '</div>';
+      echo '</div>';
+      return ob_get_clean();
    }
 
 	protected function render() { // php template
@@ -97,7 +97,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                            echo '<div class="dh-product-content">';
                               echo '<h3 class="dh-product-title">' . $item['dh_product_comparition_title'] . '</h3>';
                               echo '<div class="dh-product-star-rating">';
-                                 echo '<div class="elementor-star-rating">';
+                                 echo '<div class="dh-star-rating">';
                                     echo $this->render_stars( $item['dh_product_comparition_star_rating'] );
                                  echo '</div>';
                               echo '</div>';
@@ -148,7 +148,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                            echo '<div class="dh-product-content">';
                               echo '<div class="dh-product-star-rating">';
                                  echo '<div class="dh-product-star-rating-heading">Beoordeling</div>';
-                                 echo '<div class="elementor-star-rating">';
+                                 echo '<div class="dh-star-rating">';
                                     echo $this->render_stars( $item['dh_product_comparition_star_rating'] );
                                  echo '</div>';
                               echo '</div>';
@@ -207,18 +207,20 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
          <#
             function renderStars( rating ) {
                var starsHtml = '';
-               var flooredRating = Math.floor( rating );
+               rating = rating * 20;
 
-               for ( var stars = 1; stars <= 5; stars++ ) {
-                  if ( stars <= flooredRating  ) {
-                     starsHtml += '<i class="elementor-star-full">&#xE934;</i>';
-                  } else if ( flooredRating + 1 === stars && rating !== flooredRating ) {
-                     starsHtml += '<i class="elementor-star-' + ( rating - flooredRating ).toFixed( 1 ) * 10 + '">&#xE934;</i>';
-                  } else {
-                     starsHtml += '<i class="elementor-star-empty">&#xE934;</i>';
-                  }
-               }
-
+               starsHtml += '<div class="dh-rating">';
+                  starsHtml += '<div class="dh-rating-bg">';
+                     for ( var stars = 1; stars <= 5; stars++ ) {
+                        starsHtml += '<i class="eicon-star"></i>';
+                     }
+                  starsHtml += '</div>';
+                  starsHtml += '<div class="dh-rating-fg" style="width: ' + rating + '%">';
+                     for ( var stars = 1; stars <= 5; stars++ ) {
+                        starsHtml += '<i class="eicon-star"></i>';
+                     }
+                  starsHtml += '</div>';
+               starsHtml += '</div>';
                return starsHtml;
             }
 
@@ -272,7 +274,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               <div class="dh-product-content">
                                  <h3 class="dh-product-title">{{{ item.dh_product_comparition_title }}}</h3>
                                  <div class="dh-product-star-rating">
-                                    <div class="elementor-star-rating">
+                                    <div class="dh-star-rating">
                                        {{{ renderStars( item.dh_product_comparition_star_rating ) }}}
                                     </div>
                                  </div>
@@ -318,7 +320,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               <div class="dh-product-content">
                                  <div class="dh-product-star-rating">
                                     <div class="dh-product-star-rating-heading">Beoordeling</div>
-                                    <div class="elementor-star-rating">
+                                    <div class="dh-star-rating">
                                        {{{ renderStars(item.dh_product_comparition_star_rating) }}}
                                     </div>
                                  </div>

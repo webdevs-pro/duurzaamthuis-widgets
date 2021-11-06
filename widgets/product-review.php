@@ -29,25 +29,23 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 	protected function register_controls() {
       DH_Widgets_Content_Controls::get_dh_product_review_controls( $this );
 	}
-
-
    
    protected function render_rating( $rating ) {
-      $rating = (float) $rating / 2;
-      $floored_rating = floor( $rating );
-      $stars_html = '';
-
-      for ( $stars = 1.0; $stars <= 5; $stars++ ) {
-         if ( $stars <= $floored_rating ) {
-            $stars_html .= '<i class="dh-list-full">&#xe901;</i>';
-         } elseif ( $floored_rating + 1 === $stars && $rating !== $floored_rating ) {
-            $stars_html .= '<i class="dh-list-' . ( $rating - $floored_rating ) * 10 . '">&#xe901;</i>';
-         } else {
-            $stars_html .= '<i class="dh-list-empty">&#xe901;</i>';
-         }
-      }
-
-      return $stars_html;
+      $rating = $rating * 10;
+      ob_start();
+      echo '<div class="dh-rating">';
+         echo '<div class="dh-rating-bg">';
+            for ( $stars = 1; $stars <= 5; $stars++ ) {
+               echo '<i class="dh-icon dh-icon-benefit"></i>';
+            }
+         echo '</div>';
+         echo '<div class="dh-rating-fg" style="width: ' . $rating . '%">';
+            for ( $stars = 1; $stars <= 5; $stars++ ) {
+               echo '<i class="dh-icon dh-icon-benefit"></i>';
+            }
+         echo '</div>';
+      echo '</div>';
+      return ob_get_clean();
    }
 
    public static function get_site_logo() {
@@ -198,18 +196,21 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 					return false;
 				}
             function renderRating( rating ) {
-               rating = rating / 2;
                var starsHtml = '';
-               var flooredRating = Math.floor( rating );
-               for ( var stars = 1; stars <= 5; stars++ ) {
-                  if ( stars <= flooredRating  ) {
-                     starsHtml += '<i class="dh-list-full">&#xe901;</i>';
-                  } else if ( flooredRating + 1 === stars && rating !== flooredRating ) {
-                     starsHtml += '<i class="dh-list-' + ( rating - flooredRating ).toFixed( 1 ) * 10 + '">&#xe901;</i>';
-                  } else {
-                     starsHtml += '<i class="dh-list-empty">&#xe901;</i>';
-                  }
-               }
+               rating = rating * 10;
+
+               starsHtml += '<div class="dh-rating">';
+                  starsHtml += '<div class="dh-rating-bg">';
+                     for ( var stars = 1; stars <= 5; stars++ ) {
+                        starsHtml += '<i class="dh-icon dh-icon-benefit"></i>';
+                     }
+                  starsHtml += '</div>';
+                  starsHtml += '<div class="dh-rating-fg" style="width: ' + rating + '%">';
+                     for ( var stars = 1; stars <= 5; stars++ ) {
+                        starsHtml += '<i class="dh-icon dh-icon-benefit"></i>';
+                     }
+                  starsHtml += '</div>';
+               starsHtml += '</div>';
                return starsHtml;
             }
             function check_and_parse_json( json ) {
