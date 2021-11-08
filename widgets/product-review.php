@@ -112,7 +112,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                            echo '€' . $price;
                            $last_updated = $settings['dh_product_review_price_tooltip'];
                            if ( $last_updated ) {
-                              echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . $last_updated . '"></i>';
+                              echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
                            }
                            echo '</div>';
                         }
