@@ -812,6 +812,17 @@ class DH_Widgets_Content_Controls {
                'skin_1'  => __( 'Skin 1', 'duurzaamthuis' ),
             ],
          ] );
+			$widget->add_control( 'dh_product_review_title', [ // title
+				'label' => __( 'Title', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => __( 'Product title' , 'duurzaamthuis' ),
+				'label_block' => true,
+			] );
+			$widget->add_control( 'dh_product_review_content', [
+				'label' => __( 'Content', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::WYSIWYG,
+				'default' => 'De Buyer is een oud Frans merk van keukenartikelen. Vooral onder professionele koks is het een bekend merk. Ze hebben eigenlijk alle type pannen van RVS tot koper. Met beide hebben we veel ervaring dus wij zijn met name geïnteresseerd in de versie van staal. Hierin bieden ze twee soorten de Carbone en de B-element. Beide zijn eigenlijk identieke pannen. Alleen de B-element is netter afgewerkt met een laagje bijenwas. Dit is vooral ter voorkoming van oxidatie van de pan. Een standaard (Carbone) pan kan soms al roestachtige vlekjes vertonen in de winkel en de bijenwas gaat dit tegen. Ook zou de bijenwas het inbranden vergemakkelijken maar dat is ons inziens niet de bedoeling. Je kunt De Buyer Mineral-B element stalen pan die wij hebben getest hier vinden, we hebben maat 26, een heerlijk maatje trouwens!.',
+			] );
          $widget->add_control( 'dh_product_review_logo_url', [
             'type' => Elementor\Controls_Manager::HIDDEN,
             'default' => DH_Product_Review::get_site_logo(),
@@ -896,8 +907,17 @@ class DH_Widgets_Content_Controls {
 				'label' => __( 'Description', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 10,
-				'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'duurzaamthuis' ),
+				'default' => 'De Buyer is een oud Frans merk van keukenartikelen. Vooral onder professionele koks is het een bekend merk. Ze hebben eigenlijk alle type pannen van RVS tot koper. Met beide hebben we veel ervaring dus wij zijn met name geïnteresseerd in de versie van staal. Hierin bieden ze twee soorten de Carbone en de B-element. Beide zijn eigenlijk identieke pannen. Alleen de B-element is netter afgewerkt met een laagje bijenwas. Dit is vooral ter voorkoming van oxidatie van de pan. Een standaard (Carbone) pan kan soms al roestachtige vlekjes vertonen in de winkel en de bijenwas gaat dit tegen. Ook zou de bijenwas het inbranden vergemakkelijken maar dat is ons inziens niet de bedoeling. Je kunt De Buyer Mineral-B element stalen pan die wij hebben getest hier vinden, we hebben maat 26, een heerlijk maatje trouwens!.',
 				'placeholder' => __( 'Type your description here', 'duurzaamthuis' ),
+			] );
+
+
+			$widget->add_control( 'dh_product_review_image', [ // image
+				'label' => __( 'Image', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::MEDIA,
+				'default' => [
+					'url' => Elementor\Utils::get_placeholder_image_src(),
+				],
 			] );
 			$widget->add_control( 'dh_product_review_shortcode', [
 				'label' => esc_html__( 'Enter your shortcode or text', 'elementor' ),
@@ -926,15 +946,7 @@ class DH_Widgets_Content_Controls {
 				'default' => '#',
 				'label_block' => true,
 			] );
-			$widget->add_control( 'dh_product_review_sponsored',[
-				'label' => __( 'Sponsored', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Yes', 'duurzaamthuis' ),
-				'label_off' => __( 'No', 'duurzaamthuis' ),
-				'return_value' => 'yes',
-				'default' => 'yes',
-				'render_type' => 'ui',
-			] );
+
 
 		$widget->end_controls_section(); 
 	}
@@ -1710,3 +1722,17 @@ if( function_exists('acf_add_options_page') ) {
 
 // $templates = get_field( 'templates', 'option' );
 // error_log( "templates\n" . print_r( $templates, true ) . "\n" );
+
+
+
+
+// cleanup post dh-dfrcs-set cache
+add_action( 'elementor/editor/after_save', function( $post_id, $editor_data ) {
+	$post_meta = get_post_meta( $post_id );
+	foreach ( $post_meta as $key => $value ) {
+		if ( substr( $key, 0, 13 ) === "dh-dfrcs-set-" ) {
+			delete_post_meta( $post_id, $key );
+		}
+	}
+}, 10, 2 );
+

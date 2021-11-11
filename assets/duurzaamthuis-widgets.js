@@ -247,6 +247,19 @@
 
 
 
+// 	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+// 		console.log('options', options);
+// 		console.log('originalOptions', originalOptions);
+// 		// if (originalOptions.type === 'POST' || options.type === 'POST') {
+// 		// 	 options.data = $.extend(originalOptions.data, { myProp : 1});
+// 		// }
+  
+//   });
+
+
+
+
+
 
 
 } )( jQuery );

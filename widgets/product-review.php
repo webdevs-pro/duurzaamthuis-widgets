@@ -6,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class DH_Product_Review extends \Elementor\Widget_Base {
 
+   public $price;
+   public $last_updated;
+
 	public function get_name() {
 		return 'dh-product-review';
 	}
@@ -58,22 +61,24 @@ class DH_Product_Review extends \Elementor\Widget_Base {
       return $logo_url;
    }
 
-
    public function is_number( $string ) {
       $string = str_replace( ',', '.', $string );
       if ( is_numeric( $string ) ) return true;
       return false;
    }
    
-
 	protected function render() { // php template
 		$settings = $this->get_settings_for_display();
+      $dfrcs_set_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-0-cache', true );
       
-
       ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
          echo '<div class="dh-products-review-grid dh-products-' . $settings['dh_product_review_skin'] . '-skin">';
 
             echo '<div class="dh-product">';
+
+               echo '<h3 class="dh-product-review-title">' . $settings['dh_product_review_title'] . '</h3>';
+               echo '<div class="dh-product-review-content">' . $settings['dh_product_review_content'] . '</div>';
+
                echo '<div class="dh-product-wrapper">';
                   echo '<div class="dh-product-column">';
                      echo '<div class="dh-product-score-heading">Duurzaam Thuis Score</div>';
@@ -103,20 +108,20 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                            echo '</div>';
                         echo '</div>'; // dh-product-co2
                      }
-                     $price = $settings['dh_product_review_price'];
-                     echo '<div class="dh-product-price">';
-                        if ( $price ) {
+                     $price = $settings['dh_product_review_price'] ? '€' . $settings['dh_product_review_price'] : ( $dfrcs_set_cache['price'] ?? '' );
+                     if ( $price ) {
+                        echo '<div class="dh-product-price">';
 
                            echo '<div>Prijs</div>';
                            echo '<div>';
-                           echo '€' . $price;
+                           echo $price;
                            $last_updated = $settings['dh_product_review_price_tooltip'];
                            if ( $last_updated ) {
                               echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
                            }
                            echo '</div>';
-                        }
-                     echo '</div>';
+                        echo '</div>';
+                     }
                      echo '<div class="dh-product-score">';
                         echo '<img src="' . $settings['dh_product_review_logo_url'] . '">';
                         echo '<div>';
@@ -176,6 +181,34 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                   echo '</div>';  // dh-product-column
 
                echo '</div>'; // dh-product-wrapper
+            
+
+               echo '<div class="dh-product-review-row">';
+
+                  echo '<div class="dh-product-review-column">';
+                     echo '<div class="dh-product-image-wrapper">';
+                        if ( $settings['dh_product_review_image']['id'] ) {
+                           echo wp_get_attachment_image( $settings['dh_product_review_image']['id'], 'medium' );
+                        } else {
+                           echo '<img src="' . Elementor\Utils::get_placeholder_image_src() . '">';
+                        }
+                     echo '</div>'; // dh-product-image-wrapper
+                  echo '</div>'; // dh-product-review-column
+
+                  echo '<div class="dh-product-review-column">';
+                     echo '<div class="dh-product-review-shortcode-heading">Beste prijs</div>';
+                     $shortcode = $this->render_shortcode( $settings['dh_product_review_shortcode'] );
+                     echo '<div class="dh-product-review-shortcode">' . $shortcode . '</div>';
+                     $last_updated_text = $settings['dh_product_review_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
+                     echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
+                     if ( $settings['dh_product_review_button_text'] ) {
+                        $rel = isset( $settings['dh_product_review_sponsored'] ) ? ' rel="sponsored"' : '';
+                        echo '<a target="_blank" class="dh-product-button" href="' . $settings['dh_product_review_button_link'] . '"' . $rel . '>' . $settings['dh_product_review_button_text'] . '</a>';
+                     }
+                  echo '</div>'; // dh-product-review-column
+
+               echo '</div>'; // dh-product-review-row
+
             echo '</div>'; // dh-product
 
          echo '</div>'; // dh-products-review-grid
@@ -183,6 +216,48 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
 	}
 
+   // public function filter_products( $products ) {
+	//    $products = array_slice( $products, 0, 15 );
+   //    foreach ( $products as $index => $product ) {
+   //       if ( $products[$index]['finalprice'] < 90 ) {
+   //          unset( $products[$index] );
+   //       }
+   //    }
+	//    $products = array_slice( $products, 0, 5 );
+   //    $key = array_key_first( $products );
+   //    $this->price = number_format( ( $products[$key]['finalprice'] / 100 ), 2, ',', '.' );
+   //    return $products;
+   // }
+
+
+   public function last_updated( $text, $instance ) {
+      $this->last_updated = $instance->date_updated;
+      return $text;
+   }
+
+   public function modify_dfrcs_context( $context, $instance ) {
+      return $context . ' widget-' . $this->get_id();
+   }
+
+
+   public function render_shortcode( $shorcode, $item_id = 0 ) {
+      // add_filter( 'dfrcs_products', [ $this, 'filter_products'], 100);
+      add_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100, 2 );
+      $content = do_shortcode( shortcode_unautop( $shorcode ) );
+      remove_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100 );
+      // remove_filter( 'dfrcs_products', [ $this, 'filter_products'], 100 );
+
+      $DOM = new DOMDocument();
+      @$DOM->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ) );
+      $data = $DOM->getElementsByTagName( 'div' )->item( 1 )->getAttribute( 'data-dfrcs' );
+      $data = unserialize( base64_decode( $data ) );
+      $data['widget'][$item_id] = $this->get_id();
+      $data = base64_encode( serialize( $data ) );
+      $DOM->getElementsByTagName( 'div' )->item( 1 )->setAttribute( 'data-dfrcs', $data );
+      $content = $DOM->saveHTML();
+
+      return $content;
+   }
 
    protected function content_template() {
 		?>
@@ -251,6 +326,10 @@ class DH_Product_Review extends \Elementor\Widget_Base {
             <div class="dh-products-review-grid dh-products-{{{ settings.dh_product_review_skin }}}-skin">
 
                <div class="dh-product">
+
+                  <h3 class="dh-product-review-title">{{{ settings.dh_product_review_title }}}</h3>
+                  <div class="dh-product-review-content">{{{ settings.dh_product_review_content }}}</div>
+               
                   <div class="dh-product-wrapper">
                      <div class="dh-product-column">
                         <div class="dh-product-score-heading">Duurzaam Thuis Score</div>
@@ -356,6 +435,27 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                      </div>
                      
                   </div>
+
+
+
+                  <div class="dh-product-review-row">
+
+                     <div class="dh-product-review-column">
+                        <div class="dh-product-image-wrapper">
+                           <img src="{{ settings.dh_product_review_image.url }}">
+                        </div>
+                     </div>
+
+                     <div class="dh-product-review-column">
+                        <div class="dh-product-shortcode-heading">Beste prijs</div>
+                        <div class="dh-product-shortcode">{{{ settings.dh_product_review_shortcode }}}</div>
+                        <# if ( settings.dh_product_review_button_text ) { #>
+                           <a target="_blank" class="dh-product-button" href="{{{ settings.dh_product_review_button_link }}}">{{{ settings.dh_product_review_button_text }}}</a>
+                        <# } #>
+                     </div>
+                  </div>
+
+
                </div>
             </div>
          </div>
