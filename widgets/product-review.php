@@ -89,6 +89,14 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                               echo $settings['dh_product_review_quality'];
                               if ( $settings['dh_product_review_quality_tooltip'] ) {
                                  echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $settings['dh_product_review_quality_tooltip'] ) . '"></i>';
+                              } else {
+                                 if ( $settings['dh_product_review_quality_amount1'] && $settings['dh_product_review_quality_source1'] ) {
+                                    $quality_tooltip = 'Gebaseerd op ' . $settings['dh_product_review_quality_amount1'] . ' reviews op ' . $settings['dh_product_review_quality_source1'];
+                                    if ( $settings['dh_product_review_quality_amount2'] && $settings['dh_product_review_quality_source2'] ) {
+                                       $quality_tooltip .= ' en ' . $settings['dh_product_review_quality_amount2'] . ' op ' . $settings['dh_product_review_quality_source2'];
+                                    }
+                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $quality_tooltip ) . '"></i>';
+                                 }
                               }
                            echo '</div>';
                         echo '</div>';
@@ -209,6 +217,44 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                echo '</div>'; // dh-product-review-row
 
+               $page_author_id = get_the_author_meta( 'ID' );
+               $review_author_name = get_the_author_meta( 'first_name', $page_author_id ) . ' ' . get_the_author_meta( 'last_name', $page_author_id );
+
+               ?><script type="application/ld+json">
+               {
+                  "@context": "https://schema.org/",
+                  "@type": "Product",
+                  "brand": {
+                     "@type": "Brand",
+                     "name": "<?php echo $settings['dh_product_review_brand']; ?>"
+                  },
+                  "gtin13": "<?php echo $settings['dh_product_review_ean'] ?: ''; ?>",
+                  "description": "<?php echo $settings['dh_product_review_description']; ?>",
+                  "image": "<?php echo $settings['dh_product_review_image']['url']; ?>",
+                  "name": "<?php echo $settings['dh_product_review_title']; ?>",
+                  "price": "<?php echo $settings['dh_product_review_price']; ?>",
+                  "aggregateRating": {
+                     "@type": "AggregateRating",
+                     "ratingValue": "<?php echo $settings['dh_product_review_quality']; ?>",
+                     "ratingCount": "<?php echo intval( $settings['dh_product_review_quality_amount1'] ) + intval( $settings['dh_product_review_quality_amount2'] ); ?>",
+                     "bestRating": "10"
+                  },
+                  "review": [{
+                     "@type": "Review",
+                     "reviewRating": {
+                        "@type": "Rating",
+                        "ratingValue": "<?php echo $settings['dh_product_review_rating']; ?>",
+                        "bestRating": "10"
+                     },
+                     "reviewBody": "<?php echo $settings['dh_product_review_content']; ?>",
+                     "author": {
+                        "@type": "Person",
+                        "name": "<?php echo $review_author_name; ?>"
+                     }
+                  }]
+               }
+               </script><?php
+
             echo '</div>'; // dh-product
 
          echo '</div>'; // dh-products-review-grid
@@ -247,6 +293,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
       remove_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100 );
       // remove_filter( 'dfrcs_products', [ $this, 'filter_products'], 100 );
 
+      if ( ! $content ) return '';
       $DOM = new DOMDocument();
       @$DOM->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ) );
       $data = $DOM->getElementsByTagName( 'div' )->item( 1 )->getAttribute( 'data-dfrcs' );
@@ -340,7 +387,16 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                                  {{{ settings.dh_product_review_quality }}}
                                  <# if ( settings.dh_product_review_quality_tooltip ) { #>
                                     <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ settings.dh_product_review_quality_tooltip }}"></i>
-                                 <# } #>
+                                 <# } else {
+                                    var quality_tooltip;
+                                    if ( settings.dh_product_review_quality_amount1 && settings.dh_product_review_quality_source1 ) {
+                                       quality_tooltip = 'Gebaseerd op ' + settings.dh_product_review_quality_amount1 + ' reviews op ' + settings.dh_product_review_quality_source1;
+                                       if ( settings.dh_product_review_quality_amount2 && settings.dh_product_review_quality_source2 ) {
+                                          quality_tooltip += ' en ' + settings.dh_product_review_quality_amount2 + ' op ' + settings.dh_product_review_quality_source2;
+                                       }
+                                       #><i class="dh-icon dh-icon-info" data-dh-tooltip="{{ quality_tooltip }}"></i><#
+                                    }
+                                 } #> 
                               </div>
                            </div>
                         <# } #>
@@ -436,8 +492,6 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                      
                   </div>
 
-
-
                   <div class="dh-product-review-row">
 
                      <div class="dh-product-review-column">
@@ -454,8 +508,6 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                         <# } #>
                      </div>
                   </div>
-
-
                </div>
             </div>
          </div>

@@ -800,6 +800,20 @@ class DH_Widgets_Content_Controls {
 
 
 	public static function get_dh_product_review_controls( $widget ) {
+		ob_start(); ?>
+		<# 
+			(function($) { 
+				var timer = setTimeout(function() {
+					var text_input = $('.dh-13-digits-restriction').find('input').attr('maxlength', 13).attr('minlength', 13);
+				}, 100);		
+			})(jQuery);
+		#>
+		<style>
+			.dh-13-digits-restriction input:invalid {
+				border: 2px dashed red;
+			}
+		</style>
+		<?php $script = ob_get_clean();
 		$widget->start_controls_section( 'dh_product_review_section_content', [
          'label' => __( 'Product Comparison Sustainability Score', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
@@ -818,6 +832,20 @@ class DH_Widgets_Content_Controls {
 				'default' => __( 'Product title' , 'duurzaamthuis' ),
 				'label_block' => true,
 			] );
+			$widget->add_control( 'dh_product_review_brand', [ // title
+				'label' => __( 'Brand', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => __( 'Product title' , 'duurzaamthuis' ),
+				'label_block' => true,
+			] );
+			$widget->add_control( 'dh_product_review_ean', [ // title
+				'label' => __( 'EAN Product ID', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => __( '' , 'duurzaamthuis' ),
+				'label_block' => true,
+				'description' => 'For example: 9789000378937 (13 digits)',
+				'classes' => "dh-13-digits-restriction",
+			] );
 			$widget->add_control( 'dh_product_review_content', [
 				'label' => __( 'Content', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::WYSIWYG,
@@ -832,10 +860,31 @@ class DH_Widgets_Content_Controls {
 				'type' => Elementor\Controls_Manager::TEXT,
 				'default' => '9,6',
 			] );
+			$widget->add_control( 'dh_product_review_quality_amount1', [
+				'label' => __( 'Reviews Amount 1', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => '2000',
+			] );
+			$widget->add_control( 'dh_product_review_quality_source1', [
+				'label' => __( 'Reviews Source 1', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => 'Amazon',
+			] );
+			$widget->add_control( 'dh_product_review_quality_amount2', [
+				'label' => __( 'Reviews Amount 2', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => '100',
+			] );
+			$widget->add_control( 'dh_product_review_quality_source2', [
+				'label' => __( 'Reviews Source 2', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => 'Bol.com',
+				] );
 			$widget->add_control( 'dh_product_review_quality_tooltip', [
 				'label' => __( 'Tooltip', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
 				'default' => '',
+				'description' => 'only use to override automatic tooltip: "gebaseerd op [amount] reviews op [source]"',
 				'separator' => 'after',
 			] );
 			$widget->add_control( 'dh_product_review_co2', [
@@ -946,7 +995,10 @@ class DH_Widgets_Content_Controls {
 				'default' => '#',
 				'label_block' => true,
 			] );
-
+			$widget->add_control( 'dh_product_review_script', [
+				'type' => Elementor\Controls_Manager::RAW_HTML,
+				'raw' => $script,
+			] );
 
 		$widget->end_controls_section(); 
 	}
@@ -1706,9 +1758,8 @@ class DH_Widgets_Content_Controls {
 
 
 
-
+// Widget builder ACF option page
 if( function_exists('acf_add_options_page') ) {
-	
 	acf_add_options_page(array(
 		'page_title' 	=> 'Widget Builder',
 		'menu_title'	=> 'Widget Builder',
@@ -1717,11 +1768,9 @@ if( function_exists('acf_add_options_page') ) {
 		'icon_url' => 'dashicons-excerpt-view',
 		'redirect'		=> false
 	));
-	
 }
 
-// $templates = get_field( 'templates', 'option' );
-// error_log( "templates\n" . print_r( $templates, true ) . "\n" );
+
 
 
 
@@ -1735,4 +1784,6 @@ add_action( 'elementor/editor/after_save', function( $post_id, $editor_data ) {
 		}
 	}
 }, 10, 2 );
+
+
 

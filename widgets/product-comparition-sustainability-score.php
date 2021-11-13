@@ -139,13 +139,12 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               echo '</div>'; // dh-product-co2
                            }
                            $price = $item['dh_product_comparition_sustainability_score_price'] ? '€' . $item['dh_product_comparition_sustainability_score_price'] : ( $dfrcs_set_cache['price'] ?? '' );
-
+                           $last_updated = $item['dh_product_comparition_sustainability_score_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
                            if ( $price ) {
                               echo '<div class="dh-product-price">';
                                  echo '<div>Prijs</div>';
                                  echo '<div>';
                                  echo $price;
-                                 $last_updated = $item['dh_product_comparition_sustainability_score_price_tooltip'] ?: 'Laatste update: ' . $this->last_updated;
                                  if ( $last_updated ) {
                                     echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
                                  }
