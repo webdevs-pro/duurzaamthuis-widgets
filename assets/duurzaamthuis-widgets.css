@@ -2105,3 +2105,48 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 .dh-star-rating .dh-rating .dh-rating-fg i {
    color: #deac30;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* how to/FAQ */
+.dh-widget-dh-how-to-faq .dh-how-to-faq-item {
+   display: flex;
+   margin-bottom: 20px;
+}
+.dh-widget-dh-how-to-faq .dh-how-to-faq .dh-how-to-faq-item-number {
+   background: #EADECC;
+   border-radius: 50%;
+   width: 2em;
+   height: 2em;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-shrink: 0;
+   font-weight: 700;
+   color: #515F70;
+}
+
+.dh-widget-dh-how-to-faq .dh-how-to-faq .dh-how-to-faq-item-content {
+   margin-top: 0.25em;
+   margin-left: 1em;
+}
+.dh-widget-dh-how-to-faq .dh-how-to-faq .dh-how-to-faq-item-heading {
+   font-size: 16px;
+   line-height: 24px;
+   font-weight: 600;
+   margin-bottom: 5px;
+}

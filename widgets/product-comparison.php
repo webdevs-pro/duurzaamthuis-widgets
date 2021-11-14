@@ -171,7 +171,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                     foreach ( $pros as $pros_item ) {
                                        echo '<div class="dh-product-pros-item">';
                                           echo '<i class="dh-icon dh-icon-check"></i>';
-                                          echo '<div class="dh-product-pros-item-text">' . $pros_item[0] . '</div>';
+                                          echo '<div class="dh-product-pros-item-text">' . esc_html( $pros_item[0] ) . '</div>';
                                        echo '</div>';
                                     }
                                  echo '</div>';
@@ -184,7 +184,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                     foreach ( $cons as $cons_item ) {
                                        echo '<div class="dh-product-cons-item">';
                                           echo '<i class="dh-icon dh-icon-times"></i>';
-                                          echo '<div class="dh-product-cons-item-text">' . $cons_item[0] . '</div>';
+                                          echo '<div class="dh-product-cons-item-text">' . esc_html( $cons_item[0] ) . '</div>';
                                        echo '</div>';
                                     }
                                  echo '</div>';

@@ -46,6 +46,7 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/multiwidgets.php';
 		require __DIR__ . '/widgets/author-box.php';
 		require __DIR__ . '/widgets/product-review.php';
+		require __DIR__ . '/widgets/how-to-faq.php';
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Anchor_Navigation() );
@@ -62,6 +63,7 @@ class DH_Register_Widgets {
 		// \Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Template2() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Author_Box() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Product_Review() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_How_To_Faq() );
 		new DH_Multiwidgets();
 	}
 }
@@ -1287,7 +1289,7 @@ class DH_Widgets_Content_Controls {
 					'label_block' => true,
 				] );
 			$widget->add_control( 'dh_numbered_list_items', [
-				'label' => __( 'Products', 'duurzaamthuis' ),
+				'label' => __( 'Items', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
@@ -1302,6 +1304,56 @@ class DH_Widgets_Content_Controls {
 			] );
 		$widget->end_controls_section(); 
 	}
+
+
+
+
+
+
+
+
+
+	public static function get_dh_how_to_faq_controls( $widget ) {
+		$widget->start_controls_section( 'dh_how_to_faq_section_content', [
+         'label' => __( 'How to/FAQ', 'duurzaamthuis' ),
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
+      ] );
+			$repeater = new \Elementor\Repeater();
+				$repeater->add_control( 'dh_how_to_faq_item_heading', [
+					'label' => __( 'Heading', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXTAREA,
+					'rows' => 3,
+					'default' => __( 'Item heading' , 'duurzaamthuis' ),
+				] );
+				$repeater->add_control( 'dh_how_to_faq_item_text', [
+					'label' => __( 'Text', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::WYSIWYG,
+					'rows' => 3,
+					'default' => __( 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.' , 'duurzaamthuis' ),
+				] );
+			$widget->add_control( 'dh_how_to_faq_items', [
+				'label' => __( 'Items', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::REPEATER,
+				'fields' => $repeater->get_controls(),
+				'default' => [
+					[
+						'text' => __( 'Item text', 'duurzaamthuis' ),
+					],
+					[
+						'text' => __( 'Item text', 'duurzaamthuis' ),
+					],
+				],
+				'title_field' => '{{{ dh_how_to_faq_item_heading }}}',
+			] );
+		$widget->end_controls_section(); 
+	}
+
+
+
+
+
+
+
 
 	public static function get_dh_page_header_controls( $widget ) {
 		$widget->start_controls_section( 'dh_page_header_section_content', [
