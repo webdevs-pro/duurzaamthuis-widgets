@@ -343,7 +343,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                        <# _.each( pros, function(pros_item) { #>
                                           <div class="dh-product-pros-item">
                                              <i class="dh-icon dh-icon-check"></i>
-                                             <div class="dh-product-pros-item-text">{{{ pros_item[0] }}}</div>
+                                             <div class="dh-product-pros-item-text">{{ pros_item[0] }}</div>
                                           </div>
                                        <# }); #>
                                     </div>
@@ -355,7 +355,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                     <# _.each( cons, function(cons_item) { #>
                                        <div class="dh-product-cons-item">
                                           <i class="dh-icon dh-icon-times"></i>
-                                          <div class="dh-product-cons-item-text">{{{ cons_item[0] }}}</div>
+                                          <div class="dh-product-cons-item-text">{{ cons_item[0] }}</div>
                                        </div>
                                     <# }); #>
                                  </div>

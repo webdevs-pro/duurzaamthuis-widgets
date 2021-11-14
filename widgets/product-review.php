@@ -400,7 +400,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                               <div>
                                  {{ settings.dh_product_review_quality }}
                                  <# if ( settings.dh_product_review_quality_tooltip ) { #>
-                                    <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ settings.dh_product_review_quality_tooltip }}"></i>
+                                    <i class="dh-icon dh-icon-info" data-dh-tooltip="{{{ settings.dh_product_review_quality_tooltip }}}"></i>
                                  <# } else {
                                     var quality_tooltip;
                                     if ( settings.dh_product_review_quality_amount1 && settings.dh_product_review_quality_source1 ) {
@@ -458,7 +458,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                               <div class="dh-product-rating">
                                  <div class="dh-text-rating">{{ settings.dh_product_review_rating }}/10</div>
                                  <div class="dh-list-rating">
-                                 {{ renderRating( settings.dh_product_review_rating ) }}
+                                 {{{ renderRating( settings.dh_product_review_rating ) }}}
                                  </div>
                               </div>
                            </div>

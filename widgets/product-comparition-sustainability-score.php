@@ -230,10 +230,12 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                      {
                         "@context": "https://schema.org/",
                         "@type": "Product",
+                        <?php if ( $item['dh_product_comparition_sustainability_score_brand'] ) { ?>
                         "brand": {
                            "@type": "Brand",
                            "name": "<?php echo $item['dh_product_comparition_sustainability_score_brand']; ?>"
                         },
+                        <?php } ?>
                         "gtin13": "<?php echo $item['dh_product_comparition_sustainability_score_ean'] ?: ''; ?>",
                         "image": "<?php echo $item['dh_product_comparition_sustainability_score_image']['url']; ?>",
                         "name": "<?php echo $item['dh_product_comparition_sustainability_score_title']; ?>",
@@ -308,6 +310,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
       remove_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100 );
       // remove_filter( 'dfrcs_products', [ $this, 'filter_products'], 100 );
 
+      if ( ! $content ) return '';
       $DOM = new DOMDocument();
       @$DOM->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ) );
       $data = $DOM->getElementsByTagName( 'div' )->item( 1 )->getAttribute( 'data-dfrcs' );
@@ -481,7 +484,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                     <div class="dh-product-rating">
                                        <div class="dh-text-rating">{{ item.dh_product_comparition_sustainability_score_rating }}/10</div>
                                        <div class="dh-list-rating">
-                                       {{ renderRating( item.dh_product_comparition_sustainability_score_rating ) }}
+                                       {{{ renderRating( item.dh_product_comparition_sustainability_score_rating ) }}}
                                        </div>
                                     </div>
                                  </div>
