@@ -1318,15 +1318,16 @@ class DH_Widgets_Content_Controls {
          'label' => __( 'How to/FAQ', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
+
 			$repeater = new \Elementor\Repeater();
 				$repeater->add_control( 'dh_how_to_faq_item_heading', [
 					'label' => __( 'Heading', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXTAREA,
 					'rows' => 3,
-					'default' => __( 'Item heading' , 'duurzaamthuis' ),
+					'default' => __( 'Item heading / question' , 'duurzaamthuis' ),
 				] );
 				$repeater->add_control( 'dh_how_to_faq_item_text', [
-					'label' => __( 'Text', 'duurzaamthuis' ),
+					'label' => __( 'Text / answer', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::WYSIWYG,
 					'rows' => 3,
 					'default' => __( 'Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for previewing layouts and visual mockups.' , 'duurzaamthuis' ),
@@ -1336,14 +1337,30 @@ class DH_Widgets_Content_Controls {
 				'type' => Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 				'default' => [
-					[
-						'text' => __( 'Item text', 'duurzaamthuis' ),
-					],
-					[
-						'text' => __( 'Item text', 'duurzaamthuis' ),
-					],
+					[],
+					[],
 				],
 				'title_field' => '{{{ dh_how_to_faq_item_heading }}}',
+			] );
+			$widget->add_control( 'dh_how_to_faq_schema_type', [
+            'label' => __( 'Schema type', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::SELECT,
+            'default' => 'disabled',
+            'options' => [
+               'disabled'  => __( 'Disabled', 'duurzaamthuis' ),
+               'how_to' => __( 'How to', 'duurzaamthuis' ),
+               'faq' => __( 'FAQ', 'duurzaamthuis' ),
+            ],
+         ] );
+			$widget->add_control( 'dh_how_to_faq_name', [
+				'label' => __( 'Name', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => __( 'List name' , 'duurzaamthuis' ),
+				'description' => 'Required for How To Schema markup',
+				'label_block' => true,
+				'condition' => [
+					'dh_how_to_faq_schema_type' => 'how_to'
+				]
 			] );
 		$widget->end_controls_section(); 
 	}

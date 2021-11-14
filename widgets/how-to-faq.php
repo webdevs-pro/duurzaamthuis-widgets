@@ -45,13 +45,54 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 				}
          echo '</div>';
 
-			?></div><?php
+			?></div><?php 
+
+			if ( $settings['dh_how_to_faq_schema_type'] == 'how_to' ) {
+				?>
+					<script type="application/ld+json">
+						{
+							"@context": "https://schema.org/",
+							"@type": "HowTo",
+							"name": "<?php echo esc_html( $settings['dh_how_to_faq_name'] ); ?>",
+							"step": [
+								<?php foreach ( $settings['dh_how_to_faq_items'] as $index => $item ) { ?>
+								{
+									"@type": "HowToStep",
+									"name": "<?php echo esc_html( $item['dh_how_to_faq_item_heading'] ); ?>",
+									"text": "<?php echo esc_html( $item['dh_how_to_faq_item_text'] ); ?>"
+								}<?php echo $index < count( $settings['dh_how_to_faq_items'] ) - 1 ? ',' : ''; ?>
+								<?php } ?>
+							]
+						}
+					</script>
+				<?php
+			} else if ( $settings['dh_how_to_faq_schema_type'] == 'faq' ) {
+				?>
+					<script type="application/ld+json">
+						{
+							"@context": "https://schema.org/",
+							"@type": "FAQPage",
+							"mainEntity": [
+								<?php foreach ( $settings['dh_how_to_faq_items'] as $index => $item ) { ?>
+								{
+									"@type": "Question",
+									"name": "<?php echo esc_html( $item['dh_how_to_faq_item_heading'] ); ?>",
+									"acceptedAnswer": {
+										"@type": "Answer",
+										"text": "<?php echo esc_html( $item['dh_how_to_faq_item_text'] ); ?>"
+									}
+								}<?php echo $index < count( $settings['dh_how_to_faq_items'] ) - 1 ? ',' : ''; ?>
+								<?php } ?>
+							]
+						}
+					</script>
+				<?php
+			}
 		}
 
 	}
 
 	protected function content_template() { // php template
-
       ?>
 		<# if ( settings.dh_how_to_faq_items ) { #>
 			<# 
