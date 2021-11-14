@@ -116,10 +116,18 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               echo '<div class="dh-product-quality">';
                                  echo '<div>Kwaliteit</div>';
                                  echo '<div>';
-                                    echo $item['dh_product_comparition_sustainability_score_quality'];
-                                    if ( $item['dh_product_comparition_sustainability_score_quality_tooltip'] ) {
-                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_product_comparition_sustainability_score_quality_tooltip'] ) . '"></i>';
+                                 echo $item['dh_product_comparition_sustainability_score_quality'];
+                                 if ( $item['dh_product_comparition_sustainability_score_quality_tooltip'] ) {
+                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_product_comparition_sustainability_score_quality_tooltip'] ) . '"></i>';
+                                 } else {
+                                    if ( $item['dh_product_comparition_sustainability_score_quality_amount1'] && $item['dh_product_comparition_sustainability_score_quality_source1'] ) {
+                                       $quality_tooltip = 'Gebaseerd op ' . $item['dh_product_comparition_sustainability_score_quality_amount1'] . ' reviews op ' . $item['dh_product_comparition_sustainability_score_quality_source1'];
+                                       if ( $item['dh_product_comparition_sustainability_score_quality_amount2'] && $item['dh_product_comparition_sustainability_score_quality_source2'] ) {
+                                          $quality_tooltip .= ' en ' . $item['dh_product_comparition_sustainability_score_quality_amount2'] . ' op ' . $item['dh_product_comparition_sustainability_score_quality_source2'];
+                                       }
+                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $quality_tooltip ) . '"></i>';
                                     }
+                                 }
                                  echo '</div>';
                               echo '</div>';
                            }
@@ -177,7 +185,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  foreach ( $pros as $pros_item ) {
                                     echo '<div class="dh-product-pros-item">';
                                        echo '<i class="dh-icon dh-icon-check"></i>';
-                                       echo '<div class="dh-product-pros-item-text">' . $pros_item[0] . '</div>';
+                                       echo '<div class="dh-product-pros-item-text">' . esc_html( $pros_item[0] ) . '</div>';
                                     echo '</div>';
                                  }
                               echo '</div>';
@@ -189,7 +197,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  foreach ( $cons as $cons_item ) {
                                     echo '<div class="dh-product-cons-item">';
                                        echo '<i class="dh-icon dh-icon-times"></i>';
-                                       echo '<div class="dh-product-cons-item-text">' . $cons_item[0] . '</div>';
+                                       echo '<div class="dh-product-cons-item-text">' . esc_html( $cons_item[0] ) . '</div>';
                                     echo '</div>';
                                  }
                               echo '</div>';
@@ -214,6 +222,57 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            }
                         echo '</div>'; // dh-product-column
                      echo '</div>'; // dh-product-wrapper
+
+                     $page_author_id = get_the_author_meta( 'ID' );
+                     $review_author_name = get_the_author_meta( 'first_name', $page_author_id ) . ' ' . get_the_author_meta( 'last_name', $page_author_id );
+
+                     ?><script type="application/ld+json">
+                     {
+                        "@context": "https://schema.org/",
+                        "@type": "Product",
+                        "brand": {
+                           "@type": "Brand",
+                           "name": "<?php echo $item['dh_product_comparition_sustainability_score_brand']; ?>"
+                        },
+                        "gtin13": "<?php echo $item['dh_product_comparition_sustainability_score_ean'] ?: ''; ?>",
+                        "image": "<?php echo $item['dh_product_comparition_sustainability_score_image']['url']; ?>",
+                        "name": "<?php echo $item['dh_product_comparition_sustainability_score_title']; ?>",
+                        "price": "<?php echo $item['dh_product_comparition_sustainability_score_price']; ?>",
+                        "aggregateRating": {
+                           "@type": "AggregateRating",
+                           "ratingValue": "<?php echo $item['dh_product_comparition_sustainability_score_quality']; ?>",
+                           "ratingCount": "<?php echo intval( $item['dh_product_comparition_sustainability_score_quality_amount1'] ?? '' ) + intval( $settings['dh_product_comparition_sustainability_score_quality_amount2'] ?? '' ); ?>",
+                           "bestRating": "10"
+                        },
+                        "review": [{
+                           "@type": "Review",
+                           "reviewRating": {
+                              "@type": "Rating",
+                              "ratingValue": "<?php echo $item['dh_product_comparition_sustainability_score_rating']; ?>",
+                              "bestRating": "10"
+                           },
+                           "reviewBody": "<?php echo $item['dh_product_comparition_sustainability_score_description']; ?>",
+                           "author": {
+                              "@type": "Person",
+                              "name": "<?php echo $review_author_name; ?>"
+                           },
+                           <?php
+                              $cons = json_decode( $item['dh_product_comparition_sustainability_score_pros'] );
+                              if ( ! empty( $pros ) ) {
+                                 echo '"positiveNotes": [';
+                                    echo '"' . implode( '","', array_column( $pros, 0 ) ) . '"';
+                                 echo '],';
+                              }
+                              $cons = json_decode( $item['dh_product_comparition_sustainability_score_cons'] );
+                              if ( ! empty( $cons ) ) {
+                                 echo '"negativeNotes": [';
+                                    echo '"' . implode( '","', array_column( $cons, 0 ) ) . '"';
+                                 echo ']';
+                              }
+                           ?>
+                        }]
+                     }
+                     </script><?php
                   echo '</div>'; // dh-product
                endforeach;
             echo '</div>'; // dh-products-score-grid
@@ -325,15 +384,15 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                } ); 
                classes = ' ' + classes.join( ' ' );
             #>
-            <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
-               <div class="dh-products-score-grid dh-products-{{{ settings.dh_product_comparition_sustainability_score_skin }}}-skin">
+            <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{ classes }}">
+               <div class="dh-products-score-grid dh-products-{{ settings.dh_product_comparition_sustainability_score_skin }}-skin">
                   <# _.each( settings.dh_product_comparition_sustainability_score_products, function( item, index ) { #>
                      <div class="dh-product dh-product-{{ item.dh_product_comparition_sustainability_score__id }}">
                         <div class="dh-product-wrapper">
                            <div class="dh-product-column">
                               <h3 class="dh-product-heading dh-number-heading">
-                                 <div class="dh-number">{{{ index + 1 }}}</div>
-                                 <div class="dh-heading">{{{ item.dh_product_comparition_sustainability_score_title }}}</div>
+                                 <div class="dh-number">{{ index + 1 }}</div>
+                                 <div class="dh-heading">{{ item.dh_product_comparition_sustainability_score_title }}</div>
                               </h3>
                               <div class="dh-product-image">
                                  <#
@@ -362,10 +421,19 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  <div class="dh-product-quality">
                                     <div>Kwaliteit</div>
                                     <div>
-                                       {{{ item.dh_product_comparition_sustainability_score_quality }}}
-                                       <# if ( item.dh_product_comparition_sustainability_score_quality_tooltip ) { #>
-                                          <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_comparition_sustainability_score_quality_tooltip }}"></i>
-                                       <# } #>
+                                    {{ item.dh_product_comparition_sustainability_score_quality }}
+                                    <# if ( item.dh_product_comparition_sustainability_score_quality_tooltip ) { #>
+                                       <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_comparition_sustainability_score_quality_tooltip }}"></i>
+                                    <# } else {
+                                       var quality_tooltip;
+                                       if ( item.dh_product_comparition_sustainability_score_quality_amount1 && item.dh_product_comparition_sustainability_score_quality_source1 ) {
+                                          quality_tooltip = 'Gebaseerd op ' + item.dh_product_comparition_sustainability_score_quality_amount1 + ' reviews op ' + item.dh_product_comparition_sustainability_score_quality_source1;
+                                          if ( item.dh_product_comparition_sustainability_score_quality_amount2 && item.dh_product_comparition_sustainability_score_quality_source2 ) {
+                                             quality_tooltip += ' en ' + item.dh_product_comparition_sustainability_score_quality_amount2 + ' op ' + item.dh_product_comparition_sustainability_score_quality_source2;
+                                          }
+                                          #><i class="dh-icon dh-icon-info" data-dh-tooltip="{{ quality_tooltip }}"></i><#
+                                       }
+                                    } #> 
                                     </div>
                                  </div>
                               <# } #>
@@ -373,7 +441,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  <div class="dh-product-co2">
                                     <div>
                                     <# if ( item.dh_product_comparition_sustainability_score_co2_custom_label ) { #>
-                                       {{{ item.dh_product_comparition_sustainability_score_co2_custom_label }}}
+                                       {{ item.dh_product_comparition_sustainability_score_co2_custom_label }}
                                     <# } else { #>
                                        CO<sub>2</sub>-afdruk
                                     <# } #>
@@ -383,7 +451,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                        if ( ! item.dh_product_comparition_sustainability_score_co2_custom_label && is_number( co2 ) ) {
                                           co2 = co2 + 'kg CO<sub>2</sub> p/j';
                                        } #>
-                                       {{{ co2 }}}
+                                       {{ co2 }}
                                        <# if ( item.dh_product_comparition_sustainability_score_co2_tooltip ) { #>
                                           <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_comparition_sustainability_score_co2_tooltip }}"></i>
                                        <# } #>
@@ -394,7 +462,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  <div class="dh-product-price">
                                     <div>Prijs</div>
                                     <div>
-                                       €{{{ item.dh_product_comparition_sustainability_score_price }}}
+                                       €{{ item.dh_product_comparition_sustainability_score_price }}
                                        <# if ( item.dh_product_comparition_sustainability_score_price_tooltip ) { #>
                                           <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ item.dh_product_comparition_sustainability_score_price_tooltip }}"></i>
                                        <# } #>
@@ -402,7 +470,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  </div>
                               <# } #>
                               <div class="dh-product-score">
-                                 <img src="{{{ settings.dh_product_comparition_sustainability_score_logo_url }}}">
+                                 <img src="{{ settings.dh_product_comparition_sustainability_score_logo_url }}">
                                  <div>
                                     <div class="dh-product-rating-heading">
                                        Duurzaam Thuis Score
@@ -411,9 +479,9 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                        <# } #>
                                     </div>
                                     <div class="dh-product-rating">
-                                       <div class="dh-text-rating">{{{ item.dh_product_comparition_sustainability_score_rating }}}/10</div>
+                                       <div class="dh-text-rating">{{ item.dh_product_comparition_sustainability_score_rating }}/10</div>
                                        <div class="dh-list-rating">
-                                       {{{ renderRating( item.dh_product_comparition_sustainability_score_rating ) }}}
+                                       {{ renderRating( item.dh_product_comparition_sustainability_score_rating ) }}
                                        </div>
                                     </div>
                                  </div>
@@ -427,7 +495,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                     <# _.each( pros, function(pros_item) { #>
                                        <div class="dh-product-pros-item">
                                           <i class="dh-icon dh-icon-check"></i>
-                                          <div class="dh-product-pros-item-text">{{{ pros_item[0] }}}</div>
+                                          <div class="dh-product-pros-item-text">{{ pros_item[0] }}</div>
                                        </div>
                                     <# } ); #>
                                  </div>
@@ -439,14 +507,14 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                     <# _.each( cons, function( cons_item ) { #>
                                        <div class="dh-product-cons-item">
                                           <i class="dh-icon dh-icon-times"></i>
-                                          <div class="dh-product-cons-item-text">{{{ cons_item[0] }}}</div>
+                                          <div class="dh-product-cons-item-text">{{ cons_item[0] }}</div>
                                        </div>
                                     <# } ); #>
                                  </div>
                               <# } #>
                               <div class="dh-product-description-heading">Omschrijving</div>
                               <div class="dh-product-description">
-                                 <div class="dh-product-description-content">{{{ item.dh_product_comparition_sustainability_score_description }}}</div>
+                                 <div class="dh-product-description-content">{{ item.dh_product_comparition_sustainability_score_description }}</div>
                                     <div class="dh-product-description-toggle">
                                     <div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>
                                     <div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>
@@ -455,9 +523,9 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            </div>
                            <div class="dh-product-column">
                               <div class="dh-product-shortcode-heading">Beste prijs</div>
-                              <div class="dh-product-shortcode">{{{ item.dh_product_comparition_sustainability_score_shortcode }}}</div>
+                              <div class="dh-product-shortcode">{{ item.dh_product_comparition_sustainability_score_shortcode }}</div>
                               <# if ( item.dh_product_comparition_sustainability_score_button_text ) { #>
-                                 <a target="_blank" class="dh-product-button" href="{{{ item.dh_product_comparition_sustainability_score_button_link }}}">{{{ item.dh_product_comparition_sustainability_score_button_text }}}</a>
+                                 <a target="_blank" class="dh-product-button" href="{{ item.dh_product_comparition_sustainability_score_button_link }}">{{ item.dh_product_comparition_sustainability_score_button_text }}</a>
                               <# } #>
                            </div>
                         </div>

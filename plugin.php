@@ -804,12 +804,13 @@ class DH_Widgets_Content_Controls {
 		<# 
 			(function($) { 
 				var timer = setTimeout(function() {
-					var text_input = $('.dh-13-digits-restriction').find('input').attr('maxlength', 13).attr('minlength', 13);
+					var text_input = $('.dh-13-chars-max').find('input').attr('maxlength', 13).attr('minlength', 13);
+					$('.dh-numbers-only').find('input').DhNumbersOnly();
 				}, 100);		
 			})(jQuery);
 		#>
 		<style>
-			.dh-13-digits-restriction input:invalid {
+			.dh-13-chars-max input:invalid {
 				border: 2px dashed red;
 			}
 		</style>
@@ -835,16 +836,15 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_product_review_brand', [ // title
 				'label' => __( 'Brand', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
-				'default' => __( 'Product title' , 'duurzaamthuis' ),
 				'label_block' => true,
 			] );
 			$widget->add_control( 'dh_product_review_ean', [ // title
-				'label' => __( 'EAN Product ID', 'duurzaamthuis' ),
+				'label' => __( 'EAN Product ID (GTIN-13)', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
 				'default' => __( '' , 'duurzaamthuis' ),
 				'label_block' => true,
 				'description' => 'For example: 9789000378937 (13 digits)',
-				'classes' => "dh-13-digits-restriction",
+				'classes' => "dh-13-chars-max dh-numbers-only",
 			] );
 			$widget->add_control( 'dh_product_review_content', [
 				'label' => __( 'Content', 'duurzaamthuis' ),
@@ -864,6 +864,7 @@ class DH_Widgets_Content_Controls {
 				'label' => __( 'Reviews Amount 1', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
 				'default' => '2000',
+				'classes' => "dh-numbers-only",
 			] );
 			$widget->add_control( 'dh_product_review_quality_source1', [
 				'label' => __( 'Reviews Source 1', 'duurzaamthuis' ),
@@ -874,12 +875,13 @@ class DH_Widgets_Content_Controls {
 				'label' => __( 'Reviews Amount 2', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
 				'default' => '100',
+				'classes' => "dh-numbers-only",
 			] );
 			$widget->add_control( 'dh_product_review_quality_source2', [
 				'label' => __( 'Reviews Source 2', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
 				'default' => 'Bol.com',
-				] );
+			] );
 			$widget->add_control( 'dh_product_review_quality_tooltip', [
 				'label' => __( 'Tooltip', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
@@ -1110,12 +1112,12 @@ class DH_Widgets_Content_Controls {
 				'label' => __( 'Menu', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SELECT,
 				'options' => $menus,
-				'default' => array_keys( $menus )[0],
+				'default' => array_keys( $menus )[0] ?? '',
 			] );
 			$widget->add_control( 'dh_mega_menu_mobile_menu', [
 				'label' => __( 'Mobile Menu', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SELECT,
-				'default' => array_keys( $menus )[0],
+				'default' => array_keys( $menus )[0] ?? '',
 				'options' => $menus,
 			] );
 
@@ -1366,7 +1368,54 @@ class DH_Widgets_Content_Controls {
 		$widget->end_controls_section(); 
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	public static function get_dh_product_comparition_sustainability_score_controls( $widget ) {
+		ob_start(); ?>
+		<# 
+			(function($) { 
+				var timer = setTimeout(function() {
+					var text_input = $('.dh-13-chars-max').find('input').attr('maxlength', 13).attr('minlength', 13);
+					$('.dh-numbers-only').find('input').DhNumbersOnly();
+				}, 100);		
+			})(jQuery);
+		#>
+		<style>
+			.dh-13-chars-max input:invalid {
+				border: 2px dashed red;
+			}
+		</style>
+		<?php $script = ob_get_clean();
 		$widget->start_controls_section( 'dh_product_comparition_sustainability_score_section_content', [
          'label' => __( 'Product Comparison Sustainability Score', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
@@ -1407,6 +1456,19 @@ class DH_Widgets_Content_Controls {
                'default' => __( 'Product title' , 'duurzaamthuis' ),
                'label_block' => true,
             ] );
+				$repeater->add_control( 'dh_product_comparition_sustainability_score_brand', [
+					'label' => __( 'Brand', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXT,
+					'label_block' => true,
+				] );
+				$repeater->add_control( 'dh_product_comparition_sustainability_score_ean', [
+					'label' => __( 'EAN Product ID (GTIN-13)', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXT,
+					'default' => __( '' , 'duurzaamthuis' ),
+					'label_block' => true,
+					'description' => 'For example: 9789000378937 (13 digits)',
+					'classes' => "dh-13-chars-max dh-numbers-only",
+				] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_badge', [
                'label' => __( 'Badge', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::SELECT,
@@ -1433,6 +1495,28 @@ class DH_Widgets_Content_Controls {
                'type' => Elementor\Controls_Manager::TEXT,
                'default' => '9,6',
             ] );
+				$repeater->add_control( 'dh_product_comparition_sustainability_score_quality_amount1', [
+					'label' => __( 'Reviews Amount 1', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXT,
+					'default' => '2000',
+               'classes' => "dh-numbers-only",
+				] );
+				$repeater->add_control( 'dh_product_comparition_sustainability_score_quality_source1', [
+					'label' => __( 'Reviews Source 1', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXT,
+					'default' => 'Amazon',
+				] );
+				$repeater->add_control( 'dh_product_comparition_sustainability_score_quality_amount2', [
+					'label' => __( 'Reviews Amount 2', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXT,
+					'default' => '100',
+               'classes' => "dh-numbers-only",
+				] );
+				$repeater->add_control( 'dh_product_comparition_sustainability_score_quality_source2', [
+					'label' => __( 'Reviews Source 2', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXT,
+					'default' => 'Bol.com',
+				] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_quality_tooltip', [
                'label' => __( 'Tooltip', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::TEXT,
@@ -1548,6 +1632,10 @@ class DH_Widgets_Content_Controls {
                'default' => 'yes',
                'render_type' => 'ui',
             ] );
+				$repeater->add_control( 'dh_product_comparition_sustainability_score_script', [
+					'type' => Elementor\Controls_Manager::RAW_HTML,
+					'raw' => $script,
+				] );
          $widget->add_control( 'dh_product_comparition_sustainability_score_products', [
             'label' => __( 'Products', 'duurzaamthuis' ),
             'type' => Elementor\Controls_Manager::REPEATER,
@@ -1784,6 +1872,3 @@ add_action( 'elementor/editor/after_save', function( $post_id, $editor_data ) {
 		}
 	}
 }, 10, 2 );
-
-
-

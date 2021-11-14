@@ -156,7 +156,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                            foreach ( $pros as $pros_item ) {
                               echo '<div class="dh-product-pros-item">';
                                  echo '<i class="dh-icon dh-icon-check"></i>';
-                                 echo '<div class="dh-product-pros-item-text">' . $pros_item[0] . '</div>';
+                                 echo '<div class="dh-product-pros-item-text">' . esc_html( $pros_item[0] ) . '</div>';
                               echo '</div>';
                            }
                         echo '</div>';
@@ -171,7 +171,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                            foreach ( $cons as $cons_item ) {
                               echo '<div class="dh-product-cons-item">';
                                  echo '<i class="dh-icon dh-icon-times"></i>';
-                                 echo '<div class="dh-product-cons-item-text">' . $cons_item[0] . '</div>';
+                                 echo '<div class="dh-product-cons-item-text">' . esc_html( $cons_item[0] ) . '</div>';
                               echo '</div>';
                            }
                         echo '</div>';
@@ -236,7 +236,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                   "aggregateRating": {
                      "@type": "AggregateRating",
                      "ratingValue": "<?php echo $settings['dh_product_review_quality']; ?>",
-                     "ratingCount": "<?php echo intval( $settings['dh_product_review_quality_amount1'] ) + intval( $settings['dh_product_review_quality_amount2'] ); ?>",
+                     "ratingCount": "<?php echo intval( $settings['dh_product_review_quality_amount1'] ?? '' ) + intval( $settings['dh_product_review_quality_amount2'] ?? '' ); ?>",
                      "bestRating": "10"
                   },
                   "review": [{
@@ -250,7 +250,21 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                      "author": {
                         "@type": "Person",
                         "name": "<?php echo $review_author_name; ?>"
-                     }
+                     },
+                     <?php
+                        $cons = json_decode( $settings['dh_product_review_pros'] );
+                        if ( ! empty( $pros ) ) {
+                           echo '"positiveNotes": [';
+                              echo '"' . implode( '","', array_column( $pros, 0 ) ) . '"';
+                           echo '],';
+                        }
+                        $cons = json_decode( $settings['dh_product_review_cons'] );
+                        if ( ! empty( $cons ) ) {
+                           echo '"negativeNotes": [';
+                              echo '"' . implode( '","', array_column( $cons, 0 ) ) . '"';
+                           echo ']';
+                        }
+                     ?>
                   }]
                }
                </script><?php
@@ -369,13 +383,13 @@ class DH_Product_Review extends \Elementor\Widget_Base {
             } ); 
             classes = ' ' + classes.join( ' ' );
          #>
-         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
-            <div class="dh-products-review-grid dh-products-{{{ settings.dh_product_review_skin }}}-skin">
+         <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{ classes }}">
+            <div class="dh-products-review-grid dh-products-{{ settings.dh_product_review_skin }}-skin">
 
                <div class="dh-product">
 
-                  <h3 class="dh-product-review-title">{{{ settings.dh_product_review_title }}}</h3>
-                  <div class="dh-product-review-content">{{{ settings.dh_product_review_content }}}</div>
+                  <h3 class="dh-product-review-title">{{ settings.dh_product_review_title }}</h3>
+                  <div class="dh-product-review-content">{{ settings.dh_product_review_content }}</div>
                
                   <div class="dh-product-wrapper">
                      <div class="dh-product-column">
@@ -384,7 +398,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                            <div class="dh-product-quality">
                               <div>Kwaliteit</div>
                               <div>
-                                 {{{ settings.dh_product_review_quality }}}
+                                 {{ settings.dh_product_review_quality }}
                                  <# if ( settings.dh_product_review_quality_tooltip ) { #>
                                     <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ settings.dh_product_review_quality_tooltip }}"></i>
                                  <# } else {
@@ -404,7 +418,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                            <div class="dh-product-co2">
                               <div>
                               <# if ( settings.dh_product_review_co2_custom_label ) { #>
-                                 {{{ settings.dh_product_review_co2_custom_label }}}
+                                 {{ settings.dh_product_review_co2_custom_label }}
                               <# } else { #>
                                  CO<sub>2</sub>-afdruk
                               <# } #>
@@ -414,7 +428,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                                  if ( ! settings.dh_product_review_co2_custom_label && is_number( co2 ) ) {
                                     co2 = co2 + 'kg CO<sub>2</sub> p/j';
                                  } #>
-                                 {{{ co2 }}}
+                                 {{ co2 }}
                                  <# if ( settings.dh_product_review_co2_tooltip ) { #>
                                     <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ settings.dh_product_review_co2_tooltip }}"></i>
                                  <# } #>
@@ -425,7 +439,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                            <div class="dh-product-price">
                               <div>Prijs</div>
                               <div>
-                                 €{{{ settings.dh_product_review_price }}}
+                                 €{{ settings.dh_product_review_price }}
                                  <# if ( settings.dh_product_review_price_tooltip ) { #>
                                     <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ settings.dh_product_review_price_tooltip }}"></i>
                                  <# } #>
@@ -433,7 +447,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                            </div>
                         <# } #>
                         <div class="dh-product-score">
-                           <img src="{{{ settings.dh_product_review_logo_url }}}">
+                           <img src="{{ settings.dh_product_review_logo_url }}">
                            <div>
                               <div class="dh-product-rating-heading">
                                  Duurzaam Thuis Score
@@ -442,9 +456,9 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                                  <# } #>
                               </div>
                               <div class="dh-product-rating">
-                                 <div class="dh-text-rating">{{{ settings.dh_product_review_rating }}}/10</div>
+                                 <div class="dh-text-rating">{{ settings.dh_product_review_rating }}/10</div>
                                  <div class="dh-list-rating">
-                                 {{{ renderRating( settings.dh_product_review_rating ) }}}
+                                 {{ renderRating( settings.dh_product_review_rating ) }}
                                  </div>
                               </div>
                            </div>
@@ -458,7 +472,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                               <# _.each( pros, function(pros_item) { #>
                                  <div class="dh-product-pros-item">
                                     <i class="dh-icon dh-icon-check"></i>
-                                    <div class="dh-product-pros-item-text">{{{ pros_item[0] }}}</div>
+                                    <div class="dh-product-pros-item-text">{{ pros_item[0] }}</div>
                                  </div>
                               <# } ); #>
                            </div>
@@ -473,7 +487,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                               <# _.each( cons, function( cons_item ) { #>
                                  <div class="dh-product-cons-item">
                                     <i class="dh-icon dh-icon-times"></i>
-                                    <div class="dh-product-cons-item-text">{{{ cons_item[0] }}}</div>
+                                    <div class="dh-product-cons-item-text">{{ cons_item[0] }}</div>
                                  </div>
                               <# } ); #>
                            </div>
@@ -482,7 +496,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                      <div class="dh-product-column dh-product-fullwidth-column">
                         <div class="dh-product-description">
-                           <div class="dh-product-description-content">{{{ settings.dh_product_review_description }}}</div>
+                           <div class="dh-product-description-content">{{ settings.dh_product_review_description }}</div>
                               <div class="dh-product-description-toggle">
                               <div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>
                               <div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>
@@ -502,9 +516,9 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                      <div class="dh-product-review-column">
                         <div class="dh-product-shortcode-heading">Beste prijs</div>
-                        <div class="dh-product-shortcode">{{{ settings.dh_product_review_shortcode }}}</div>
+                        <div class="dh-product-shortcode">{{ settings.dh_product_review_shortcode }}</div>
                         <# if ( settings.dh_product_review_button_text ) { #>
-                           <a target="_blank" class="dh-product-button" href="{{{ settings.dh_product_review_button_link }}}">{{{ settings.dh_product_review_button_text }}}</a>
+                           <a target="_blank" class="dh-product-button" href="{{ settings.dh_product_review_button_link }}">{{ settings.dh_product_review_button_text }}</a>
                         <# } #>
                      </div>
                   </div>
