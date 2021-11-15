@@ -96,16 +96,20 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 
 				var width;
 				var height;
-				if ( typeof window[id] !== 'undefined' ) {
-					width = window[id].width;
-					height = window[id].height;
-				}
+				var img_dimensions = sessionStorage.getItem(id);
+				if ( img_dimensions !== null ) {
+					img_dimensions = JSON.parse( img_dimensions );
+					width = img_dimensions.width;
+					height = img_dimensions.height;
+				} 
+
+
 			#>
          <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<div class="dh-wrapper">
 					<# if ( settings.dh_image_heading_text_image_show_image == 'yes' ) { #>
 						<div class="dh-image-column">
-							<img src="{{ settings.dh_image_heading_text_image.url }}" width="{{{width}}}" height="{{{height}}}" onload="javascript: window.{{{id}}} = { 'width': this.naturalWidth, 'height': this.naturalHeight }">
+							<img src="{{ settings.dh_image_heading_text_image.url }}" width="{{{width}}}" height="{{{height}}}" onload="javascript: sessionStorage.setItem('{{{id}}}', JSON.stringify({ 'width': this.naturalWidth, 'height': this.naturalHeight }));">
 						</div>
 						<div class="dh-gap-column"></div>
 					<# } #>
