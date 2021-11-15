@@ -34,7 +34,7 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
          ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
 
          echo '<div class="dh-how-to-faq">';
-				echo '<h3 class="dh-how-to-faq-heading">' . esc_html( $settings['dh_how_to_faq_name'] ) . '</h3>';
+				echo '<h2 class="dh-how-to-faq-heading">' . esc_html( $settings['dh_how_to_faq_name'] ) . '</h2>';
             foreach (  $settings['dh_how_to_faq_items'] as $index => $item ) {
 					echo '<div class="dh-how-to-faq-item">';
 						echo '<div class="dh-how-to-faq-item-number">' . ( $index + 1 ) . '</div>';
@@ -48,46 +48,45 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 
 			?></div><?php 
 
+			$schema = array();
 			if ( $settings['dh_how_to_faq_schema_type'] == 'how_to' ) {
-				?>
-					<script type="application/ld+json">
-						{
-							"@context": "https://schema.org/",
-							"@type": "HowTo",
-							"name": "<?php echo esc_html( $settings['dh_how_to_faq_name'] ); ?>",
-							"step": [
-								<?php foreach ( $settings['dh_how_to_faq_items'] as $index => $item ) { ?>
-								{
-									"@type": "HowToStep",
-									"name": "<?php echo esc_html( $item['dh_how_to_faq_item_heading'] ); ?>",
-									"text": "<?php echo esc_html( $item['dh_how_to_faq_item_text'] ); ?>"
-								}<?php echo $index < count( $settings['dh_how_to_faq_items'] ) - 1 ? ',' : ''; ?>
-								<?php } ?>
-							]
-						}
-					</script>
-				<?php
+				$schema['@context'] = "https://schema.org/";
+				$schema['@type'] = "HowTo";
+				$schema['name'] = (string) $settings['dh_how_to_faq_name'];
+
+				if ( $settings['dh_how_to_faq_items'] ) {
+					foreach ( $settings['dh_how_to_faq_items'] as $item ) { 
+						$step = [];
+
+						$step['@type'] = "HowToStep";
+						$step['name'] = $item['dh_how_to_faq_item_heading'];
+						$step['text'] = $item['dh_how_to_faq_item_text'];
+
+						$schema['step'][] = $step;
+					}
+				}
 			} else if ( $settings['dh_how_to_faq_schema_type'] == 'faq' ) {
-				?>
-					<script type="application/ld+json">
-						{
-							"@context": "https://schema.org/",
-							"@type": "FAQPage",
-							"mainEntity": [
-								<?php foreach ( $settings['dh_how_to_faq_items'] as $index => $item ) { ?>
-								{
-									"@type": "Question",
-									"name": "<?php echo esc_html( $item['dh_how_to_faq_item_heading'] ); ?>",
-									"acceptedAnswer": {
-										"@type": "Answer",
-										"text": "<?php echo esc_html( $item['dh_how_to_faq_item_text'] ); ?>"
-									}
-								}<?php echo $index < count( $settings['dh_how_to_faq_items'] ) - 1 ? ',' : ''; ?>
-								<?php } ?>
-							]
-						}
-					</script>
-				<?php
+				$schema['@context'] = "https://schema.org/";
+				$schema['@type'] = "FAQPage";
+				$schema['name'] = (string) $settings['dh_product_review_title'];
+
+				if ( $settings['dh_how_to_faq_items'] ) {
+					foreach ( $settings['dh_how_to_faq_items'] as $item ) { 
+						$answer = [];
+
+						$answer['@type'] = "Question";
+						$answer['name'] = $item['dh_how_to_faq_item_heading'];
+						$answer['acceptedAnswer']['@type'] = "Answer";
+						$answer['acceptedAnswer']['text'] = $item['dh_how_to_faq_item_text'];
+
+						$schema['mainEntity'][] = $answer;
+					}
+				}
+
+			}
+			if ( ! empty( $schema ) ) {
+				$schema_json = json_encode( $schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+				echo '<script type="application/ld+json">' . $schema_json . '</script>';
 			}
 		}
 
@@ -114,7 +113,7 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 			#>
 			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<div class="dh-how-to-faq">
-					<h3 class="dh-how-to-faq-heading">{{ settings.dh_how_to_faq_name }}</h3>
+					<h2 class="dh-how-to-faq-heading">{{ settings.dh_how_to_faq_name }}</h2>
 					<# _.each( settings.dh_how_to_faq_items, function( item, index ) { #>
 						<div class="dh-how-to-faq-item">
 							<div class="dh-how-to-faq-item-number">{{{ index + 1 }}}</div>

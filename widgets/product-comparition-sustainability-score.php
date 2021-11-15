@@ -36,6 +36,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 
    
    protected function render_rating( $rating ) {
+      if ( ! $rating ) return '';
       $rating = $rating * 10;
       ob_start();
       echo '<div class="dh-rating">';
@@ -74,12 +75,20 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 	protected function render() { // php template
 		$settings = $this->get_settings_for_display();
       
+      $page_author_id = get_the_author_meta( 'ID' );
+      $review_author_name = get_the_author_meta( 'first_name', $page_author_id ) . ' ' . get_the_author_meta( 'last_name', $page_author_id );
+      
 		if ( $settings['dh_product_comparition_sustainability_score_products'] ) :
          ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
             echo '<div class="dh-products-score-grid dh-products-' . $settings['dh_product_comparition_sustainability_score_skin'] . '-skin">';
                foreach ( $settings['dh_product_comparition_sustainability_score_products'] as $index => $item ) :
                   $shortcode = $this->render_shortcode( $item['dh_product_comparition_sustainability_score_shortcode'], $item['_id'] );
                   $dfrcs_set_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-' . $item['_id'] . '-cache', true );
+                  $price = $item['dh_product_comparition_sustainability_score_price'] ? '€' . $item['dh_product_comparition_sustainability_score_price'] : ( $dfrcs_set_cache['price'] ?? '' );
+                  $last_updated = $item['dh_product_comparition_sustainability_score_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
+                  $last_updated_text = $item['dh_product_comparition_sustainability_score_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
+                  $pros = json_decode( $item['dh_product_comparition_sustainability_score_pros'] );
+                  $cons = json_decode( $item['dh_product_comparition_sustainability_score_cons'] );
                   echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
                      echo '<div class="dh-product-wrapper">';
                         echo '<div class="dh-product-column">';
@@ -146,8 +155,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  echo '</div>';
                               echo '</div>'; // dh-product-co2
                            }
-                           $price = $item['dh_product_comparition_sustainability_score_price'] ? '€' . $item['dh_product_comparition_sustainability_score_price'] : ( $dfrcs_set_cache['price'] ?? '' );
-                           $last_updated = $item['dh_product_comparition_sustainability_score_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
+
                            if ( $price ) {
                               echo '<div class="dh-product-price">';
                                  echo '<div>Prijs</div>';
@@ -178,7 +186,6 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            echo '</div>';
                         echo '</div>'; // dh-product-column
                         echo '<div class="dh-product-column">';
-                           $pros = json_decode( $item['dh_product_comparition_sustainability_score_pros'] );
                            if ( ! empty( $pros ) ) {
                               echo '<div class="dh-product-pros">';
                                  echo '<div class="dh-product-pros-heading">Voordelen</div>';
@@ -190,7 +197,6 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  }
                               echo '</div>';
                            }
-                           $cons = json_decode( $item['dh_product_comparition_sustainability_score_cons'] );
                            if ( ! empty( $cons ) ) {
                               echo '<div class="dh-product-cons">';
                                  echo '<div class="dh-product-cons-heading">Nadelen</div>';
@@ -214,7 +220,6 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                         echo '<div class="dh-product-column">';
                            echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
                            echo '<div class="dh-product-shortcode">' . $shortcode . '</div>';
-                           $last_updated_text = $item['dh_product_comparition_sustainability_score_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
                            echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
                            if ( $item['dh_product_comparition_sustainability_score_button_text'] ) {
                               $rel = isset( $item['dh_product_comparition_sustainability_score_sponsored'] ) ? ' rel="sponsored"' : '';
@@ -223,58 +228,49 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                         echo '</div>'; // dh-product-column
                      echo '</div>'; // dh-product-wrapper
 
-                     $page_author_id = get_the_author_meta( 'ID' );
-                     $review_author_name = get_the_author_meta( 'first_name', $page_author_id ) . ' ' . get_the_author_meta( 'last_name', $page_author_id );
+                     $schema = array();
+                     $schema['@context'] = "https://schema.org/";
+                     $schema['@type'] = "Product";
 
-                     ?><script type="application/ld+json">
-                     {
-                        "@context": "https://schema.org/",
-                        "@type": "Product",
-                        <?php if ( $item['dh_product_comparition_sustainability_score_brand'] ) { ?>
-                        "brand": {
-                           "@type": "Brand",
-                           "name": "<?php echo $item['dh_product_comparition_sustainability_score_brand']; ?>"
-                        },
-                        <?php } ?>
-                        "gtin13": "<?php echo $item['dh_product_comparition_sustainability_score_ean'] ?: ''; ?>",
-                        "image": "<?php echo $item['dh_product_comparition_sustainability_score_image']['url']; ?>",
-                        "name": "<?php echo $item['dh_product_comparition_sustainability_score_title']; ?>",
-                        "price": "<?php echo $item['dh_product_comparition_sustainability_score_price']; ?>",
-                        "aggregateRating": {
-                           "@type": "AggregateRating",
-                           "ratingValue": "<?php echo $item['dh_product_comparition_sustainability_score_quality']; ?>",
-                           "ratingCount": "<?php echo intval( $item['dh_product_comparition_sustainability_score_quality_amount1'] ?? '' ) + intval( $settings['dh_product_comparition_sustainability_score_quality_amount2'] ?? '' ); ?>",
-                           "bestRating": "10"
-                        },
-                        "review": [{
-                           "@type": "Review",
-                           "reviewRating": {
-                              "@type": "Rating",
-                              "ratingValue": "<?php echo $item['dh_product_comparition_sustainability_score_rating']; ?>",
-                              "bestRating": "10"
-                           },
-                           "reviewBody": "<?php echo $item['dh_product_comparition_sustainability_score_description']; ?>",
-                           "author": {
-                              "@type": "Person",
-                              "name": "<?php echo $review_author_name; ?>"
-                           },
-                           <?php
-                              $cons = json_decode( $item['dh_product_comparition_sustainability_score_pros'] );
-                              if ( ! empty( $pros ) ) {
-                                 echo '"positiveNotes": [';
-                                    echo '"' . implode( '","', array_column( $pros, 0 ) ) . '"';
-                                 echo '],';
-                              }
-                              $cons = json_decode( $item['dh_product_comparition_sustainability_score_cons'] );
-                              if ( ! empty( $cons ) ) {
-                                 echo '"negativeNotes": [';
-                                    echo '"' . implode( '","', array_column( $cons, 0 ) ) . '"';
-                                 echo ']';
-                              }
-                           ?>
-                        }]
+                     if ( $item['dh_product_comparition_sustainability_score_brand'] ) {
+                        $schema['brand']['@type'] = "Brand";
+                        $schema['brand']['name'] = (string) $item['dh_product_comparition_sustainability_score_brand'];
                      }
-                     </script><?php
+
+                     $schema['gtin13'] = (string) $item['dh_product_comparition_sustainability_score_ean'];
+                     $schema['image'] = (string) $item['dh_product_comparition_sustainability_score_image']['url'];
+                     $schema['name'] = (string) $item['dh_product_comparition_sustainability_score_title'];
+
+                     if ( $price ) {
+                        $schema['offers']['@type'] = "Offer";
+                        $schema['offers']['price'] = (string) $price;
+                     }
+
+                     if ( isset( $item['dh_product_comparition_sustainability_score_quality'] ) && ( isset( $item['dh_product_comparition_sustainability_score_quality_amount1'] ) || isset( $settings['dh_product_comparition_sustainability_score_quality_amount2'] ) ) ) {
+                        $schema['aggregateRating']['@type'] = "AggregateRating";
+                        $schema['aggregateRating']['ratingValue'] = (string) $item['dh_product_comparition_sustainability_score_quality'];
+                        $schema['aggregateRating']['ratingCount'] = (string) intval( $item['dh_product_comparition_sustainability_score_quality_amount1'] ?? '' ) + intval( $settings['dh_product_comparition_sustainability_score_quality_amount2'] ?? '' );
+                        $schema['aggregateRating']['bestRating'] = "10";
+                     }
+
+                     $schema['review']['@type'] = "Review";
+
+                     $schema['review']['reviewRating']['@type'] = "Rating";
+                     $schema['review']['reviewRating']['ratingValue'] = (string) $item['dh_product_comparition_sustainability_score_rating'];
+                     $schema['review']['reviewRating']['bestRating'] = "10";
+
+                     $schema['review']['reviewBody'] = $item['dh_product_comparition_sustainability_score_description'];
+
+                     $schema['review']['author']['@type'] = "Person";
+                     $schema['review']['author']['name'] = $review_author_name;
+                     
+                     $schema['review']['positiveNotes'] = $pros;
+                     $schema['review']['negativeNotes'] = $cons;
+
+                     $schema_json = json_encode( $schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+                     // error_log( "schema_json\n" . print_r( $schema_json, true ) . "\n" );
+                     echo '<script type="application/ld+json">' . $schema_json . '</script>';
+
                   echo '</div>'; // dh-product
                endforeach;
             echo '</div>'; // dh-products-score-grid

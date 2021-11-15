@@ -34,6 +34,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 	}
    
    protected function render_rating( $rating ) {
+      if ( ! $rating ) return '';
       $rating = $rating * 10;
       ob_start();
       echo '<div class="dh-rating">';
@@ -70,7 +71,12 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 	protected function render() { // php template
 		$settings = $this->get_settings_for_display();
       $dfrcs_set_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-0-cache', true );
-      
+      $page_author_id = get_the_author_meta( 'ID' );
+      $review_author_name = get_the_author_meta( 'first_name', $page_author_id ) . ' ' . get_the_author_meta( 'last_name', $page_author_id );
+      $price = $settings['dh_product_review_price'] ? '€' . $settings['dh_product_review_price'] : ( $dfrcs_set_cache['price'] ?? '' );
+      $pros = json_decode( $settings['dh_product_review_pros'] );
+      $cons = json_decode( $settings['dh_product_review_cons'] );
+
       ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
          echo '<div class="dh-products-review-grid dh-products-' . $settings['dh_product_review_skin'] . '-skin">';
 
@@ -116,7 +122,6 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                            echo '</div>';
                         echo '</div>'; // dh-product-co2
                      }
-                     $price = $settings['dh_product_review_price'] ? '€' . $settings['dh_product_review_price'] : ( $dfrcs_set_cache['price'] ?? '' );
                      if ( $price ) {
                         echo '<div class="dh-product-price">';
 
@@ -149,7 +154,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                      echo '</div>';
                   echo '</div>'; // dh-product-column
                   echo '<div class="dh-product-column">';
-                     $pros = json_decode( $settings['dh_product_review_pros'] );
+                     
                      if ( ! empty( $pros ) ) {
                         echo '<div class="dh-product-pros">';
                            echo '<div class="dh-product-pros-heading">Voordelen</div>';
@@ -164,7 +169,6 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                   echo '</div>';  // dh-product-column
 
                   echo '<div class="dh-product-column">';
-                     $cons = json_decode( $settings['dh_product_review_cons'] );
                      if ( ! empty( $cons ) ) {
                         echo '<div class="dh-product-cons">';
                            echo '<div class="dh-product-cons-heading">Nadelen</div>';
@@ -205,10 +209,10 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                   echo '<div class="dh-product-review-column">';
                      echo '<div class="dh-product-review-shortcode-heading">Beste prijs</div>';
-                     $shortcode = $this->render_shortcode( $settings['dh_product_review_shortcode'] );
-                     echo '<div class="dh-product-review-shortcode">' . $shortcode . '</div>';
-                     $last_updated_text = $settings['dh_product_review_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
-                     echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
+                     // $shortcode = $this->render_shortcode( $settings['dh_product_review_shortcode'] );
+                     // echo '<div class="dh-product-review-shortcode">' . $shortcode . '</div>';
+                     // $last_updated_text = $settings['dh_product_review_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
+                     // echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
                      if ( $settings['dh_product_review_button_text'] ) {
                         $rel = isset( $settings['dh_product_review_sponsored'] ) ? ' rel="sponsored"' : '';
                         echo '<a target="_blank" class="dh-product-button" href="' . $settings['dh_product_review_button_link'] . '"' . $rel . '>' . $settings['dh_product_review_button_text'] . '</a>';
@@ -217,57 +221,49 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                echo '</div>'; // dh-product-review-row
 
-               $page_author_id = get_the_author_meta( 'ID' );
-               $review_author_name = get_the_author_meta( 'first_name', $page_author_id ) . ' ' . get_the_author_meta( 'last_name', $page_author_id );
+               $schema = array();
+               $schema['@context'] = "https://schema.org/";
+               $schema['@type'] = "Product";
 
-               ?><script type="application/ld+json">
-               {
-                  "@context": "https://schema.org/",
-                  "@type": "Product",
-                  "brand": {
-                     "@type": "Brand",
-                     "name": "<?php echo $settings['dh_product_review_brand']; ?>"
-                  },
-                  "gtin13": "<?php echo $settings['dh_product_review_ean'] ?: ''; ?>",
-                  "description": "<?php echo $settings['dh_product_review_description']; ?>",
-                  "image": "<?php echo $settings['dh_product_review_image']['url']; ?>",
-                  "name": "<?php echo $settings['dh_product_review_title']; ?>",
-                  "price": "<?php echo $settings['dh_product_review_price']; ?>",
-                  "aggregateRating": {
-                     "@type": "AggregateRating",
-                     "ratingValue": "<?php echo $settings['dh_product_review_quality']; ?>",
-                     "ratingCount": "<?php echo intval( $settings['dh_product_review_quality_amount1'] ?? '' ) + intval( $settings['dh_product_review_quality_amount2'] ?? '' ); ?>",
-                     "bestRating": "10"
-                  },
-                  "review": [{
-                     "@type": "Review",
-                     "reviewRating": {
-                        "@type": "Rating",
-                        "ratingValue": "<?php echo $settings['dh_product_review_rating']; ?>",
-                        "bestRating": "10"
-                     },
-                     "reviewBody": "<?php echo $settings['dh_product_review_content']; ?>",
-                     "author": {
-                        "@type": "Person",
-                        "name": "<?php echo $review_author_name; ?>"
-                     },
-                     <?php
-                        $cons = json_decode( $settings['dh_product_review_pros'] );
-                        if ( ! empty( $pros ) ) {
-                           echo '"positiveNotes": [';
-                              echo '"' . implode( '","', array_column( $pros, 0 ) ) . '"';
-                           echo '],';
-                        }
-                        $cons = json_decode( $settings['dh_product_review_cons'] );
-                        if ( ! empty( $cons ) ) {
-                           echo '"negativeNotes": [';
-                              echo '"' . implode( '","', array_column( $cons, 0 ) ) . '"';
-                           echo ']';
-                        }
-                     ?>
-                  }]
+               if ( $settings['dh_product_review_brand'] ) {
+                  $schema['brand']['@type'] = "Brand";
+                  $schema['brand']['name'] = (string) $settings['dh_product_review_brand'];
                }
-               </script><?php
+
+               $schema['gtin13'] = (string) $settings['dh_product_review_ean'];
+               $schema['image'] = (string) $settings['dh_product_review_image']['url'];
+               $schema['name'] = (string) $settings['dh_product_review_title'];
+               $schema['description'] = $settings['dh_product_review_description'];
+
+               if ( $price ) {
+                  $schema['offers']['@type'] = "Offer";
+                  $schema['offers']['price'] = (string) $price;
+               }
+
+               if ( isset( $settings['dh_product_review_quality'] ) && ( isset( $settings['dh_product_review_quality_amount1'] ) || isset( $settings['dh_product_review_quality_amount2'] ) ) ) {
+                  $schema['aggregateRating']['@type'] = "AggregateRating";
+                  $schema['aggregateRating']['ratingValue'] = (string) $settings['dh_product_review_quality'];
+                  $schema['aggregateRating']['ratingCount'] = (string) intval( $settings['dh_product_review_quality_amount1'] ?? '' ) + intval( $settings['dh_product_review_quality_amount2'] ?? '' );
+                  $schema['aggregateRating']['bestRating'] = "10";
+               }
+
+               $schema['review']['@type'] = "Review";
+
+               $schema['review']['reviewRating']['@type'] = "Rating";
+               $schema['review']['reviewRating']['ratingValue'] = (string) $settings['dh_product_review_rating'];
+               $schema['review']['reviewRating']['bestRating'] = "10";
+
+               $schema['review']['reviewBody'] = $settings['dh_product_review_description'];
+
+               $schema['review']['author']['@type'] = "Person";
+               $schema['review']['author']['name'] = $review_author_name;
+               
+               $schema['review']['positiveNotes'] = $pros;
+               $schema['review']['negativeNotes'] = $cons;
+
+               $schema_json = json_encode( $schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+               // error_log( "schema_json\n" . print_r( $schema_json, true ) . "\n" );
+               echo '<script type="application/ld+json">' . $schema_json . '</script>';
 
             echo '</div>'; // dh-product
 
