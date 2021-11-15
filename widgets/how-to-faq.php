@@ -12,7 +12,7 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 	}
 
 	public function get_title() {
-		return __( 'How to/FAQ', 'duurzaamthuis' );
+		return __( 'How to/FAQ list', 'duurzaamthuis' );
 	}
 
 	public function get_icon() {

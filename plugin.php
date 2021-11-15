@@ -804,12 +804,14 @@ class DH_Widgets_Content_Controls {
 	public static function get_dh_product_review_controls( $widget ) {
 		ob_start(); ?>
 		<# 
-			(function($) { 
+			( function( $ ) { 
 				var timer = setTimeout(function() {
-					var text_input = $('.dh-13-chars-max').find('input').attr('maxlength', 13).attr('minlength', 13);
-					$('.dh-numbers-only').find('input').DhNumbersOnly();
-				}, 100);		
-			})(jQuery);
+					$( '.dh-13-chars-max input' ).attr( 'maxlength', 13 ).attr( 'minlength', 13 );
+					$( '.dh-numbers-only input' ).keypress(function (e) {
+						if ( String.fromCharCode( e.keyCode ).match(/[^0-9]/g) ) return false;
+					} );
+				}, 100 );		
+			} )( jQuery );
 		#>
 		<style>
 			.dh-13-chars-max input:invalid {
@@ -1315,7 +1317,7 @@ class DH_Widgets_Content_Controls {
 
 	public static function get_dh_how_to_faq_controls( $widget ) {
 		$widget->start_controls_section( 'dh_how_to_faq_section_content', [
-         'label' => __( 'How to/FAQ', 'duurzaamthuis' ),
+         'label' => __( 'How to/FAQ list', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
 
@@ -1472,12 +1474,14 @@ class DH_Widgets_Content_Controls {
 	public static function get_dh_product_comparition_sustainability_score_controls( $widget ) {
 		ob_start(); ?>
 		<# 
-			(function($) { 
+			( function( $ ) { 
 				var timer = setTimeout(function() {
-					var text_input = $('.dh-13-chars-max').find('input').attr('maxlength', 13).attr('minlength', 13);
-					$('.dh-numbers-only').find('input').DhNumbersOnly();
-				}, 100);		
-			})(jQuery);
+					$( '.dh-13-chars-max input' ).attr( 'maxlength', 13 ).attr( 'minlength', 13 );
+					$( '.dh-numbers-only input' ).keypress(function (e) {
+						if ( String.fromCharCode( e.keyCode ).match(/[^0-9]/g) ) return false;
+					} );
+				}, 100 );		
+			} )( jQuery );
 		#>
 		<style>
 			.dh-13-chars-max input:invalid {
