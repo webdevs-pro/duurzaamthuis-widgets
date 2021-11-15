@@ -34,6 +34,7 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
          ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
 
          echo '<div class="dh-how-to-faq">';
+				echo '<h3 class="dh-how-to-faq-heading">' . esc_html( $settings['dh_how_to_faq_name'] ) . '</h3>';
             foreach (  $settings['dh_how_to_faq_items'] as $index => $item ) {
 					echo '<div class="dh-how-to-faq-item">';
 						echo '<div class="dh-how-to-faq-item-number">' . ( $index + 1 ) . '</div>';
@@ -113,6 +114,7 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 			#>
 			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<div class="dh-how-to-faq">
+					<h3 class="dh-how-to-faq-heading">{{ settings.dh_how_to_faq_name }}</h3>
 					<# _.each( settings.dh_how_to_faq_items, function( item, index ) { #>
 						<div class="dh-how-to-faq-item">
 							<div class="dh-how-to-faq-item-number">{{{ index + 1 }}}</div>

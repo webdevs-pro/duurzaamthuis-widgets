@@ -154,6 +154,52 @@
 	}
 
 
+	var DH_Company_Offer = function( $scope, $ ) {
+		var el_id = $scope.attr( 'data-id' );
+
+		$scope.find('.dh-product-description').each(function() {
+			var height = $(this).height();
+			var content = $(this).find('.dh-product-description-content');
+			var content_height = $(content).height();
+			// console.log(content_height);
+			if(content_height > height) {
+				var open = $(this).find('.dh-open');
+				var close = $(this).find('.dh-close');
+				$(open).show();
+				var parent = this;
+				$(open).on('click', function() {
+					$(parent).css('max-height', content_height + 22);
+					$(this).hide();
+					$(close).show();
+				});
+				$(close).on('click', function() {
+					$(parent).css('max-height', height);
+					setTimeout(function(){
+						$(this).hide();
+						$(open).show();
+					}, 150);
+				});
+			}
+		});
+
+
+		$( 'input[name="' + el_id + '"]' ).change( function() {
+			var maxAllowed = 2;
+			var checked = $( 'input[name="' + el_id + '"]:checked' ).length;
+			if ( checked > maxAllowed ) {
+				$(this).prop( 'checked', '' );
+			}
+		});
+
+		$scope.find( 'label > div' ).on( 'click', function(e) {
+			e.stopPropagation();
+			e.preventDefault();
+			alert();
+		})
+
+	}
+
+
 
 	
 	// Make sure you run this code under Elementor.
@@ -164,6 +210,7 @@
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-mega-menu.default', DH_Mega_Menu );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-product-comparition-sustainability-score.default', DH_Product_Comparition_Sustainability_Score );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-product-review.default', DH_Product_Review );
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-company-offer.default', DH_Company_Offer );
 		initDHtooltips();
 	} );
 
