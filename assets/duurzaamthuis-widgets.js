@@ -183,19 +183,41 @@
 		});
 
 
-		$( 'input[name="' + el_id + '"]' ).change( function() {
-			var maxAllowed = 2;
-			var checked = $( 'input[name="' + el_id + '"]:checked' ).length;
-			if ( checked > maxAllowed ) {
-				$(this).prop( 'checked', '' );
-			}
-		});
 
-		$scope.find( 'label > div' ).on( 'click', function(e) {
-			e.stopPropagation();
-			e.preventDefault();
-			alert();
-		})
+		$scope.find( '.dh-product-checkbox-button' ).on( 'click', function() {
+			var max_checked = 3;
+			if ( $( this ).hasClass( 'active' ) ) {
+				$( this ).toggleClass( 'checked' );
+			}
+
+			var checked_buttons = $scope.find( '.dh-product-checkbox-button.checked' );
+			if ( checked_buttons.length >= max_checked ) {
+				$scope.find( '.dh-product-checkbox-button.active:not(.checked)' ).removeClass( 'active' );
+			} else {
+				$scope.find( '.dh-product-checkbox-button' ).addClass( 'active' );
+			}
+
+			var emails = [];
+			var titles = [];
+			$( checked_buttons ).each( function() {
+				emails.push( $( this ).data( 'email' ) );
+				titles.push( $( this ).closest( '.dh-product' ).find( '.dh-heading' ).text() );
+			} );
+
+			$( '#solar #form-field-companies' ).val( JSON.stringify( emails ) );
+
+			$( '#solar .elementor-field-group-companies .dh-selected-company-badge' ).remove();
+			$.each( titles, function( key, title ) {
+				$( '#solar .elementor-field-group-companies' ).append( '<span class="dh-selected-company-badge">' + title + '</span>' );
+			} );
+
+			$( document ).on('submit_success', '#solar', function() {
+				$scope.find( '.dh-product-checkbox-button' ).addClass( 'active' ).removeClass( 'checked' );
+				$( '#solar .elementor-field-group-companies .dh-selected-company-badge' ).remove();
+			} )
+
+		} );
+
 
 	}
 

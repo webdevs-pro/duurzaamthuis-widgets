@@ -2518,69 +2518,50 @@ body:not(.logged-in) .dh-widget-dh-company-offer .dh-product-last-updated-text {
 
 
 
-.dh-widget-dh-company-offer .dh-product-checkbox {
-   display: block;
-   margin-top: 10px;
-}
-
-.dh-widget-dh-company-offer .dh-product-checkbox > input {
-   position: absolute;
-   z-index: -1;
-   opacity: 0;
- }
- 
- .dh-widget-dh-company-offer .dh-product-checkbox > span {
-   align-items: center;
-   user-select: none;
-   background-color: #769179;
+.dh-widget-dh-company-offer .dh-product-checkbox-button {
    display: flex;
-   width: 100%;
    justify-content: center;
+   align-items: center;
+   margin-top: 10px;
+   background-color: #769179;
    border-radius: 8px;
-   transition: background-color 200ms;
    border-radius: 8px;
    padding: 11px;
    font-size: 14px;
    font-weight: 500;
    cursor: pointer;
    color: #fff;
- }
- 
- .dh-widget-dh-company-offer .dh-product-checkbox > div {
-   height: 0;
-   overflow: hidden;
-   transition: height 200ms;
-   font-size: 14px;
-   line-height: 14px;
-   margin-top: 10px;
-   text-decoration: underline;
-   cursor: pointer;
-   text-align: center;
- }
- 
- .dh-widget-dh-company-offer .dh-product-checkbox > span::before {
+}
+.dh-widget-dh-company-offer .dh-product-checkbox-button:not(.active) {
+   cursor: not-allowed;
+   opacity: 0.7;
+}
+.dh-widget-dh-company-offer .dh-product-checkbox-button.active:before {
    content: '';
-   display: inline-block;
-   width: 1.5em;
+   display: block;
    height: 1.5em;
-   flex-shrink: 0;
-   flex-grow: 0;
-   border-radius: 0.25em;
-   margin-right: 0.5em;
+   width: 1.5em;
+   background-color: #fff;
+   margin-right: 5px;
+   border-radius: 3px;
+}
+.dh-widget-dh-company-offer .dh-product-checkbox-button.checked.active:before {
+   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%230b76ef' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+   background-color: #eeeeee;
+   background-size: 63%;
    background-repeat: no-repeat;
-   background-position: center center;
-   background-size: 50% 50%;
-   background-color: #fff;
- }
- 
- .dh-widget-dh-company-offer .dh-product-checkbox > input:checked + span {
-   background-color: #505050 !important;
- }
- .dh-widget-dh-company-offer .dh-product-checkbox > input:checked ~ div {
-   height: 14px !important;
- }
+   background-position: center;
+}
+.dh-widget-dh-company-offer .dh-product-checkbox-button.checked.active {
+   background-color: #505050;
+}
 
- .dh-widget-dh-company-offer .dh-product-checkbox > input:checked + span::before {
-   background-color: #fff;
-   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 7'%3e%3cpath fill='%230b76ef' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
- }
+
+.dh-selected-company-badge {
+   display: inline-block;
+   padding: 5px 20px;
+   margin-left: 5px;
+   background-color: #333;
+   color: #fff;
+   border-radius: 3px;
+}

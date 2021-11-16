@@ -1766,6 +1766,10 @@ class DH_Widgets_Content_Controls {
                'vertical' => __( 'Vertical', 'duurzaamthuis' ),
             ],
          ] );
+			$widget->add_control( 'dh_company_offer_form_id', [
+				'label' => __( 'Form ID', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+			] );
          $widget->add_responsive_control( 'dh_company_offer_columns_count', [
 				'label' => __( 'Columns', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::NUMBER,
@@ -1791,6 +1795,11 @@ class DH_Widgets_Content_Controls {
                'label' => __( 'Title', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::TEXT,
                'default' => __( 'Product title' , 'duurzaamthuis' ),
+               'label_block' => true,
+            ] );
+            $repeater->add_control( 'dh_company_offer_email', [
+               'label' => __( 'Email', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
                'label_block' => true,
             ] );
 				$repeater->add_control( 'dh_company_offer_brand', [

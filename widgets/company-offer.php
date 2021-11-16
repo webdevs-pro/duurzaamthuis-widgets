@@ -216,11 +216,10 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                               echo '</div>';
                            }
                            if ( $item['dh_company_offer_button_text'] ) {
-                              echo '<label class="dh-product-checkbox">';
-                                 echo '<input type="checkbox" name="' . $this->get_id() . '">';
-                                 echo '<span>' . $item['dh_company_offer_button_text'] . '</span>';
+                              echo '<div class="dh-product-checkbox-button-wrapper">';
+                                 echo '<div class="dh-product-checkbox-button active" data-email="' . esc_html( $item['dh_company_offer_email'] ) . '">Selecteer</div>';
                                  echo '<div>Send offer</div>';
-                              echo '</label>';
+                              echo '</div>';
                            }
                         echo '</div>'; // dh-product-column
                      echo '</div>'; // dh-product-wrapper
