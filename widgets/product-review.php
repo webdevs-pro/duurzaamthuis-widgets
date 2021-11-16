@@ -70,10 +70,10 @@ class DH_Product_Review extends \Elementor\Widget_Base {
    
 	protected function render() { // php template
 		$settings = $this->get_settings_for_display();
-      $dfrcs_set_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-0-cache', true );
+      $dfrcs_get_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-0-cache', true );
       $page_author_id = get_the_author_meta( 'ID' );
       $review_author_name = get_the_author_meta( 'first_name', $page_author_id ) . ' ' . get_the_author_meta( 'last_name', $page_author_id );
-      $price = $settings['dh_product_review_price'] ?? ( $dfrcs_set_cache['price'] ?? '' );
+      $price = dh_format_price( $settings['dh_product_review_price'] ?: ( $dfrcs_get_cache['price'] ?? '' ) );
       $pros = json_decode( $settings['dh_product_review_pros'] );
       $cons = json_decode( $settings['dh_product_review_cons'] );
 
@@ -127,7 +127,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                            echo '<div>Prijs</div>';
                            echo '<div>';
-                           echo '€' . $price;
+                           echo '€' . str_replace( '€', '', $price );
                            $last_updated = $settings['dh_product_review_price_tooltip'];
                            if ( $last_updated ) {
                               echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
@@ -287,10 +287,10 @@ class DH_Product_Review extends \Elementor\Widget_Base {
    // }
 
 
-   public function last_updated( $text, $instance ) {
-      $this->last_updated = $instance->date_updated;
-      return $text;
-   }
+   // public function last_updated( $text, $instance ) {
+   //    $this->last_updated = $instance->date_updated;
+   //    return $text;
+   // }
 
    public function modify_dfrcs_context( $context, $instance ) {
       return $context . ' widget-' . $this->get_id();
@@ -299,15 +299,15 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
    public function render_shortcode( $shorcode, $item_id = 0 ) {
       // add_filter( 'dfrcs_products', [ $this, 'filter_products'], 100);
-      add_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100, 2 );
+      // add_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100, 2 );
       $content = do_shortcode( shortcode_unautop( $shorcode ) );
-      remove_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100 );
+      // remove_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100 );
       // remove_filter( 'dfrcs_products', [ $this, 'filter_products'], 100 );
-
-      if ( ! $content ) return '';
       $DOM = new DOMDocument();
       @$DOM->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ) );
-      $data = $DOM->getElementsByTagName( 'div' )->item( 1 )->getAttribute( 'data-dfrcs' );
+      $divs = $DOM->getElementsByTagName( 'div' );
+      if ( $divs->length == 0 ) return '';
+      $data = $divs->item( 1 )->getAttribute( 'data-dfrcs' );
       $data = unserialize( base64_decode( $data ) );
       $data['widget'][$item_id] = $this->get_id();
       $data = base64_encode( serialize( $data ) );

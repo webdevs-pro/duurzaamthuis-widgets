@@ -2206,3 +2206,16 @@ add_action( 'elementor/editor/after_save', function( $post_id, $editor_data ) {
 		}
 	}
 }, 10, 2 );
+
+
+
+
+
+function dh_format_price( $price ) {
+	$maybe_decimal_sign = substr( $price, -3, -2 );
+	if ( $maybe_decimal_sign == '.' || $maybe_decimal_sign == ',' ) {
+		$decimal = substr( $price, -2 );
+		$price = str_replace( [',', '.'], '', substr( $price, 0, -2 ) ) . '.' . $decimal;
+	}
+	return $price;
+}
