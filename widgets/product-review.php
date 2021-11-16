@@ -303,6 +303,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
       $content = do_shortcode( shortcode_unautop( $shorcode ) );
       // remove_filter( 'dfrcs_last_updated_text', [ $this, 'last_updated' ], 100 );
       // remove_filter( 'dfrcs_products', [ $this, 'filter_products'], 100 );
+      if ( ! $content ) return '';
       $DOM = new DOMDocument();
       @$DOM->loadHTML( mb_convert_encoding( $content, 'HTML-ENTITIES', 'UTF-8' ) );
       $divs = $DOM->getElementsByTagName( 'div' );
