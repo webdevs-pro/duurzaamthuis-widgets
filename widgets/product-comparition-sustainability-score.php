@@ -243,7 +243,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 
                      if ( $price ) {
                         $schema['offers']['@type'] = "Offer";
-                        $schema['offers']['price'] = (string) $price;
+                        $schema['offers']['price'] = str_replace( ',', '.', $price );
                         $schema['offers']['priceCurrency'] = "EUR";
                      }
 
