@@ -869,24 +869,24 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_product_review_quality_amount1', [
 				'label' => __( 'Reviews Amount 1', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
-				'default' => '2000',
+				'placeholder' => '2000',
 				'classes' => "dh-numbers-only",
 			] );
 			$widget->add_control( 'dh_product_review_quality_source1', [
 				'label' => __( 'Reviews Source 1', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
-				'default' => 'Amazon',
+				'placeholder' => 'Amazon',
 			] );
 			$widget->add_control( 'dh_product_review_quality_amount2', [
 				'label' => __( 'Reviews Amount 2', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
-				'default' => '100',
+				'placeholder' => '100',
 				'classes' => "dh-numbers-only",
 			] );
 			$widget->add_control( 'dh_product_review_quality_source2', [
 				'label' => __( 'Reviews Source 2', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
-				'default' => 'Bol.com',
+				'placeholder' => 'Bol.com',
 			] );
 			$widget->add_control( 'dh_product_review_quality_tooltip', [
 				'label' => __( 'Tooltip', 'duurzaamthuis' ),
@@ -1565,24 +1565,24 @@ class DH_Widgets_Content_Controls {
 				$repeater->add_control( 'dh_product_comparition_sustainability_score_quality_amount1', [
 					'label' => __( 'Reviews Amount 1', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXT,
-					'default' => '2000',
+					'placeholder' => '2000',
                'classes' => "dh-numbers-only",
 				] );
 				$repeater->add_control( 'dh_product_comparition_sustainability_score_quality_source1', [
 					'label' => __( 'Reviews Source 1', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXT,
-					'default' => 'Amazon',
+					'placeholder' => 'Amazon',
 				] );
 				$repeater->add_control( 'dh_product_comparition_sustainability_score_quality_amount2', [
 					'label' => __( 'Reviews Amount 2', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXT,
-					'default' => '100',
+					'placeholder' => '100',
                'classes' => "dh-numbers-only",
 				] );
 				$repeater->add_control( 'dh_product_comparition_sustainability_score_quality_source2', [
 					'label' => __( 'Reviews Source 2', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXT,
-					'default' => 'Bol.com',
+					'placeholder' => 'Bol.com',
 				] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_quality_tooltip', [
                'label' => __( 'Tooltip', 'duurzaamthuis' ),
@@ -1834,24 +1834,24 @@ class DH_Widgets_Content_Controls {
 				$repeater->add_control( 'dh_company_offer_quality_amount1', [
 					'label' => __( 'Reviews Amount 1', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXT,
-					'default' => '',
+					'placeholder' => '2000',
                'classes' => "dh-numbers-only",
 				] );
 				$repeater->add_control( 'dh_company_offer_quality_source1', [
 					'label' => __( 'Reviews Source 1', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXT,
-					'default' => '',
+					'placeholder' => 'Amazon',
 				] );
 				$repeater->add_control( 'dh_company_offer_quality_amount2', [
 					'label' => __( 'Reviews Amount 2', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXT,
-					'default' => '',
+					'placeholder' => '100',
                'classes' => "dh-numbers-only",
 				] );
 				$repeater->add_control( 'dh_company_offer_quality_source2', [
 					'label' => __( 'Reviews Source 2', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXT,
-					'default' => '',
+					'placeholder' => 'Bol.com',
 				] );
             $repeater->add_control( 'dh_company_offer_quality_tooltip', [
                'label' => __( 'Tooltip', 'duurzaamthuis' ),

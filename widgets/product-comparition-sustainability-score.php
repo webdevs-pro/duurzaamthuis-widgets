@@ -84,7 +84,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                foreach ( $settings['dh_product_comparition_sustainability_score_products'] as $index => $item ) :
                   $shortcode = $this->render_shortcode( $item['dh_product_comparition_sustainability_score_shortcode'], $item['_id'] );
                   $dfrcs_set_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-' . $item['_id'] . '-cache', true );
-                  $price = $item['dh_product_comparition_sustainability_score_price'] ? '€' . $item['dh_product_comparition_sustainability_score_price'] : ( $dfrcs_set_cache['price'] ?? '' );
+                  $price = $item['dh_product_comparition_sustainability_score_price'] ?? ( $dfrcs_set_cache['price'] ?? '' );
                   $last_updated = $item['dh_product_comparition_sustainability_score_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
                   $last_updated_text = $item['dh_product_comparition_sustainability_score_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
                   $pros = json_decode( $item['dh_product_comparition_sustainability_score_pros'] );
@@ -158,9 +158,9 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 
                            if ( $price ) {
                               echo '<div class="dh-product-price">';
-                                 echo '<div>Prijs</div>';
+                                 echo '<div>Prijs11</div>';
                                  echo '<div>';
-                                 echo $price;
+                                 echo '€' . $price;
                                  if ( $last_updated ) {
                                     echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
                                  }
@@ -244,6 +244,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                      if ( $price ) {
                         $schema['offers']['@type'] = "Offer";
                         $schema['offers']['price'] = (string) $price;
+                        $schema['offers']['priceCurrency'] = "EUR";
                      }
 
                      if ( isset( $item['dh_product_comparition_sustainability_score_quality'] ) && ( isset( $item['dh_product_comparition_sustainability_score_quality_amount1'] ) || isset( $settings['dh_product_comparition_sustainability_score_quality_amount2'] ) ) ) {

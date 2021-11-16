@@ -73,7 +73,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
       $dfrcs_set_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-0-cache', true );
       $page_author_id = get_the_author_meta( 'ID' );
       $review_author_name = get_the_author_meta( 'first_name', $page_author_id ) . ' ' . get_the_author_meta( 'last_name', $page_author_id );
-      $price = $settings['dh_product_review_price'] ? '€' . $settings['dh_product_review_price'] : ( $dfrcs_set_cache['price'] ?? '' );
+      $price = $settings['dh_product_review_price'] ?? ( $dfrcs_set_cache['price'] ?? '' );
       $pros = json_decode( $settings['dh_product_review_pros'] );
       $cons = json_decode( $settings['dh_product_review_cons'] );
 
@@ -127,7 +127,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                            echo '<div>Prijs</div>';
                            echo '<div>';
-                           echo $price;
+                           echo '€' . $price;
                            $last_updated = $settings['dh_product_review_price_tooltip'];
                            if ( $last_updated ) {
                               echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
@@ -238,6 +238,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                if ( $price ) {
                   $schema['offers']['@type'] = "Offer";
                   $schema['offers']['price'] = (string) $price;
+                  $schema['offers']['priceCurrency'] = "EUR";
                }
 
                if ( isset( $settings['dh_product_review_quality'] ) && ( isset( $settings['dh_product_review_quality_amount1'] ) || isset( $settings['dh_product_review_quality_amount2'] ) ) ) {
