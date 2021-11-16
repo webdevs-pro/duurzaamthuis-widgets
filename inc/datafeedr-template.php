@@ -66,7 +66,7 @@
 <?php
     if ( ! $dfrcs_products ) return;
     $key = array_key_first( $dfrcs_products );
-    $price = number_format( ( $dfrcs_products[$key]['finalprice'] / 100 ), 2, ',', '.' );
+    $price = number_format( ( $dfrcs_products[$key]['finalprice'] / 100 ), 2, '.', '' );
     $date = $compset->date_updated;
     foreach ( $widget as $item_id => $widget_id ) {
         update_post_meta( $post_id, 'dh-dfrcs-set-' . $widget_id . '-' . $item_id . '-cache', array( 'price' => $price, 'last_updated' => $date ), true );

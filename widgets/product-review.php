@@ -243,15 +243,15 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                if ( isset( $settings['dh_product_review_quality'] ) && ( isset( $settings['dh_product_review_quality_amount1'] ) || isset( $settings['dh_product_review_quality_amount2'] ) ) ) {
                   $schema['aggregateRating']['@type'] = "AggregateRating";
-                  $schema['aggregateRating']['ratingValue'] = (string) $settings['dh_product_review_quality'];
-                  $schema['aggregateRating']['ratingCount'] = (string) intval( $settings['dh_product_review_quality_amount1'] ?? '' ) + intval( $settings['dh_product_review_quality_amount2'] ?? '' );
+                  $schema['aggregateRating']['ratingValue'] = str_replace( ',', '.', $settings['dh_product_review_quality'] );
+                  $schema['aggregateRating']['ratingCount'] = intval( $settings['dh_product_review_quality_amount1'] ?? '' ) + intval( $settings['dh_product_review_quality_amount2'] ?? '' );
                   $schema['aggregateRating']['bestRating'] = "10";
                }
 
                $schema['review']['@type'] = "Review";
 
                $schema['review']['reviewRating']['@type'] = "Rating";
-               $schema['review']['reviewRating']['ratingValue'] = (string) $settings['dh_product_review_rating'];
+               $schema['review']['reviewRating']['ratingValue'] = str_replace( ',', '.', $settings['dh_product_review_rating'] );
                $schema['review']['reviewRating']['bestRating'] = "10";
 
                $schema['review']['reviewBody'] = $settings['dh_product_review_description'];

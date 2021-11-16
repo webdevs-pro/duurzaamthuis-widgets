@@ -249,15 +249,15 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 
                      if ( isset( $item['dh_product_comparition_sustainability_score_quality'] ) && ( isset( $item['dh_product_comparition_sustainability_score_quality_amount1'] ) || isset( $settings['dh_product_comparition_sustainability_score_quality_amount2'] ) ) ) {
                         $schema['aggregateRating']['@type'] = "AggregateRating";
-                        $schema['aggregateRating']['ratingValue'] = (string) $item['dh_product_comparition_sustainability_score_quality'];
-                        $schema['aggregateRating']['ratingCount'] = (string) intval( $item['dh_product_comparition_sustainability_score_quality_amount1'] ?? '' ) + intval( $settings['dh_product_comparition_sustainability_score_quality_amount2'] ?? '' );
+                        $schema['aggregateRating']['ratingValue'] = str_replace( ',', '.', $item['dh_product_comparition_sustainability_score_quality'] );
+                        $schema['aggregateRating']['ratingCount'] = intval( $item['dh_product_comparition_sustainability_score_quality_amount1'] ?? '' ) + intval( $settings['dh_product_comparition_sustainability_score_quality_amount2'] ?? '' );
                         $schema['aggregateRating']['bestRating'] = "10";
                      }
 
                      $schema['review']['@type'] = "Review";
 
                      $schema['review']['reviewRating']['@type'] = "Rating";
-                     $schema['review']['reviewRating']['ratingValue'] = (string) $item['dh_product_comparition_sustainability_score_rating'];
+                     $schema['review']['reviewRating']['ratingValue'] = str_replace( ',', '.', $item['dh_product_comparition_sustainability_score_rating'] );
                      $schema['review']['reviewRating']['bestRating'] = "10";
 
                      $schema['review']['reviewBody'] = $item['dh_product_comparition_sustainability_score_description'];
