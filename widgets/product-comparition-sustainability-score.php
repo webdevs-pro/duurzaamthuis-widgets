@@ -158,7 +158,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 
                            if ( $price ) {
                               echo '<div class="dh-product-price">';
-                                 echo '<div>Prijs11</div>';
+                                 echo '<div>Prijs</div>';
                                  echo '<div>';
                                  echo '€' . $price;
                                  if ( $last_updated ) {
@@ -243,7 +243,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 
                      if ( $price ) {
                         $schema['offers']['@type'] = "Offer";
-                        $schema['offers']['price'] = str_replace( ',', '.', $price );
+                        $schema['offers']['price'] = $price;
                         $schema['offers']['priceCurrency'] = "EUR";
                      }
 
