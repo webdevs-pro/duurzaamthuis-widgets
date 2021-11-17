@@ -1,7 +1,7 @@
 <?php 
    global $compset; 
    $set_id = uniqid();
-   $widget = $compset->source->original['widget'];
+   $widget = $compset->source->original['widget'] ?? '';
    $post_id = $compset->source->original['post_id'];
 ?>
 
@@ -66,10 +66,12 @@
 <?php
     if ( ! $dfrcs_products ) return;
     $key = array_key_first( $dfrcs_products );
-    $price = number_format( ( $dfrcs_products[$key]['finalprice'] / 100 ), 2, ',', '.' );
+    $price = number_format( ( $dfrcs_products[$key]['finalprice'] / 100 ), 2, '.', '' );
     $date = $compset->date_updated;
-    foreach ( $widget as $item_id => $widget_id ) {
-        update_post_meta( $post_id, 'dh-dfrcs-set-' . $widget_id . '-' . $item_id . '-cache', array( 'price' => $price, 'last_updated' => $date ), true );
+    if ( $widget ) {
+        foreach ( $widget as $item_id => $widget_id ) {
+            update_post_meta( $post_id, 'dh-dfrcs-set-' . $widget_id . '-' . $item_id . '-cache', array( 'price' => $price, 'last_updated' => $date ), true );
+        }
     }
 ?>
 
@@ -80,7 +82,7 @@
         $( productEl ).find( '.dh-product-last-updated-text' ).text( 'Laatste update: <?php echo $date; ?>' );
 
         if ( priceEl.length == 0 ) {
-            $( productEl ).find( '.dh-product-score' ).before( '<div class="dh-product-price"><div>Prijs</div><div><?php echo $price; ?></div></div>' );
+            $( productEl ).find( '.dh-product-score' ).before( '<div class="dh-product-price"><div>Prijs</div><div><?php echo '€' . $price; ?></div></div>' );
         }
     })(jQuery)
 </script>

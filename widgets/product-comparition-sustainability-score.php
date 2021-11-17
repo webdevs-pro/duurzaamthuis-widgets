@@ -160,7 +160,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               echo '<div class="dh-product-price">';
                                  echo '<div>Prijs</div>';
                                  echo '<div>';
-                                 echo '€' . str_replace( '€', '', $price );
+                                 echo '€' . str_replace( ['€', '.'], ['', ','], $price );
                                  if ( $last_updated ) {
                                     echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
                                  }
@@ -243,7 +243,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 
                      if ( $price ) {
                         $schema['offers']['@type'] = "Offer";
-                        $schema['offers']['price'] = str_replace( ',', '.', $price );
+                        $schema['offers']['price'] = $price;
                         $schema['offers']['priceCurrency'] = "EUR";
                      }
 

@@ -182,7 +182,7 @@
 			}
 		});
 
-
+		$( '#solar #form-field-companies' ).val( '' );
 
 		$scope.find( '.dh-product-checkbox-button' ).on( 'click', function() {
 			var max_checked = 3;
@@ -204,7 +204,7 @@
 				titles.push( $( this ).closest( '.dh-product' ).find( '.dh-heading' ).text() );
 			} );
 
-			$( '#solar #form-field-companies' ).val( JSON.stringify( emails ) );
+			$( '#solar #form-field-companies' ).val( emails.join(',') );
 
 			$( '#solar .elementor-field-group-companies .dh-selected-company-badge' ).remove();
 			$.each( titles, function( key, title ) {

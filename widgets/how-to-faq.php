@@ -49,7 +49,9 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 			?></div><?php 
 
 			$schema = array();
+
 			if ( $settings['dh_how_to_faq_schema_type'] == 'how_to' ) {
+			
 				$schema['@context'] = "https://schema.org/";
 				$schema['@type'] = "HowTo";
 				$schema['name'] = (string) $settings['dh_how_to_faq_name'];
@@ -64,6 +66,23 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 
 						$schema['step'][] = $step;
 					}
+				}
+
+				$days = $settings['dh_how_to_faq_duration_days'] ?? 0;
+				$hours = $settings['dh_how_to_faq_duration_hours'] ?? 0;
+				$minutes = $settings['dh_how_to_faq_duration_minutes'] ?? 0;
+				$duration = '';
+				if ( $days > 0 ) {
+					$duration .= $days . 'D';
+				}
+				if ( $hours > 0 ) {
+					$duration .= $hours . 'H';
+				}
+				if ( $minutes > 0 ) {
+					$duration .= $minutes . 'M';
+				}
+				if ( $duration ) {
+					$schema['totalTime'] = 'PT' . $duration;
 				}
 			} else if ( $settings['dh_how_to_faq_schema_type'] == 'faq' ) {
 				$schema['@context'] = "https://schema.org/";

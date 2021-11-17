@@ -1358,6 +1358,49 @@ class DH_Widgets_Content_Controls {
                'faq' => __( 'FAQ', 'duurzaamthuis' ),
             ],
          ] );
+			$widget->add_control( 'dh_how_to_faq_duration_heading',
+				[
+					'label' => __( 'How To Duration', 'duurzaamthuis' ),
+					'type' => \Elementor\Controls_Manager::HEADING,
+					'separator' => 'before',
+					'condition' => [
+						'dh_how_to_faq_schema_type' => 'how_to',
+					]  
+				]
+			);
+			$widget->add_control( 'dh_how_to_faq_duration_days', [
+				'label' => __( 'Days', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::NUMBER,
+				'min' => 0,
+				'max' => 31,
+				'step' => 1,
+				'default' => 0,  
+            'condition' => [
+               'dh_how_to_faq_schema_type' => 'how_to',
+            ]      
+			] );
+			$widget->add_control( 'dh_how_to_faq_duration_hours', [
+				'label' => __( 'Hours', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::NUMBER,
+				'min' => 0,
+				'max' => 23,
+				'step' => 1,
+				'default' => 0,  
+            'condition' => [
+               'dh_how_to_faq_schema_type' => 'how_to',
+            ]      
+			] );
+			$widget->add_control( 'dh_how_to_faq_duration_minutes', [
+				'label' => __( 'Minutes', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::NUMBER,
+				'min' => 0,
+				'max' => 59,
+				'step' => 1,
+				'default' => 0,  
+            'condition' => [
+               'dh_how_to_faq_schema_type' => 'how_to',
+            ]      
+			] );
 		$widget->end_controls_section(); 
 	}
 

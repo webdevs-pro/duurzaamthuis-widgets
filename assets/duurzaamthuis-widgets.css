@@ -2125,7 +2125,7 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 /* how to/FAQ */
 .dh-widget-dh-how-to-faq .dh-how-to-faq-item {
    display: flex;
-   margin-bottom: 20px;
+   margin-bottom: 10px;
 }
 .dh-widget-dh-how-to-faq .dh-how-to-faq .dh-how-to-faq-item-number {
    background: #EADECC;

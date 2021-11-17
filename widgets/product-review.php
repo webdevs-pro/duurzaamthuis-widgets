@@ -127,7 +127,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                            echo '<div>Prijs</div>';
                            echo '<div>';
-                           echo '€' . str_replace( '€', '', $price );
+                           echo '€' . str_replace( ['€', '.'], ['', ','], $price );
                            $last_updated = $settings['dh_product_review_price_tooltip'];
                            if ( $last_updated ) {
                               echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
@@ -209,8 +209,8 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                   echo '<div class="dh-product-review-column">';
                      echo '<div class="dh-product-review-shortcode-heading">Beste prijs</div>';
-                     // $shortcode = $this->render_shortcode( $settings['dh_product_review_shortcode'] );
-                     // echo '<div class="dh-product-review-shortcode">' . $shortcode . '</div>';
+                     $shortcode = $this->render_shortcode( $settings['dh_product_review_shortcode'] );
+                     echo '<div class="dh-product-review-shortcode">' . $shortcode . '</div>';
                      // $last_updated_text = $settings['dh_product_review_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
                      // echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
                      if ( $settings['dh_product_review_button_text'] ) {
@@ -237,7 +237,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
 
                if ( $price ) {
                   $schema['offers']['@type'] = "Offer";
-                  $schema['offers']['price'] = str_replace( ',', '.', $price );
+                  $schema['offers']['price'] = $price;
                   $schema['offers']['priceCurrency'] = "EUR";
                }
 
@@ -291,10 +291,6 @@ class DH_Product_Review extends \Elementor\Widget_Base {
    //    $this->last_updated = $instance->date_updated;
    //    return $text;
    // }
-
-   public function modify_dfrcs_context( $context, $instance ) {
-      return $context . ' widget-' . $this->get_id();
-   }
 
 
    public function render_shortcode( $shorcode, $item_id = 0 ) {
@@ -436,7 +432,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                                  if ( ! settings.dh_product_review_co2_custom_label && is_number( co2 ) ) {
                                     co2 = co2 + 'kg CO<sub>2</sub> p/j';
                                  } #>
-                                 {{ co2 }}
+                                 {{{ co2 }}}
                                  <# if ( settings.dh_product_review_co2_tooltip ) { #>
                                     <i class="dh-icon dh-icon-info" data-dh-tooltip="{{ settings.dh_product_review_co2_tooltip }}"></i>
                                  <# } #>
