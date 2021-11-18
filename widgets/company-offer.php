@@ -75,7 +75,7 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
 		$settings = $this->get_settings_for_display();
       
 		if ( $settings['dh_company_offer_products'] ) :
-         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>" data-form-id="<?php echo $settings['dh_company_offer_form_id']; ?>" data-hidden-form-field-id="<?php echo $settings['dh_company_offer_hidden_form_field_id']; ?>"><?php
             echo '<div class="dh-products-score-grid dh-products-' . $settings['dh_company_offer_skin'] . '-skin">';
                foreach ( $settings['dh_company_offer_products'] as $index => $item ) :
                   echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
@@ -110,72 +110,72 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                  }
                               echo '</div>'; // dh-product-image-wrapper
                            echo '</div>'; // dh-product-image
-                           if ( $item['dh_company_offer_quality'] ) {
-                              echo '<div class="dh-product-quality">';
-                                 echo '<div>Kwaliteit</div>';
-                                 echo '<div>';
-                                 echo $item['dh_company_offer_quality'];
-                                 if ( $item['dh_company_offer_quality_tooltip'] ) {
-                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_company_offer_quality_tooltip'] ) . '"></i>';
-                                 } else {
-                                    if ( $item['dh_company_offer_quality_amount1'] && $item['dh_company_offer_quality_source1'] ) {
-                                       $quality_tooltip = 'Gebaseerd op ' . $item['dh_company_offer_quality_amount1'] . ' reviews op ' . $item['dh_company_offer_quality_source1'];
-                                       if ( $item['dh_company_offer_quality_amount2'] && $item['dh_company_offer_quality_source2'] ) {
-                                          $quality_tooltip .= ' en ' . $item['dh_company_offer_quality_amount2'] . ' op ' . $item['dh_company_offer_quality_source2'];
-                                       }
-                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $quality_tooltip ) . '"></i>';
-                                    }
-                                 }
-                                 echo '</div>';
-                              echo '</div>';
-                           }
-                           if ( $item['dh_company_offer_co2'] || $item['dh_company_offer_co2_custom_label'] ) {
-                              echo '<div class="dh-product-co2">';
-                                 echo '<div>' . ( $item['dh_company_offer_co2_custom_label'] ?: 'CO<sub>2</sub>-afdruk' ) . '</div>';
-                                 echo '<div>';
-                                    $co2 = $item['dh_company_offer_co2'];
-                                    if ( ! $item['dh_company_offer_co2_custom_label'] && $this->is_number( $co2 ) ) {
-                                       $co2 = $co2 . 'kg CO<sub>2</sub> p/j';
-                                    } 
-                                    echo $co2;
-                                    if ( $item['dh_company_offer_co2_tooltip'] ) {
-                                       echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_company_offer_co2_tooltip'] ) . '"></i>';
-                                    }
-                                 echo '</div>';
-                              echo '</div>'; // dh-product-co2
-                           }
-                           $price = $item['dh_company_offer_price'] ? '€' . $item['dh_company_offer_price'] : ( $dfrcs_set_cache['price'] ?? '' );
-                           $last_updated = $item['dh_company_offer_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
-                           if ( $price ) {
-                              echo '<div class="dh-product-price">';
-                                 echo '<div>Prijs</div>';
-                                 echo '<div>';
-                                 echo $price;
-                                 if ( $last_updated ) {
-                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
-                                 }
-                                 echo '</div>';
-                              echo '</div>';
-                           }
-                           if ( $item['dh_company_offer_rating'] ) {
-                              echo '<div class="dh-product-score">';
-                                 echo '<img src="' . $settings['dh_company_offer_logo_url'] . '">';
-                                 echo '<div>';
-                                    echo '<div class="dh-product-rating-heading">';
-                                       echo 'Duurzaam Thuis Score';
-                                       if ( $item['dh_company_offer_rating_tooltip'] ) {
-                                          echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_company_offer_rating_tooltip'] ) . '"></i>';
-                                       }
-                                    echo '</div>';
-                                    echo '<div class="dh-product-rating">';
-                                       echo '<div class="dh-text-rating">' . $item['dh_company_offer_rating'] .'/10</div>';
-                                       echo '<div class="dh-list-rating">';
-                                          echo $this->render_rating( $item['dh_company_offer_rating'] );
-                                       echo '</div>';
-                                    echo '</div>';
-                                 echo '</div>';
-                              echo '</div>';
-                           }
+                           // if ( $item['dh_company_offer_quality'] ) {
+                           //    echo '<div class="dh-product-quality">';
+                           //       echo '<div>Kwaliteit</div>';
+                           //       echo '<div>';
+                           //       echo $item['dh_company_offer_quality'];
+                           //       if ( $item['dh_company_offer_quality_tooltip'] ) {
+                           //          echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_company_offer_quality_tooltip'] ) . '"></i>';
+                           //       } else {
+                           //          if ( $item['dh_company_offer_quality_amount1'] && $item['dh_company_offer_quality_source1'] ) {
+                           //             $quality_tooltip = 'Gebaseerd op ' . $item['dh_company_offer_quality_amount1'] . ' reviews op ' . $item['dh_company_offer_quality_source1'];
+                           //             if ( $item['dh_company_offer_quality_amount2'] && $item['dh_company_offer_quality_source2'] ) {
+                           //                $quality_tooltip .= ' en ' . $item['dh_company_offer_quality_amount2'] . ' op ' . $item['dh_company_offer_quality_source2'];
+                           //             }
+                           //             echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $quality_tooltip ) . '"></i>';
+                           //          }
+                           //       }
+                           //       echo '</div>';
+                           //    echo '</div>';
+                           // }
+                           // if ( $item['dh_company_offer_co2'] || $item['dh_company_offer_co2_custom_label'] ) {
+                           //    echo '<div class="dh-product-co2">';
+                           //       echo '<div>' . ( $item['dh_company_offer_co2_custom_label'] ?: 'CO<sub>2</sub>-afdruk' ) . '</div>';
+                           //       echo '<div>';
+                           //          $co2 = $item['dh_company_offer_co2'];
+                           //          if ( ! $item['dh_company_offer_co2_custom_label'] && $this->is_number( $co2 ) ) {
+                           //             $co2 = $co2 . 'kg CO<sub>2</sub> p/j';
+                           //          } 
+                           //          echo $co2;
+                           //          if ( $item['dh_company_offer_co2_tooltip'] ) {
+                           //             echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_company_offer_co2_tooltip'] ) . '"></i>';
+                           //          }
+                           //       echo '</div>';
+                           //    echo '</div>'; // dh-product-co2
+                           // }
+                           // $price = $item['dh_company_offer_price'] ? '€' . $item['dh_company_offer_price'] : ( $dfrcs_set_cache['price'] ?? '' );
+                           // $last_updated = $item['dh_company_offer_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
+                           // if ( $price ) {
+                           //    echo '<div class="dh-product-price">';
+                           //       echo '<div>Prijs</div>';
+                           //       echo '<div>';
+                           //       echo $price;
+                           //       if ( $last_updated ) {
+                           //          echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
+                           //       }
+                           //       echo '</div>';
+                           //    echo '</div>';
+                           // }
+                           // if ( $item['dh_company_offer_rating'] ) {
+                           //    echo '<div class="dh-product-score">';
+                           //       echo '<img src="' . $settings['dh_company_offer_logo_url'] . '">';
+                           //       echo '<div>';
+                           //          echo '<div class="dh-product-rating-heading">';
+                           //             echo 'Duurzaam Thuis Score';
+                           //             if ( $item['dh_company_offer_rating_tooltip'] ) {
+                           //                echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_company_offer_rating_tooltip'] ) . '"></i>';
+                           //             }
+                           //          echo '</div>';
+                           //          echo '<div class="dh-product-rating">';
+                           //             echo '<div class="dh-text-rating">' . $item['dh_company_offer_rating'] .'/10</div>';
+                           //             echo '<div class="dh-list-rating">';
+                           //                echo $this->render_rating( $item['dh_company_offer_rating'] );
+                           //             echo '</div>';
+                           //          echo '</div>';
+                           //       echo '</div>';
+                           //    echo '</div>';
+                           // }
                         echo '</div>'; // dh-product-column
                         echo '<div class="dh-product-column">';
                            $pros = json_decode( $item['dh_company_offer_pros'] );
@@ -215,12 +215,12 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                  echo '</div>';
                               echo '</div>';
                            }
-                           if ( $item['dh_company_offer_button_text'] ) {
-                              echo '<div class="dh-product-checkbox-button-wrapper">';
-                                 echo '<div class="dh-product-checkbox-button active" data-email="' . esc_html( $item['dh_company_offer_email'] ) . '">Selecteer</div>';
-                                 echo '<div>Offerte aanvragen</div>';
-                              echo '</div>';
-                           }
+                           // if ( $item['dh_company_offer_button_text'] ) {
+                           //    echo '<div class="dh-product-checkbox-button-wrapper">';
+                           //       echo '<div class="dh-product-checkbox-button active" data-email="' . esc_html( $item['dh_company_offer_email'] ) . '">Selecteer</div>';
+                           //       echo '<div class="dh-product-checkbox-scroll-to-form">Offerte aanvragen</div>';
+                           //    echo '</div>';
+                           // }
                         echo '</div>'; // dh-product-column
                      echo '</div>'; // dh-product-wrapper
 
@@ -328,7 +328,7 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                        <img src="{{ item.dh_company_offer_image.url }}">
                                  </div>
                               </div>
-                              <# if ( item.dh_company_offer_quality ) { #>
+                              <!-- <# if ( item.dh_company_offer_quality ) { #>
                                  <div class="dh-product-quality">
                                     <div>Kwaliteit</div>
                                     <div>
@@ -347,8 +347,8 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                     } #> 
                                     </div>
                                  </div>
-                              <# } #>
-                              <# if ( item.dh_company_offer_co2 || item.dh_company_offer_co2_custom_label ) { #>
+                              <# } #> -->
+                              <!-- <# if ( item.dh_company_offer_co2 || item.dh_company_offer_co2_custom_label ) { #>
                                  <div class="dh-product-co2">
                                     <div>
                                     <# if ( item.dh_company_offer_co2_custom_label ) { #>
@@ -368,8 +368,8 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                        <# } #>
                                     </div>
                                  </div>
-                              <# } #>
-                              <# if ( item.dh_company_offer_price ) { #>
+                              <# } #> -->
+                              <!-- <# if ( item.dh_company_offer_price ) { #>
                                  <div class="dh-product-price">
                                     <div>Prijs</div>
                                     <div>
@@ -379,9 +379,9 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                        <# } #>
                                     </div>
                                  </div>
-                              <# } #>
+                              <# } #> -->
 
-                              <# if ( item.dh_company_offer_rating ) { #>
+                              <!-- <# if ( item.dh_company_offer_rating ) { #>
                                  <div class="dh-product-score">
                                     <img src="{{ settings.dh_company_offer_logo_url }}">
                                     <div>
@@ -399,7 +399,7 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                        </div>
                                     </div>
                                  </div>
-                              <# } #>
+                              <# } #> -->
                            </div>
                            <div class="dh-product-column">
                               <# var pros = check_and_parse_json( item.dh_company_offer_pros );  #>
@@ -438,9 +438,9 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                     </div>
                                  </div>
                               <# } #>
-                              <# if ( item.dh_company_offer_button_text ) { #>
+                              <!-- <# if ( item.dh_company_offer_button_text ) { #>
                                  <a target="_blank" class="dh-product-button" href="{{ item.dh_company_offer_button_link }}">{{ item.dh_company_offer_button_text }}</a>
-                              <# } #>
+                              <# } #> -->
                            </div>
                         </div>
                      </div>

@@ -2610,11 +2610,22 @@ body:not(.logged-in) .dh-widget-dh-company-offer .dh-product-last-updated-text {
    background-color: #505050;
 }
 
-
+.dh-widget-dh-company-offer .dh-product-checkbox-scroll-to-form {
+   display: none;
+   text-align: center;
+   margin-top: 5px;
+   cursor: pointer;
+   text-decoration: underline;
+   font-size: 14px;
+}
+.dh-widget-dh-company-offer .dh-product-checkbox-button.checked + .dh-product-checkbox-scroll-to-form {
+   display: block;
+}
 .dh-selected-company-badge {
    display: inline-block;
    padding: 5px 20px;
    margin-left: 5px;
+   margin-bottom: 5px;
    background-color: #333;
    color: #fff;
    border-radius: 3px;

@@ -155,7 +155,9 @@
 
 
 	var DH_Company_Offer = function( $scope, $ ) {
-		var el_id = $scope.attr( 'data-id' );
+		var form_id = $scope.find( '.dh-widget-dh-company-offer' ).data( 'form-id' );
+
+		var form_hidden_field_id = $scope.find( '.dh-widget-dh-company-offer' ).data( 'hidden-form-field-id' );
 
 		$scope.find('.dh-product-description').each(function() {
 			var height = $(this).height();
@@ -182,7 +184,7 @@
 			}
 		});
 
-		$( '#solar #form-field-companies' ).val( '' );
+		$( '#' + form_id + ' #form-field-' + form_hidden_field_id ).val( '' );
 
 		$scope.find( '.dh-product-checkbox-button' ).on( 'click', function() {
 			var max_checked = 3;
@@ -204,19 +206,25 @@
 				titles.push( $( this ).closest( '.dh-product' ).find( '.dh-heading' ).text() );
 			} );
 
-			$( '#solar #form-field-companies' ).val( emails.join(',') );
+			$( '#' + form_id + ' #form-field-' + form_hidden_field_id ).val( emails.join(',') );
 
-			$( '#solar .elementor-field-group-companies .dh-selected-company-badge' ).remove();
+			$( '#' + form_id + ' .dh-selected-company-badge' ).remove();
 			$.each( titles, function( key, title ) {
-				$( '#solar .elementor-field-group-companies' ).append( '<span class="dh-selected-company-badge">' + title + '</span>' );
+				$( '#' + form_id + ' #form-field-' + form_hidden_field_id ).parent().after( '<span class="dh-selected-company-badge">' + title + '</span>' );
 			} );
-
-			$( document ).on('submit_success', '#solar', function() {
-				$scope.find( '.dh-product-checkbox-button' ).addClass( 'active' ).removeClass( 'checked' );
-				$( '#solar .elementor-field-group-companies .dh-selected-company-badge' ).remove();
-			} )
-
 		} );
+
+		$( document ).on('submit_success', '#' + form_id + '', function() {
+			$scope.find( '.dh-product-checkbox-button' ).addClass( 'active' ).removeClass( 'checked' );
+			$( '#' + form_id + ' .dh-selected-company-badge' ).remove();
+		} )
+
+		$scope.find( '.dh-product-checkbox-scroll-to-form' ).on( 'click', function() {
+			if ( $( '#' + form_id ).length == 0 ) return false;
+			$( 'html, body' ).animate( {
+				scrollTop: $( '#' + form_id ).offset().top - 50
+			}, 700, 'swing' );
+		})
 
 
 	}

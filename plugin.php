@@ -1813,6 +1813,11 @@ class DH_Widgets_Content_Controls {
 				'label' => __( 'Form ID', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
 			] );
+			$widget->add_control( 'dh_company_offer_hidden_form_field_id', [
+				'label' => __( 'Hidden form field ID', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => 'companies',
+			] );
          $widget->add_responsive_control( 'dh_company_offer_columns_count', [
 				'label' => __( 'Columns', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::NUMBER,
@@ -1827,7 +1832,7 @@ class DH_Widgets_Content_Controls {
 				],   
             'condition' => [
                'dh_company_offer_skin' => 'vertical',
-            ]      
+				]
 			] );
          $widget->add_control( 'dh_company_offer_logo_url', [
             'type' => Elementor\Controls_Manager::HIDDEN,
@@ -1845,18 +1850,18 @@ class DH_Widgets_Content_Controls {
                'type' => Elementor\Controls_Manager::TEXT,
                'label_block' => true,
             ] );
-				$repeater->add_control( 'dh_company_offer_brand', [
-					'label' => __( 'Brand', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::TEXT,
-					'label_block' => true,
-				] );
-				$repeater->add_control( 'dh_company_offer_ean', [
-					'label' => __( 'EAN Product ID (GTIN-13)', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::TEXT,
-					'label_block' => true,
-					'description' => 'For example: 9789000378937 (13 digits)',
-					'classes' => "dh-13-chars-max dh-numbers-only",
-				] );
+				// $repeater->add_control( 'dh_company_offer_brand', [
+				// 	'label' => __( 'Brand', 'duurzaamthuis' ),
+				// 	'type' => Elementor\Controls_Manager::TEXT,
+				// 	'label_block' => true,
+				// ] );
+				// $repeater->add_control( 'dh_company_offer_ean', [
+				// 	'label' => __( 'EAN Product ID (GTIN-13)', 'duurzaamthuis' ),
+				// 	'type' => Elementor\Controls_Manager::TEXT,
+				// 	'label_block' => true,
+				// 	'description' => 'For example: 9789000378937 (13 digits)',
+				// 	'classes' => "dh-13-chars-max dh-numbers-only",
+				// ] );
             $repeater->add_control( 'dh_company_offer_badge', [
                'label' => __( 'Badge', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::SELECT,
@@ -1878,77 +1883,77 @@ class DH_Widgets_Content_Controls {
                ],
                'separator' => 'after',
             ] );
-            $repeater->add_control( 'dh_company_offer_quality', [
-               'label' => __( 'Quality', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => '',
-            ] );
-				$repeater->add_control( 'dh_company_offer_quality_amount1', [
-					'label' => __( 'Reviews Amount 1', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::TEXT,
-					'placeholder' => '2000',
-               'classes' => "dh-numbers-only",
-				] );
-				$repeater->add_control( 'dh_company_offer_quality_source1', [
-					'label' => __( 'Reviews Source 1', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::TEXT,
-					'placeholder' => 'Amazon',
-				] );
-				$repeater->add_control( 'dh_company_offer_quality_amount2', [
-					'label' => __( 'Reviews Amount 2', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::TEXT,
-					'placeholder' => '100',
-               'classes' => "dh-numbers-only",
-				] );
-				$repeater->add_control( 'dh_company_offer_quality_source2', [
-					'label' => __( 'Reviews Source 2', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::TEXT,
-					'placeholder' => 'Bol.com',
-				] );
-            $repeater->add_control( 'dh_company_offer_quality_tooltip', [
-               'label' => __( 'Tooltip', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => '',
-               'separator' => 'after',
-            ] );
-            $repeater->add_control( 'dh_company_offer_co2', [
-					'label' => __( 'CO<sub>2</sub>-afdruk', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => '',
-					] );
-				$repeater->add_control( 'dh_company_offer_co2_custom_label', [
-					'label' => __( 'Custom label', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::TEXT,
-					'description' => 'Will be used instead "CO<sub>2</sub>-afdruk"',
-				] );
-            $repeater->add_control( 'dh_company_offer_co2_tooltip', [
-               'label' => __( 'Tooltip', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => '',
-               'separator' => 'after',
-            ] );
-            $repeater->add_control( 'dh_company_offer_price', [
-               'label' => __( 'Price', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => '',
-               'description' => 'If empty, the lowest price from datafeedr will be taken',
-            ] );
-            $repeater->add_control( 'dh_company_offer_price_tooltip', [
-               'label' => __( 'Tooltip', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => '',
-               'separator' => 'after',
-            ] );
-            $repeater->add_control( 'dh_company_offer_rating', [
-               'label' => __( 'Rating', 'elementor' ),
-               'type' => Elementor\Controls_Manager::NUMBER,
-            ] );
-            $repeater->add_control( 'dh_company_offer_rating_tooltip', [
-               'label' => __( 'Tooltip', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => '',
-               'separator' => 'after',
-            ] );
+            // $repeater->add_control( 'dh_company_offer_quality', [
+            //    'label' => __( 'Quality', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'default' => '',
+            // ] );
+				// $repeater->add_control( 'dh_company_offer_quality_amount1', [
+				// 	'label' => __( 'Reviews Amount 1', 'duurzaamthuis' ),
+				// 	'type' => Elementor\Controls_Manager::TEXT,
+				// 	'placeholder' => '2000',
+            //    'classes' => "dh-numbers-only",
+				// ] );
+				// $repeater->add_control( 'dh_company_offer_quality_source1', [
+				// 	'label' => __( 'Reviews Source 1', 'duurzaamthuis' ),
+				// 	'type' => Elementor\Controls_Manager::TEXT,
+				// 	'placeholder' => 'Amazon',
+				// ] );
+				// $repeater->add_control( 'dh_company_offer_quality_amount2', [
+				// 	'label' => __( 'Reviews Amount 2', 'duurzaamthuis' ),
+				// 	'type' => Elementor\Controls_Manager::TEXT,
+				// 	'placeholder' => '100',
+            //    'classes' => "dh-numbers-only",
+				// ] );
+				// $repeater->add_control( 'dh_company_offer_quality_source2', [
+				// 	'label' => __( 'Reviews Source 2', 'duurzaamthuis' ),
+				// 	'type' => Elementor\Controls_Manager::TEXT,
+				// 	'placeholder' => 'Bol.com',
+				// ] );
+            // $repeater->add_control( 'dh_company_offer_quality_tooltip', [
+            //    'label' => __( 'Tooltip', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'default' => '',
+            //    'separator' => 'after',
+            // ] );
+            // $repeater->add_control( 'dh_company_offer_co2', [
+				// 	'label' => __( 'CO<sub>2</sub>-afdruk', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'default' => '',
+				// 	] );
+				// $repeater->add_control( 'dh_company_offer_co2_custom_label', [
+				// 	'label' => __( 'Custom label', 'duurzaamthuis' ),
+				// 	'type' => Elementor\Controls_Manager::TEXT,
+				// 	'description' => 'Will be used instead "CO<sub>2</sub>-afdruk"',
+				// ] );
+            // $repeater->add_control( 'dh_company_offer_co2_tooltip', [
+            //    'label' => __( 'Tooltip', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'default' => '',
+            //    'separator' => 'after',
+            // ] );
+            // $repeater->add_control( 'dh_company_offer_price', [
+            //    'label' => __( 'Price', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'default' => '',
+            //    'description' => 'If empty, the lowest price from datafeedr will be taken',
+            // ] );
+            // $repeater->add_control( 'dh_company_offer_price_tooltip', [
+            //    'label' => __( 'Tooltip', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'default' => '',
+            //    'separator' => 'after',
+            // ] );
+            // $repeater->add_control( 'dh_company_offer_rating', [
+            //    'label' => __( 'Rating', 'elementor' ),
+            //    'type' => Elementor\Controls_Manager::NUMBER,
+            // ] );
+            // $repeater->add_control( 'dh_company_offer_rating_tooltip', [
+            //    'label' => __( 'Tooltip', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'default' => '',
+            //    'separator' => 'after',
+            // ] );
             $repeater->add_control( 'dh_company_offer_pros', [
                'label' => 'Pros',
                'label_block' => false,
@@ -1979,19 +1984,19 @@ class DH_Widgets_Content_Controls {
                'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'duurzaamthuis' ),
                'placeholder' => __( 'Type your description here', 'duurzaamthuis' ),
             ] );
-            $repeater->add_control( 'dh_company_offer_button_text', [
-               'label' => __( 'Button Text', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => 'Button text',
-               'separator' => 'before',
-               'label_block' => true,
-            ] );
-            $repeater->add_control( 'dh_company_offer_button_link', [
-               'label' => __( 'Button Link', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => '#',
-               'label_block' => true,
-            ] );
+            // $repeater->add_control( 'dh_company_offer_button_text', [
+            //    'label' => __( 'Button Text', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'default' => 'Button text',
+            //    'separator' => 'before',
+            //    'label_block' => true,
+            // ] );
+            // $repeater->add_control( 'dh_company_offer_button_link', [
+            //    'label' => __( 'Button Link', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'default' => '#',
+            //    'label_block' => true,
+            // ] );
 				$repeater->add_control( 'dh_company_offer_script', [
 					'type' => Elementor\Controls_Manager::RAW_HTML,
 					'raw' => $script,
