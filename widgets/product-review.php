@@ -379,15 +379,6 @@ class DH_Product_Review extends \Elementor\Widget_Base {
             } ); 
             classes = ' ' + classes.join( ' ' );
 
-            var width;
-				var height;
-				var img_dimensions = sessionStorage.getItem(id);
-				if ( img_dimensions !== null ) {
-					img_dimensions = JSON.parse( img_dimensions );
-					width = img_dimensions.width;
-					height = img_dimensions.height;
-				} 
-
          #>
          <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{ classes }}">
             <div class="dh-products-review-grid dh-products-{{ settings.dh_product_review_skin }}-skin">
@@ -515,8 +506,10 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                   <div class="dh-product-review-row">
 
                      <div class="dh-product-review-column">
-                        <div class="dh-product-image-wrapper">
-							      <img src="{{ settings.dh_product_review_image.url }}" width="{{{width}}}" height="{{{height}}}" onload="javascript: sessionStorage.setItem('{{{id}}}', JSON.stringify({ 'width': this.naturalWidth, 'height': this.naturalHeight }));">
+                        <div class="dh-product-image">
+                           <div class="dh-product-image-wrapper">
+                              <img src="{{ settings.dh_product_review_image.url }}">
+                           </div>
                         </div>
                      </div>
 
