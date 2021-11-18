@@ -198,13 +198,15 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                echo '<div class="dh-product-review-row">';
 
                   echo '<div class="dh-product-review-column">';
-                     echo '<div class="dh-product-image-wrapper">';
-                        if ( $settings['dh_product_review_image']['id'] ) {
-                           echo wp_get_attachment_image( $settings['dh_product_review_image']['id'], 'medium' );
-                        } else {
-                           echo '<img src="' . Elementor\Utils::get_placeholder_image_src() . '">';
-                        }
-                     echo '</div>'; // dh-product-image-wrapper
+                     echo '<div class="dh-product-image">';
+                        echo '<div class="dh-product-image-wrapper">';
+                           if ( $settings['dh_product_review_image']['id'] ) {
+                              echo wp_get_attachment_image( $settings['dh_product_review_image']['id'], 'medium' );
+                           } else {
+                              echo '<img src="' . Elementor\Utils::get_placeholder_image_src() . '">';
+                           }
+                        echo '</div>'; // dh-product-image-wrapper
+                     echo '</div>'; // dh-product-image
                   echo '</div>'; // dh-product-review-column
 
                   echo '<div class="dh-product-review-column">';

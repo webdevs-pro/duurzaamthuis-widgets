@@ -78,6 +78,9 @@
 
 
 /* anchor-navigation */
+.dh-widget-dh-anchor-navigation {
+   padding-bottom: 30px;
+}
 .dh-widget-dh-anchor-navigation .dh-heading {
    text-align: center;
    margin-bottom: 20px;
@@ -296,6 +299,7 @@
 /* normal */
 .dh-page-header-calc-text { 
    display: none;
+   font-size: 14px;
 }
 /* dropdown */
 /* .dh-page-header-calc-text { 
@@ -360,6 +364,9 @@
 .dh-page-header-breadcrumbs a {
    color: inherit;
 }
+.dh-page-header-breadcrumbs a:hover {
+   color: inherit;
+}
 .dh-page-header-breadcrumbs i {
    font-size: 0.8em;
    margin: 0;
@@ -368,7 +375,7 @@
 .dh-page-intro {
    display: block !important;
    padding-top: 40px;
-   padding-bottom: 40px;
+   padding-bottom: 0px;
    padding-left: 10px;
    padding-right: 10px;
    font-weight: bold;
@@ -991,6 +998,7 @@
    display: -webkit-box;
    -webkit-line-clamp: 2; /* number of lines to show */
    -webkit-box-orient: vertical;
+   line-height: 20px;
 }
 
 
@@ -1084,6 +1092,10 @@
    }
 
    .dh-widget-dh-mega-menu .dh-menu-second-level-more {
+      text-transform: lowercase;
+   }
+
+   .dh-widget-dh-mega-menu .dh-menu-second-level-more {
       margin-top: 5px;
       display: inline-block;
       color: #deac30;
@@ -1101,13 +1113,14 @@
       font-size: 14px;
       line-height: 20px;
       color: #515F70;
-      margin-bottom: 10px;
+      margin-bottom: 5px;
       display: inline-block;
    }
    .dh-widget-dh-mega-menu .dh-menu-third-item:hover {
       text-decoration-line: underline;
       color: #11AFE9;
    }
+
 }
 
 
@@ -1321,6 +1334,7 @@
 .dh-widget-dh-product-comparition-sustainability-score .dh-product-price {
    border: none;
    margin-bottom: 10px;
+   font-weight: 600;
 }
 
 
@@ -1361,11 +1375,12 @@
 
 .dh-widget-dh-product-comparition-sustainability-score .dh-product-pros-heading,
 .dh-widget-dh-product-comparition-sustainability-score .dh-product-cons-heading {
-   margin-top: 12px;
+   margin-top: 15px;
    margin-bottom: 15px;
+   padding-bottom: 10px;
+   font-size: 18px;
    font-weight: 600;
    border-bottom: 1px solid #eaebed;
-   padding-bottom: 20px;
    margin-bottom: 20px;
 }
 .dh-widget-dh-product-comparition-sustainability-score .dh-product-cons-heading {
@@ -1395,6 +1410,7 @@
    margin-top: 30px;
    margin-bottom: 15px;
    font-weight: 600;
+   font-size: 18px;
 }
 .dh-widget-dh-product-comparition-sustainability-score .dh-product-description {
    font-size: 14px;
@@ -1427,6 +1443,7 @@
    margin-bottom: 15px;
    font-weight: 600;
    margin-bottom: 20px;
+   font-size: 18px;
 }
 .dh-widget-dh-product-comparition-sustainability-score .dfrcs ul.dfrcs_compset li {
    border: 1px solid #eaebed;
@@ -1913,7 +1930,41 @@ body.test .type-elementor_library > header {
       grid-template-columns: 1fr 1fr;
    }
 }
-
+.dh-widget-dh-product-review .dh-product-image {
+   border-radius: 8px;
+   position: relative;
+   padding-bottom: 80%;
+   margin-bottom: 10px;
+}
+.dh-widget-dh-product-review .dh-product-image-wrapper {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+}
+.dh-widget-dh-product-review .dh-product-image-wrapper > img {
+   object-fit: cover;
+   object-position: center;
+   border-radius: 8px;
+   width: 100%;
+}
+/* fix for picture */
+.dh-widget-dh-product-review .dh-product-image-wrapper > picture {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+}
+.dh-widget-dh-product-review .dh-product-image-wrapper > picture > img {
+   object-fit: cover;
+   object-position: center;
+   border-radius: 8px;
+   width: 100%;
+}
 
 .dh-widget-dh-product-review .dh-product-shortcode-heading {
    margin-top: 12px;
@@ -2564,4 +2615,20 @@ body:not(.logged-in) .dh-widget-dh-company-offer .dh-product-last-updated-text {
    background-color: #333;
    color: #fff;
    border-radius: 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 1025px) {
+   .unclickable > a {
+      pointer-events: none;
+   }
 }
