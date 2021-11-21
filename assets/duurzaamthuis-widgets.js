@@ -156,8 +156,8 @@
 
 	var DH_Company_Offer = function( $scope, $ ) {
 		var form_id = $scope.find( '.dh-widget-dh-company-offer' ).data( 'form-id' );
-
-		var form_hidden_field_id = $scope.find( '.dh-widget-dh-company-offer' ).data( 'hidden-form-field-id' );
+		var max_checked = $scope.find( '.dh-widget-dh-company-offer' ).data( 'max-companies' );
+		var empty_text = 'Selecteer minimaal 1 bedrijf';
 
 		$scope.find('.dh-product-description').each(function() {
 			var height = $(this).height();
@@ -184,10 +184,25 @@
 			}
 		});
 
-		$( '#' + form_id + ' #form-field-' + form_hidden_field_id ).val( '' );
+
+
+		$( '#' + form_id + ' [type="dh-companies-offer-emails"]' ).val( '' );
+		$( '#' + form_id + ' [type="dh-companies-offer-titles"]' ).val( '' );
+		$( '#' + form_id + ' .dh-selected-companies-badges' ).html( empty_text );
+
+		var selected = $scope.find( '.dh-product[data-selected="yes"]' );
+		console.log('selected', selected);
+		$( selected ).each( function( index ) {
+			var _this = this;
+			setTimeout( function() {
+				console.log( $( _this ) );
+				var target = $( _this ).find( '.dh-product-checkbox-button' );
+				console.log('target', target);
+				$( target ).click();
+			}, 100 );
+		} );
 
 		$scope.find( '.dh-product-checkbox-button' ).on( 'click', function() {
-			var max_checked = 3;
 			if ( $( this ).hasClass( 'active' ) ) {
 				$( this ).toggleClass( 'checked' );
 			}
@@ -206,26 +221,31 @@
 				titles.push( $( this ).closest( '.dh-product' ).find( '.dh-heading' ).text() );
 			} );
 
-			$( '#' + form_id + ' #form-field-' + form_hidden_field_id ).val( emails.join(',') );
+			$( '#' + form_id + ' [type="dh-companies-offer-emails"]' ).val( emails.join(',') );
+			$( '#' + form_id + ' [type="dh-companies-offer-titles"]' ).val( titles.join(', ') );
 
-			$( '#' + form_id + ' .dh-selected-company-badge' ).remove();
-			$.each( titles, function( key, title ) {
-				$( '#' + form_id + ' #form-field-' + form_hidden_field_id ).parent().after( '<span class="dh-selected-company-badge">' + title + '</span>' );
-			} );
+			
+			if ( titles.length ) {
+				$( '#' + form_id + ' .dh-selected-companies-badges' ).html('');
+				$.each( titles, function( key, title ) {
+					$( '#' + form_id + ' .dh-selected-companies-badges' ).append( '<span class="dh-selected-company-badge">' + title + '</span>' );
+				} );
+			} else {
+				$( '#' + form_id + ' .dh-selected-companies-badges' ).html( empty_text );
+			}
 		} );
 
 		$( document ).on('submit_success', '#' + form_id + '', function() {
 			$scope.find( '.dh-product-checkbox-button' ).addClass( 'active' ).removeClass( 'checked' );
-			$( '#' + form_id + ' .dh-selected-company-badge' ).remove();
-		} )
+			$( '#' + form_id + ' .dh-selected-companies-badges' ).remove( empty_text );
+		} );
 
 		$scope.find( '.dh-product-checkbox-scroll-to-form' ).on( 'click', function() {
 			if ( $( '#' + form_id ).length == 0 ) return false;
 			$( 'html, body' ).animate( {
-				scrollTop: $( '#' + form_id ).offset().top - 50
+				scrollTop: $( '#' + form_id ).offset().top - 250
 			}, 700, 'swing' );
-		})
-
+		} );
 
 	}
 

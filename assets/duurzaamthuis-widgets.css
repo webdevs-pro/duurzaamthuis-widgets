@@ -2624,14 +2624,17 @@ body:not(.logged-in) .dh-widget-dh-company-offer .dh-product-last-updated-text {
 .dh-selected-company-badge {
    display: inline-block;
    padding: 5px 20px;
-   margin-left: 5px;
+   margin-right: 5px;
    margin-bottom: 5px;
    background-color: #333;
    color: #fff;
    border-radius: 3px;
 }
 
-
+.elementor-field-type-dh-companies-offer-emails,
+.elementor-field-type-dh-companies-offer-titles input {
+   display: none;
+} 
 
 
 

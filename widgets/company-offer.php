@@ -75,10 +75,10 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
 		$settings = $this->get_settings_for_display();
       
 		if ( $settings['dh_company_offer_products'] ) :
-         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>" data-form-id="<?php echo $settings['dh_company_offer_form_id']; ?>" data-hidden-form-field-id="<?php echo $settings['dh_company_offer_hidden_form_field_id']; ?>"><?php
+         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>" data-form-id="<?php echo $settings['dh_company_offer_form_id']; ?>" data-max-companies="<?php echo $settings['dh_company_offer_max']; ?>"><?php
             echo '<div class="dh-products-score-grid dh-products-' . $settings['dh_company_offer_skin'] . '-skin">';
                foreach ( $settings['dh_company_offer_products'] as $index => $item ) :
-                  echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
+                  echo '<div class="dh-product dh-product-' . $item['_id'] . '" data-selected="' . $item['dh_company_offer_selected'] . '">';
                      echo '<div class="dh-product-wrapper">';
                         echo '<div class="dh-product-column">';
                            echo '<h3 class="dh-product-heading">';
@@ -215,12 +215,10 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                  echo '</div>';
                               echo '</div>';
                            }
-                           // if ( $item['dh_company_offer_button_text'] ) {
-                           //    echo '<div class="dh-product-checkbox-button-wrapper">';
-                           //       echo '<div class="dh-product-checkbox-button active" data-email="' . esc_html( $item['dh_company_offer_email'] ) . '">Selecteer</div>';
-                           //       echo '<div class="dh-product-checkbox-scroll-to-form">Offerte aanvragen</div>';
-                           //    echo '</div>';
-                           // }
+                           echo '<div class="dh-product-checkbox-button-wrapper">';
+                              echo '<div class="dh-product-checkbox-button active" data-email="' . esc_html( $item['dh_company_offer_email'] ) . '">Selecteer</div>';
+                              echo '<div class="dh-product-checkbox-scroll-to-form">Offerte aanvragen</div>';
+                           echo '</div>';
                         echo '</div>'; // dh-product-column
                      echo '</div>'; // dh-product-wrapper
 
@@ -438,9 +436,7 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                     </div>
                                  </div>
                               <# } #>
-                              <!-- <# if ( item.dh_company_offer_button_text ) { #>
-                                 <a target="_blank" class="dh-product-button" href="{{ item.dh_company_offer_button_link }}">{{ item.dh_company_offer_button_text }}</a>
-                              <# } #> -->
+                              <a target="_blank" class="dh-product-button" href="{{ item.dh_company_offer_button_link }}">{{ item.dh_company_offer_button_text }}</a>
                            </div>
                         </div>
                      </div>

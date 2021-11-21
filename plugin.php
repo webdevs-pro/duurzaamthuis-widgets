@@ -72,7 +72,36 @@ class DH_Register_Widgets {
 new DH_Register_Widgets();
 
 
+// register custom DH elementor form fields 
+add_action( 'elementor_pro/forms/fields/register', function( $module ) {
+	require ( DH_PLUGIN_DIR . '/inc/modules/form-company-offer-fields.php' );
+	$module->register( new DH_Companies_Offer_Emails_Field() );
+	$module->register( new DH_Companies_Offer_Titles_Field() );
+}, 10 );
 
+add_action( 'elementor_pro/forms/validation', function ( $record, $ajax_handler ) {
+	$form_fields = $record->get_form_settings( 'form_fields' );
+
+	$min_emails = 0;
+	foreach ( $form_fields as $index => $form_field ) {
+		if ( $form_field['field_type'] == 'dh-companies-offer-emails' ) {
+			$min_emails = $form_fields[$index]['dh_min_companies_offer_emails'];
+		} 
+	}
+
+	if ( $min_emails > 0 ) {
+		$emails_fields = $record->get_field( [
+			'type' => 'dh-companies-offer-emails',
+		] );
+		$emails_field = $emails_fields[array_key_first( $emails_fields )];
+		$emails = explode( ',', $emails_field['value'] );
+		if ( is_array( $emails ) && ! empty( $emails ) && $min_emails > count( $emails ) ) {
+			// $ajax_handler->add_error( $emails_field['id'], 'Minimum emails' );
+			$ajax_handler->add_error_message( 'Selecteer minimaal 1 bedrijf' );
+
+		}
+	}
+}, 10, 2 );
 
 
 
@@ -1813,10 +1842,13 @@ class DH_Widgets_Content_Controls {
 				'label' => __( 'Form ID', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
 			] );
-			$widget->add_control( 'dh_company_offer_hidden_form_field_id', [
-				'label' => __( 'Hidden form field ID', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::TEXT,
-				'default' => 'companies',
+			$widget->add_responsive_control( 'dh_company_offer_max', [
+				'label' => __( 'Maximum number of companies to select', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 6,
+				'step' => 1,
+				'default' => 3,
 			] );
          $widget->add_responsive_control( 'dh_company_offer_columns_count', [
 				'label' => __( 'Columns', 'duurzaamthuis' ),
@@ -1845,6 +1877,13 @@ class DH_Widgets_Content_Controls {
                'default' => __( 'Product title' , 'duurzaamthuis' ),
                'label_block' => true,
             ] );
+				$repeater->add_control( 'dh_company_offer_selected', [
+					'label' => 'Preselected',
+					'type' => \Elementor\Controls_Manager::SWITCHER,
+					'label_on' => __( 'Yes', 'your-plugin' ),
+					'label_off' => __( 'No', 'your-plugin' ),
+					'return_value' => 'yes',
+				] );
             $repeater->add_control( 'dh_company_offer_email', [
                'label' => __( 'Email', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::TEXT,
