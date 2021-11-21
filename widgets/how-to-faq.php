@@ -40,7 +40,11 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 						echo '<div class="dh-how-to-faq-item-number">' . ( $index + 1 ) . '</div>';
 						echo '<div class="dh-how-to-faq-item-content">';
 							echo '<div class="dh-how-to-faq-item-heading">' . $item['dh_how_to_faq_item_heading']. '</div>';
-							echo '<div class="dh-how-to-faq-item-text">' . $item['dh_how_to_faq_item_text']. '</div>';
+							$video_id = $this->get_youtube_video_id( $item['dh_how_to_faq_item_video_url']['url'] );
+							if ( $video_id ) {
+								echo '<div class="dh-youtube-video"><iframe style="position: absolute; left: 0; top: 0; width: 100%; height: 100%;" width="1280" height="720" src="https://www.youtube.com/embed/' . $video_id . '" frameborder="0" allowfullscreen></iframe></div>';
+							}
+							echo '<div class="dh-how-to-faq-item-text">' . wp_get_attachment_image( $item['dh_how_to_faq_item_image']['id'], $settings['dh_how_to_faq_image_size_size']  ) . $item['dh_how_to_faq_item_text']. '</div>';
 						echo '</div>';
 					echo '</div>';
 				}
@@ -63,6 +67,13 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 						$step['@type'] = "HowToStep";
 						$step['name'] = $item['dh_how_to_faq_item_heading'];
 						$step['text'] = $item['dh_how_to_faq_item_text'];
+						if ( $item['dh_how_to_faq_item_image']['url'] ) {
+							$step['image'] = $item['dh_how_to_faq_item_image']['url'];
+						}
+						// if ( $item['dh_how_to_faq_item_video_url']['url'] ) {
+						// 	$step['video']['@type'] = "VideoObject";
+						// 	$step['video']['contentUrl'] = $item['dh_how_to_faq_item_video_url']['url'];
+						// }
 
 						$schema['step'][] = $step;
 					}
@@ -138,7 +149,10 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 							<div class="dh-how-to-faq-item-number">{{{ index + 1 }}}</div>
 							<div class="dh-how-to-faq-item-content">
 								<div class="dh-how-to-faq-item-heading">{{{ item.dh_how_to_faq_item_heading }}}</div>
-								<div class="dh-how-to-faq-item-text">{{{ item.dh_how_to_faq_item_text }}}</div>
+								<# if ( item.dh_how_to_faq_item_video_url.url ) { #>
+									<div class="dh-youtube-video"><div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #ccc; display: flex; justify-content: center; align-items: center;">VIDEO AVAILABLE ONLY ON FRONTEND</div></div>
+								<# } #>
+								<div class="dh-how-to-faq-item-text"><img src="{{{ item.dh_how_to_faq_item_image.url }}}">{{{ item.dh_how_to_faq_item_text }}}</div>
 							</div>
 						</div>
 					<# }); #>
@@ -147,6 +161,15 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 		<# } #>
       <?php
 
+	}
+
+	public function get_youtube_video_id( $url ) {
+		$pattern = '%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i';
+		if ( preg_match( $pattern, $url, $match ) ) {
+			return $match[1];
+		} else {
+			return '';
+		}
 	}
 	
 }

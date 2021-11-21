@@ -1343,6 +1343,20 @@ class DH_Widgets_Content_Controls {
 
 
 	public static function get_dh_how_to_faq_controls( $widget ) {
+		ob_start(); ?>
+		<# 
+			( function( $ ) { 
+				var timer = setTimeout(function() {
+					$( '.dh-79-chars-max textarea' ).attr( 'maxlength', 79 );
+				}, 100 );		
+			} )( jQuery );
+		#>
+		<style>
+			.dh-13-chars-max input:invalid {
+				border: 2px dashed red;
+			}
+		</style>
+		<?php $script = ob_get_clean();
 		$widget->start_controls_section( 'dh_how_to_faq_section_content', [
          'label' => __( 'How to/FAQ list', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
@@ -1354,13 +1368,35 @@ class DH_Widgets_Content_Controls {
 				'description' => 'Required for How To Schema markup',
 				'label_block' => true,
 			] );
+			$widget->add_group_control( Elementor\Group_Control_Image_Size::get_type(), [
+				'name' => 'dh_how_to_faq_image_size', // // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
+				'exclude' => [ 'custom' ],
+				'include' => [],
+				'default' => 'large',
+			] );
 			$repeater = new \Elementor\Repeater();
 				$repeater->add_control( 'dh_how_to_faq_item_heading', [
 					'label' => __( 'Heading', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXTAREA,
 					'rows' => 3,
 					'default' => __( 'Item heading / question' , 'duurzaamthuis' ),
+					'classes' => "dh-79-chars-max",
 				] );
+				$repeater->add_control( 'dh_how_to_faq_item_image', [
+               'label' => __( 'Image', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::MEDIA,
+					// 'label_block' => false,
+            ] );
+				$repeater->add_control( 'dh_how_to_faq_item_video_url', [
+						'label' => 'YouTube video url',
+						'type' => Elementor\Controls_Manager::URL,
+						'autocomplete' => false,
+						'options' => false,
+						'label_block' => true,
+						'show_label' => false,
+						'placeholder' => 'Enter your URL',
+					]
+				);
 				$repeater->add_control( 'dh_how_to_faq_item_text', [
 					'label' => __( 'Text / answer', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::WYSIWYG,
@@ -1429,6 +1465,10 @@ class DH_Widgets_Content_Controls {
             'condition' => [
                'dh_how_to_faq_schema_type' => 'how_to',
             ]      
+			] );
+			$widget->add_control( 'dh_how_to_faq_script', [
+				'type' => Elementor\Controls_Manager::RAW_HTML,
+				'raw' => $script,
 			] );
 		$widget->end_controls_section(); 
 	}
