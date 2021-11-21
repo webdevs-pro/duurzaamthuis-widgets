@@ -70,7 +70,9 @@
     $date = $compset->date_updated;
     if ( $widget ) {
         foreach ( $widget as $item_id => $widget_id ) {
-            update_post_meta( $post_id, 'dh-dfrcs-set-' . $widget_id . '-' . $item_id . '-cache', array( 'price' => $price, 'last_updated' => $date ), true );
+            $meta_name = 'dh-dfrcs-set-' . $widget_id . '-' . $item_id . '-cache';
+            // update_post_meta( $post_id, $meta_name, array( 'price' => $price, 'last_updated' => $date ), true );
+            update_metadata( 'post', $post_id, $meta_name, array( 'price' => $price, 'last_updated' => $date ) );
         }
     }
 ?>
