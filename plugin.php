@@ -409,7 +409,7 @@ function duurza_save_menu_item_icon_classes( $menu_id, $menu_item_db_id ) {
 
 
 // filter excerpt
-add_filter( 'get_the_excerpt', 'dh_excerpt_filter', 10, 2 );
+add_filter( 'get_the_excerpt', 'dh_excerpt_filter', 1, 2 );
 function dh_excerpt_filter( $exerpt, $post ) {
 
 	$yoast_description = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true ); 
