@@ -44,7 +44,7 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 							if ( $video_id ) {
 								echo '<div class="dh-youtube-video"><iframe style="position: absolute; left: 0; top: 0; width: 100%; height: 100%;" width="1280" height="720" src="https://www.youtube.com/embed/' . $video_id . '" frameborder="0" allowfullscreen></iframe></div>';
 							}
-							echo '<div class="dh-how-to-faq-item-text">' . wp_get_attachment_image( $item['dh_how_to_faq_item_image']['id'], $settings['dh_how_to_faq_image_size_size']  ) . $item['dh_how_to_faq_item_text']. '</div>';
+							echo '<div class="dh-how-to-faq-item-text">' . wp_get_attachment_image( $item['dh_how_to_faq_item_image']['id'], 'medium'  ) . $item['dh_how_to_faq_item_text']. '</div>';
 						echo '</div>';
 					echo '</div>';
 				}

@@ -188,7 +188,6 @@
 
 		$( '#' + form_id + ' [type="dh-companies-offer-emails"]' ).val( '' );
 		$( '#' + form_id + ' [type="dh-companies-offer-titles"]' ).val( '' );
-		$( '#' + form_id + ' .dh-selected-companies-badges' ).html( empty_text );
 
 		var selected = $scope.find( '.dh-product[data-selected="yes"]' );
 		console.log('selected', selected);
@@ -230,14 +229,12 @@
 				$.each( titles, function( key, title ) {
 					$( '#' + form_id + ' .dh-selected-companies-badges' ).append( '<span class="dh-selected-company-badge">' + title + '</span>' );
 				} );
-			} else {
-				$( '#' + form_id + ' .dh-selected-companies-badges' ).html( empty_text );
 			}
 		} );
 
 		$( document ).on('submit_success', '#' + form_id + '', function() {
 			$scope.find( '.dh-product-checkbox-button' ).addClass( 'active' ).removeClass( 'checked' );
-			$( '#' + form_id + ' .dh-selected-companies-badges' ).remove( empty_text );
+			$( '#' + form_id + ' .dh-selected-companies-badges' ).remove();
 		} );
 
 		$scope.find( '.dh-product-checkbox-scroll-to-form' ).on( 'click', function() {

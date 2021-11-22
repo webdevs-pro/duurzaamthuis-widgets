@@ -82,24 +82,24 @@ add_action( 'elementor_pro/forms/fields/register', function( $module ) {
 add_action( 'elementor_pro/forms/validation', function ( $record, $ajax_handler ) {
 	$form_fields = $record->get_form_settings( 'form_fields' );
 
-	$min_emails = 0;
 	foreach ( $form_fields as $index => $form_field ) {
 		if ( $form_field['field_type'] == 'dh-companies-offer-emails' ) {
 			$min_emails = $form_fields[$index]['dh_min_companies_offer_emails'];
 		} 
 	}
+	if ( ! isset( $min_emails ) ) return;
 
-	if ( $min_emails > 0 ) {
-		$emails_fields = $record->get_field( [
-			'type' => 'dh-companies-offer-emails',
-		] );
-		$emails_field = $emails_fields[array_key_first( $emails_fields )];
-		$emails = explode( ',', $emails_field['value'] );
-		if ( is_array( $emails ) && ! empty( $emails ) && $min_emails > count( $emails ) ) {
-			// $ajax_handler->add_error( $emails_field['id'], 'Minimum emails' );
-			$ajax_handler->add_error_message( 'Selecteer minimaal 1 bedrijf' );
+	error_log( "min_emails\n" . print_r( $min_emails, true ) . "\n" );
 
-		}
+	$emails_fields = $record->get_field( [
+		'type' => 'dh-companies-offer-emails',
+	] );
+	$emails_field = $emails_fields[array_key_first( $emails_fields )];
+
+	$emails = array_filter( explode( ',', $emails_field['value'] ) );
+
+	if ( ! is_array( $emails ) || empty( $emails ) || $min_emails > count( $emails ) ) {
+		$ajax_handler->add_error_message( 'Selecteer minimaal 1 bedrijf' );
 	}
 }, 10, 2 );
 
@@ -1368,12 +1368,6 @@ class DH_Widgets_Content_Controls {
 				'description' => 'Required for How To Schema markup',
 				'label_block' => true,
 			] );
-			$widget->add_group_control( Elementor\Group_Control_Image_Size::get_type(), [
-				'name' => 'dh_how_to_faq_image_size', // // Usage: `{name}_size` and `{name}_custom_dimension`, in this case `thumbnail_size` and `thumbnail_custom_dimension`.
-				'exclude' => [ 'custom' ],
-				'include' => [],
-				'default' => 'large',
-			] );
 			$repeater = new \Elementor\Repeater();
 				$repeater->add_control( 'dh_how_to_faq_item_heading', [
 					'label' => __( 'Heading', 'duurzaamthuis' ),
@@ -1866,7 +1860,7 @@ class DH_Widgets_Content_Controls {
 		</style>
 		<?php $script = ob_get_clean();
 		$widget->start_controls_section( 'dh_company_offer_section_content', [
-         'label' => __( 'Product Comparison Sustainability Score', 'duurzaamthuis' ),
+         'label' => __( 'Companies', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
          $widget->add_control( 'dh_company_offer_skin', [
@@ -1882,8 +1876,8 @@ class DH_Widgets_Content_Controls {
 				'label' => __( 'Form ID', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
 			] );
-			$widget->add_responsive_control( 'dh_company_offer_max', [
-				'label' => __( 'Maximum number of companies to select', 'duurzaamthuis' ),
+			$widget->add_control( 'dh_company_offer_max', [
+				'label' => __( 'Maximum companies to select', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::NUMBER,
 				'min' => 1,
 				'max' => 6,
@@ -2152,7 +2146,7 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_related_content_heading', [
 				'label' => __( 'Heading', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
-				'default' => '',
+				'default' => 'Gerelateerde artikelen',
 				'label_block' => true,
 				'separator' => 'before'
 			] );
