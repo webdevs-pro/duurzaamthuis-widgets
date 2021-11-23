@@ -348,12 +348,12 @@ new DH_Intro_Field();
 
 add_filter( 'elementor/query/get_autocomplete/display/dh_custom', function( $results, $data ) {
 	$post = get_post($data);
-	$results = $post->post_title . ' (' . $post->post_type . ' - ' .get_the_permalink( $post->ID ) . ')';
+	$results = $post->post_title . ' (' . $post->post_type . ') - ' . str_replace( home_url(), '', get_the_permalink( $post->ID ) );
 	return $results;
 }, 10, 2);
 add_filter( 'elementor/query/get_value_titles/display/dh_custom', function( $results, $data ) {
 	$post = get_post($data);
-	$results = $post->post_title . ' (' . $post->post_type . ' - ' .get_the_permalink( $post->ID ) . ')';
+	$results = $post->post_title . ' (' . $post->post_type . ') - ' . str_replace( home_url(), '', get_the_permalink( $post->ID ) );
 	return $results;
 }, 10, 2);
 
