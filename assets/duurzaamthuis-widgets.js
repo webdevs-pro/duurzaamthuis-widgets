@@ -1,5 +1,10 @@
 ( function( $ ) {
 
+
+	// var sidebar = new StickySidebar('.dh-sticky-sidebar', {
+	// 	topSpacing: 20,
+	//  });
+
 	/**
  	 * @param $scope The Widget wrapper element as a jQuery element
 	 * @param $ The jQuery alias

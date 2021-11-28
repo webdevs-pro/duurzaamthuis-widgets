@@ -2448,7 +2448,7 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
    font-size: 14px;
    line-height: 24px;
    color: #515F70;
-   max-height: 48px;
+   max-height: 120px;
    overflow: hidden;
    position: relative;
    transition: max-height 200ms; 
@@ -2468,120 +2468,6 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
    display: none;
    text-align: right;
 }
-
-
-.dh-widget-dh-company-offer .dh-product-shortcode-heading {
-   margin-top: 12px;
-   margin-bottom: 15px;
-   font-weight: 600;
-   margin-bottom: 20px;
-}
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li {
-   border: 1px solid #eaebed;
-   border-radius: 5px;
-   margin-bottom: 14px;
-}
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .item {
-   height: 70px;
-}
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .dfrcs_image {
-   width: 60px;
-   height: 60px;
-   display: flex;
-   flex: 0 0 60px !important;
-   margin: 0;
-   margin-left: 5px;
-}
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .dfrcs_image img {
-   object-fit: contain;
-   object-position: center;
-   border-radius: 8px;
-   width: 100%;
-}
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .dfrcs_logo {
-   width: 58px;
-   flex: 0 0 80px !important;
-   height: 29px;
-   display: flex;
-   margin-left: 10px;
-   margin-right: 0;
-   background: #fff;
-}
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .dfrcs_logo img {
-   object-fit: contain;
-   object-position: center;
-   width: 100%;
-   border-radius: 3px;
-   border: 3px solid #fff;
-}
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .dfrcs_price {
-   margin-left: auto !important;
-   margin-right: 0 !important;
-   flex: none !important;
-}
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .dfrcs_price * {
-   font-weight: 500;
-   font-size: 14px;
-   color: #515F70;
-}
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .dfrcs_price del,
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .dfrcs_price .usedprice {
-   display: none !important;
-}
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .dfrcs_link {
-   flex: none !important;
-   margin-left: 15px;
-   margin-right: 10px;
-   padding: 5px 15px;
-   background: #769179;
-   border-radius: 5px;
-}
-
-.dh-widget-dh-company-offer .dfrcs ul.dfrcs_compset li .dfrcs_link .dfrcs_action {
-   text-decoration: none !important;
-   color: #fff !important;
-   background-color: transparent !important;
-   letter-spacing: inherit !important;
-   border: none !important;
-   border-radius: 0 !important;
-   height: auto !important;
-   line-height: inherit !important;
-   padding: 0 !important;
-   text-transform: none  !important;
-   font-weight: 500 !important;
-}
-
-.dh-widget-dh-company-offer .dfrcs .dfrcs_last_updated {
-   display: none;
-}
-body:not(.logged-in) .dh-widget-dh-company-offer .dh-product-last-updated-text {
-   display: none;
-}
-.dh-widget-dh-company-offer .dh-product-last-updated-text {
-   font-size: 10px;
-   color: #777;
-}
-.dh-widget-dh-company-offer .dh-product-button {
-   background-color: #769179;
-   transition: background-color 200ms;
-   border-radius: 8px;
-   padding: 11px;
-   text-align: center;
-   font-size: 14px;
-   font-weight: 500;
-   color: #FFF;
-   display: block;
-   margin-top: 10px;
-}
-
-.dh-widget-dh-company-offer .dh-product-button:hover {
-   background-color: #505050;
-}
-
-
-
-
-
 
 .dh-widget-dh-company-offer .dh-product-checkbox-button {
    display: flex;
@@ -2609,6 +2495,12 @@ body:not(.logged-in) .dh-widget-dh-company-offer .dh-product-last-updated-text {
    background-color: #fff;
    margin-right: 5px;
    border-radius: 3px;
+}
+.dh-widget-dh-company-offer .dh-product-checkbox-button:after {
+   content: 'Selecteer';
+}
+.dh-widget-dh-company-offer .dh-product-checkbox-button.checked:after {
+   content: 'Geselecteerd';
 }
 .dh-widget-dh-company-offer .dh-product-checkbox-button.checked.active:before {
    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%230b76ef' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");

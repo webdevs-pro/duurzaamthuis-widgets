@@ -19,13 +19,14 @@ class DH_Register_Widgets {
 		
 		add_action( 'elementor/frontend/after_register_scripts', function() {
 			// to do replace time() with plugin version
-			wp_register_script( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.js', __FILE__ ), array( 'jquery' ), time(), true );
+			wp_register_script( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.js', __FILE__ ), array( 'jquery' ), DH_VERSION, true );
+			wp_enqueue_script( 'sticky-sidebar', 'https://cdnjs.cloudflare.com/ajax/libs/sticky-sidebar/3.3.1/sticky-sidebar.min.js', array(), DH_VERSION, true );
 		} );
 		
 		add_action( 'elementor/frontend/after_enqueue_styles', function() {
 			// to do replace time() with plugin version
-			wp_enqueue_style( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.css', __FILE__ ), array(), time() ); 
-			wp_enqueue_style( 'dh-icons', plugins_url( '/assets/dh-icons-font/style.css', __FILE__ ), array(), time() ); 
+			wp_enqueue_style( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.css', __FILE__ ), array(), DH_VERSION ); 
+			wp_enqueue_style( 'dh-icons', plugins_url( '/assets/dh-icons-font/style.css', __FILE__ ), array(), DH_VERSION ); 
 		} );
 	}
 
@@ -2017,16 +2018,18 @@ class DH_Widgets_Content_Controls {
             //    'default' => '',
             //    'separator' => 'after',
             // ] );
-            // $repeater->add_control( 'dh_company_offer_rating', [
-            //    'label' => __( 'Rating', 'elementor' ),
-            //    'type' => Elementor\Controls_Manager::NUMBER,
-            // ] );
-            // $repeater->add_control( 'dh_company_offer_rating_tooltip', [
-            //    'label' => __( 'Tooltip', 'duurzaamthuis' ),
-            //    'type' => Elementor\Controls_Manager::TEXT,
-            //    'default' => '',
-            //    'separator' => 'after',
-            // ] );
+            $repeater->add_control( 'dh_company_offer_rating', [
+               'label' => __( 'Rating', 'elementor' ),
+               'type' => Elementor\Controls_Manager::NUMBER,
+					'min' => 1,
+					'max' => 10,
+            ] );
+            $repeater->add_control( 'dh_company_offer_rating_tooltip', [
+               'label' => __( 'Tooltip', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '',
+               'separator' => 'after',
+            ] );
             $repeater->add_control( 'dh_company_offer_pros', [
                'label' => 'Pros',
                'label_block' => false,

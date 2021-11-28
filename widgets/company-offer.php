@@ -157,25 +157,25 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                            //       echo '</div>';
                            //    echo '</div>';
                            // }
-                           // if ( $item['dh_company_offer_rating'] ) {
-                           //    echo '<div class="dh-product-score">';
-                           //       echo '<img src="' . $settings['dh_company_offer_logo_url'] . '">';
-                           //       echo '<div>';
-                           //          echo '<div class="dh-product-rating-heading">';
-                           //             echo 'Duurzaam Thuis Score';
-                           //             if ( $item['dh_company_offer_rating_tooltip'] ) {
-                           //                echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_company_offer_rating_tooltip'] ) . '"></i>';
-                           //             }
-                           //          echo '</div>';
-                           //          echo '<div class="dh-product-rating">';
-                           //             echo '<div class="dh-text-rating">' . $item['dh_company_offer_rating'] .'/10</div>';
-                           //             echo '<div class="dh-list-rating">';
-                           //                echo $this->render_rating( $item['dh_company_offer_rating'] );
-                           //             echo '</div>';
-                           //          echo '</div>';
-                           //       echo '</div>';
-                           //    echo '</div>';
-                           // }
+                           if ( $item['dh_company_offer_rating'] ) {
+                              echo '<div class="dh-product-score">';
+                                 echo '<img src="' . $settings['dh_company_offer_logo_url'] . '">';
+                                 echo '<div>';
+                                    echo '<div class="dh-product-rating-heading">';
+                                       echo 'Duurzaam Thuis Score';
+                                       if ( $item['dh_company_offer_rating_tooltip'] ) {
+                                          echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $item['dh_company_offer_rating_tooltip'] ) . '"></i>';
+                                       }
+                                    echo '</div>';
+                                    echo '<div class="dh-product-rating">';
+                                       echo '<div class="dh-text-rating">' . $item['dh_company_offer_rating'] .'/10</div>';
+                                       echo '<div class="dh-list-rating">';
+                                          echo $this->render_rating( $item['dh_company_offer_rating'] );
+                                       echo '</div>';
+                                    echo '</div>';
+                                 echo '</div>';
+                              echo '</div>';
+                           }
                         echo '</div>'; // dh-product-column
                         echo '<div class="dh-product-column">';
                            $pros = json_decode( $item['dh_company_offer_pros'] );
@@ -216,7 +216,7 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                               echo '</div>';
                            }
                            echo '<div class="dh-product-checkbox-button-wrapper">';
-                              echo '<div class="dh-product-checkbox-button active" data-email="' . esc_html( $item['dh_company_offer_email'] ) . '">Selecteer</div>';
+                              echo '<div class="dh-product-checkbox-button active" data-email="' . esc_html( $item['dh_company_offer_email'] ) . '"></div>';
                               echo '<div class="dh-product-checkbox-scroll-to-form">Offerte aanvragen</div>';
                            echo '</div>';
                         echo '</div>'; // dh-product-column
@@ -379,7 +379,7 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                  </div>
                               <# } #> -->
 
-                              <!-- <# if ( item.dh_company_offer_rating ) { #>
+                              <# if ( item.dh_company_offer_rating ) { #>
                                  <div class="dh-product-score">
                                     <img src="{{ settings.dh_company_offer_logo_url }}">
                                     <div>
@@ -397,7 +397,7 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                        </div>
                                     </div>
                                  </div>
-                              <# } #> -->
+                              <# } #>
                            </div>
                            <div class="dh-product-column">
                               <# var pros = check_and_parse_json( item.dh_company_offer_pros );  #>
@@ -436,7 +436,10 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                                     </div>
                                  </div>
                               <# } #>
-                              <a target="_blank" class="dh-product-button" href="{{ item.dh_company_offer_button_link }}">{{ item.dh_company_offer_button_text }}</a>
+                              <div class="dh-product-checkbox-button-wrapper">
+                                 <div class="dh-product-checkbox-button active" data-email="{{item.dh_company_offer_email}}"></div>
+                                 <div class="dh-product-checkbox-scroll-to-form">Offerte aanvragen</div>
+                              </div>
                            </div>
                         </div>
                      </div>

@@ -87,6 +87,17 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                echo '<div class="dh-product-wrapper">';
                   echo '<div class="dh-product-column">';
                      echo '<div class="dh-product-score-heading">' . $settings['dh_product_review_title'] . '</div>';
+
+                     echo '<div class="dh-product-image">';
+                        echo '<div class="dh-product-image-wrapper">';
+                           if ( $settings['dh_product_review_image']['id'] ) {
+                              echo wp_get_attachment_image( $settings['dh_product_review_image']['id'], 'medium' );
+                           } else {
+                              echo '<img src="' . Elementor\Utils::get_placeholder_image_src() . '">';
+                           }
+                        echo '</div>'; // dh-product-image-wrapper
+                     echo '</div>'; // dh-product-image
+
                      if ( $settings['dh_product_review_quality'] ) {
                         echo '<div class="dh-product-quality">';
                            echo '<div>Kwaliteit</div>';
@@ -178,16 +189,6 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                   echo '</div>';  // dh-product-column
 
                   echo '<div class="dh-product-column">';
-
-                     echo '<div class="dh-product-image">';
-                        echo '<div class="dh-product-image-wrapper">';
-                           if ( $settings['dh_product_review_image']['id'] ) {
-                              echo wp_get_attachment_image( $settings['dh_product_review_image']['id'], 'medium' );
-                           } else {
-                              echo '<img src="' . Elementor\Utils::get_placeholder_image_src() . '">';
-                           }
-                        echo '</div>'; // dh-product-image-wrapper
-                     echo '</div>'; // dh-product-image
 
                      echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
                      $shortcode = $this->render_shortcode( $settings['dh_product_review_shortcode'] );
@@ -381,6 +382,11 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                   <div class="dh-product-wrapper">
                      <div class="dh-product-column">
                         <div class="dh-product-score-heading">{{ settings.dh_product_review_title }}</div>
+                        <div class="dh-product-image">
+                           <div class="dh-product-image-wrapper">
+                              <img src="{{ settings.dh_product_review_image.url }}">
+                           </div>
+                        </div>
                         <# if ( settings.dh_product_review_quality ) { #>
                            <div class="dh-product-quality">
                               <div>Kwaliteit</div>
@@ -479,11 +485,6 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                      </div>
 
                      <div class="dh-product-column">
-                        <div class="dh-product-image">
-                           <div class="dh-product-image-wrapper">
-                              <img src="{{ settings.dh_product_review_image.url }}">
-                           </div>
-                        </div>
                         <div class="dh-product-shortcode-heading">Beste prijs</div>
                         <div class="dh-product-shortcode">{{ settings.dh_product_review_shortcode }}</div>
                         <# if ( settings.dh_product_review_button_text ) { #>
