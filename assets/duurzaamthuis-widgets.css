@@ -2448,10 +2448,16 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
    font-size: 14px;
    line-height: 24px;
    color: #515F70;
-   max-height: 120px;
+   max-height: 240px;
    overflow: hidden;
    position: relative;
    transition: max-height 200ms; 
+   margin-bottom: 20px;
+}
+@media(max-width: 767px) {
+   .dh-widget-dh-company-offer .dh-product-description {
+      max-height: 120px;
+   }
 }
 .dh-widget-dh-company-offer .dh-product-description-toggle {
    cursor: pointer;
@@ -2551,4 +2557,24 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
    .unclickable > a {
       pointer-events: none;
    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dh-product-column {
+   width: 100%;
+   overflow-x: scroll;
 }

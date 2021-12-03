@@ -176,11 +176,13 @@
 				var parent = this;
 				$(open).on('click', function() {
 					$(parent).css('max-height', content_height + 22);
+					$(parent).css('height', content_height + 22);
 					$(this).hide();
 					$(close).show();
 				});
 				$(close).on('click', function() {
 					$(parent).css('max-height', height);
+					$(parent).css('height', '');
 					setTimeout(function(){
 						$(this).hide();
 						$(open).show();

@@ -90,7 +90,7 @@ add_action( 'elementor_pro/forms/validation', function ( $record, $ajax_handler 
 	}
 	if ( ! isset( $min_emails ) ) return;
 
-	error_log( "min_emails\n" . print_r( $min_emails, true ) . "\n" );
+	// error_log( "min_emails\n" . print_r( $min_emails, true ) . "\n" );
 
 	$emails_fields = $record->get_field( [
 		'type' => 'dh-companies-offer-emails',
