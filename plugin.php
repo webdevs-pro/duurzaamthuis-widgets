@@ -2352,3 +2352,19 @@ function dh_format_price( $price ) {
 	}
 	return $price;
 }
+
+
+
+
+
+// add sticky option for column
+add_action( 'elementor/element/column/layout/before_section_end', function( $element ) {
+	$element->add_responsive_control( 'dh_sticky_column', [
+		'label' => 'DH Make column sticky',
+		'type' => Elementor\Controls_Manager::SWITCHER,
+		'label_on' => __( 'Yes', 'duurzaamthuis' ),
+		'label_off' => __( 'No', 'duurzaamthuis' ),
+		'return_value' => 'yes',
+		'frontend_available' => true,
+	] );
+} );
