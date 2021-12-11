@@ -413,23 +413,23 @@ function duurza_save_menu_item_icon_classes( $menu_id, $menu_item_db_id ) {
 
 // filter excerpt
 add_filter( 'get_the_excerpt', 'dh_excerpt_filter', 1, 2 );
-function dh_excerpt_filter( $exerpt, $post ) {
+function dh_excerpt_filter( $excerpt, $post ) {
 
 	$yoast_description = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true ); 
 	
 	if ( ! $yoast_description ) {
 		$introduction = get_post_meta( $post->ID, 'intro-text', true );
 		if ( ! $introduction ) {
-			$post_exerpt = $post->post_excerpt;
-			if ( ! $post_exerpt ) {
+			$post_excerpt = $post->post_excerpt;
+			if ( ! $post_excerpt ) {
 				$body_text = $post->post_content;
 			}
 		}
 	}
 
-	$exerpt = strip_tags( $yoast_description ?: ( $introduction ?: ( $exerpt ?: $body_text ) ) );
+	$excerpt = wp_trim_words( strip_tags( $yoast_description ?: ( $introduction ?: ( $excerpt ?: $body_text ) ) ), 25, '...' );
 
-	return $exerpt;
+	return $excerpt;
 }
 
 
