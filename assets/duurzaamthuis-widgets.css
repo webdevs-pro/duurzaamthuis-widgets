@@ -2575,8 +2575,54 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 
 
 
-
+/* columns fix for datafeedr shortcodes */
 .dh-product-column {
    width: 100%;
    overflow-x: auto;
+}
+
+
+
+
+
+/* page navigation */
+.elementor-widget-dh-page-navigation a {
+   color: inherit;
+}
+.elementor-widget-dh-page-navigation a:hover {
+   text-decoration: underline;
+}
+.elementor-widget-dh-page-navigation ul {
+   list-style-type: none;
+   padding: 3px 0;
+   margin: 0;
+}
+.elementor-widget-dh-page-navigation li {
+   margin-left: 1.2em;
+   position: relative;
+   line-height: 1.1;
+   padding: 5px 0;
+}
+.elementor-widget-dh-page-navigation .dh-current-page > span {
+   font-weight: bold;
+}
+.elementor-widget-dh-page-navigation .dh-subpages-toggle {
+   position: absolute;
+   left: -1.2em;
+   cursor: pointer;
+}
+.elementor-widget-dh-page-navigation .dh-subpages-toggle > i:before {
+   content: '\e944' !important;
+}
+.elementor-widget-dh-page-navigation .dh-opened > .dh-subpages-toggle > i:before {
+   content: '\e945' !important;
+}
+.elementor-widget-dh-page-navigation ul {
+   display: none;
+}
+.elementor-widget-dh-page-navigation ul.dh-top-level-pages {
+   display: block;
+}
+.elementor-widget-dh-page-navigation .dh-onload-opened > ul {
+   display: block;
 }

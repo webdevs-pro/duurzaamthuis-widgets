@@ -49,6 +49,7 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/product-review.php';
 		require __DIR__ . '/widgets/how-to-faq.php';
 		require __DIR__ . '/widgets/company-offer.php';
+		require __DIR__ . '/widgets/page-navigation.php';
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Anchor_Navigation() );
@@ -67,6 +68,7 @@ class DH_Register_Widgets {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Product_Review() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_How_To_Faq() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Company_Offer() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Page_Navigation() );
 		new DH_Multiwidgets();
 	}
 }
