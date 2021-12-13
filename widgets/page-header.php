@@ -189,6 +189,12 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                            <i class="dh-icon dh-icon-clock"></i>
                            <div class="dh-page-header-meta dh-page-header-meta-reading-time"><?php echo post_read_time( $post_id ); ?> min leestijd</div>
                         </div>
+                        <?php if ( get_post_modified_time( 'U', $post_id ) > strtotime('-1 year') ) { ?>
+                           <div class="dh-page-header-meta-item">
+                              <i class="dh-icon dh-icon-convenience"></i>
+                              <div class="dh-page-header-meta dh-page-header-meta-last-updated"><?php echo human_time_diff( get_post_modified_time( 'U', false, $post_id ), current_time( 'timestamp' ) ) . ' geleden'; ?></div>
+                           </div>
+                        <?php } ?>
                      </div>
                      <?php if ( function_exists('yoast_breadcrumb') ) { ?>
                         <div class="dh-page-header-meta dh-page-header-meta-item dh-page-header-breadcrumbs">
@@ -196,7 +202,6 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                         </div>
                      <?php } ?>
                   </div>
-
 
                </div>
 
