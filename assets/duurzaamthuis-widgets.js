@@ -259,6 +259,14 @@
 
 	}
 
+	var DH_Menu_Tree_Navigation = function( $scope, $ ) {
+		$scope.find( '.dh-subpages-toggle' ).on( 'click', function() {
+			$( this ).closest( 'li' ).toggleClass( 'dh-opened' );
+			$( this ).closest( 'li' ).find( '> ul' ).slideToggle( 300 );
+		} );
+
+	}
+
 
 	
 	// Make sure you run this code under Elementor.
@@ -271,6 +279,7 @@
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-product-review.default', DH_Product_Review );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-company-offer.default', DH_Company_Offer );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-page-navigation.default', DH_Page_Navigation );
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-menu-tree-navigation.default', DH_Menu_Tree_Navigation );
 		initDHtooltips();
 	} );
 
