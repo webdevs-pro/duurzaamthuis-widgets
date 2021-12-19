@@ -68,7 +68,12 @@
    margin-bottom: 30px;
 }
 
-
+.dh-widget-dh-image-heading-text .dh-image-heading-text-button-wrapper {
+   text-align: center;
+}
+.dh-widget-dh-image-heading-text .dh-image-heading-text-button-wrapper a.elementor-button {
+   padding: 14px 50px;
+}
 
 
 

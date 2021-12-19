@@ -2140,7 +2140,7 @@ class DH_Widgets_Content_Controls {
 
 
 	
-	public static function get_dh_related_content_controls( $widget ) {
+	public static function get_dh_related_content_controls( $widget, $is_multiwidget = false ) {
 		ob_start(); ?>
 			<# 
 				(function($) { 
@@ -2169,14 +2169,16 @@ class DH_Widgets_Content_Controls {
          'label' => __( 'Related Content', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
-			$widget->add_control( 'dh_related_content_heading', [
-				'label' => __( 'Heading', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::TEXT,
-				'default' => 'Gerelateerde artikelen',
-				'label_block' => true,
-				'separator' => 'before'
-			] );
-         $widget->add_control( 'dh_related_content_type', [
+			if ( ! $is_multiwidget ) {
+				$widget->add_control( 'dh_related_content_heading', [
+					'label' => __( 'Heading', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXT,
+					'default' => 'Gerelateerde artikelen',
+					'label_block' => true,
+					'separator' => 'before'
+				] );
+			} 
+			$widget->add_control( 'dh_related_content_type', [
             'label' => __( 'Query', 'duurzaamthuis' ),
             'type' => Elementor\Controls_Manager::SELECT,
             'default' => 'manual',

@@ -69,7 +69,7 @@ class DH_Multiwidgets {
                protected function register_controls() {
                   foreach ( \$this->get_widgets() as \$name => \$class_name ) {
                      \$fn_name = str_replace( '-', '_', 'get_' . \$name . '_controls' );
-                     DH_Widgets_Content_Controls::\$fn_name( \$this );
+                     DH_Widgets_Content_Controls::\$fn_name( \$this, true );
                   }
                }
                protected function render() {

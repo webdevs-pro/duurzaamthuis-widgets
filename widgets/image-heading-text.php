@@ -65,9 +65,11 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 							</div>
 						<?php } ?>
 						<?php if ( $settings['dh_image_heading_text_image_show_button'] == 'yes' ) { ?>
-							<a class="elementor-button-link elementor-button elementor-size-sm" href="<?php echo $button_link['url']; ?>">
-								<?php echo $button_text; ?>
-							</a>
+							<div class="dh-image-heading-text-button-wrapper">
+								<a class="elementor-button-link elementor-button elementor-size-sm" href="<?php echo $button_link['url']; ?>">
+									<?php echo $button_text; ?>
+								</a>
+							</div>
 						<?php } ?>
 
 					</div>
@@ -127,9 +129,11 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 							<# } #>
 
 							<# if ( settings.dh_image_heading_text_image_show_button == 'yes' ) { #>
-								<a class="elementor-button-link elementor-button elementor-size-sm" href="{{{ settings.dh_image_heading_text_button_url.url }}}">
-									{{{ settings.dh_image_heading_text_button_text }}}
-								</a>
+								<div class="dh-image-heading-text-button-wrapper">
+									<a class="elementor-button-link elementor-button elementor-size-sm" href="{{{ settings.dh_image_heading_text_button_url.url }}}">
+										{{{ settings.dh_image_heading_text_button_text }}}
+									</a>
+								</div>
 							<# } #>
 					</div>
 				</div>
