@@ -188,7 +188,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                      }
                   echo '</div>';  // dh-product-column
 
-                  echo '<div class="dh-product-column">';
+                  echo '<div class="dh-product-column dh-product-shortcode-column">';
 
                      echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
                      $shortcode = $this->render_shortcode( $settings['dh_product_review_shortcode'] );
@@ -484,7 +484,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                         <# } #>
                      </div>
 
-                     <div class="dh-product-column">
+                     <div class="dh-product-column dh-product-shortcode-column">
                         <div class="dh-product-shortcode-heading">Beste prijs</div>
                         <div class="dh-product-shortcode">{{ settings.dh_product_review_shortcode }}</div>
                         <# if ( settings.dh_product_review_button_text ) { #>

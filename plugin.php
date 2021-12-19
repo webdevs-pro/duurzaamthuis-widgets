@@ -1318,6 +1318,14 @@ class DH_Widgets_Content_Controls {
          'label' => __( 'Numbered List', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
+			$widget->add_control( 'dh_numbered_list_start', [
+				'label' => __( 'Start from', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 100,
+				'step' => 1,
+				'default' => 1,     
+			] );
 			$repeater = new \Elementor\Repeater();
 				$repeater->add_control( 'dh_numbered_list_text', [
 					'label' => __( 'Text', 'duurzaamthuis' ),
@@ -1372,6 +1380,17 @@ class DH_Widgets_Content_Controls {
 				'default' => __( 'Heading' , 'duurzaamthuis' ),
 				'description' => 'Required for How To Schema markup',
 				'label_block' => true,
+			] );
+			$widget->add_control( 'dh_how_to_faq_start', [
+				'label' => __( 'Start from', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 100,
+				'step' => 1,
+				'default' => 1,  
+				'condition' => [
+					'dh_how_to_faq_schema_type' => 'disabled',
+				]      
 			] );
 			$repeater = new \Elementor\Repeater();
 				$repeater->add_control( 'dh_how_to_faq_item_heading', [

@@ -217,7 +217,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               echo '</div>';
                            echo '</div>';
                         echo '</div>';  // dh-product-column
-                        echo '<div class="dh-product-column">';
+                        echo '<div class="dh-product-column dh-product-shortcode-column">';
                            echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
                            echo '<div class="dh-product-shortcode">' . $shortcode . '</div>';
                            echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
@@ -522,7 +522,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  </div>
                               </div>
                            </div>
-                           <div class="dh-product-column">
+                           <div class="dh-product-column dh-product-shortcode-column">
                               <div class="dh-product-shortcode-heading">Beste prijs</div>
                               <div class="dh-product-shortcode">{{ item.dh_product_comparition_sustainability_score_shortcode }}</div>
                               <# if ( item.dh_product_comparition_sustainability_score_button_text ) { #>

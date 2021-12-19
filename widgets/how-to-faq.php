@@ -37,9 +37,9 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 				echo '<h2 class="dh-how-to-faq-heading">' . esc_html( $settings['dh_how_to_faq_name'] ) . '</h2>';
             foreach (  $settings['dh_how_to_faq_items'] as $index => $item ) {
 					echo '<div class="dh-how-to-faq-item">';
-						echo '<div class="dh-how-to-faq-item-number">' . ( $index + 1 ) . '</div>';
+						echo '<div class="dh-how-to-faq-item-number">' . ( $index + ( $settings['dh_how_to_faq_start'] ?? 1 ) ) . '</div>';
 						echo '<div class="dh-how-to-faq-item-content">';
-							echo '<div class="dh-how-to-faq-item-heading">' . $item['dh_how_to_faq_item_heading']. '</div>';
+							echo '<div class="dh-how-to-faq-item-heading">' . $item['dh_how_to_faq_item_heading'] . '</div>';
 							$video_id = $this->get_youtube_video_id( $item['dh_how_to_faq_item_video_url']['url'] );
 							if ( $video_id ) {
 								echo '<div class="dh-youtube-video"><iframe style="position: absolute; left: 0; top: 0; width: 100%; height: 100%;" width="1280" height="720" src="https://www.youtube.com/embed/' . $video_id . '" frameborder="0" allowfullscreen></iframe></div>';
@@ -146,7 +146,7 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 					<h2 class="dh-how-to-faq-heading">{{ settings.dh_how_to_faq_name }}</h2>
 					<# _.each( settings.dh_how_to_faq_items, function( item, index ) { #>
 						<div class="dh-how-to-faq-item">
-							<div class="dh-how-to-faq-item-number">{{{ index + 1 }}}</div>
+							<div class="dh-how-to-faq-item-number">{{{ index + ( settings.dh_how_to_faq_start ?? 1 ) }}}</div>
 							<div class="dh-how-to-faq-item-content">
 								<div class="dh-how-to-faq-item-heading">{{{ item.dh_how_to_faq_item_heading }}}</div>
 								<# if ( item.dh_how_to_faq_item_video_url.url ) { #>

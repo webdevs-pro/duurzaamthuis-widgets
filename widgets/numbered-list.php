@@ -36,7 +36,7 @@ class DH_Numbered_List extends \Elementor\Widget_Base {
          echo '<div class="dh-numbered-list">';
             foreach (  $settings['dh_numbered_list_items'] as $index => $item ) {
 					echo '<div class="dh-numbered-list-item">';
-						echo '<div class="dh-numbered-list-item-number">' . ( $index + 1 ) . '</div>';
+						echo '<div class="dh-numbered-list-item-number">' . ( $index + $settings['dh_numbered_list_start'] ) . '</div>';
 						echo '<div class="dh-numbered-list-item-text">' . $item['dh_numbered_list_text']. '</div>';
 					echo '</div>';
 				}
@@ -71,7 +71,7 @@ class DH_Numbered_List extends \Elementor\Widget_Base {
 				<div class="dh-numbered-list">
 					<# _.each( settings.dh_numbered_list_items, function( item, index ) { #>
 						<div class="dh-numbered-list-item">
-							<div class="dh-numbered-list-item-number">{{{ index + 1 }}}</div>
+							<div class="dh-numbered-list-item-number">{{{ index + settings.dh_numbered_list_start }}}</div>
 							<div class="dh-numbered-list-item-text">{{{ item.dh_numbered_list_text }}}</div>
 						</div>
 					<# }); #>

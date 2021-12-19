@@ -173,6 +173,8 @@
 @media(max-width: 767px) {
    .dh-page-header {
       padding-top: 50px;
+      padding-left: 15px;
+      padding-right: 15px;
    }
 }
 .dh-page-header-tags {
@@ -397,6 +399,8 @@
    .dh-page-intro {
       padding-top: 30px;
       padding-bottom: 30px;
+      padding-left: 25px;
+      padding-right: 25px;
       font-size: 16px;
    }
 }
@@ -1361,7 +1365,7 @@
    flex: 0 0 54px;
    width: 54px;
    height: 54px;
-   margin-left: 15px;
+   margin-left: 0px;
    margin-right: 10px;
 }
 .dh-widget-dh-product-comparition-sustainability-score .dh-product-score .dh-product-rating-heading {
@@ -2604,10 +2608,11 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 
 
 /* columns fix for datafeedr shortcodes */
-.dh-product-column {
+.dh-product-column.dh-product-shortcode-column {
    width: 100%;
    overflow-x: auto;
 }
+
 
 
 
@@ -2658,36 +2663,52 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 
 
 /* page navigation */
+.elementor-widget-dh-menu-tree-navigation .dh-menu-tree-heading {
+   font-weight: 600;
+   font-size: 20px;
+   line-height: 30px;
+   color: #2D3745;
+}
 .elementor-widget-dh-menu-tree-navigation a {
-   color: inherit;
+   color: #515F70;
+   font-size: 14px;
 }
 .elementor-widget-dh-menu-tree-navigation a:hover {
    text-decoration: underline;
 }
 .elementor-widget-dh-menu-tree-navigation ul {
    list-style-type: none;
-   padding: 3px 0;
+   padding: 0;
    margin: 0;
 }
 .elementor-widget-dh-menu-tree-navigation li {
-   margin-left: 1.2em;
+   /* margin-left: 1.2em; */
    position: relative;
-   line-height: 1.1;
-   padding: 5px 0;
+   /* line-height: 1.1; */
+   padding: 10px 0 10px 1.2em;
+}
+.elementor-widget-dh-menu-tree-navigation li:not(.sub-menu > li:last-child) {
+   border-bottom: 1px solid #E8EFF7;
 }
 .elementor-widget-dh-menu-tree-navigation .current-menu-item > a {
-   font-weight: bold;
+   /* font-weight: bold; */
+   color: #DEAC30;
 }
 .elementor-widget-dh-menu-tree-navigation .dh-subpages-toggle {
    position: absolute;
-   left: -1.2em;
+   left: 0;
    cursor: pointer;
 }
-.elementor-widget-dh-menu-tree-navigation .dh-subpages-toggle > i:before {
-   content: '\e944' !important;
+.elementor-widget-dh-menu-tree-navigation .dh-subpages-toggle > i {
+   transition: transform 200ms;
+   color: #96A5BB;
+   font-size: 0.9em;
 }
-.elementor-widget-dh-menu-tree-navigation .dh-opened > .dh-subpages-toggle > i:before {
-   content: '\e945' !important;
+.elementor-widget-dh-menu-tree-navigation .dh-subpages-toggle > i:before {
+   content: '\e87d' !important;
+}
+.elementor-widget-dh-menu-tree-navigation .dh-opened > .dh-subpages-toggle > i {
+   transform: rotate(90deg);
 }
 .elementor-widget-dh-menu-tree-navigation ul:not(.menu) {
    display: none;

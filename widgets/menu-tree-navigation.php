@@ -51,6 +51,13 @@ class DH_Menu_Tree_Navigation extends \Elementor\Widget_Base {
       ] );
          $menus = $this->get_available_menus();
 
+			$this->add_control( 'dh_menu_tree_heading', [
+				'label' => __( 'Heading', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
+				'default' => __( 'In deze categorie:' , 'duurzaamthuis' ),
+				'label_block' => true,
+			] );
+
          $this->add_control( 'dh_menu_tree_name', [
             'label' => 'Menu',
             'type' => \Elementor\Controls_Manager::SELECT,
@@ -75,7 +82,7 @@ class DH_Menu_Tree_Navigation extends \Elementor\Widget_Base {
 		$settings = $this->get_settings_for_display();
 
       global $post;
-
+		$menu_id = false;
       if ( $settings['dh_menu_tree_name'] == 'dh_acf_page_menu' ) {
          $menu_id = get_field( 'dh_page_menu', $post->ID );
          if ( ! $menu_id ) {
@@ -121,7 +128,7 @@ class DH_Menu_Tree_Navigation extends \Elementor\Widget_Base {
 				$parent->setAttribute('class', $parent_classes . ' dh-opened dh-has-current-page dh-onload-opened');
 			}
 
-         $toggleSpan->appendXML('<span class="dh-subpages-toggle"><i class="eicon-plus-square-o"></i></span>');
+         $toggleSpan->appendXML('<span class="dh-subpages-toggle"><i class="eicon-chevron-right"></i></span>');
 			$parent->insertBefore( $toggleSpan, $firstChild );
 		}
 
@@ -136,6 +143,8 @@ class DH_Menu_Tree_Navigation extends \Elementor\Widget_Base {
 		}
 
 		$html=$DOM->saveHTML();
+
+		echo '<h3 class="dh-menu-tree-heading">' . $settings['dh_menu_tree_heading'] . '</h3>';
 		echo $html;	
 	}
 

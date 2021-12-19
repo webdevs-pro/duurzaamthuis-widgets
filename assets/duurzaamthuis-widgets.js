@@ -163,31 +163,31 @@
 		var empty_text = 'Selecteer minimaal 1 bedrijf';
 
 		$scope.find('.dh-product-description').each(function() {
-			var height = $(this).height();
-			var content = $(this).find('.dh-product-description-content');
-			var content_height = $(content).height();
+			var height = $( this ).height();
+			var content = $( this ).find( '.dh-product-description-content' );
+			var content_height = $( content ).height();
 			// console.log(content_height);
-			if(content_height > height) {
-				var open = $(this).find('.dh-open');
-				var close = $(this).find('.dh-close');
-				$(open).show();
+			if( content_height > height ) {
+				var open = $( this ).find( '.dh-open' );
+				var close = $( this ).find( '.dh-close' );
+				$( open ).show();
 				var parent = this;
-				$(open).on('click', function() {
-					$(parent).css('max-height', content_height + 22);
-					$(parent).css('height', content_height + 22);
-					$(this).hide();
-					$(close).show();
+				$( open ).on( 'click', function() {
+					$( parent ).css( 'max-height', content_height + 22 );
+					$( parent ).css( 'height', content_height + 22 );
+					$( this ).hide();
+					$( close ).show();
 				});
-				$(close).on('click', function() {
-					$(parent).css('max-height', height);
-					$(parent).css('height', '');
-					setTimeout(function(){
-						$(this).hide();
-						$(open).show();
-					}, 150);
-				});
+				$( close ).on( 'click', function() {
+					$( parent ).css( 'max-height', height );
+					$( parent ).css( 'height', '' );
+					setTimeout( function(){
+						$( this ).hide();
+						$( open ).show();
+					}, 150 );
+				} );
 			}
-		});
+		} );
 
 
 
@@ -225,9 +225,10 @@
 			$( '#' + form_id + ' [type="dh-companies-offer-emails"]' ).val( emails.join(',') );
 			$( '#' + form_id + ' [type="dh-companies-offer-titles"]' ).val( titles.join(', ') );
 
+
 			
+			$( '#' + form_id + ' .dh-selected-companies-badges' ).html('');
 			if ( titles.length ) {
-				$( '#' + form_id + ' .dh-selected-companies-badges' ).html('');
 				$.each( titles, function( key, title ) {
 					$( '#' + form_id + ' .dh-selected-companies-badges' ).append( '<span class="dh-selected-company-badge">' + title + '</span>' );
 				} );
