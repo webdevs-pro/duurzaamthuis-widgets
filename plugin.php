@@ -887,7 +887,7 @@ class DH_Widgets_Content_Controls {
 				'classes' => "dh-13-chars-max dh-numbers-only",
 			] );
 			$widget->add_control( 'dh_product_review_content', [
-				'label' => __( 'Content', 'duurzaamthuis' ),
+				'label' => __( 'Product review summary', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::WYSIWYG,
 				'default' => 'De Buyer is een oud Frans merk van keukenartikelen. Vooral onder professionele koks is het een bekend merk. Ze hebben eigenlijk alle type pannen van RVS tot koper. Met beide hebben we veel ervaring dus wij zijn met name geïnteresseerd in de versie van staal. Hierin bieden ze twee soorten de Carbone en de B-element. Beide zijn eigenlijk identieke pannen. Alleen de B-element is netter afgewerkt met een laagje bijenwas. Dit is vooral ter voorkoming van oxidatie van de pan. Een standaard (Carbone) pan kan soms al roestachtige vlekjes vertonen in de winkel en de bijenwas gaat dit tegen. Ook zou de bijenwas het inbranden vergemakkelijken maar dat is ons inziens niet de bedoeling. Je kunt De Buyer Mineral-B element stalen pan die wij hebben getest hier vinden, we hebben maat 26, een heerlijk maatje trouwens!.',
 			] );
@@ -995,11 +995,10 @@ class DH_Widgets_Content_Controls {
 				'default' => '[["Disadvantage 1"],["Disadvantage 2"]]',
 			] );
 			$widget->add_control( 'dh_product_review_description', [
-				'label' => __( 'Description', 'duurzaamthuis' ),
+				'label' => __( 'Product description summary', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXTAREA,
 				'rows' => 10,
-				'default' => 'De Buyer is een oud Frans merk van keukenartikelen. Vooral onder professionele koks is het een bekend merk. Ze hebben eigenlijk alle type pannen van RVS tot koper. Met beide hebben we veel ervaring dus wij zijn met name geïnteresseerd in de versie van staal. Hierin bieden ze twee soorten de Carbone en de B-element. Beide zijn eigenlijk identieke pannen. Alleen de B-element is netter afgewerkt met een laagje bijenwas. Dit is vooral ter voorkoming van oxidatie van de pan. Een standaard (Carbone) pan kan soms al roestachtige vlekjes vertonen in de winkel en de bijenwas gaat dit tegen. Ook zou de bijenwas het inbranden vergemakkelijken maar dat is ons inziens niet de bedoeling. Je kunt De Buyer Mineral-B element stalen pan die wij hebben getest hier vinden, we hebben maat 26, een heerlijk maatje trouwens!.',
-				'placeholder' => __( 'Type your description here', 'duurzaamthuis' ),
+				'default' => 'Productbeschrijving van rond de 3 zinnen',
 			] );
 
 

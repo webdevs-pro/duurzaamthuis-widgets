@@ -248,7 +248,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                $schema['review']['reviewRating']['ratingValue'] = str_replace( ',', '.', $settings['dh_product_review_rating'] );
                $schema['review']['reviewRating']['bestRating'] = "10";
 
-               $schema['review']['reviewBody'] = $settings['dh_product_review_description'];
+               $schema['review']['reviewBody'] = $settings['dh_product_review_content'];
 
                $schema['review']['author']['@type'] = "Person";
                $schema['review']['author']['name'] = $review_author_name;
