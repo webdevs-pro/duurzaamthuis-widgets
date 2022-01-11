@@ -508,17 +508,8 @@
 }
 .dh-widget-dh-product-comparition .dh-products-simple-skin .dh-product-button {
    grid-column: span 2;
-   background-color: #769179;
    transition: background-color 200ms;
-   border-radius: 8px;
-   padding: 11px;
    text-align: center;
-   font-size: 14px;
-   font-weight: 500;
-   color: #FFF;
-}
-.dh-widget-dh-product-comparition .dh-products-simple-skin .dh-product-button:hover {
-   background-color: #505050;
 }
 
 
@@ -683,20 +674,10 @@
    margin-right: 10px;
 }
 .dh-widget-dh-product-comparition .dh-products-extended-skin .dh-product-button {
-   background-color: #769179;
    transition: background-color 200ms;
-   border-radius: 8px;
-   padding: 11px;
    text-align: center;
-   font-size: 14px;
-   font-weight: 500;
-   color: #FFF;
    display: block;
    margin-top: 10px;
-}
-
-.dh-widget-dh-product-comparition .dh-products-extended-skin .dh-product-button:hover {
-   background-color: #505050;
 }
 
 
@@ -1523,23 +1504,20 @@
    flex: none !important;
    margin-left: 15px;
    margin-right: 10px;
-   padding: 5px 15px;
-   background: #769179;
-   border-radius: 5px;
 }
 
 .dh-widget-dh-product-comparition-sustainability-score .dfrcs ul.dfrcs_compset li .dfrcs_link .dfrcs_action {
    text-decoration: none !important;
-   color: #fff !important;
-   background-color: transparent !important;
+   color: inherit !important;
+   /* background-color: transparent !important; */
    letter-spacing: inherit !important;
    border: none !important;
    border-radius: 0 !important;
    height: auto !important;
    line-height: inherit !important;
-   padding: 0 !important;
-   text-transform: none  !important;
-   font-weight: 500 !important;
+   /* padding: 0 !important; */
+   text-transform: inherit  !important;
+   font-weight: inherit !important;
 }
 
 .dh-widget-dh-product-comparition-sustainability-score .dfrcs .dfrcs_last_updated {
@@ -1553,21 +1531,12 @@ body:not(.logged-in) .dh-widget-dh-product-comparition-sustainability-score .dh-
    color: #777;
 }
 .dh-widget-dh-product-comparition-sustainability-score .dh-product-button {
-   background-color: #769179;
    transition: background-color 200ms;
-   border-radius: 8px;
-   padding: 11px;
    text-align: center;
-   font-size: 14px;
-   font-weight: 500;
-   color: #FFF;
    display: block;
    margin-top: 10px;
 }
 
-.dh-widget-dh-product-comparition-sustainability-score .dh-product-button:hover {
-   background-color: #505050;
-}
 
 
 
@@ -2082,21 +2051,12 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
    color: #777;
 }
 .dh-widget-dh-product-review .dh-product-button {
-   background-color: #769179;
    transition: background-color 200ms;
-   border-radius: 8px;
-   padding: 11px;
    text-align: center;
-   font-size: 14px;
-   font-weight: 500;
-   color: #FFF;
    display: block;
    margin-top: 10px;
 }
 
-.dh-widget-dh-product-review .dh-product-button:hover {
-   background-color: #505050;
-}
 
 
 
@@ -2519,14 +2479,7 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
    justify-content: center;
    align-items: center;
    margin-top: 10px;
-   background-color: #769179;
-   border-radius: 8px;
-   border-radius: 8px;
-   padding: 11px;
-   font-size: 14px;
-   font-weight: 500;
    cursor: pointer;
-   color: #fff;
 }
 .dh-widget-dh-company-offer .dh-product-checkbox-button:not(.active) {
    cursor: not-allowed;
@@ -2614,8 +2567,7 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 
 /* columns fix for datafeedr shortcodes */
 .dh-product-column.dh-product-shortcode-column {
-   width: 100%;
-   overflow-x: auto;
+   min-width: 0;
 }
 
 

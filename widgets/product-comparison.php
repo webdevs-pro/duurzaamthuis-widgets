@@ -109,7 +109,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               }
                            echo '</div>';
                            $rel = isset( $item['dh_product_comparition_sponsored'] ) ? ' rel="sponsored"' : '';
-                           echo '<a target="_blank" class="dh-product-button" href="' . $item['dh_product_comparition_button_link'] . '"' . $rel . '>' . $item['dh_product_comparition_button_text'] . '</a>';
+                           echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . $item['dh_product_comparition_button_link'] . '"' . $rel . '>' . $item['dh_product_comparition_button_text'] . '</a>';
                         echo '</div>';
                      echo '</div>';
                   endif;
@@ -191,7 +191,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               }
                            echo '</div>';
                            $rel = isset( $item['dh_product_comparition_sponsored'] ) ? ' rel="sponsored"' : '';
-                           echo '<a class="dh-product-button" href="' . $item['dh_product_comparition_button_link'] . '"' . $rel . '>' . $item['dh_product_comparition_button_text'] . '</a>';
+                           echo '<a class="dh-product-button elementor-button elementor-size-sm" href="' . $item['dh_product_comparition_button_link'] . '"' . $rel . '>' . $item['dh_product_comparition_button_text'] . '</a>';
                         echo '</div>';
                      echo '</div>';
                   endif;
@@ -285,7 +285,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                     <div class="dh-product-order-by">{{{ item.dh_product_comparition_order_by }}}</div>
                                  <# } #>
                               </div>
-                              <a class="dh-product-button" href="{{{ item.dh_product_comparition_button_link }}}">{{{ item.dh_product_comparition_button_text }}}</a>
+                              <a class="dh-product-button elementor-button elementor-size-sm" href="{{{ item.dh_product_comparition_button_link }}}">{{{ item.dh_product_comparition_button_text }}}</a>
                            </div>
                         </div>
                      <# } #>
@@ -361,7 +361,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                  </div>
                               <# } #>
                               </div>
-                              <a class="dh-product-button" href="{{{ item.dh_product_comparition_button_link }}}">{{{ item.dh_product_comparition_button_text }}}</a>
+                              <a class="dh-product-button elementor-button elementor-size-sm" href="{{{ item.dh_product_comparition_button_link }}}">{{{ item.dh_product_comparition_button_text }}}</a>
                            </div>
                         </div>
                      <# } #>

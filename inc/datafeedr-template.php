@@ -41,7 +41,7 @@
 							<?php endif; ?>
 							<?php if ( dfrcs_display_button() ) : ?>
                                 <div class="dfrcs_link">
-                                    <span class="dfrcs_action"><?php echo dfrcs_link_text(); ?></span>
+                                    <span class="elementor-button elementor-size-sm"><?php echo dfrcs_link_text(); ?></span>
                                 </div>
 							<?php endif; ?>
                         </div>

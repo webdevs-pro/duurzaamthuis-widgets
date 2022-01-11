@@ -223,7 +223,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
                            if ( $item['dh_product_comparition_sustainability_score_button_text'] ) {
                               $rel = isset( $item['dh_product_comparition_sustainability_score_sponsored'] ) ? ' rel="sponsored"' : '';
-                              echo '<a target="_blank" class="dh-product-button" href="' . $item['dh_product_comparition_sustainability_score_button_link'] . '"' . $rel . '>' . $item['dh_product_comparition_sustainability_score_button_text'] . '</a>';
+                              echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . $item['dh_product_comparition_sustainability_score_button_link'] . '"' . $rel . '>' . $item['dh_product_comparition_sustainability_score_button_text'] . '</a>';
                            }
                         echo '</div>'; // dh-product-column
                      echo '</div>'; // dh-product-wrapper
@@ -526,7 +526,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               <div class="dh-product-shortcode-heading">Beste prijs</div>
                               <div class="dh-product-shortcode">{{ item.dh_product_comparition_sustainability_score_shortcode }}</div>
                               <# if ( item.dh_product_comparition_sustainability_score_button_text ) { #>
-                                 <a target="_blank" class="dh-product-button" href="{{ item.dh_product_comparition_sustainability_score_button_link }}">{{ item.dh_product_comparition_sustainability_score_button_text }}</a>
+                                 <a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="{{ item.dh_product_comparition_sustainability_score_button_link }}">{{ item.dh_product_comparition_sustainability_score_button_text }}</a>
                               <# } #>
                            </div>
                         </div>
