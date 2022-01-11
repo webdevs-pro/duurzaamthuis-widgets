@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class DH_Custom_Templates {
 	public function __construct() {
 		add_action( 'init', [ $this, 'register_taxonomy' ] );
-		add_action( 'init', [ $this, 'register_terms' ] );
+		// add_action( 'init', [ $this, 'register_terms' ] );
 		add_filter( 'manage_post_posts_columns', [ $this, 'add_post_column' ] );
 		add_filter( 'manage_page_posts_columns', [ $this, 'add_post_column' ] );
 		add_action( 'manage_posts_custom_column', [ $this, 'print_post_column' ], 10, 2);
@@ -26,6 +26,30 @@ class DH_Custom_Templates {
 		add_action( 'elementor/element/wp-post/document_settings/after_section_end', [ $this, 'add_elementor_post_settings_controls' ], 10 );
 		add_action( 'elementor/element/wp-page/document_settings/after_section_end', [ $this, 'add_elementor_page_settings_controls' ], 10 );
 		add_action( 'elementor/document/before_save', [ $this, 'save_elementor_post_settings' ], 10, 2 );
+
+
+		add_action( 'admin_menu', function() {
+			add_submenu_page(
+				'options-general.php',
+				'DH templates', 
+				'DH templates', 
+				'manage_options', 
+				'edit-tags.php?taxonomy=dh_templates', 
+				false
+			);
+			remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=dh_templates' );
+			remove_submenu_page( 'edit.php?post_type=page', 'edit-tags.php?taxonomy=dh_templates&amp;post_type=page' );
+		}, 10 );
+
+
+		add_action( 'parent_file', function( $parent_file ) {
+			global $current_screen;
+			$taxonomy = $current_screen->taxonomy;
+			if ( $taxonomy == 'dh_templates' )
+				$parent_file = 'options-general.php';
+			return $parent_file;
+		}, 10 );
+
 	}
 
 
@@ -38,7 +62,7 @@ class DH_Custom_Templates {
 			],
 			'description'           => '',
 			'public'                => true,
-			'show_ui'               => false, // равен аргументу public
+			'show_ui'               => true, // равен аргументу public
 			'hierarchical'          => true,
 			'show_in_quick_edit'    => false,
 			'rewrite'               => true,
@@ -52,90 +76,90 @@ class DH_Custom_Templates {
 	}
 
 
-	public function register_terms() {
-		if ( ! term_exists( 'DH Template 1', 'dh_templates' ) ) {
-			wp_insert_term(
-				'Template 1',
-				'dh_templates',
-				array(
-					'slug' => 'dh-template-1'
-				)
-			);
-	  	}
-		if ( ! term_exists( 'DH Template 2', 'dh_templates' ) ) {
-			wp_insert_term(
-				'Template 2',
-				'dh_templates',
-				array(
-					'slug' => 'dh-template-2'
-				)
-			);
-	  	}
-		if ( ! term_exists( 'DH Template 3', 'dh_templates' ) ) {
-			wp_insert_term(
-				'Template 3',
-				'dh_templates',
-				array(
-					'slug' => 'dh-template-3'
-				)
-			);
-	  	}
-		if ( ! term_exists( 'DH Template 4', 'dh_templates' ) ) {
-			wp_insert_term(
-				'Template 4',
-				'dh_templates',
-				array(
-					'slug' => 'dh-template-4'
-				)
-			);
-	  	}
-		if ( ! term_exists( 'DH Template 5', 'dh_templates' ) ) {
-			wp_insert_term(
-				'Template 5',
-				'dh_templates',
-				array(
-					'slug' => 'dh-template-5'
-				)
-			);
-	  	}
-		if ( ! term_exists( 'DH Template 6', 'dh_templates' ) ) {
-			wp_insert_term(
-				'Template 6',
-				'dh_templates',
-				array(
-					'slug' => 'dh-template-6'
-				)
-			);
-	  	}
-		if ( ! term_exists( 'DH Template 7', 'dh_templates' ) ) {
-			wp_insert_term(
-				'Template 7',
-				'dh_templates',
-				array(
-					'slug' => 'dh-template-7'
-				)
-			);
-	  	}
-		if ( ! term_exists( 'DH Template 8', 'dh_templates' ) ) {
-			wp_insert_term(
-				'Template 8',
-				'dh_templates',
-				array(
-					'slug' => 'dh-template-8'
-				)
-			);
-	  	}
-		if ( ! term_exists( 'DH Template 9', 'dh_templates' ) ) {
-			wp_insert_term(
-				'Template 9',
-				'dh_templates',
-				array(
-					'slug' => 'dh-template-9'
-				)
-			);
-	  	}
+	// public function register_terms() {
+	// 	if ( ! term_exists( 'DH Template 1', 'dh_templates' ) ) {
+	// 		wp_insert_term(
+	// 			'Template 1',
+	// 			'dh_templates',
+	// 			array(
+	// 				'slug' => 'dh-template-1'
+	// 			)
+	// 		);
+	//   	}
+	// 	if ( ! term_exists( 'DH Template 2', 'dh_templates' ) ) {
+	// 		wp_insert_term(
+	// 			'Template 2',
+	// 			'dh_templates',
+	// 			array(
+	// 				'slug' => 'dh-template-2'
+	// 			)
+	// 		);
+	//   	}
+	// 	if ( ! term_exists( 'DH Template 3', 'dh_templates' ) ) {
+	// 		wp_insert_term(
+	// 			'Template 3',
+	// 			'dh_templates',
+	// 			array(
+	// 				'slug' => 'dh-template-3'
+	// 			)
+	// 		);
+	//   	}
+	// 	if ( ! term_exists( 'DH Template 4', 'dh_templates' ) ) {
+	// 		wp_insert_term(
+	// 			'Template 4',
+	// 			'dh_templates',
+	// 			array(
+	// 				'slug' => 'dh-template-4'
+	// 			)
+	// 		);
+	//   	}
+	// 	if ( ! term_exists( 'DH Template 5', 'dh_templates' ) ) {
+	// 		wp_insert_term(
+	// 			'Template 5',
+	// 			'dh_templates',
+	// 			array(
+	// 				'slug' => 'dh-template-5'
+	// 			)
+	// 		);
+	//   	}
+	// 	if ( ! term_exists( 'DH Template 6', 'dh_templates' ) ) {
+	// 		wp_insert_term(
+	// 			'Template 6',
+	// 			'dh_templates',
+	// 			array(
+	// 				'slug' => 'dh-template-6'
+	// 			)
+	// 		);
+	//   	}
+	// 	if ( ! term_exists( 'DH Template 7', 'dh_templates' ) ) {
+	// 		wp_insert_term(
+	// 			'Template 7',
+	// 			'dh_templates',
+	// 			array(
+	// 				'slug' => 'dh-template-7'
+	// 			)
+	// 		);
+	//   	}
+	// 	if ( ! term_exists( 'DH Template 8', 'dh_templates' ) ) {
+	// 		wp_insert_term(
+	// 			'Template 8',
+	// 			'dh_templates',
+	// 			array(
+	// 				'slug' => 'dh-template-8'
+	// 			)
+	// 		);
+	//   	}
+	// 	if ( ! term_exists( 'DH Template 9', 'dh_templates' ) ) {
+	// 		wp_insert_term(
+	// 			'Template 9',
+	// 			'dh_templates',
+	// 			array(
+	// 				'slug' => 'dh-template-9'
+	// 			)
+	// 		);
+	//   	}
 
-	}
+	// }
 
 
 	public function add_post_column( $column_array ) {
