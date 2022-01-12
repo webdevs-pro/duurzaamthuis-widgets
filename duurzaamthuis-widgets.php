@@ -3,7 +3,7 @@
  * Plugin Name: Duurzaamthuis Widgets
  * Description: Custom Elementor widgets
  * Plugin URI:  https://magnificsoft.com/
- * Version:     1.8
+ * Version:     1.9
  * Author:      Alex Ischenko
  * Text Domain: duurzaamthuis
  */
@@ -23,8 +23,8 @@ require_once ( DH_PLUGIN_DIR . '/inc/modules/dh-templates/dh-templates.php' );
 
 final class Duurzaamthuis_Widgets {
 
-	const MINIMUM_ELEMENTOR_VERSION = '3.0.0';
-	const MINIMUM_PHP_VERSION = '7.0';
+	const MINIMUM_ELEMENTOR_VERSION = '3.4.0';
+	const MINIMUM_PHP_VERSION = '7.3';
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'i18n' ) );

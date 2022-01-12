@@ -91,7 +91,11 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 
 		?>
 		<div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>">
-			<?php if ( $settings['dh_related_content_heading'] ) { ?>
+			<?php 
+				$e = new Exception();
+				$trace = $e->getTrace();
+				if ( ! strpos( $trace[2]['file'], 'multiwidgets.php' ) && $settings['dh_related_content_heading'] ) { 
+			?>
 				<h2 class="dh-heading">
 					<?php echo $settings['dh_related_content_heading']; ?>
 				</h2>
@@ -118,10 +122,6 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 							echo '</div>';
 							echo '<h3 class="dh-related-post-title">' . get_the_title( $post['dh_related_content_id'] ) . '</h3>';
 							if ( $settings['dh_related_content_show_excerpt'] ) {
-								// $exerpt = get_yoast_derfve
-								// inhinh
-								// EBML_ID_TARGETSetgb
-
 								echo '<div class="dh-related-post-exerpt">' . get_the_excerpt( $post['dh_related_content_id'] ) . '</div>';
 							}
 						echo '</a>';

@@ -31,7 +31,16 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 		$settings = $this->get_settings_for_display();
 
 		if ( $settings['dh_how_to_faq_items'] ) {
-         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+			$classes = DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings );
+			if ( $settings['dh_how_to_faq_schema_type'] == 'how_to' && ! $settings['dh_how_to_faq_duration_days'] && ! $settings['dh_how_to_faq_duration_hours'] && ! $settings['dh_how_to_faq_duration_minutes'] ) {
+				$classes .= ' dh-how-to-widget-notice';
+				if ( ! Elementor\Plugin::$instance->preview->is_preview_mode() ) {
+					return;
+				}
+			}
+         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . $classes; ?>"><?php
+
+
 
          echo '<div class="dh-how-to-faq">';
 				echo '<h2 class="dh-how-to-faq-heading">' . esc_html( $settings['dh_how_to_faq_name'] ) . '</h2>';
@@ -83,17 +92,21 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 				$hours = $settings['dh_how_to_faq_duration_hours'] ?? 0;
 				$minutes = $settings['dh_how_to_faq_duration_minutes'] ?? 0;
 				$duration = '';
-				if ( $days > 0 ) {
-					$duration .= $days . 'D';
-				}
-				if ( $hours > 0 ) {
-					$duration .= $hours . 'H';
-				}
-				if ( $minutes > 0 ) {
-					$duration .= $minutes . 'M';
-				}
-				if ( $duration ) {
-					$schema['totalTime'] = 'PT' . $duration;
+				if ( $days || $hours || $minutes ) {
+					$duration = 'P';
+					if ( $days ) {
+						$duration .= $days . 'D';
+					}
+					if ( $hours || $minutes ) {
+						$duration .= 'T';
+					}
+					if ( $hours ) {
+						$duration .= $hours . 'H';
+					}
+					if ( $minutes ) {
+						$duration .= $minutes . 'M';
+					}
+					$schema['totalTime'] = $duration;
 				}
 			} else if ( $settings['dh_how_to_faq_schema_type'] == 'faq' ) {
 				$schema['@context'] = "https://schema.org/";
@@ -141,6 +154,11 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 				} ); 
 				classes = ' ' + classes.join( ' ' );
 			#>
+			<#
+				if ( settings.dh_how_to_faq_schema_type == 'how_to' && ! settings.dh_how_to_faq_duration_days && ! settings.dh_how_to_faq_duration_hours && ! settings.dh_how_to_faq_duration_minutes ) {
+					classes = classes + ' dh-how-to-widget-notice';
+				}
+			#>
 			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<div class="dh-how-to-faq">
 					<h2 class="dh-how-to-faq-heading">{{ settings.dh_how_to_faq_name }}</h2>
@@ -152,7 +170,12 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 								<# if ( item.dh_how_to_faq_item_video_url.url ) { #>
 									<div class="dh-youtube-video"><div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #ccc; display: flex; justify-content: center; align-items: center;">VIDEO AVAILABLE ONLY ON FRONTEND</div></div>
 								<# } #>
-								<div class="dh-how-to-faq-item-text"><img src="{{{ item.dh_how_to_faq_item_image.url }}}">{{{ item.dh_how_to_faq_item_text }}}</div>
+								<div class="dh-how-to-faq-item-text">
+									<# if ( item.dh_how_to_faq_item_image.url ) { #>
+										<img src="{{{ item.dh_how_to_faq_item_image.url }}}">
+									<# } #>
+									{{{ item.dh_how_to_faq_item_text }}}
+								</div>
 							</div>
 						</div>
 					<# }); #>
