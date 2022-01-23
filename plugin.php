@@ -491,9 +491,16 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_anchor_navigation_heading', [ // heading
             'label' => __( 'Heading', 'duurzaamthuis' ),
             'type' => Elementor\Controls_Manager::TEXT,
-            'default' => __( 'Heading text', 'duurzaamthuis' ),
+            'default' => __( 'Op deze pagina', 'duurzaamthuis' ),
             'label_block' => true,
-            'separator' => 'before'
+         ] );
+			$widget->add_control( 'dh_anchor_navigation_show_index', [ // heading
+            'label' => __( 'Show index', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'duurzaamthuis' ),
+				'label_off' => __( 'No', 'duurzaamthuis' ),		
+				'return_value' => 'yes',
+				'default' => 'yes',	
          ] );
          $repeater = new \Elementor\Repeater();
          $repeater->add_control( 'dh_anchor_navigation_title', [ // title
@@ -515,7 +522,15 @@ class DH_Widgets_Content_Controls {
             'label' => __( 'Items', 'duurzaamthuis' ),
             'type' => Elementor\Controls_Manager::REPEATER,
             'fields' => $repeater->get_controls(),
-            'title_field' => '{{{ dh_anchor_navigation_title }}}',
+            'title_field' => '
+					<span id="item-{{_id}}"></span>
+					<#
+					setTimeout( function() {
+						var index = jQuery( "#item-" + _id ).closest( ".elementor-repeater-fields" ).index();
+						jQuery( "#item-" + _id ).text( ( index + 1 ) + ". " + dh_anchor_navigation_title );
+					}, 10 )
+					#>
+				',
          ] );
 		$widget->end_controls_section(); 
 	}

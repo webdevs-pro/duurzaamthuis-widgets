@@ -48,13 +48,13 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
                <?php echo $heading; ?>
             </h2>
             <div class="dh-repeater">
-               <?php foreach ( $items as $item ) { ?>
+               <?php foreach ( $items as $index => $item ) { ?>
                   <a class="dh-item" <?php echo $item['dh_anchor_navigation_anchor'] ? 'href="#' . $item['dh_anchor_navigation_anchor'] . '"' : ''; ?>>
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.2744 19.75V4.75" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M18.2988 13.7002L12.2748 19.7502L6.24976 13.7002" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                      </svg>
-                     <?php echo $item['dh_anchor_navigation_title']; ?>
+                     <?php echo ( $settings['dh_anchor_navigation_show_index'] ? $index + 1 . '. ' : '' ) . $item['dh_anchor_navigation_title']; ?>
                   </a>
                <?php } ?>
             </div>
@@ -85,7 +85,7 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
                {{{ settings.dh_anchor_navigation_heading }}}
             </h2>
             <div class="dh-repeater">
-               <# _.each( settings.dh_anchor_navigation_items, function( item ) { #>
+               <# _.each( settings.dh_anchor_navigation_items, function( item, index ) { #>
                   <# if(item.dh_anchor_navigation_anchor) {
                      var href = 'href="#' + item.dh_anchor_navigation_anchor + '"';
                   } else {
@@ -96,7 +96,7 @@ class DH_Anchor_Navigation extends \Elementor\Widget_Base {
                         <path d="M12.2744 19.75V4.75" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M18.2988 13.7002L12.2748 19.7502L6.24976 13.7002" stroke="#515F70" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                      </svg>
-                     {{{ item.dh_anchor_navigation_title }}}
+                     <# if ( settings.dh_anchor_navigation_show_index ) { print ( ( index + 1 ) + '. ' ); } #>{{{ item.dh_anchor_navigation_title }}}
                   </a>
                <# }); #>
             </div>

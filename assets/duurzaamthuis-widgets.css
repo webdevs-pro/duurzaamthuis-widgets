@@ -60,8 +60,17 @@
 .dh-widget-dh-image-heading-text h2 {
    margin-bottom: 20px;
 }
-.dh-widget-dh-image-heading-text img {
+.dh-widget-dh-image-heading-text .dh-image-wrapper {
+   padding-bottom: 65%;
    border-radius: 16px;
+   display: flex;
+   position: relative;
+   overflow: hidden;
+}
+.dh-widget-dh-image-heading-text img {
+   position: absolute;
+   object-fit: cover;
+   min-height: 100%;
 }
 
 .dh-widget-dh-image-heading-text .dh-content {
