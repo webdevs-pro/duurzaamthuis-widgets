@@ -63,14 +63,20 @@
 .dh-widget-dh-image-heading-text .dh-image-wrapper {
    padding-bottom: 65%;
    border-radius: 16px;
-   display: flex;
    position: relative;
    overflow: hidden;
 }
-.dh-widget-dh-image-heading-text img {
+.dh-widget-dh-image-heading-text .dh-image-wrapper .dh-image {
    position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+}
+.dh-widget-dh-image-heading-text img {
+   width: 100%;
    object-fit: cover;
-   min-height: 100%;
 }
 
 .dh-widget-dh-image-heading-text .dh-content {
