@@ -30,7 +30,14 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 	protected function render() { // php template
 		$settings = $this->get_settings_for_display();
 		if ( $settings['dh_number_heading_heading'] ) {
-			?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+			?><?php 
+				$e = new Exception(); 
+				$is_multiwidget = strpos( $e->getTrace()[2]['file'], 'multiwidgets.php' ) ? true : false;
+				echo sprintf( '<div class="%s"%s>',
+					( $is_multiwidget ? 'elementor-element elementor-widget elementor-widget-' . $this->get_name() : '' ) . ' dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ),
+					$is_multiwidget ? ' data-widget_type="' . $this->get_name() . '.default" data-element_type="widget"' : ''
+				); 
+			?><?php
 
 				$add_class = $settings['dh_number_heading_badge'] != 'none' ? ' with-badge' : '';
 				echo '<' . $settings['dh_number_heading_size'] . ' class="dh-number-heading' . $add_class . '">';

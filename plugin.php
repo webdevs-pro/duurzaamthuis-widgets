@@ -2344,9 +2344,17 @@ class DH_Widgets_Content_Controls {
 		$widget->end_controls_section(); 
 	}
 
+	public static function is_multiwidget() {
+		$start_time = microtime(true);
+		$e = new Exception();
+		$trace = $e->getTrace();
+		if ( ! strpos( $trace[2]['file'], 'multiwidgets.php' ) ) {
+			return true;
+		}
+		return false;
+	}
+
 }
-
-
 
 
 

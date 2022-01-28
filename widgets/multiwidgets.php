@@ -83,6 +83,8 @@ class DH_Multiwidgets {
                      );
                      \$widget = Elementor\Plugin::\$instance->elements_manager->create_element_instance( \$widget_config );
                      \$widget->render_content();
+                     // \$widget->print_element();
+
                   }
                }
                protected function content_template() {

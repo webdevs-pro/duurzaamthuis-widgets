@@ -48,8 +48,8 @@
 
 
 	var DH_Impact = function( $scope, $ ) {
-
 		var toggle = $scope.find('.dh-impact-calc-toggle');
+		console.log('toggle', toggle);
 		var content = $scope.find('.dh-impact-calc-text');
 
 		$(toggle).on('click', function(){
@@ -61,7 +61,6 @@
 
 
 	var DH_Mega_Menu = function( $scope, $ ) {
-
 		var toggle = $scope.find( '.dh-mobile-menu-toggle' );
 		var menu = $scope.find( '.dh-mobile-menu' );
 		var submenu_toggle = $scope.find( '.dh-mobile-submenu-toggle' );
@@ -91,7 +90,6 @@
 
 
 	var DH_Product_Comparition_Sustainability_Score = function( $scope, $ ) {
-
 		$scope.find('.dh-product-description').each(function() {
 			var height = $(this).height();
 			var content = $(this).find('.dh-product-description-content');
@@ -124,8 +122,6 @@
 		$( products ).each( function() {
 			var last_updated = $( this ).find( '.dfrcs_last_updated' ).text();
 		} );
-		
-
 	}
 
 
@@ -283,8 +279,6 @@
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-menu-tree-navigation.default', DH_Menu_Tree_Navigation );
 		initDHtooltips();
 	} );
-
-
 
 
 

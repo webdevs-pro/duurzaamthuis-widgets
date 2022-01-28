@@ -66,7 +66,14 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 			return;
 		}
 
-		?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+		?><?php 
+				$e = new Exception(); 
+				$is_multiwidget = strpos( $e->getTrace()[2]['file'], 'multiwidgets.php' ) ? true : false;
+				echo sprintf( '<div class="%s"%s>',
+					( $is_multiwidget ? 'elementor-element elementor-widget elementor-widget-' . $this->get_name() : '' ) . ' dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ),
+					$is_multiwidget ? ' data-widget_type="' . $this->get_name() . '.default" data-element_type="widget"' : ''
+				); 
+			?><?php
 		$items = wp_get_nav_menu_items( $settings['dh_mega_menu_menu'] );
 		if ( $items ) {
 			$items_tree = $this->build_menu_tree( $items );  

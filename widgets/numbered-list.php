@@ -31,7 +31,14 @@ class DH_Numbered_List extends \Elementor\Widget_Base {
 		$settings = $this->get_settings_for_display();
 
 		if ( $settings['dh_numbered_list_items'] ) {
-         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+         ?><?php 
+				$e = new Exception(); 
+				$is_multiwidget = strpos( $e->getTrace()[2]['file'], 'multiwidgets.php' ) ? true : false;
+				echo sprintf( '<div class="%s"%s>',
+					( $is_multiwidget ? 'elementor-element elementor-widget elementor-widget-' . $this->get_name() : '' ) . ' dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ),
+					$is_multiwidget ? ' data-widget_type="' . $this->get_name() . '.default" data-element_type="widget"' : ''
+				); 
+			?><?php
 
          echo '<div class="dh-numbered-list">';
             foreach (  $settings['dh_numbered_list_items'] as $index => $item ) {

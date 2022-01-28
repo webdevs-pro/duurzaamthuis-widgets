@@ -77,7 +77,14 @@ class DH_Product_Review extends \Elementor\Widget_Base {
       $pros = json_decode( $settings['dh_product_review_pros'] );
       $cons = json_decode( $settings['dh_product_review_cons'] );
 
-      ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+      ?><?php 
+				$e = new Exception(); 
+				$is_multiwidget = strpos( $e->getTrace()[2]['file'], 'multiwidgets.php' ) ? true : false;
+				echo sprintf( '<div class="%s"%s>',
+					( $is_multiwidget ? 'elementor-element elementor-widget elementor-widget-' . $this->get_name() : '' ) . ' dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ),
+					$is_multiwidget ? ' data-widget_type="' . $this->get_name() . '.default" data-element_type="widget"' : ''
+				); 
+			?><?php
          echo '<div class="dh-products-review-grid dh-products-' . $settings['dh_product_review_skin'] . '-skin">';
 
             echo '<div class="dh-product">';

@@ -79,7 +79,14 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
       $review_author_name = get_the_author_meta( 'first_name', $page_author_id ) . ' ' . get_the_author_meta( 'last_name', $page_author_id );
       
 		if ( $settings['dh_product_comparition_sustainability_score_products'] ) :
-         ?><div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>"><?php
+         ?><?php 
+				$e = new Exception(); 
+				$is_multiwidget = strpos( $e->getTrace()[2]['file'], 'multiwidgets.php' ) ? true : false;
+				echo sprintf( '<div class="%s"%s>',
+					( $is_multiwidget ? 'elementor-element elementor-widget elementor-widget-' . $this->get_name() : '' ) . ' dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ),
+					$is_multiwidget ? ' data-widget_type="' . $this->get_name() . '.default" data-element_type="widget"' : ''
+				); 
+			?><?php
             echo '<div class="dh-products-score-grid dh-products-' . $settings['dh_product_comparition_sustainability_score_skin'] . '-skin">';
                foreach ( $settings['dh_product_comparition_sustainability_score_products'] as $index => $item ) :
                   $shortcode = $this->render_shortcode( $item['dh_product_comparition_sustainability_score_shortcode'], $item['_id'] );

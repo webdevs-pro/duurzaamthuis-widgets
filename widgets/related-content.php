@@ -88,20 +88,16 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
             }
          }
       }
-
-		?>
-		<div class="<?php echo 'dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ); ?>">
-			<?php 
-				$e = new Exception();
-				$trace = $e->getTrace();
-				if ( ! strpos( $trace[2]['file'], 'multiwidgets.php' ) && $settings['dh_related_content_heading'] ) { 
-			?>
-				<h2 class="dh-heading">
-					<?php echo $settings['dh_related_content_heading']; ?>
-				</h2>
-			<?php
-			}
+		
       if ( isset( $posts_ids ) && ! empty( $posts_ids ) ) {
+
+				$e = new Exception(); 
+				$is_multiwidget = strpos( $e->getTrace()[2]['file'], 'multiwidgets.php' ) ? true : false;
+				echo sprintf( '<div class="%s"%s>',
+					( $is_multiwidget ? 'elementor-element elementor-widget elementor-widget-' . $this->get_name() : '' ) . ' dh-widget-' . $this->get_name() . DH_Widgets_Content_Controls::get_prefix_classes( $this, $settings ),
+					$is_multiwidget ? ' data-widget_type="' . $this->get_name() . '.default" data-element_type="widget"' : ''
+				); 
+
             echo '<div class="dh-related-content-grid dh-related-content-' . $settings['dh_related_content_type'] . '-skin">';
                foreach ( $posts_ids as $post ) {
 						echo '<a class="dh-related-post post-id-' . $post['dh_related_content_id'] . '" href="' . get_the_permalink( $post['dh_related_content_id'] ) . '">';
@@ -126,9 +122,9 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 							}
 						echo '</a>';
                }
-					?></div><?php
-            echo '</div>';
-      }
+				?></div><?php
+			echo '</div>';
+		} 
 
 	}
 
