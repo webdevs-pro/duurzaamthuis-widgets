@@ -63,13 +63,8 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 					$is_multiwidget ? ' data-widget_type="' . $this->get_name() . '.default" data-element_type="widget"' : ''
 				); 
 			?><?php
-            echo '<div class="dh-products-grid dh-products-' . $settings['dh_product_comparition_skin'] . '-skin">';
+            echo '<div class="dh-products-grid">';
                foreach (  $settings['dh_product_comparition_products'] as $item ) {
-                  if ( $item['dh_product_comparition_ean'] && ! $item['dh_product_comparition_custom_shortcode_enabled'] ) {
-                     $shortcode = $this->render_shortcode( '[dfrcs ean="' . $item['dh_product_comparition_ean'] . '"]', $item['_id'] );
-                  } else {
-                     $shortcode = $this->render_shortcode( $item['dh_product_comparition_shortcode'], $item['_id'] );
-                  }
                   $dfrcs_get_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-' . $item['_id'] . '-cache', true );
                   $price = dh_format_price( $item['dh_product_comparition_price'] ?: ( $dfrcs_get_cache['price'] ?? '' ) );
                   $last_updated = $item['dh_product_comparition_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
@@ -105,14 +100,21 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
                         echo '</div>';
 
-                        if ( ( $item['dh_product_comparition_custom_shortcode_enabled'] || $item['dh_product_comparition_ean'] ) && ! $item['dh_product_comparition_button_enabled'] ) {
+                        if ( $item['dh_product_comparition_custom_type'] == 'ean' ) {
                            echo '<div class="dh-product-column dh-product-shortcode-column">';
-                              echo '<div class="dh-product-shortcode">' . $shortcode . '</div>';
+                              echo '<div class="dh-product-shortcode">' . $this->render_shortcode( '[dfrcs ean="' . $item['dh_product_comparition_ean'] . '"]', $item['_id'] ) . '</div>';
                               echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
                            echo '</div>'; // dh-product-column
                         }
 
-                        if ( $item['dh_product_comparition_button_enabled'] ) {
+                        if ( $item['dh_product_comparition_custom_type'] == 'shortcode' ) {
+                           echo '<div class="dh-product-column dh-product-shortcode-column">';
+                              echo '<div class="dh-product-shortcode">' . $this->render_shortcode( $item['dh_product_comparition_shortcode'], $item['_id'] ) . '</div>';
+                              echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
+                           echo '</div>'; // dh-product-column
+                        }
+
+                        if ( $item['dh_product_comparition_custom_type'] == 'button' ) {
                            echo '<div class="dh-product-column dh-product-button-column">';
                               $rel = isset( $item['dh_product_comparition_sponsored'] ) ? ' rel="sponsored"' : '';
                               echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . $item['dh_product_comparition_button_link'] . '"' . $rel . '>' . $item['dh_product_comparition_button_text'] . '</a>';
@@ -187,7 +189,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                classes = ' ' + classes.join( ' ' );
             #>
             <div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
-               <div class="dh-products-grid dh-products-{{{ settings.dh_product_comparition_skin }}}-skin">
+               <div class="dh-products-grid">
                   <# _.each( settings.dh_product_comparition_products, function( item ) { #>
 
                      <div class="dh-product dh-product-{{ item._id }}">
@@ -212,20 +214,21 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               <# } #>
                            </div>
 
-                           <# if ( ( item.dh_product_comparition_custom_shortcode_enabled || item.dh_product_comparition_ean ) && ! item.dh_product_comparition_button_enabled ) { #>
+                           <# if ( item.dh_product_comparition_custom_type == 'ean' ) { #>
                               <div class="dh-product-column dh-product-shortcode-column">
-                                 <#
-                                    if ( item.dh_product_comparition_ean && ! item.dh_product_comparition_custom_shortcode_enabled ) {
-                                       var shortcode = '[dfrcs ean="' + item.dh_product_comparition_ean + '"]';
-                                    } else {
-                                       var shortcode = item.dh_product_comparition_shortcode;
-                                    }
-                                 #>
+                                 <# var shortcode = '[dfrcs ean="' + item.dh_product_comparition_ean + '"]'; #>
                                  <div class="dh-product-shortcode">{{ shortcode }}</div>
                               </div>
                            <# } #>
 
-                           <# if ( item.dh_product_comparition_button_enabled ) { #>
+                           <# if ( item.dh_product_comparition_custom_type == 'shortcode' ) { #>
+                              <div class="dh-product-column dh-product-shortcode-column">
+                                 <# var shortcode = item.dh_product_comparition_shortcode; #>
+                                 <div class="dh-product-shortcode">{{ shortcode }}</div>
+                              </div>
+                           <# } #>
+
+                           <# if ( item.dh_product_comparition_custom_type == 'button' ) { #>
                               <div class="dh-product-column dh-product-shortcode-column">
                                  <a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="{{ item.dh_product_comparition_button_link }}">{{ item.dh_product_comparition_button_text }}</a>
                               </div>

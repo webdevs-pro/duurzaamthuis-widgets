@@ -667,20 +667,22 @@ class DH_Widgets_Content_Controls {
 			.dh-13-chars-max input:invalid {
 				border: 2px dashed red;
 			}
+			.tab-like-switcher .elementor-choices-label {
+				width: 33.333%;
+			}
+			.tab-like-switcher .elementor-screen-only {
+				display: block;
+				position: relative;
+				height: unset;
+				width: unset;
+				top: unset;
+			}
 		</style>
 		<?php $script = ob_get_clean();
 		$widget->start_controls_section( 'dh_product_comparition_content', [
          'label' => __( 'Product Comparison', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
-         $widget->add_control( 'dh_product_comparition_skin', [ // skin
-            'label' => __( 'Skin', 'duurzaamthuis' ),
-            'type' => Elementor\Controls_Manager::SELECT,
-            'default' => 'simple',
-            'options' => [
-               'simple'  => __( 'Simple', 'duurzaamthuis' ),
-            ],
-         ] );
          $widget->add_responsive_control( 'dh_product_comparition_columns_count', [ // columns_count
 				'label' => __( 'Columns', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::NUMBER,
@@ -739,19 +741,27 @@ class DH_Widgets_Content_Controls {
                'label' => __( 'Order By', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::TEXT,
                'default' => 'Voor 23:59 besteld',
-               'classes' => "simple-skin-control",
             ] );
-            $repeater->add_control( 'dh_product_comparition_custom_shortcode_enabled',[
-               'label' => __( 'Datafeedr manual settings', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::SWITCHER,
-               'label_on' => __( 'Yes', 'duurzaamthuis' ),
-               'label_off' => __( 'No', 'duurzaamthuis' ),
-               'return_value' => 'yes',
-					'separator' => 'before',
-					'condition' => [
-						'dh_product_comparition_button_enabled!' => 'yes',
+				$repeater->add_control( 'dh_product_comparition_custom_type', [
+					'label' => esc_html__( 'Custom shortcode or button', 'duurzaamthuis' ),
+					'type' => \Elementor\Controls_Manager::CHOOSE,
+					'options' => [
+						'ean' => [
+							'title' => esc_html__( 'EAN', 'duurzaamthuis' ),
+						],
+						'shortcode' => [
+							'title' => esc_html__( 'Shortcode', 'duurzaamthuis' ),
+						],
+						'button' => [
+							'title' => esc_html__( 'Button', 'duurzaamthuis' ),
+						],
 					],
-            ] );
+					'label_block' => true,
+					'toggle' => false,
+					'default' => 'ean',
+					'classes' => 'tab-like-switcher',
+					'separator' => 'before',
+				] );
             $repeater->add_control( 'dh_product_comparition_shortcode', [
 					'label' => esc_html__( 'Shortcode below overrides [dfrcs ean="XXX"]', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXTAREA,
@@ -759,8 +769,7 @@ class DH_Widgets_Content_Controls {
 					'description' => 'HTML allowed. Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
 					'default' => '',
 					'condition' => [
-						'dh_product_comparition_custom_shortcode_enabled' => 'yes',
-						'dh_product_comparition_button_enabled!' => 'yes',
+						'dh_product_comparition_custom_type' => 'shortcode',
 					],
 				] );
             $repeater->add_control( 'dh_product_comparition_last_updated_text', [
@@ -768,17 +777,8 @@ class DH_Widgets_Content_Controls {
                'type' => Elementor\Controls_Manager::TEXT,
                'label_block' => true,
 					'condition' => [
-						'dh_product_comparition_custom_shortcode_enabled' => 'yes',
-						'dh_product_comparition_button_enabled!' => 'yes',
+						'dh_product_comparition_custom_type' => 'shortcode',
 					],
-            ] );
-            $repeater->add_control( 'dh_product_comparition_button_enabled',[
-               'label' => __( 'Custom button', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::SWITCHER,
-               'label_on' => __( 'Yes', 'duurzaamthuis' ),
-               'label_off' => __( 'No', 'duurzaamthuis' ),
-               'return_value' => 'yes',
-					'separator' => 'before',
             ] );
             $repeater->add_control( 'dh_product_comparition_button_text', [
                'label' => __( 'Button Text', 'duurzaamthuis' ),
@@ -786,7 +786,7 @@ class DH_Widgets_Content_Controls {
                'label_block' => true,
 					'default' => 'Button label',
 					'condition' => [
-						'dh_product_comparition_button_enabled' => 'yes',
+						'dh_product_comparition_custom_type' => 'button',
 					],
             ] );
             $repeater->add_control( 'dh_product_comparition_button_link', [
@@ -795,7 +795,7 @@ class DH_Widgets_Content_Controls {
                'default' => '#',
                'label_block' => true,
 					'condition' => [
-						'dh_product_comparition_button_enabled' => 'yes',
+						'dh_product_comparition_custom_type' => 'button',
 					],
             ] );
             $repeater->add_control( 'dh_product_comparition_sponsored',[
@@ -807,7 +807,7 @@ class DH_Widgets_Content_Controls {
                'default' => 'yes',
                'render_type' => 'ui',
 					'condition' => [
-						'dh_product_comparition_button_enabled' => 'yes',
+						'dh_product_comparition_custom_type' => 'button',
 					],
             ] );
 				$repeater->add_control( 'dh_product_comparition_script', [
@@ -1544,6 +1544,16 @@ class DH_Widgets_Content_Controls {
 			.dh-13-chars-max input:invalid {
 				border: 2px dashed red;
 			}
+			.tab-like-switcher .elementor-choices-label {
+				width: 33.333%;
+			}
+			.tab-like-switcher .elementor-screen-only {
+				display: block;
+				position: relative;
+				height: unset;
+				width: unset;
+				top: unset;
+			}
 		</style>
 		<?php $script = ob_get_clean();
 		$widget->start_controls_section( 'dh_product_comparition_sustainability_score_section_content', [
@@ -1724,17 +1734,26 @@ class DH_Widgets_Content_Controls {
                'default' => __( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ', 'duurzaamthuis' ),
                'placeholder' => __( 'Type your description here', 'duurzaamthuis' ),
             ] );
-            $repeater->add_control( 'dh_product_comparition_sustainability_score_custom_shortcode_enabled',[
-               'label' => __( 'Datafeedr manual settings', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::SWITCHER,
-               'label_on' => __( 'Yes', 'duurzaamthuis' ),
-               'label_off' => __( 'No', 'duurzaamthuis' ),
-               'return_value' => 'yes',
-					'separator' => 'before',
-					'condition' => [
-						'dh_product_comparition_sustainability_score_button_enabled!' => 'yes',
+				$repeater->add_control( 'dh_product_comparition_sustainability_score_custom_type', [
+					'label' => esc_html__( 'Custom shortcode or button', 'duurzaamthuis' ),
+					'type' => \Elementor\Controls_Manager::CHOOSE,
+					'options' => [
+						'ean' => [
+							'title' => esc_html__( 'EAN', 'duurzaamthuis' ),
+						],
+						'shortcode' => [
+							'title' => esc_html__( 'Shortcode', 'duurzaamthuis' ),
+						],
+						'button' => [
+							'title' => esc_html__( 'Button', 'duurzaamthuis' ),
+						],
 					],
-            ] );
+					'label_block' => true,
+					'toggle' => false,
+					'default' => 'ean',
+					'classes' => 'tab-like-switcher',
+					'separator' => 'before',
+				] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_shortcode', [
 					'label' => esc_html__( 'Shortcode below overrides [dfrcs ean="XXX"]', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXTAREA,
@@ -1742,8 +1761,7 @@ class DH_Widgets_Content_Controls {
 					'description' => 'HTML allowed. Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
 					'default' => '',
 					'condition' => [
-						'dh_product_comparition_sustainability_score_custom_shortcode_enabled' => 'yes',
-						'dh_product_comparition_sustainability_score_button_enabled!' => 'yes',
+						'dh_product_comparition_sustainability_score_custom_type' => 'shortcode',
 					],
 				] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_last_updated_text', [
@@ -1751,17 +1769,8 @@ class DH_Widgets_Content_Controls {
                'type' => Elementor\Controls_Manager::TEXT,
                'label_block' => true,
 					'condition' => [
-						'dh_product_comparition_sustainability_score_custom_shortcode_enabled' => 'yes',
-						'dh_product_comparition_sustainability_score_button_enabled!' => 'yes',
+						'dh_product_comparition_sustainability_score_custom_type' => 'shortcode',
 					],
-            ] );
-            $repeater->add_control( 'dh_product_comparition_sustainability_score_button_enabled',[
-               'label' => __( 'Custom button', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::SWITCHER,
-               'label_on' => __( 'Yes', 'duurzaamthuis' ),
-               'label_off' => __( 'No', 'duurzaamthuis' ),
-               'return_value' => 'yes',
-					'separator' => 'before',
             ] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_button_text', [
                'label' => __( 'Button Text', 'duurzaamthuis' ),
@@ -1769,7 +1778,7 @@ class DH_Widgets_Content_Controls {
                'label_block' => true,
 					'default' => 'Button label',
 					'condition' => [
-						'dh_product_comparition_sustainability_score_button_enabled' => 'yes',
+						'dh_product_comparition_sustainability_score_custom_type' => 'button',
 					],
             ] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_button_link', [
@@ -1778,7 +1787,7 @@ class DH_Widgets_Content_Controls {
                'default' => '#',
                'label_block' => true,
 					'condition' => [
-						'dh_product_comparition_sustainability_score_button_enabled' => 'yes',
+						'dh_product_comparition_sustainability_score_custom_type' => 'button',
 					],
             ] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_sponsored',[
@@ -1790,7 +1799,7 @@ class DH_Widgets_Content_Controls {
                'default' => 'yes',
                'render_type' => 'ui',
 					'condition' => [
-						'dh_product_comparition_sustainability_score_button_enabled' => 'yes',
+						'dh_product_comparition_sustainability_score_custom_type' => 'button',
 					],
             ] );
 				$repeater->add_control( 'dh_product_comparition_sustainability_score_script', [

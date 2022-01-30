@@ -60,14 +60,16 @@
 
     <?php
         // button for product comparison widget
-        if ( $widget['name'] == 'dh-product-comparition' ) {
-            $product = reset( $dfrcs_products ); // get first item in array of products
-            $strings_to_exclude = array(
-                ' - personal care',
-                ': DIY',
-            );
-            $merchant = str_replace( $strings_to_exclude, '', $product['merchant'] );
-            echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . dfrcs_url() . '">' . 'Bekijk op ' . $merchant . '</a>';
+        if ( $dfrcs_products ) {
+            if ( $widget['name'] == 'dh-product-comparition' ) {
+                $product = reset( $dfrcs_products ); // get first item in array of products
+                $strings_to_exclude = array(
+                    ' - personal care',
+                    ': DIY',
+                );
+                $merchant = str_replace( $strings_to_exclude, '', $product['merchant'] );
+                echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . dfrcs_url() . '">' . 'Bekijk op ' . $merchant . '</a>';
+            }
         }
     ?>
 
