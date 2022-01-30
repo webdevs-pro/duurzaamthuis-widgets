@@ -49,7 +49,6 @@
 
 	var DH_Impact = function( $scope, $ ) {
 		var toggle = $scope.find('.dh-impact-calc-toggle');
-		console.log('toggle', toggle);
 		var content = $scope.find('.dh-impact-calc-text');
 
 		$(toggle).on('click', function(){

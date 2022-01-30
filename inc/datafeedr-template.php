@@ -81,6 +81,7 @@
     (function($){
         var productEl = $( '.<?php echo 'set-' . $set_id; ?>' ).closest( '.dh-product' );
         var priceEl = $( productEl ).find( '.dh-product-price' );
+        console.log('priceEl', priceEl);
         $( productEl ).find( '.dh-product-last-updated-text' ).text( 'Laatste update: <?php echo $date; ?>' );
 
         if ( priceEl.length == 0 ) {

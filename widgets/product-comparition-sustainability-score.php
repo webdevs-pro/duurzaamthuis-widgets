@@ -89,7 +89,11 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 			?><?php
             echo '<div class="dh-products-score-grid dh-products-' . $settings['dh_product_comparition_sustainability_score_skin'] . '-skin">';
                foreach ( $settings['dh_product_comparition_sustainability_score_products'] as $index => $item ) :
-                  $shortcode = $this->render_shortcode( $item['dh_product_comparition_sustainability_score_shortcode'], $item['_id'] );
+                  if ( $item['dh_product_comparition_sustainability_score_ean'] && ! $item['dh_product_comparition_sustainability_score_custom_shortcode_enabled'] ) {
+                     $shortcode = $this->render_shortcode( '[dfrcs ean="' . $item['dh_product_comparition_sustainability_score_ean'] . '"]', $item['_id'] );
+                  } else {
+                     $shortcode = $this->render_shortcode( $item['dh_product_comparition_sustainability_score_shortcode'], $item['_id'] );
+                  }
                   $dfrcs_get_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-' . $item['_id'] . '-cache', true );
                   $price = dh_format_price( $item['dh_product_comparition_sustainability_score_price'] ?: ( $dfrcs_get_cache['price'] ?? '' ) );
                   $last_updated = $item['dh_product_comparition_sustainability_score_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
@@ -224,15 +228,22 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               echo '</div>';
                            echo '</div>';
                         echo '</div>';  // dh-product-column
-                        echo '<div class="dh-product-column dh-product-shortcode-column">';
-                           echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
-                           echo '<div class="dh-product-shortcode">' . $shortcode . '</div>';
-                           echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
-                           if ( $item['dh_product_comparition_sustainability_score_button_text'] ) {
+
+                        if ( ( $item['dh_product_comparition_sustainability_score_custom_shortcode_enabled'] || $item['dh_product_comparition_sustainability_score_ean'] ) && ! $item['dh_product_comparition_sustainability_score_button_enabled'] ) {
+                           echo '<div class="dh-product-column dh-product-shortcode-column">';
+                              echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
+                              echo '<div class="dh-product-shortcode">' . $shortcode . '</div>';
+                              echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
+                           echo '</div>'; // dh-product-column
+                        }
+
+                        if ( $item['dh_product_comparition_sustainability_score_button_enabled'] ) {
+                           echo '<div class="dh-product-column dh-product-button-column">';
                               $rel = isset( $item['dh_product_comparition_sustainability_score_sponsored'] ) ? ' rel="sponsored"' : '';
                               echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . $item['dh_product_comparition_sustainability_score_button_link'] . '"' . $rel . '>' . $item['dh_product_comparition_sustainability_score_button_text'] . '</a>';
-                           }
-                        echo '</div>'; // dh-product-column
+                           echo '</div>'; // dh-product-column
+                        }
+
                      echo '</div>'; // dh-product-wrapper
 
                      $schema = array();
@@ -529,13 +540,26 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  </div>
                               </div>
                            </div>
-                           <div class="dh-product-column dh-product-shortcode-column">
-                              <div class="dh-product-shortcode-heading">Beste prijs</div>
-                              <div class="dh-product-shortcode">{{ item.dh_product_comparition_sustainability_score_shortcode }}</div>
-                              <# if ( item.dh_product_comparition_sustainability_score_button_text ) { #>
+
+                           <# if ( ( item.dh_product_comparition_sustainability_score_custom_shortcode_enabled || item.dh_product_comparition_sustainability_score_ean ) && ! item.dh_product_comparition_sustainability_score_button_enabled ) { #>
+                              <div class="dh-product-column dh-product-shortcode-column">
+                                 <div class="dh-product-shortcode-heading">Beste prijs</div>
+                                 <#
+                                    if ( item.dh_product_comparition_sustainability_score_ean && ! item.dh_product_comparition_sustainability_score_custom_shortcode_enabled ) {
+                                       var shortcode = '[dfrcs ean="' + item.dh_product_comparition_sustainability_score_ean + '"]';
+                                    } else {
+                                       var shortcode = item.dh_product_comparition_sustainability_score_shortcode;
+                                    }
+                                 #>
+                                 <div class="dh-product-shortcode">{{ shortcode }}</div>
+                              </div>
+                           <# } #>
+
+                           <# if ( item.dh_product_comparition_sustainability_score_button_enabled ) { #>
+                              <div class="dh-product-column dh-product-shortcode-column">
                                  <a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="{{ item.dh_product_comparition_sustainability_score_button_link }}">{{ item.dh_product_comparition_sustainability_score_button_text }}</a>
-                              <# } #>
-                           </div>
+                              </div>
+                           <# } #>
                         </div>
                      </div>
                   <# } ); #>
