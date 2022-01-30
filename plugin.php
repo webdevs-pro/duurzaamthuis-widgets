@@ -1731,6 +1731,9 @@ class DH_Widgets_Content_Controls {
                'label_off' => __( 'No', 'duurzaamthuis' ),
                'return_value' => 'yes',
 					'separator' => 'before',
+					'condition' => [
+						'dh_product_comparition_sustainability_score_button_enabled!' => 'yes',
+					],
             ] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_shortcode', [
 					'label' => esc_html__( 'Shortcode below overrides [dfrcs ean="XXX"]', 'duurzaamthuis' ),
@@ -1740,6 +1743,7 @@ class DH_Widgets_Content_Controls {
 					'default' => '',
 					'condition' => [
 						'dh_product_comparition_sustainability_score_custom_shortcode_enabled' => 'yes',
+						'dh_product_comparition_sustainability_score_button_enabled!' => 'yes',
 					],
 				] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_last_updated_text', [
@@ -1748,6 +1752,7 @@ class DH_Widgets_Content_Controls {
                'label_block' => true,
 					'condition' => [
 						'dh_product_comparition_sustainability_score_custom_shortcode_enabled' => 'yes',
+						'dh_product_comparition_sustainability_score_button_enabled!' => 'yes',
 					],
             ] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_button_enabled',[
