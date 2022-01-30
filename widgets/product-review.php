@@ -308,6 +308,7 @@ class DH_Product_Review extends \Elementor\Widget_Base {
       $data = $divs->item( 1 )->getAttribute( 'data-dfrcs' );
       $data = unserialize( base64_decode( $data ) );
       $data['widget'][$item_id] = $this->get_id();
+      $data['widget']['name'] = $this->get_name();
       $data = base64_encode( serialize( $data ) );
       $DOM->getElementsByTagName( 'div' )->item( 1 )->setAttribute( 'data-dfrcs', $data );
       $content = $DOM->saveHTML();

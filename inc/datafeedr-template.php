@@ -24,36 +24,52 @@
                unset( $dfrcs_products[$index] );
             }
          }
-         $dfrcs_products = array_slice( $dfrcs_products, 0, 5 );
+         $dfrcs_products = array_slice( $dfrcs_products, 0, 3 );
 
-			foreach ( $dfrcs_products as $dfrcs_product ) : ?>
-                <li class="<?php echo dfrcs_row_class(); ?>">
-                    <a target="_blank" href="<?php echo dfrcs_url(); ?>" rel="nofollow">
-                        <div class="item">
-							<?php if ( dfrcs_display_image() ) : ?>
-                                <div class="dfrcs_image"><?php echo dfrcs_image(); ?></div>
-							<?php endif; ?>
-							<?php if ( dfrcs_display_logo() ) : ?>
-                                <div class="dfrcs_logo"><?php echo dfrcs_logo(); ?></div>
-							<?php endif; ?>
-							<?php if ( dfrcs_display_price() ) : ?>
-                                <div class="dfrcs_price"><?php echo dfrcs_price(); ?></div>
-							<?php endif; ?>
-							<?php if ( dfrcs_display_button() ) : ?>
-                                <div class="dfrcs_link">
-                                    <span class="elementor-button elementor-size-sm"><?php echo dfrcs_link_text(); ?></span>
-                                </div>
-							<?php endif; ?>
-                        </div>
-						<?php if ( dfrcs_display_promo() ) : ?>
-							<?php echo dfrcs_promo(); ?>
-						<?php endif; ?>
-                    </a>
-					<?php echo dfrcs_product_actions(); ?>
-					<?php echo dfrcs_product_debug(); ?>
-                </li>
-			<?php endforeach; endif; ?>
+
+
+        foreach ( $dfrcs_products as $dfrcs_product ) : ?>
+            <li class="<?php echo dfrcs_row_class(); ?> widget-<?php echo $widget['name']; ?>">
+                <a target="_blank" href="<?php echo dfrcs_url(); ?>" rel="nofollow">
+                    <div class="item">
+                        <?php if ( dfrcs_display_image() ) : ?>
+                            <div class="dfrcs_image"><?php echo dfrcs_image(); ?></div>
+                        <?php endif; ?>
+                        <?php if ( dfrcs_display_logo() ) : ?>
+                            <div class="dfrcs_logo"><?php echo dfrcs_logo(); ?></div>
+                        <?php endif; ?>
+                        <?php if ( dfrcs_display_price() ) : ?>
+                            <div class="dfrcs_price"><?php echo dfrcs_price(); ?></div>
+                        <?php endif; ?>
+                        <?php if ( dfrcs_display_button() ) : ?>
+                            <div class="dfrcs_link">
+                                <span class="elementor-button elementor-size-sm"><?php echo dfrcs_link_text(); ?></span>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    <?php if ( dfrcs_display_promo() ) : ?>
+                        <?php echo dfrcs_promo(); ?>
+                    <?php endif; ?>
+                </a>
+                <?php echo dfrcs_product_actions(); ?>
+                <?php echo dfrcs_product_debug(); ?>
+            </li>
+        <?php endforeach; endif; ?>
+
     </ul>
+
+    <?php
+        // button for product comparison widget
+        if ( $widget['name'] == 'dh-product-comparition' ) {
+            $product = reset( $dfrcs_products ); // get first item in array of products
+            $strings_to_exclude = array(
+                ' - personal care',
+                ': DIY',
+            );
+            $merchant = str_replace( $strings_to_exclude, '', $product['merchant'] );
+            echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . dfrcs_url() . '">' . 'Bekijk op ' . $merchant . '</a>';
+        }
+    ?>
 
 <?php else : ?>
 

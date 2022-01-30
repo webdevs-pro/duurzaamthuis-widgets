@@ -535,7 +535,9 @@
    display: none;
 }
 
-
+body:not(.admin-bar) .dh-widget-dh-product-comparition .dfrcs_compset {
+   display: none;
+}
 
 
 

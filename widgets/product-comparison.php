@@ -107,7 +107,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
                         if ( ( $item['dh_product_comparition_custom_shortcode_enabled'] || $item['dh_product_comparition_ean'] ) && ! $item['dh_product_comparition_button_enabled'] ) {
                            echo '<div class="dh-product-column dh-product-shortcode-column">';
-                              echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
                               echo '<div class="dh-product-shortcode">' . $shortcode . '</div>';
                               echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
                            echo '</div>'; // dh-product-column
@@ -215,7 +214,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
                            <# if ( ( item.dh_product_comparition_custom_shortcode_enabled || item.dh_product_comparition_ean ) && ! item.dh_product_comparition_button_enabled ) { #>
                               <div class="dh-product-column dh-product-shortcode-column">
-                                 <div class="dh-product-shortcode-heading">Beste prijs</div>
                                  <#
                                     if ( item.dh_product_comparition_ean && ! item.dh_product_comparition_custom_shortcode_enabled ) {
                                        var shortcode = '[dfrcs ean="' + item.dh_product_comparition_ean + '"]';
@@ -261,6 +259,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
       $data = $divs->item( 1 )->getAttribute( 'data-dfrcs' );
       $data = unserialize( base64_decode( $data ) );
       $data['widget'][$item_id] = $this->get_id();
+      $data['widget']['name'] = $this->get_name();
       $data = base64_encode( serialize( $data ) );
       $DOM->getElementsByTagName( 'div' )->item( 1 )->setAttribute( 'data-dfrcs', $data );
       $content = $DOM->saveHTML();
