@@ -12,6 +12,67 @@ function icons_font_styles() {
 
 
 
+
+// // Widget builder ACF option page
+// if( function_exists('acf_add_options_page') ) {
+// 	acf_add_options_page(array(
+// 		'page_title' 	=> 'Widget Builder',
+// 		'menu_title'	=> 'Widget Builder',
+// 		'menu_slug' 	=> 'duurzaamthuis-templates',
+// 		'capability'	=> 'edit_posts',
+// 		'icon_url' => 'dashicons-excerpt-view',
+// 		'redirect'		=> false
+// 	));
+// }
+
+
+
+
+
+add_action( 'admin_menu', function() {
+	add_menu_page( 
+		'DH Tools',
+		'DH Tools',
+		'manage_options', 
+		'dh-tools', 
+		false,
+		'', 
+		99
+	);
+
+	add_submenu_page(
+		'dh-tools',
+		'DH templates', 
+		'DH templates', 
+		'manage_options', 
+		'edit-tags.php?taxonomy=dh_templates', 
+		false,
+		1
+	);
+	remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=dh_templates' );
+	remove_submenu_page( 'edit.php?post_type=page', 'edit-tags.php?taxonomy=dh_templates&amp;post_type=page' );
+
+	// Widget builder ACF option page
+	if( function_exists('acf_add_options_sub_page') ) {
+		acf_add_options_sub_page(array(
+			'page_title' 	=> 'Widget Builder',
+			'menu_title'	=> 'Widget Builder',
+			'parent_slug' 	=> 'dh-tools',
+		));
+	}
+
+	remove_submenu_page('dh-tools','dh-tools');
+}, 10 );
+add_action( 'parent_file', function( $parent_file ) {
+	global $current_screen;
+	$taxonomy = $current_screen->taxonomy;
+	if ( $taxonomy == 'dh_templates' )
+		$parent_file = 'dh-tools';
+	return $parent_file;
+}, 10 );
+
+
+
 // register widgets
 class DH_Register_Widgets {
 	public function __construct() {
@@ -2283,17 +2344,6 @@ class DH_Widgets_Content_Controls {
 
 
 
-// Widget builder ACF option page
-if( function_exists('acf_add_options_page') ) {
-	acf_add_options_page(array(
-		'page_title' 	=> 'Widget Builder',
-		'menu_title'	=> 'Widget Builder',
-		'menu_slug' 	=> 'duurzaamthuis-templates',
-		'capability'	=> 'edit_posts',
-		'icon_url' => 'dashicons-excerpt-view',
-		'redirect'		=> false
-	));
-}
 
 
 

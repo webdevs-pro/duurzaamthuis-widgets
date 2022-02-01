@@ -98,6 +98,14 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 					$is_multiwidget ? ' data-widget_type="' . $this->get_name() . '.default" data-element_type="widget"' : ''
 				); 
 
+				if ( ! $is_multiwidget && $settings['dh_related_content_heading'] ) { 
+					?>
+						<h2 class="dh-heading">
+							<?php echo $settings['dh_related_content_heading']; ?>
+						</h2>
+					<?php
+				}
+
             echo '<div class="dh-related-content-grid dh-related-content-' . $settings['dh_related_content_type'] . '-skin">';
                foreach ( $posts_ids as $post ) {
 						echo '<a class="dh-related-post post-id-' . $post['dh_related_content_id'] . '" href="' . get_the_permalink( $post['dh_related_content_id'] ) . '">';

@@ -29,7 +29,7 @@
 
 
         foreach ( $dfrcs_products as $dfrcs_product ) : ?>
-            <li class="<?php echo dfrcs_row_class(); ?> widget-<?php echo $widget['name']; ?>">
+            <li class="<?php echo dfrcs_row_class(); ?> widget-<?php echo $widget['name'] ?? 'non-elementor'; ?>">
                 <a target="_blank" href="<?php echo dfrcs_url(); ?>" rel="nofollow">
                     <div class="item">
                         <?php if ( dfrcs_display_image() ) : ?>
@@ -61,7 +61,7 @@
     <?php
         // button for product comparison widget
         if ( $dfrcs_products ) {
-            if ( $widget['name'] == 'dh-product-comparition' ) {
+            if ( isset( $widget['name'] ) && $widget['name'] == 'dh-product-comparition' ) {
                 $product = reset( $dfrcs_products ); // get first item in array of products
                 $strings_to_exclude = array(
                     ' - personal care',

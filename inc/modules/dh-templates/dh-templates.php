@@ -27,29 +27,6 @@ class DH_Custom_Templates {
 		add_action( 'elementor/element/wp-page/document_settings/after_section_end', [ $this, 'add_elementor_page_settings_controls' ], 10 );
 		add_action( 'elementor/document/before_save', [ $this, 'save_elementor_post_settings' ], 10, 2 );
 
-
-		add_action( 'admin_menu', function() {
-			add_submenu_page(
-				'options-general.php',
-				'DH templates', 
-				'DH templates', 
-				'manage_options', 
-				'edit-tags.php?taxonomy=dh_templates', 
-				false
-			);
-			remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=dh_templates' );
-			remove_submenu_page( 'edit.php?post_type=page', 'edit-tags.php?taxonomy=dh_templates&amp;post_type=page' );
-		}, 10 );
-
-
-		add_action( 'parent_file', function( $parent_file ) {
-			global $current_screen;
-			$taxonomy = $current_screen->taxonomy;
-			if ( $taxonomy == 'dh_templates' )
-				$parent_file = 'options-general.php';
-			return $parent_file;
-		}, 10 );
-
 	}
 
 
@@ -71,6 +48,7 @@ class DH_Custom_Templates {
 			// 'show_admin_column'     => true, // авто-создание колонки таксы в таблице ассоциированного типа записи. (с версии 3.5)
 			'show_in_rest'          => null, // добавить в REST API
 			'rest_base'             => null, // $taxonomy
+			'show_in_menu' => 'dh-tools'
 		] );
 
 	}
