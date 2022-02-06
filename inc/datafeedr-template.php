@@ -10,7 +10,7 @@
     <h2><?php echo dfrcs_title(); ?></h2>
 
     <ul class="dfrcs_compset <?php echo 'set-' . $set_id; ?>">
-		<?php if ( $dfrcs_products = dfrcs_products() ) : global $dfrcs_product;
+        <?php if ( $dfrcs_products = dfrcs_products() ) : global $dfrcs_product;
 
         foreach ( $dfrcs_products as $key => $value ) {
             if ( isset( $value['_removed'] ) && $value['_removed'] == '1' ) {
@@ -18,13 +18,18 @@
             }
         }
 
-         $dfrcs_products = array_slice( $dfrcs_products, 0, 15 );
-         foreach ( $dfrcs_products as $index => $product ) {
-            if ( $dfrcs_products[$index]['finalprice'] < 90 ) {
-               unset( $dfrcs_products[$index] );
+            $dfrcs_products = array_slice( $dfrcs_products, 0, 15 );
+            foreach ( $dfrcs_products as $index => $product ) {
+                if ( $dfrcs_products[$index]['finalprice'] < 90 ) {
+                    unset( $dfrcs_products[$index] );
+                }
             }
-         }
-         $dfrcs_products = array_slice( $dfrcs_products, 0, 3 );
+            $dfrcs_products = array_slice( $dfrcs_products, 0, 3 );
+
+            // only 1 product for simple comparison
+            if ( isset( $widget['name'] ) && $widget['name'] == 'dh-product-comparition' ) {
+                $dfrcs_products = array_slice( $dfrcs_products, 0, 1 );
+            }
 
 
 
@@ -58,20 +63,6 @@
 
     </ul>
 
-    <?php
-        // button for product comparison widget
-        if ( $dfrcs_products ) {
-            if ( isset( $widget['name'] ) && $widget['name'] == 'dh-product-comparition' ) {
-                $product = reset( $dfrcs_products ); // get first item in array of products
-                $strings_to_exclude = array(
-                    ' - personal care',
-                );
-                $merchant = str_replace( $strings_to_exclude, '', $product['merchant'] );
-                if ( strpos( $merchant, 'bol.com' ) !== false ) $merchant = 'bol.com';
-                echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . dfrcs_url() . '">' . 'Bekijk op ' . $merchant . '</a>';
-            }
-        }
-    ?>
 
 <?php else : ?>
 
@@ -89,7 +80,6 @@
     if ( $widget ) {
         foreach ( $widget as $item_id => $widget_id ) {
             $meta_name = 'dh-dfrcs-set-' . $widget_id . '-' . $item_id . '-cache';
-            // update_post_meta( $post_id, $meta_name, array( 'price' => $price, 'last_updated' => $date ), true );
             update_metadata( 'post', $post_id, $meta_name, array( 'price' => $price, 'last_updated' => $date ) );
         }
     }
@@ -98,12 +88,15 @@
 <script>
     (function($){
         var productEl = $( '.<?php echo 'set-' . $set_id; ?>' ).closest( '.dh-product' );
+        console.log('productEl', productEl);
+
         var priceEl = $( productEl ).find( '.dh-product-price' );
         console.log('priceEl', priceEl);
         $( productEl ).find( '.dh-product-last-updated-text' ).text( 'Laatste update: <?php echo $date; ?>' );
 
         if ( priceEl.length == 0 ) {
             $( productEl ).find( '.dh-product-score' ).before( '<div class="dh-product-price"><div>Prijs</div><div><?php echo '€' . $price; ?></div></div>' );
+            $( productEl ).find( '.dh-product-star-rating' ).after( '<div class="dh-product-price"><div><?php echo '€' . $price; ?></div></div>' );
         }
     })(jQuery)
 </script>

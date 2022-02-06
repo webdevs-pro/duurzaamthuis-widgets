@@ -116,8 +116,23 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
                         if ( $item['dh_product_comparition_custom_type'] == 'button' ) {
                            echo '<div class="dh-product-column dh-product-button-column">';
-                              $rel = isset( $item['dh_product_comparition_sponsored'] ) ? ' rel="sponsored"' : '';
-                              echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . $item['dh_product_comparition_button_link'] . '"' . $rel . '>' . $item['dh_product_comparition_button_text'] . '</a>';
+                              echo '<div class="dfrcs">';
+                                 echo '<ul class="dfrcs_compset">';
+                                    echo '<li class="widget-dh-product-comparition">';
+                                    $rel = isset( $item['dh_product_comparition_sponsored'] ) ? ' rel="sponsored"' : '';
+                                       echo '<a target="_blank" href="' . $item['dh_product_comparition_button_link'] . '"' . $rel . '>';
+                                          echo '<div class="item">';
+                                             echo '<div class="dfrcs_logo">';
+                                                echo '<img src="' . $item['dh_product_comparition_button_image']['url'] . '">';
+                                             echo '</div>';
+                                             echo '<div class="dfrcs_link">';
+                                                echo '<span class="elementor-button elementor-size-sm">' . $item['dh_product_comparition_button_text'] . '</span>';
+                                             echo '</div>';
+                                          echo '</div>';
+                                       echo '</a>';
+                                    echo '</li>';
+                                 echo '</ul>';
+                              echo '</div>'; 
                            echo '</div>'; // dh-product-column
                         }
 
@@ -206,8 +221,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                     {{{ renderStars( item.dh_product_comparition_star_rating ) }}}
                                  </div>
                               </div>
-                              <# if(item.dh_product_comparition_price) { #>
+                              <# if(item.dh_product_comparition_price && item.dh_product_comparition_custom_type == 'button') { #>
                                  <div class="dh-product-price">€{{{ item.dh_product_comparition_price }}}</div>
+                                 
                               <# } #>
                               <# if(item.dh_product_comparition_order_by) { #>
                                  <div class="dh-product-order-by">{{{ item.dh_product_comparition_order_by }}}</div>
@@ -229,8 +245,23 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                            <# } #>
 
                            <# if ( item.dh_product_comparition_custom_type == 'button' ) { #>
-                              <div class="dh-product-column dh-product-shortcode-column">
-                                 <a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="{{ item.dh_product_comparition_button_link }}">{{ item.dh_product_comparition_button_text }}</a>
+                              <div class="dh-product-column dh-product-button-column">
+                                 <div class="dfrcs">
+                                 <ul class="dfrcs_compset">
+                                    <li class="widget-dh-product-comparition">
+                                       <a target="_blank" href="{{ item.dh_product_comparition_button_link }}">
+                                          <div class="item">
+                                             <div class="dfrcs_logo">
+                                                <img src="{{ item.dh_product_comparition_button_image.url}}">
+                                             </div>
+                                             <div class="dfrcs_link">
+                                                <span class="elementor-button elementor-size-sm">{{ item.dh_product_comparition_button_text }}</span>
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </li>
+                                 </ul>
+                              </div>
                               </div>
                            <# } #>
 

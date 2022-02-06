@@ -772,32 +772,21 @@ class DH_Widgets_Content_Controls {
 					'description' => 'For example: 9789000378937 (13 digits)',
 					'classes' => "dh-13-chars-max dh-numbers-only",
 				] );
-            $repeater->add_control( 'dh_product_comparition_image', [ // image
-               'label' => __( 'Image', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::MEDIA,
-               'default' => [
-                  'url' => Elementor\Utils::get_placeholder_image_src(),
-               ],
-            ] );
-            $repeater->add_control( 'dh_product_comparition_star_rating', [ // star_rating
-               'label' => __( 'Rating', 'elementor' ),
-               'type' => Elementor\Controls_Manager::NUMBER,
-               'min' => 0,
-               'max' => 5,
-               'step' => 0.1,
-               'default' => 5,
-            ] );
-            $repeater->add_control( 'dh_product_comparition_price', [ // price
-               'label' => __( 'Price', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => '10',
-            ] );
-				$repeater->add_control( 'dh_product_comparition_price_tooltip', [
-               'label' => __( 'Tooltip', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => '',
-               'separator' => 'after',
-            ] );
+				$repeater->add_control( 'dh_product_comparition_image', [ // image
+					'label' => __( 'Image', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::MEDIA,
+					'default' => [
+						'url' => Elementor\Utils::get_placeholder_image_src(),
+					],
+				] );
+				$repeater->add_control( 'dh_product_comparition_star_rating', [ // star_rating
+					'label' => __( 'Rating', 'elementor' ),
+					'type' => Elementor\Controls_Manager::NUMBER,
+					'min' => 0,
+					'max' => 5,
+					'step' => 0.1,
+					'default' => 5,
+				] );
             $repeater->add_control( 'dh_product_comparition_order_by', [ // order_by
                'label' => __( 'Order By', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::TEXT,
@@ -839,6 +828,29 @@ class DH_Widgets_Content_Controls {
                'label_block' => true,
 					'condition' => [
 						'dh_product_comparition_custom_type' => 'shortcode',
+					],
+            ] );
+				$repeater->add_control( 'dh_product_comparition_button_image', [
+               'label' => __( 'Logo', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::MEDIA,
+               'default' => [
+                  'url' => Elementor\Utils::get_placeholder_image_src(),
+               ],
+            ] );
+				$repeater->add_control( 'dh_product_comparition_price', [ // price
+               'label' => __( 'Price', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '10',
+					'condition' => [
+						'dh_product_comparition_custom_type' => 'button',
+					],
+            ] );
+				$repeater->add_control( 'dh_product_comparition_price_tooltip', [
+               'label' => __( 'Price Tooltip', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => '',
+					'condition' => [
+						'dh_product_comparition_custom_type' => 'button',
 					],
             ] );
             $repeater->add_control( 'dh_product_comparition_button_text', [
