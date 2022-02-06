@@ -1377,7 +1377,16 @@ class DH_Widgets_Content_Controls {
 					[],
 					[],
 				],
-				'title_field' => '{{{ dh_numbered_list_text }}}',
+				// 'title_field' => '{{{ dh_numbered_list_text }}}',
+				'title_field' => '
+					<span id="item-{{_id}}"></span>
+					<#
+					setTimeout( function() {
+						var index = jQuery( "#item-" + _id ).closest( ".elementor-repeater-fields" ).index();
+						jQuery( "#item-" + _id ).text( ( index + 1 ) + ". " + dh_numbered_list_text );
+					}, 10 )
+					#>
+				',
 			] );
 		$widget->end_controls_section(); 
 	}
@@ -1458,7 +1467,16 @@ class DH_Widgets_Content_Controls {
 					[],
 					[],
 				],
-				'title_field' => '{{{ dh_how_to_faq_item_heading }}}',
+				// 'title_field' => '{{{ dh_how_to_faq_item_heading }}}',
+				'title_field' => '
+				<span id="item-{{_id}}"></span>
+				<#
+				setTimeout( function() {
+					var index = jQuery( "#item-" + _id ).closest( ".elementor-repeater-fields" ).index();
+					jQuery( "#item-" + _id ).text( ( index + 1 ) + ". " + dh_how_to_faq_item_heading );
+				}, 10 )
+				#>
+			',
 			] );
 			$widget->add_control( 'dh_how_to_faq_schema_type', [
             'label' => __( 'Schema type', 'duurzaamthuis' ),
