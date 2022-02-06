@@ -65,9 +65,9 @@
                 $product = reset( $dfrcs_products ); // get first item in array of products
                 $strings_to_exclude = array(
                     ' - personal care',
-                    ': DIY',
                 );
                 $merchant = str_replace( $strings_to_exclude, '', $product['merchant'] );
+                if ( strpos( $merchant, 'bol.com' ) !== false ) $merchant = 'bol.com';
                 echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . dfrcs_url() . '">' . 'Bekijk op ' . $merchant . '</a>';
             }
         }
