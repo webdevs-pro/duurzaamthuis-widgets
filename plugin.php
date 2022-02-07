@@ -836,6 +836,9 @@ class DH_Widgets_Content_Controls {
                'default' => [
                   'url' => Elementor\Utils::get_placeholder_image_src(),
                ],
+					'condition' => [
+						'dh_product_comparition_custom_type' => 'button',
+					],
             ] );
 				$repeater->add_control( 'dh_product_comparition_price', [ // price
                'label' => __( 'Price', 'duurzaamthuis' ),

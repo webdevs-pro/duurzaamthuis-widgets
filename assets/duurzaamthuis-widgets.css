@@ -548,8 +548,12 @@
 .dh-widget-dh-product-comparition .dfrcs_compset .widget-dh-product-comparition .item .dfrcs_price {
    display: none;
 }
+.dh-widget-dh-product-comparition .dfrcs_compset .widget-dh-product-comparition .item .dfrcs_logo,
 .dh-widget-dh-product-comparition .dfrcs_compset .widget-dh-product-comparition .item .elementor-button  {
    width: 100%;
+}
+.dh-widget-dh-product-comparition .dfrcs_compset .widget-dh-product-comparition .item .dfrcs_logo.dfrcs_missing_logo span {
+   font-size: 10px;
 }
 
 
