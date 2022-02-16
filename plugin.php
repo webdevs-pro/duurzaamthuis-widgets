@@ -1304,6 +1304,7 @@ class DH_Widgets_Content_Controls {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .dh-menu-top-item i' => 'margin-right: {{SIZE}}{{UNIT}};',
+					'{{WRAPPER}} .dh-menu-top-item svg' => 'margin-right: {{SIZE}}{{UNIT}};',
 				],
 			] );
 			$widget->add_control( 'dh_mega_menu_offset', [
