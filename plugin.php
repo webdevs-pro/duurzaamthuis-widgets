@@ -473,6 +473,30 @@ function duurza_save_menu_item_icon_classes( $menu_id, $menu_item_db_id ) {
 	}
 }
 
+// custom field for menu item to set icon svg code
+add_action( 'wp_nav_menu_item_custom_fields', 'duurza_menu_item_icon_svg', 10, 2 );
+add_action( 'wp_update_nav_menu_item', 'duurza_save_menu_item_icon_svg', 10, 2 );
+function duurza_menu_item_icon_svg( $item_id, $item ) {
+	$menu_item_icon_svg = get_post_meta( $item_id, '_menu_item_icon_svg', true );
+	?>
+	<p class="description description-wide">
+		<label for="menu_item_icon_svg[<?php echo $item_id ;?>]">
+			Icon SVG<br>
+			<textarea rows="6" class="widefat code" name="menu_item_icon_svg[<?php echo $item_id ;?>]" id="menu-item-icon-svg-<?php echo $item_id ;?>"><?php echo esc_attr( $menu_item_icon_svg ); ?></textarea>
+		</label>
+	</p>
+	<?php
+}
+function duurza_save_menu_item_icon_svg( $menu_id, $menu_item_db_id ) {
+	if ( isset( $_POST['menu_item_icon_svg'][$menu_item_db_id]  ) ) {
+		// $sanitized_data = sanitize_text_field( $_POST['menu_item_icon_svg'][$menu_item_db_id] );
+		$sanitized_data = $_POST['menu_item_icon_svg'][$menu_item_db_id];
+		update_post_meta( $menu_item_db_id, '_menu_item_icon_svg', $sanitized_data );
+	} else {
+		delete_post_meta( $menu_item_db_id, '_menu_item_icon_svg' );
+	}
+}
+
 
 // filter excerpt
 add_filter( 'get_the_excerpt', 'dh_excerpt_filter', 1, 2 );

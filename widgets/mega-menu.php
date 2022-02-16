@@ -83,9 +83,14 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 				foreach ( $items_tree as $top_level_item ) {
 					echo '<li class="dh-menu-item dh-menu-top-item menu-item menu-item-' . $top_level_item->ID . ' ' . implode( " ", $top_level_item->classes ) . '">';
 						echo '<a href="' . $top_level_item->url . '" class="">';
-							$icon_classes = get_post_meta( $top_level_item->ID, '_menu_item_icon_classes', true );
-							if ( $icon_classes ) {
-								echo '<i class="' . $icon_classes . '"></i>';
+							$icon_svg = get_post_meta( $top_level_item->ID, '_menu_item_icon_svg', true );
+							if ( $icon_svg ) {
+								echo $icon_svg;
+							} else {
+								$icon_classes = get_post_meta( $top_level_item->ID, '_menu_item_icon_classes', true );
+								if ( $icon_classes ) {
+									echo '<i class="' . $icon_classes . '"></i>';
+								}
 							}
 							echo $top_level_item->title;
 							if ( ! empty( $top_level_item->children ) ) {
@@ -133,21 +138,32 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 
 				foreach ( $mobile_items_tree as $top_level_item ) {
 					echo '<li class="dh-menu-item dh-menu-top-item menu-item menu-item-' . $top_level_item->ID . ' ' . implode( " ", $top_level_item->classes ) . '">';
-						$icon_classes = get_post_meta( $top_level_item->ID, '_menu_item_icon_classes', true );
 						if ( empty( $top_level_item->children ) ) {
 							echo '<a class="dh-mobile-submenu-toggle">';
-								if ( $icon_classes ) {
-									echo '<i class="' . $icon_classes . '"></i>';
+								$icon_svg = get_post_meta( $top_level_item->ID, '_menu_item_icon_svg', true );
+								if ( $icon_svg ) {
+									echo $icon_svg;
+								} else {
+									$icon_classes = get_post_meta( $top_level_item->ID, '_menu_item_icon_classes', true );
+									if ( $icon_classes ) {
+										echo '<i class="' . $icon_classes . '"></i>';
+									}
 								}
 								echo $top_level_item->title;
 							echo '</a>';
 						} else {
 							echo '<a class="dh-mobile-submenu-toggle">';
-								if ( $icon_classes ) {
-									echo '<i class="' . $icon_classes . '"></i>';
+								$icon_svg = get_post_meta( $top_level_item->ID, '_menu_item_icon_svg', true );
+								if ( $icon_svg ) {
+									echo $icon_classes;
+								} else {
+									$icon_classes = get_post_meta( $top_level_item->ID, '_menu_item_icon_classes', true );
+									if ( $icon_classes ) {
+										echo '<i class="' . $icon_classes . '"></i>';
+									}
 								}
 								echo $top_level_item->title;
-								echo '<i class="dh-dropdown-indicator dh-icon dh-icon-arrow-right"></i>';
+								echo '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.52867 10.8047C7.78901 11.0651 8.21114 11.0651 8.47148 10.8047L13.1381 6.13807C13.3985 5.87773 13.3985 5.4556 13.1381 5.19526C12.8778 4.93491 12.4557 4.93491 12.1954 5.19526L8.00009 9.39049L3.80482 5.19526C3.54448 4.93491 3.12235 4.93491 2.86201 5.19526C2.60166 5.4556 2.60166 5.87773 2.86201 6.13807L7.52868 10.8047H7.52867Z" fill="black"/></svg>';
 							echo '</a>';
 							echo '<ul class="dh-submenu">';
 								foreach ( $top_level_item->children as $second_level_item ) {
@@ -157,7 +173,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 										} else {
 											echo '<a class="dh-mobile-submenu-toggle">';
 												echo $second_level_item->title;
-												echo '<i class="dh-dropdown-indicator dh-icon dh-icon-arrow-right"></i>';
+												echo '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.52867 10.8047C7.78901 11.0651 8.21114 11.0651 8.47148 10.8047L13.1381 6.13807C13.3985 5.87773 13.3985 5.4556 13.1381 5.19526C12.8778 4.93491 12.4557 4.93491 12.1954 5.19526L8.00009 9.39049L3.80482 5.19526C3.54448 4.93491 3.12235 4.93491 2.86201 5.19526C2.60166 5.4556 2.60166 5.87773 2.86201 6.13807L7.52868 10.8047H7.52867Z" fill="black"/></svg>';
 											echo '</a>';
 											echo '<ul class="dh-submenu">';
 												foreach ( $second_level_item->children as $third_level_item ) {
