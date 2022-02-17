@@ -1169,6 +1169,10 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
       display: inline-block;
       cursor: pointer;
    }
+
+   .dh-widget-dh-mega-menu .dh-mobile-menu .dh-mobile-submenu-toggle {
+      padding: 3px 0;
+   }
    .dh-widget-dh-mega-menu .dh-mobile-menu .dh-menu-top-item > div {
       padding: 5px 0;
       display: flex;
