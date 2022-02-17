@@ -188,7 +188,11 @@
    padding-bottom: 40px;
    padding-left: 10px;
    padding-right: 10px;
-   min-height: 400px;
+}
+.dh-page-header-title {
+   display: flex;
+   flex-direction: column;
+   min-height: 200px;
    justify-content: flex-end;
 }
 @media(max-width: 767px) {
@@ -1165,7 +1169,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
       display: inline-block;
       cursor: pointer;
    }
-   .dh-widget-dh-mega-menu .dh-mobile-menu .dh-menu-top-item > a {
+   .dh-widget-dh-mega-menu .dh-mobile-menu .dh-menu-top-item > div {
       padding: 5px 0;
       display: flex;
       align-items: center;
