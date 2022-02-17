@@ -285,13 +285,16 @@
 .dh-page-header-feature-title {
    font-weight: bold;
    font-size: 14px;
+   display: flex;
+   align-items: center;
 }
 @media(max-width: 767px) {
    .dh-page-header-feature-title {
       font-size: 12px;
    }
 }
-.dh-page-header-feature-title i {
+.dh-page-header-feature-title i,
+.dh-page-header-feature-title svg {
    margin-right: 10px;
 }
 .dh-page-header-feature-title i.dh-icon-info {
@@ -386,10 +389,11 @@
 /* .dh-page-header-meta-item:not(:last-child) {
    border-right: 2px solid rgba(255, 255, 255, 0.2);
 } */
-.dh-page-header-meta-item:not(.dh-page-header-breadcrumbs) {
+.dh-page-header-meta-item:not(.dh-page-header-breadcrumbs):not(:last-child) {
    border-right: 2px solid rgba(255, 255, 255, 0.2);
 }
-.dh-page-header-meta-item i {
+.dh-page-header-meta-item i,
+.dh-page-header-meta-item svg {
    margin-right: 7px;
 }
 .dh-page-header-breadcrumbs {

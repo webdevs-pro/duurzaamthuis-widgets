@@ -1632,6 +1632,8 @@ class DH_Widgets_Content_Controls {
             'default' => '#54CC8B',
             'selectors' => [
                '{{WRAPPER}} .dh-page-header-feature-title i' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-feature-title svg *' => 'fill: {{VALUE}}',
+
             ],
          ] );
          $widget->add_control( 'dh_page_header_meta_icons_color', [
@@ -1640,6 +1642,7 @@ class DH_Widgets_Content_Controls {
             'default' => '#769179',
             'selectors' => [
                '{{WRAPPER}} .dh-page-header-meta-item i' => 'color: {{VALUE}}',
+               '{{WRAPPER}} .dh-page-header-meta-item svg *' => 'fill: {{VALUE}}',
             ],
          ] );
 		$widget->end_controls_section(); 
