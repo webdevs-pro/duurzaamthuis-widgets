@@ -153,7 +153,8 @@ class DH_Product_Review extends \Elementor\Widget_Base {
                         echo '</div>';
                      }
                      echo '<div class="dh-product-score">';
-                        echo '<img src="' . $settings['dh_product_review_logo_url'] . '">';
+                        // echo '<img src="' . $settings['dh_product_review_logo_url'] . '">';
+                           echo wp_get_attachment_image( get_theme_mod( 'custom_logo' ), 'full' );
                         echo '<div>';
                            echo '<div class="dh-product-rating-heading">';
                               echo 'Duurzaam Thuis Score';
