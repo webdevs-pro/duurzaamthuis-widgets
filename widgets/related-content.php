@@ -121,7 +121,7 @@ class DH_Related_Posts extends \Elementor\Widget_Base {
 							}
 							echo '<div class="dh-related-post-image">';
 								echo '<div class="dh-related-post-image-wrapper">';
-									echo '<img src="' . get_the_post_thumbnail_url( $post['dh_related_content_id'], 'medium' ) . '">';
+									echo get_the_post_thumbnail( $post['dh_related_content_id'], 'large' );
 								echo '</div>';
 							echo '</div>';
 							echo '<h3 class="dh-related-post-title">' . get_the_title( $post['dh_related_content_id'] ) . '</h3>';

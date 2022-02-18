@@ -60,7 +60,7 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 								<div class="dh-image">
 									<?php
 										if ( $image['id'] ) {
-											echo wp_get_attachment_image( $image['id'], 'medium' );
+											echo wp_get_attachment_image( $image['id'], 'large' );
 										} else if ( $image['url'] && ! $image['id'] ) {
 											echo '<img src="' . $image['url'] . '">';
 										}
