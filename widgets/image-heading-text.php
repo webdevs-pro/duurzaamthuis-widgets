@@ -58,7 +58,13 @@ class DH_Image_Heading_Text extends \Elementor\Widget_Base {
 						<div class="dh-image-column">
 							<div class="dh-image-wrapper">
 								<div class="dh-image">
-									<img src="<?php echo $image['url']; ?>">
+									<?php
+										if ( $image['id'] ) {
+											echo wp_get_attachment_image( $image['id'], 'medium' );
+										} else if ( $image['url'] && ! $image['id'] ) {
+											echo '<img src="' . $image['url'] . '">';
+										}
+									?>
 								</div>
 							</div>
 						</div>

@@ -33,7 +33,11 @@ class DH_Author_Box extends \Elementor\Widget_Base {
 	}
 
 	protected function register_controls() {
-      DH_Widgets_Content_Controls::get_dh_anchor_navigation_controls( $this );
+		$this->start_controls_section( 'author_controls_section', [
+			'label' => __( 'Author', 'duurzaamthuis' ),
+			'tab' => Elementor\Controls_Manager::TAB_CONTENT, // https://developers.elementor.com/elementor-element-panel-tabs/
+		] );
+		$this->end_controls_section(); 
 	}
 
 	protected function render() {
@@ -49,9 +53,9 @@ class DH_Author_Box extends \Elementor\Widget_Base {
 
       $avatar_id = get_user_meta( $author_id, 'dh-user-avatar', true );
       if ( $avatar_id ) {
-         $avatar_url = wp_get_attachment_image_url( $avatar_id, 'small' );
-      } else {
-         $avatar_url = DH_PLUGIN_DIR_URL . 'assets/duurzaamthuis-logo-small.png';
+         $avatar_img = wp_get_attachment_image( $avatar_id, 'thumbnail' );
+      } else  {
+         $avatar_img = '<img src="' . DH_PLUGIN_DIR_URL . 'assets/duurzaamthuis-logo-small.png">';
       }
 
       $name = get_the_author_meta( 'first_name', $author_id ) . ' ' . get_the_author_meta( 'last_name', $author_id );
@@ -69,7 +73,7 @@ class DH_Author_Box extends \Elementor\Widget_Base {
       ?>
          <div class="dh-author-box">
             <div class="dh-author-box-image">
-               <img src="<?php echo $avatar_url; ?>" alt="">
+               <?php echo $avatar_img; ?>
             </div>
             
             <h3 class="dh-author-box-name">
