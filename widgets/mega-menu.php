@@ -105,7 +105,8 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 								echo '<div class="elementor-container">';
 									foreach ( $top_level_item->children as $second_level_item ) {
 										echo '<li class="dh-menu-item dh-second-level-item menu-item menu-item-' . $second_level_item->ID . ' ' . implode( " ", $second_level_item->classes ) . '">';
-											echo '<a href="' . ( $second_level_item->url != '#' ? $second_level_item->url : '' ) . '" class="dh-menu-second-level-heading">' . $second_level_item->title . '</a>';
+											// echo '<a href="' . ( $second_level_item->url != '#' ? $second_level_item->url : '' ) . '" class="dh-menu-second-level-heading">' . $second_level_item->title . '</a>';
+											echo '<div class="dh-menu-second-level-heading">' . $second_level_item->title . '</div>';
 											echo '<ul class="dh-megamenu-second-level-item">';
 												if ( ! empty( $second_level_item->children ) ) {
 													foreach ( $second_level_item->children as $third_level_item ) {
