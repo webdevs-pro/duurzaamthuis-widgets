@@ -210,6 +210,9 @@
       padding-left: 15px;
       padding-right: 15px;
    }
+   .dh-page-header-title {
+      min-height: unset;
+   }
 }
 .dh-page-header-tags {
    display: flex;
