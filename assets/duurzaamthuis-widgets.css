@@ -977,6 +977,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
 .dh-widget-dh-related-content .dh-related-content-grid .dh-related-post-image-wrapper > img {
    object-fit: cover;
    width: 100%;
+   border-radius: 0 !important;
 }
 /* fix for picture */
 .dh-widget-dh-related-content .dh-related-content-grid .dh-related-post-image-wrapper > picture {
@@ -991,6 +992,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
 .dh-widget-dh-related-content .dh-related-content-grid .dh-related-post-image-wrapper > picture > img {
    object-fit: cover;
    width: 100%;
+   border-radius: 0 !important;
 }
 
 .dh-widget-dh-related-content .dh-related-content-grid .dh-related-post-title {
@@ -1370,6 +1372,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
    height: 54px;
    margin-left: 0px;
    margin-right: 10px;
+   border-radius: 0 !important;
 }
 .dh-widget-dh-product-comparition-sustainability-score .dh-product-score .dh-product-rating-heading {
    font-size: 14px;
@@ -1631,6 +1634,7 @@ body.test .type-elementor_library > header {
 .dh-author-box .dh-author-box-image img {
    object-fit: cover;
    width: 100%;
+   border-radius: 0 !important;
 }
 
 /* fix for picture */
@@ -1646,6 +1650,7 @@ body.test .type-elementor_library > header {
 .dh-author-box .dh-author-box-image > picture > img {
    object-fit: cover;
    width: 100%;
+   border-radius: 0 !important;
 }
 
 .dh-author-box .dh-author-box-expertises {
@@ -1852,6 +1857,7 @@ body.test .type-elementor_library > header {
    width: 54px;
    height: 54px;
    margin-right: 10px;
+   border-radius: 0 !important;
 }
 .dh-widget-dh-product-review .dh-product-score .dh-product-rating-heading {
    font-size: 14px;
@@ -2424,6 +2430,7 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
    height: 54px;
    margin-left: 15px;
    margin-right: 10px;
+   border-radius: 0 !important;
 }
 .dh-widget-dh-company-offer .dh-product-score .dh-product-rating-heading {
    font-size: 14px;
