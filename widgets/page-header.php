@@ -56,9 +56,11 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 				); 
 			?>
 
-            <div class="elementor-section elementor-section-boxed" style="background-image: url(<?php echo $featured_image_url; ?>);">
+            <div class="elementor-section elementor-section-boxed">
 
-               <div class="dh-overlay"></div>
+               <div class="dh-page-header-thumbnail-wrapper">
+                  <?php echo get_the_post_thumbnail( $post_id, 'full' ); ?>
+               </div>
 
                <div class="dh-page-header elementor-container">
 
