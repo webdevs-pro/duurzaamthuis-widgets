@@ -1077,7 +1077,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
       pointer-events: auto;
    }
    .dh-widget-dh-mega-menu .dh-menu-top-item:hover .dh-megamenu {
-      visibility: visible;
+      visibility: visible !important;
       opacity: 1;
       transform: translateY(0px);
    }

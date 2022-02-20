@@ -101,7 +101,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 						// dropdown
 						if ( ! empty( $top_level_item->children ) ) {
 
-							echo '<ul class="dh-megamenu elementor-section elementor-section-boxed">';
+							echo '<ul class="dh-megamenu elementor-section elementor-section-boxed" style="visibility: hidden;">';
 								echo '<div class="elementor-container">';
 									foreach ( $top_level_item->children as $second_level_item ) {
 										echo '<li class="dh-menu-item dh-second-level-item menu-item menu-item-' . $second_level_item->ID . ' ' . implode( " ", $second_level_item->classes ) . '">';
