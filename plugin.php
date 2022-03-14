@@ -1894,6 +1894,16 @@ class DH_Widgets_Content_Controls {
 						'dh_product_comparition_sustainability_score_custom_type' => 'shortcode',
 					],
             ] );
+				$repeater->add_control( 'dh_product_comparition_sustainability_score_button_image', [
+               'label' => __( 'Logo', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::MEDIA,
+               'default' => [
+                  'url' => Elementor\Utils::get_placeholder_image_src(),
+               ],
+					'condition' => [
+						'dh_product_comparition_sustainability_score_custom_type' => 'button',
+					],
+            ] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_button_text', [
                'label' => __( 'Button Text', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::TEXT,

@@ -58,7 +58,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
             <div class="elementor-section elementor-section-boxed">
 
-               <div class="dh-page-header-thumbnail-wrapper">
+               <div class="dh-page-header-thumbnail-wrapper" style="min-width: 100%;">
                   <?php echo get_the_post_thumbnail( $post_id, 'full' ); ?>
                </div>
 

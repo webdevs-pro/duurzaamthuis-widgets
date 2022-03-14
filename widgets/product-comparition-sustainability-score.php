@@ -242,8 +242,23 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 
                         if ( $item['dh_product_comparition_sustainability_score_custom_type'] == 'button' ) {
                            echo '<div class="dh-product-column dh-product-button-column">';
-                              $rel = isset( $item['dh_product_comparition_sustainability_score_sponsored'] ) ? ' rel="sponsored"' : '';
-                              echo '<a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="' . $item['dh_product_comparition_sustainability_score_button_link'] . '"' . $rel . '>' . $item['dh_product_comparition_sustainability_score_button_text'] . '</a>';
+                              echo '<div class="dfrcs">';
+                                 echo '<ul class="dfrcs_compset">';
+                                    echo '<li class="widget-dh-product-comparition-sustainability-score">';
+                                    $rel = isset( $item['dh_product_comparition_sustainability_score_sponsored'] ) ? ' rel="sponsored"' : '';
+                                       echo '<a target="_blank" href="' . $item['dh_product_comparition_sustainability_score_button_link'] . '"' . $rel . '>';
+                                          echo '<div class="item">';
+                                             echo '<div class="dfrcs_logo">';
+                                                echo '<img src="' . $item['dh_product_comparition_sustainability_score_button_image']['url'] . '">';
+                                             echo '</div>';
+                                             echo '<div class="dfrcs_link">';
+                                                echo '<span class="elementor-button elementor-size-sm">' . $item['dh_product_comparition_sustainability_score_button_text'] . '</span>';
+                                             echo '</div>';
+                                          echo '</div>';
+                                       echo '</a>';
+                                    echo '</li>';
+                                 echo '</ul>';
+                              echo '</div>'; 
                            echo '</div>'; // dh-product-column
                         }
 
@@ -270,7 +285,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
 
                      if ( isset( $item['dh_product_comparition_sustainability_score_quality'] ) && ( isset( $item['dh_product_comparition_sustainability_score_quality_amount1'] ) || isset( $settings['dh_product_comparition_sustainability_score_quality_amount2'] ) ) ) {
                         $schema['aggregateRating']['@type'] = "AggregateRating";
-                        $schema['aggregateRating']['ratingValue'] = str_replace( ',', '.', $item['dh_product_comparition_sustainability_score_quality'] );
+                        $schema['aggregateRating']['ratingValue'] = str_replace( ',', '.', $item['dh_product_comparition_sustainability_score_quality'] ) ?: str_replace( ',', '.', $item['dh_product_comparition_sustainability_score_rating'] );
                         $schema['aggregateRating']['ratingCount'] = intval( $item['dh_product_comparition_sustainability_score_quality_amount1'] ?? '' ) + intval( $settings['dh_product_comparition_sustainability_score_quality_amount2'] ?? '' );
                         $schema['aggregateRating']['bestRating'] = "10";
                      }
@@ -562,8 +577,23 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            <# } #>
 
                            <# if ( item.dh_product_comparition_sustainability_score_custom_type == 'button' ) { #>
-                              <div class="dh-product-column dh-product-shortcode-column">
-                                 <a target="_blank" class="dh-product-button elementor-button elementor-size-sm" href="{{ item.dh_product_comparition_sustainability_score_button_link }}">{{ item.dh_product_comparition_sustainability_score_button_text }}</a>
+                              <div class="dh-product-column dh-product-button-column">
+                                 <div class="dfrcs">
+                                 <ul class="dfrcs_compset">
+                                    <li class="widget-dh-product-comparition-sustainability-score">
+                                       <a target="_blank" href="{{ item.dh_product_comparition_sustainability_score_button_link }}">
+                                          <div class="item">
+                                             <div class="dfrcs_logo">
+                                                <img src="{{ item.dh_product_comparition_sustainability_score_button_image.url}}">
+                                             </div>
+                                             <div class="dfrcs_link">
+                                                <span class="elementor-button elementor-size-sm">{{ item.dh_product_comparition_sustainability_score_button_text }}</span>
+                                             </div>
+                                          </div>
+                                       </a>
+                                    </li>
+                                 </ul>
+                              </div>
                               </div>
                            <# } #>
                         </div>
