@@ -556,10 +556,13 @@
 .dh-widget-dh-product-comparition .dh-product-button-column {
    grid-column: span 2;
 }
-.dh-widget-dh-product-comparition .dh-product-button {
+.dh-widget-dh-product-comparition .elementor-button {
    transition: background-color 200ms;
    text-align: center;
+   width: 100%;
+   display: block;
 }
+
 .dh-widget-dh-product-comparition .dh-product-shortcode h2 {
    display: none;
 }
@@ -677,12 +680,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
    font-size: 10px;
    color: #777;
 }
-.dh-widget-dh-product-comparition .dh-product-button {
-   transition: background-color 200ms;
-   text-align: center;
-   display: block;
-   margin-top: 10px;
-}
+
 
 
 
@@ -1550,13 +1548,15 @@ body:not(.logged-in) .dh-widget-dh-product-comparition-sustainability-score .dh-
    font-size: 10px;
    color: #777;
 }
-.dh-widget-dh-product-comparition-sustainability-score .dh-product-button {
+.dh-widget-dh-product-comparition-sustainability-score .elementor-button {
    transition: background-color 200ms;
    text-align: center;
    display: block;
+   width: 100%;
+}
+.dh-widget-dh-product-comparition-sustainability-score .elementor-button.no-logo {
    margin-top: 10px;
 }
-
 
 .dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item {
    display: grid;
@@ -1571,8 +1571,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition-sustainability-score .dh-
 .dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_price {
    display: none;
 }
-.dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_logo,
-.dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .elementor-button  {
+.dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_logo {
    width: 100%;
 }
 .dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_logo.dfrcs_missing_logo span {
