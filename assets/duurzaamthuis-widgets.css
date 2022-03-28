@@ -1558,23 +1558,25 @@ body:not(.logged-in) .dh-widget-dh-product-comparition-sustainability-score .dh-
    margin-top: 10px;
 }
 
-.dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item {
+.dh-widget-dh-product-comparition-sustainability-score .type-button .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item {
    display: grid;
    grid-template-columns: 1fr 2fr;
    grid-gap: 20px;
    gap: 0 20px;
 }
-.dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item > * {
+.dh-widget-dh-product-comparition-sustainability-score .type-button .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item > * {
    margin: 0;
 }
-.dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_image,
-.dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_price {
+.dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_image {
    display: none;
 }
-.dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_logo {
+.dh-widget-dh-product-comparition-sustainability-score .type-button .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_price {
+   display: none;
+}
+.dh-widget-dh-product-comparition-sustainability-score .type-button .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_logo {
    width: 100%;
 }
-.dh-widget-dh-product-comparition-sustainability-score .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_logo.dfrcs_missing_logo span {
+.dh-widget-dh-product-comparition-sustainability-score .type-button .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_logo.dfrcs_missing_logo span {
    font-size: 10px;
 }
 

@@ -241,7 +241,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                         }
 
                         if ( $item['dh_product_comparition_sustainability_score_custom_type'] == 'button' ) {
-                           echo '<div class="dh-product-column dh-product-button-column">';
+                           echo '<div class="dh-product-column dh-product-button-column type-button">';
                               $image_url = $item['dh_product_comparition_sustainability_score_button_image']['url'];
                               if ( $image_url ) {
                                  echo '<div class="dfrcs">';
