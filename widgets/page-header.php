@@ -105,6 +105,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
                      $subsidie = get_post_meta( $post_id, 'subsidie', true );
                      $subsidie_type = get_post_meta( $post_id, 'subsidie_type', true );
+                     $subsidie_tooltip = get_post_meta( $post_id, 'subsidie_tooltip', true ) ?: 'Zie toelichting, of de <a href="/subsidies">subsidiepagina</a>';
 
                      $calculations_text = get_post_meta( $post_id, 'calculations-text', true );
 
@@ -164,7 +165,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                                  <div class="dh-page-header-feature">
                                     <div class="dh-page-header-feature-title">
                                        <i class="dh-icon dh-icon-subsidy"></i>
-                                       Subsidie<?php echo $subsidie_type == 'yes2' ? '<i class="dh-icon dh-icon-info dh-has-tooltip" data-dh-tooltip="' . esc_html( 'Zie toelichting, of de <a href="/subsidies">subsidiepagina</a>' ). '"></i>' : ''; ?>
+                                       Subsidie<?php echo $subsidie_type == 'yes2' ? '<i class="dh-icon dh-icon-info dh-has-tooltip" data-dh-tooltip="' . esc_html( $subsidie_tooltip ) . '"></i>' : ''; ?>
                                     </div>
                                     <div class="dh-page-header-feature-value"><?php echo $subsidie_type == 'yes2' ? 'Ja' : 'Nee'; ?></div>
                                  </div>

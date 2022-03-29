@@ -329,6 +329,13 @@ class DH_Impact_Fields {
 					'subsidie' => 'yes'
 				]
 			] );
+			$post->add_control( 'subsidie_tooltip2', [ // subsidie type
+				'label' => __( 'Subsidie Tooltip', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXTAREA,
+				'condition' => [
+					'subsidie_type2' => 'yes2'
+				]
+			] );
 			$post->add_control( 'calculations_text', [
 				'label' => __( 'Toelichting', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::WYSIWYG,
@@ -352,6 +359,7 @@ class DH_Impact_Fields {
 		update_post_meta( $post_id, 'gemak', $settings['gemak'] ?? '' );
 		update_post_meta( $post_id, 'subsidie', $settings['subsidie'] ?? '' );
 		update_post_meta( $post_id, 'subsidie_type', $settings['subsidie_type2'] ?? '' );
+		update_post_meta( $post_id, 'subsidie_tooltip', $settings['subsidie_tooltip2'] ?? '' );
 		// update_post_meta( $post_id, 'vervuiling', $settings['vervuiling'] ?? '' );
 		update_post_meta( $post_id, 'calculations-text', $settings['calculations_text'] ?? '' );
 	}
@@ -1197,6 +1205,13 @@ class DH_Widgets_Content_Controls {
 				'classes' => "dh-max-chars-restriction",
 				'condition' => [
 					'dh_impact_subsidie' => 'yes'
+				]
+			] );
+			$widget->add_control( 'dh_impact_subsidie_tooltip', [ // subsidie tooltip
+				'label' => __( 'Subsidie Tooltip', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXTAREA,
+				'condition' => [
+					'dh_impact_subsidie_type' => 'yes'
 				]
 			] );
 			$widget->add_control( 'dh_impact_calculations_text', [ // calculations_text

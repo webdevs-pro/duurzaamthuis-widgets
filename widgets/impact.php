@@ -63,6 +63,8 @@ class DH_Impact extends \Elementor\Widget_Base {
 		$vervuiling = $settings['dh_impact_vervuiling'] ?? '';
 		$subsidie = $settings['dh_impact_subsidie'];
 		$subsidie_type = $settings['dh_impact_subsidie_type'];
+		$subsidie_tooltip = $settings['dh_impact_subsidie_tooltip'] ?: 'Zie toelichting, of de <a href="/subsidies">subsidiepagina</a>';
+
 		$calculations_text = $settings['dh_impact_calculations_text'];
 
 		if ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling ) : ?>
@@ -118,7 +120,7 @@ class DH_Impact extends \Elementor\Widget_Base {
 
 							<?php if ( $subsidie ) { ?>
 								<div class="dh-impact-feature">
-									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<?php echo $subsidie_type == 'yes' ? '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( 'Zie toelichting, of de <a href="/subsidies">subsidiepagina</a>' ). '"></i>' : ''; ?></div>
+									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<?php echo $subsidie_type == 'yes' ? '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $subsidie_tooltip ). '"></i>' : ''; ?></div>
 									<div class="dh-impact-feature-value"><?php echo $subsidie_type == 'yes' ? 'Ja' : 'Nee'; ?></div>
 								</div>
 							<?php } ?>
@@ -173,6 +175,8 @@ class DH_Impact extends \Elementor\Widget_Base {
 
 				var subsidie = settings.dh_impact_subsidie;
 				var subsidie_type = settings.dh_impact_subsidie_type;
+				var subsidie_tooltip = settings.dh_impact_subsidie_tooltip ? settings.dh_impact_subsidie_tooltip : 'Zie toelichting, of de <a href="/subsidies">subsidiepagina</a>';
+
 
 				var calculations_text = settings.dh_impact_calculations_text;
 
@@ -256,7 +260,7 @@ class DH_Impact extends \Elementor\Widget_Base {
 
 							<# if(subsidie) { #>
 								<div class="dh-impact-feature">
-									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<# subsidie_type == 'yes' ? print('<i class="dh-icon dh-icon-info" data-dh-tooltip="Zie toelichting, of de ' + escapeHTML( '<a href="/subsidies">subsidiepagina</a>' ) + '"></i>') : print() #></div>
+									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-subsidy"></i>Subsidie<# subsidie_type == 'yes' ? print('<i class="dh-icon dh-icon-info" data-dh-tooltip="' + escapeHTML( subsidie_tooltip ) + '"></i>') : print() #></div>
 									<div class="dh-impact-feature-value"><# subsidie_type == 'yes' ? print('Ja') : print('Nee') #></div>
 								</div>
 							<# } #>
