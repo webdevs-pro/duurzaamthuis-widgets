@@ -1778,6 +1778,7 @@ body.test .type-elementor_library > header {
 }
 [data-dh-tooltip] .tooltip .tooltip-wrapper p {
    display: inline-block;
+   margin: 0;
 }
 [data-dh-tooltip] .tooltip .tooltip-wrapper a {
    text-decoration: underline;
