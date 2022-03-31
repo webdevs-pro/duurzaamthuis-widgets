@@ -312,8 +312,8 @@ class DH_Impact_Fields {
 			$post->add_control( 'subsidie', [
 				'label' => __( 'Subsidie', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Ja', 'duurzaamthuis' ),
-				'label_off' => __( 'Nee', 'duurzaamthuis' ),
+				'label_on' => __( 'Aan', 'duurzaamthuis' ),
+				'label_off' => __( 'Uit', 'duurzaamthuis' ),
 				'return_value' => 'yes',
 			] );
 			$post->add_control( 'subsidie_type2', [ // subsidie type
@@ -331,8 +331,9 @@ class DH_Impact_Fields {
 			] );
 			$post->add_control( 'subsidie_tooltip2', [ // subsidie type
 				'label' => __( 'Subsidie Tooltip', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::TEXTAREA,
+				'type' => Elementor\Controls_Manager::WYSIWYG,
 				'condition' => [
+					'subsidie' => 'yes',
 					'subsidie_type2' => 'yes2'
 				]
 			] );
@@ -1190,8 +1191,8 @@ class DH_Widgets_Content_Controls {
 			$widget->add_control( 'dh_impact_subsidie', [ // subsidie
 				'label' => __( 'Subsidie', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
-				'label_on' => __( 'Ja', 'duurzaamthuis' ),
-				'label_off' => __( 'Nee', 'duurzaamthuis' ),
+				'label_on' => __( 'Aan', 'duurzaamthuis' ),
+				'label_off' => __( 'Uit', 'duurzaamthuis' ),
 				'return_value' => 'yes',
 			] );
 			$widget->add_control( 'dh_impact_subsidie_type', [ // subsidie type
@@ -1209,8 +1210,10 @@ class DH_Widgets_Content_Controls {
 			] );
 			$widget->add_control( 'dh_impact_subsidie_tooltip', [ // subsidie tooltip
 				'label' => __( 'Subsidie Tooltip', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::TEXTAREA,
+				'type' => Elementor\Controls_Manager::WYSIWYG,
+				'rows' => 3,
 				'condition' => [
+					'dh_impact_subsidie' => 'yes',
 					'dh_impact_subsidie_type' => 'yes'
 				]
 			] );
