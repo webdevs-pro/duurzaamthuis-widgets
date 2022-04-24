@@ -37,7 +37,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
    
    protected function render_rating( $rating ) {
       if ( ! $rating ) return '';
-      $rating = $rating * 10;
+      $rating = intval( $rating ) * 10;
       ob_start();
       echo '<div class="dh-rating">';
          echo '<div class="dh-rating-bg">';
