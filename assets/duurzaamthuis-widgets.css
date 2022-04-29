@@ -2726,6 +2726,14 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 .elementor-widget-dh-menu-tree-navigation li:not(.sub-menu > li:last-child) {
    border-bottom: 1px solid #E8EFF7;
 }
+@media(min-width: 1025px) {
+   .elementor-widget-dh-menu-tree-navigation .sub-menu .sub-menu li {
+      display: inline-block;
+      width: calc( 25% - 1.2em );
+      vertical-align: top;
+      border-bottom-width: 0 !important;
+   }
+}
 .elementor-widget-dh-menu-tree-navigation .current-menu-item > a {
    /* font-weight: bold; */
    color: #DEAC30;
