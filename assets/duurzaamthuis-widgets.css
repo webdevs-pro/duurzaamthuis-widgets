@@ -568,6 +568,7 @@
    display: block;
 }
 
+
 .dh-widget-dh-product-comparition .dh-product-shortcode h2 {
    display: none;
 }
@@ -1586,7 +1587,9 @@ body:not(.logged-in) .dh-widget-dh-product-comparition-sustainability-score .dh-
 .dh-widget-dh-product-comparition-sustainability-score .type-button .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_logo.dfrcs_missing_logo span {
    font-size: 10px;
 }
-
+.dh-widget-dh-product-comparition-sustainability-score .type-button .dfrcs_compset .widget-dh-product-comparition-sustainability-score .item .dfrcs_link {
+   margin-right: 10px !important;
+}
 
 
 
