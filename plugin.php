@@ -309,6 +309,19 @@ class DH_Impact_Fields {
 			// 	'type' => Elementor\Controls_Manager::TEXT,
 			// 	'classes' => "dh-max-chars-restriction",
 			// ] );
+			$post->add_control( 'subsidie_switcher', [
+				'label' => __( 'Toelichting', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Aan', 'duurzaamthuis' ),
+				'label_off' => __( 'Uit', 'duurzaamthuis' ),
+				'return_value' => 'yes',
+			] );
+			$post->add_control( 'calculations_text', [
+				'type' => Elementor\Controls_Manager::WYSIWYG,
+				'condition' => [
+					'subsidie_switcher' => 'yes'
+				]
+			] );
 			$post->add_control( 'subsidie', [
 				'label' => __( 'Subsidie', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
@@ -336,10 +349,6 @@ class DH_Impact_Fields {
 					'subsidie' => 'yes',
 					'subsidie_type2' => 'yes2'
 				]
-			] );
-			$post->add_control( 'calculations_text', [
-				'label' => __( 'Toelichting', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::WYSIWYG,
 			] );
 			$post->add_control( 'impact_button', [
 				'type' => Elementor\Controls_Manager::RAW_HTML,
@@ -1188,6 +1197,19 @@ class DH_Widgets_Content_Controls {
 			// 	'type' => Elementor\Controls_Manager::TEXT,
 			// 	'classes' => "dh-max-chars-restriction",
 			// ] );
+			$post->add_control( 'dh_impact_subsidie_switcher', [
+				'label' => __( 'Toelichting', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Aan', 'duurzaamthuis' ),
+				'label_off' => __( 'Uit', 'duurzaamthuis' ),
+				'return_value' => 'yes',
+			] );
+			$widget->add_control( 'dh_impact_calculations_text', [ // calculations_text
+				'type' => Elementor\Controls_Manager::WYSIWYG,
+				'condition' => [
+					'dh_impact_subsidie_switcher' => 'yes'
+				]
+			] );
 			$widget->add_control( 'dh_impact_subsidie', [ // subsidie
 				'label' => __( 'Subsidie', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
@@ -1216,10 +1238,6 @@ class DH_Widgets_Content_Controls {
 					'dh_impact_subsidie' => 'yes',
 					'dh_impact_subsidie_type' => 'yes'
 				]
-			] );
-			$widget->add_control( 'dh_impact_calculations_text', [ // calculations_text
-				'label' => __( 'Toelichting', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::WYSIWYG,
 			] );
 			$widget->add_control( 'dh_impact_script', [
 				'type' => Elementor\Controls_Manager::RAW_HTML,
