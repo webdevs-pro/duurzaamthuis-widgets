@@ -1443,7 +1443,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
    font-size: 14px;
    line-height: 24px;
    color: #515F70;
-   max-height: 48px;
+   max-height: 72px;
    overflow: hidden;
    position: relative;
    transition: max-height 200ms; 
@@ -1953,7 +1953,7 @@ body.test .type-elementor_library > header {
    font-size: 14px;
    line-height: 24px;
    color: #515F70;
-   max-height: 48px;
+   max-height: 72px;
    overflow: hidden;
    position: relative;
    transition: max-height 200ms; 
@@ -2531,17 +2531,13 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
    font-size: 14px;
    line-height: 24px;
    color: #515F70;
-   max-height: 240px;
+   max-height: 72px;
    overflow: hidden;
    position: relative;
    transition: max-height 200ms; 
    margin-bottom: 20px;
 }
-@media(max-width: 767px) {
-   .dh-widget-dh-company-offer .dh-product-description {
-      max-height: 120px;
-   }
-}
+
 .dh-widget-dh-company-offer .dh-product-description-toggle {
    cursor: pointer;
    color: #2D3745;

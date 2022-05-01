@@ -218,8 +218,8 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            echo '<div class="dh-product-description">';
                               echo '<div class="dh-product-description-content">' . $item['dh_product_comparition_sustainability_score_description'] . '</div>';
                               echo '<div class="dh-product-description-toggle">';
-                                 echo '<div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>';
-                                 echo '<div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>';
+                                 echo '<div class="dh-open">...<i class="dh-icon dh-icon-arrow-down"></i></div>';
+                                 echo '<div class="dh-close"><i class="dh-icon dh-icon-arrow-up"></i></div>';
                               echo '</div>';
                            echo '</div>';
                         echo '</div>';  // dh-product-column
@@ -559,8 +559,8 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                               <div class="dh-product-description">
                                  <div class="dh-product-description-content">{{ item.dh_product_comparition_sustainability_score_description }}</div>
                                     <div class="dh-product-description-toggle">
-                                    <div class="dh-open">... Meer<i class="dh-icon dh-icon-arrow-down"></i></div>
-                                    <div class="dh-close">Minder<i class="dh-icon dh-icon-arrow-up"></i></div>
+                                    <div class="dh-open">... <i class="dh-icon dh-icon-arrow-down"></i></div>
+                                    <div class="dh-close"><i class="dh-icon dh-icon-arrow-up"></i></div>
                                  </div>
                               </div>
                            </div>
