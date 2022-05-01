@@ -446,7 +446,7 @@
    padding-left: 10px;
    padding-right: 10px;
    font-weight: bold;
-   font-size: 15px;
+   font-size: 17px;
 }
 @media(max-width: 767px) {
    .dh-page-intro {
@@ -454,7 +454,6 @@
       padding-bottom: 30px;
       padding-left: 25px;
       padding-right: 25px;
-      font-size: 16px;
    }
 }
 
@@ -938,7 +937,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
 .dh-widget-dh-related-content .dh-related-content-grid {
    display: grid;
    column-gap: 15px;
-   row-gap: 15px;
+   row-gap: 30px;
 }
 .dh-widget-dh-related-content .dh-related-content-grid .dh-related-post {
    background-color: #FFFFFF;
@@ -1002,7 +1001,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
 .dh-widget-dh-related-content .dh-related-content-grid .dh-related-post-title {
    margin: 20px 20px 10px 20px;
    font-weight: 600;
-   font-size: 14px;
+   font-size: 15px;
    line-height: 21px;
    color: #2D3745;
    word-wrap: break-word;
@@ -1010,7 +1009,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
 }
 .dh-widget-dh-related-content .dh-related-content-grid .dh-related-post-exerpt {
    margin: 10px 20px 20px 20px;;
-   font-size: 12px;
+   font-size: 15px;
    color: #2D3745;
    overflow: hidden;
    text-overflow: ellipsis;
@@ -1164,6 +1163,8 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
    .dh-widget-dh-mega-menu .dh-mobile-menu-toggle {
       display: block;
       cursor: pointer;
+      font-size: 24px;
+      padding: 12px;
    }
 
    .dh-widget-dh-mega-menu .dh-mobile-menu {
@@ -1193,7 +1194,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
    .dh-widget-dh-mega-menu .dh-mobile-menu a {
       white-space: nowrap;
       color: inherit;
-      padding: 3px 0;
+      padding: 4px 0;
       display: inline-block;
       cursor: pointer;
    }
@@ -2702,10 +2703,11 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 
 /* page navigation */
 .elementor-widget-dh-menu-tree-navigation .dh-menu-tree-heading {
-   font-weight: 600;
-   font-size: 20px;
+   font-weight: 400;
+   font-size: 16px;
    line-height: 30px;
    color: #2D3745;
+   margin-bottom: 5px;
 }
 .elementor-widget-dh-menu-tree-navigation a {
    color: #515F70;
@@ -2762,6 +2764,9 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 .elementor-widget-dh-menu-tree-navigation .dh-onload-opened > ul {
    display: block;
 }
-ul.menu > li {
+.elementor-widget-dh-menu-tree-navigation ul.menu > li {
    border-bottom-width: 0 !important;
+}
+.elementor-widget-dh-menu-tree-navigation .dh-menu-item {
+   padding-right: 5px;
 }
