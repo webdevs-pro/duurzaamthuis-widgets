@@ -60,13 +60,14 @@
 .dh-widget-dh-image-heading-text h2 {
    margin-bottom: 20px;
 }
-.dh-widget-dh-image-heading-text .dh-image-wrapper {
+
+.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-wrapper {
    padding-bottom: 65%;
    border-radius: 16px;
    position: relative;
    overflow: hidden;
 }
-.dh-widget-dh-image-heading-text .dh-image-wrapper .dh-image {
+.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-wrapper .dh-image {
    position: absolute;
    top: 0;
    left: 0;
@@ -75,20 +76,25 @@
    display: flex;
    overflow: hidden;
 }
-.dh-widget-dh-image-heading-text img {
+.dh-widget-dh-image-heading-text.dh-image-height-ratio img {
    width: 100%;
-   object-fit: cover;
+   object-fit: contain;
 }
 
-.dh-widget-dh-image-heading-text .dh-content {
+.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-content {
    margin-bottom: 30px;
 }
 
-.dh-widget-dh-image-heading-text .dh-image-heading-text-button-wrapper {
+.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-heading-text-button-wrapper {
    text-align: center;
 }
-.dh-widget-dh-image-heading-text .dh-image-heading-text-button-wrapper a.elementor-button {
+.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-heading-text-button-wrapper a.elementor-button {
    padding: 14px 50px;
+}
+
+.dh-widget-dh-image-heading-text.dh-image-height-auto img {
+   width: 100%;
+   height: auto;
 }
 
 

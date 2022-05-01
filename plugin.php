@@ -166,6 +166,7 @@ add_action( 'elementor_pro/forms/validation', function ( $record, $ajax_handler 
 
 	if ( ! is_array( $emails ) || empty( $emails ) || $min_emails > count( $emails ) ) {
 		$ajax_handler->add_error_message( 'Selecteer minimaal 1 bedrijf' );
+		$ajax_handler->add_error( 'Selecteer minimaal 1 bedrijf' );
 	}
 }, 10, 2 );
 
@@ -665,6 +666,20 @@ class DH_Widgets_Content_Controls {
 				],
 				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-image-width-',
+				'condition' => [
+					'dh_image_heading_text_image_show_image' => 'yes',
+				]
+			] );
+			$widget->add_control( 'dh_image_heading_text_image_height', [
+				'label' => __( 'Image height', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SELECT,
+				'default' => 'ratio',
+				'options' => [
+					'auto'  => __( 'Auto', 'duurzaamthuis' ),
+					'ratio' => __( 'Ratio', 'duurzaamthuis' ),
+				],
+				'render_type' => 'template', // mandatory if we use prefix_class
+				'prefix_class' => 'dh-image-height-',
 				'condition' => [
 					'dh_image_heading_text_image_show_image' => 'yes',
 				]
@@ -1197,7 +1212,7 @@ class DH_Widgets_Content_Controls {
 			// 	'type' => Elementor\Controls_Manager::TEXT,
 			// 	'classes' => "dh-max-chars-restriction",
 			// ] );
-			$post->add_control( 'dh_impact_subsidie_switcher', [
+			$widget->add_control( 'dh_impact_subsidie_switcher', [
 				'label' => __( 'Toelichting', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
 				'label_on' => __( 'Aan', 'duurzaamthuis' ),

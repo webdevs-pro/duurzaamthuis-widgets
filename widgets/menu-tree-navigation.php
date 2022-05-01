@@ -124,9 +124,14 @@ class DH_Menu_Tree_Navigation extends \Elementor\Widget_Base {
 
 			$toggleSpan = $DOM->createDocumentFragment();
 
+			// open submenu if current page inside
 			if ( strpos( $parent_classes, 'current-menu-ancestor' ) !== false ) {
 				$parent->setAttribute('class', $parent_classes . ' dh-opened dh-has-current-page dh-onload-opened');
 			}
+			if ( strpos( $parent_classes, 'current-menu-item' ) !== false ) {
+				$parent->setAttribute('class', $parent_classes . ' dh-opened dh-has-current-page dh-onload-opened');
+			}
+
 
          $toggleSpan->appendXML('<span class="dh-subpages-toggle"><i class="eicon-chevron-right"></i></span>');
 			$parent->insertBefore( $toggleSpan, $firstChild );
@@ -142,7 +147,7 @@ class DH_Menu_Tree_Navigation extends \Elementor\Widget_Base {
 			}
 		}
 
-		$html=$DOM->saveHTML();
+		$html = $DOM->saveHTML();
 
 		echo '<h3 class="dh-menu-tree-heading">' . $settings['dh_menu_tree_heading'] . '</h3>';
 		echo $html;	
