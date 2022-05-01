@@ -2760,3 +2760,6 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 .elementor-widget-dh-menu-tree-navigation .dh-onload-opened > ul {
    display: block;
 }
+ul.menu > li {
+   border-bottom-width: 0 !important;
+}
