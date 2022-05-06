@@ -2773,3 +2773,19 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 .elementor-widget-dh-menu-tree-navigation .dh-menu-item {
    padding-right: 5px;
 }
+
+
+
+
+i.svg-icon {
+   font-family: none !important;
+}
+i.svg-icon:before {
+   content: none !important;
+}
+i.svg-icon svg {
+   fill: currentColor;
+}
+i.svg-icon svg path {
+   fill: currentColor;
+}
