@@ -40,12 +40,12 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
       echo '<div class="dh-rating">';
          echo '<div class="dh-rating-bg">';
             for ( $stars = 1; $stars <= 5; $stars++ ) {
-               echo '<i class="eicon-star"></i>';
+               echo '<i class="dh-icon dh-icon-star"></i>';
             }
          echo '</div>';
          echo '<div class="dh-rating-fg" style="width: ' . $rating . '%">';
             for ( $stars = 1; $stars <= 5; $stars++ ) {
-               echo '<i class="eicon-star"></i>';
+               echo '<i class="dh-icon dh-icon-star"></i>';
             }
          echo '</div>';
       echo '</div>';

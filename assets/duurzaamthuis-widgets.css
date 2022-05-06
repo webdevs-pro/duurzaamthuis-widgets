@@ -320,8 +320,7 @@
       font-size: 12px;
    }
 }
-.dh-page-header-feature-title i,
-.dh-page-header-feature-title svg {
+.dh-page-header-feature-title i {
    margin-right: 10px;
 }
 .dh-page-header-feature-title i.dh-icon-info {

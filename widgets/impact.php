@@ -92,7 +92,7 @@ class DH_Impact extends \Elementor\Widget_Base {
 
 							<?php if ( $prijs ) { ?>
 								<div class="dh-impact-feature">
-									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-euro-sign-solid"></i>Kosten</div>
+									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-payback"></i>Kosten</div>
 									<div class="dh-impact-feature-value"><?php echo $prijs; ?></div>
 								</div>
 							<?php } ?>
