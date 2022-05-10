@@ -118,11 +118,11 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                         if ( $item['dh_product_comparition_custom_type'] == 'button' ) {
                            echo '<div class="dh-product-column dh-product-button-column">';
                               $image_url = $item['dh_product_comparition_button_image']['url'];
+                              $rel = isset( $item['dh_product_comparition_sponsored'] ) ? ' rel="sponsored"' : '';
                               if ( $image_url ) {
                                  echo '<div class="dfrcs">';
                                     echo '<ul class="dfrcs_compset">';
                                        echo '<li class="widget-dh-product-comparition">';
-                                          $rel = isset( $item['dh_product_comparition_sponsored'] ) ? ' rel="sponsored"' : '';
                                           echo '<a target="_blank" href="' . $item['dh_product_comparition_button_link'] . '"' . $rel . '>';
                                              echo '<div class="item">';
                                                 echo '<div class="dfrcs_logo">';
@@ -137,7 +137,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                     echo '</ul>';
                                  echo '</div>'; 
                               } else {
-                                 echo '<span class="elementor-button elementor-size-sm no-logo">' . $item['dh_product_comparition_button_text'] . '</span>';
+                                 echo '<a target="_blank" href="' . $item['dh_product_comparition_button_link'] . '"' . $rel . '>';
+                                    echo '<span class="elementor-button elementor-size-sm no-logo">' . $item['dh_product_comparition_button_text'] . '</span>';
+                                 echo '</a>';
                               }
                            echo '</div>'; // dh-product-column
                         }
@@ -269,7 +271,9 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                        </ul>
                                     </div>
                                  <# } else { #>
-                                    <span class="elementor-button elementor-size-sm no-logo">{{ item.dh_product_comparition_button_text }}</span>
+                                    <a target="_blank" href="{{ item.dh_product_comparition_button_link }}">
+                                       <span class="elementor-button elementor-size-sm no-logo">{{ item.dh_product_comparition_button_text }}</span>
+                                    </a>
                                  <# } #>
                               </div>
                            <# } #>
