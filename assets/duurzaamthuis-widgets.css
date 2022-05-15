@@ -77,7 +77,8 @@
    height: 100%;
    display: flex;
    overflow: hidden;
-
+   justify-content: center;
+   align-items: center;
 }
 .dh-widget-dh-image-heading-text.dh-image-height-ratio img,
 .dh-widget-dh-image-heading-text.dh-image-height-ratio-cover img {
@@ -85,7 +86,7 @@
    /* object-fit: contain; */
    height: 100%;
    width: auto;
-   margin: 0 auto;
+   /* margin: 0 auto; */
 }
 
 .dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-content,
@@ -110,7 +111,6 @@
 .dh-widget-dh-image-heading-text.dh-image-height-ratio-cover img {
    height: auto;
    width: 100%;
-   margin: auto 0;
 }
 
 
