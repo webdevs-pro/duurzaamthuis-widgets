@@ -87,7 +87,7 @@ class DH_Register_Widgets {
 		add_action( 'elementor/frontend/after_enqueue_styles', function() {
 			// to do replace time() with plugin version
 			wp_enqueue_style( 'duurzaamthuis-widgets', plugins_url( '/assets/duurzaamthuis-widgets.css', __FILE__ ), array(), DH_VERSION ); 
-			wp_enqueue_style( 'dh-icons', plugins_url( '/assets/dh-icons-font/style.css', __FILE__ ), array(), DH_VERSION ); 
+			// wp_enqueue_style( 'dh-icons', plugins_url( '/assets/dh-icons-font/style.css', __FILE__ ), array(), DH_VERSION ); 
 		} );
 	}
 
@@ -676,7 +676,8 @@ class DH_Widgets_Content_Controls {
 				'default' => 'ratio',
 				'options' => [
 					'auto'  => __( 'Auto', 'duurzaamthuis' ),
-					'ratio' => __( 'Ratio', 'duurzaamthuis' ),
+					'ratio' => __( 'Ratio Contain', 'duurzaamthuis' ),
+					'ratio-cover' => __( 'Ratio Cover', 'duurzaamthuis' ),
 				],
 				'render_type' => 'template', // mandatory if we use prefix_class
 				'prefix_class' => 'dh-image-height-',

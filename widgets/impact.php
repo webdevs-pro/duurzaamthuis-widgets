@@ -16,7 +16,7 @@ class DH_Impact extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icon dh-icon-impact';
+		return 'eicon-number-field';
 	}
 
 	public function get_categories() {

@@ -61,13 +61,15 @@
    margin-bottom: 20px;
 }
 
-.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-wrapper {
+.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-wrapper,
+.dh-widget-dh-image-heading-text.dh-image-height-ratio-cover .dh-image-wrapper {
    padding-bottom: 65%;
    border-radius: 16px;
    position: relative;
    overflow: hidden;
 }
-.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-wrapper .dh-image {
+.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-wrapper .dh-image,
+.dh-widget-dh-image-heading-text.dh-image-height-ratio-cover .dh-image-wrapper .dh-image {
    position: absolute;
    top: 0;
    left: 0;
@@ -75,20 +77,28 @@
    height: 100%;
    display: flex;
    overflow: hidden;
+
 }
-.dh-widget-dh-image-heading-text.dh-image-height-ratio img {
-   width: 100%;
-   object-fit: contain;
+.dh-widget-dh-image-heading-text.dh-image-height-ratio img,
+.dh-widget-dh-image-heading-text.dh-image-height-ratio-cover img {
+   /* width: 100%; */
+   /* object-fit: contain; */
+   height: 100%;
+   width: auto;
+   margin: 0 auto;
 }
 
-.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-content {
+.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-content,
+.dh-widget-dh-image-heading-text.dh-image-height-ratio-cover .dh-content {
    margin-bottom: 30px;
 }
 
-.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-heading-text-button-wrapper {
+.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-heading-text-button-wrapper,
+.dh-widget-dh-image-heading-text.dh-image-height-ratio-cover .dh-image-heading-text-button-wrapper {
    text-align: center;
 }
-.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-heading-text-button-wrapper a.elementor-button {
+.dh-widget-dh-image-heading-text.dh-image-height-ratio .dh-image-heading-text-button-wrapper a.elementor-button,
+.dh-widget-dh-image-heading-text.dh-image-height-ratio-cover .dh-image-heading-text-button-wrapper a.elementor-button {
    padding: 14px 50px;
 }
 
@@ -97,6 +107,11 @@
    height: auto;
 }
 
+.dh-widget-dh-image-heading-text.dh-image-height-ratio-cover img {
+   height: auto;
+   width: 100%;
+   margin: auto 0;
+}
 
 
 

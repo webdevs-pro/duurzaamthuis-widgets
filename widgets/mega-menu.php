@@ -16,7 +16,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icon dh-icon-impact';
+		return 'eicon-menu-bar';
 	}
 
 	public function get_categories() {

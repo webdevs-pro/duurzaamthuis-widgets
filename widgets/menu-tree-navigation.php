@@ -25,7 +25,7 @@ class DH_Menu_Tree_Navigation extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'eicon-bullet-list';
+		return 'eicon-theme-builder';
 	}
 
 	public function get_categories() {

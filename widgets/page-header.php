@@ -15,7 +15,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icon dh-icon-post-header';
+		return 'eicon-header';
 	}
 
 	public function get_categories() {

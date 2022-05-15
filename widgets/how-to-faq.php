@@ -16,7 +16,7 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icon dh-icon-numbered-list';
+		return 'eicon-checkbox';
 	}
 
 	public function get_categories() {

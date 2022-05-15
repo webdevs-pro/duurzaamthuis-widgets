@@ -16,7 +16,7 @@ class DH_Numbered_List extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icon dh-icon-numbered-list';
+		return 'eicon-editor-list-ol';
 	}
 
 	public function get_categories() {

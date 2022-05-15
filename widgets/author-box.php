@@ -25,7 +25,7 @@ class DH_Author_Box extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icon dh-icon-anchor-navigation';
+		return 'eicon-person';
 	}
 
 	public function get_categories() {

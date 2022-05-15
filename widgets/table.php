@@ -17,7 +17,7 @@ class DH_Table extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icon dh-icon-table';
+		return 'eicon-table';
 	}
 
 	public function get_categories() {

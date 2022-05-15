@@ -16,7 +16,7 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 	}
 
 	public function get_icon() {
-		return 'dh-icon dh-icon-number-heading';
+		return 'eicon-editor-h2';
 	}
 
 	public function get_categories() {
