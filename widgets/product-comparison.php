@@ -75,11 +75,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                      echo '<div class="dh-product-wrapper">';
                         echo '<div class="dh-product-image">';
                            echo '<div class="dh-product-image-wrapper">';
-                              if ( $item['dh_product_comparition_image']['id'] ) {
-                                 echo wp_get_attachment_image( $item['dh_product_comparition_image']['id'], 'medium' );
-                              } else {
-                                 echo '<img src="' . \Elementor\Utils::get_placeholder_image_src() . '">';
-                              }
+                              echo wp_get_attachment_image( $item['dh_product_comparition_image']['id'], 'medium' );
                            echo '</div>';
                         echo '</div>';
                         echo '<div class="dh-product-content">';
@@ -117,16 +113,15 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
                         if ( $item['dh_product_comparition_custom_type'] == 'button' ) {
                            echo '<div class="dh-product-column dh-product-button-column">';
-                              $image_url = $item['dh_product_comparition_button_image']['url'];
                               $rel = isset( $item['dh_product_comparition_sponsored'] ) ? ' rel="sponsored"' : '';
-                              if ( $image_url ) {
+                              if ( $item['dh_product_comparition_button_image']['id'] ) {
                                  echo '<div class="dfrcs">';
                                     echo '<ul class="dfrcs_compset">';
                                        echo '<li class="widget-dh-product-comparition">';
                                           echo '<a target="_blank" href="' . $item['dh_product_comparition_button_link'] . '"' . $rel . '>';
                                              echo '<div class="item">';
                                                 echo '<div class="dfrcs_logo">';
-                                                   echo '<img src="' . $image_url . '">';
+                                                   echo wp_get_attachment_image( $item['dh_product_comparition_button_image']['id'], 'medium' );
                                                 echo '</div>';
                                                 echo '<div class="dfrcs_link">';
                                                    echo '<span class="elementor-button elementor-size-sm">' . $item['dh_product_comparition_button_text'] . '</span>';

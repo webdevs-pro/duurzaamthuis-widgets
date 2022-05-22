@@ -833,9 +833,6 @@ class DH_Widgets_Content_Controls {
 				$repeater->add_control( 'dh_product_comparition_image', [ // image
 					'label' => __( 'Image', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::MEDIA,
-					'default' => [
-						'url' => Elementor\Utils::get_placeholder_image_src(),
-					],
 				] );
 				$repeater->add_control( 'dh_product_comparition_star_rating', [ // star_rating
 					'label' => __( 'Rating', 'elementor' ),
@@ -891,9 +888,6 @@ class DH_Widgets_Content_Controls {
 				$repeater->add_control( 'dh_product_comparition_button_image', [
                'label' => __( 'Logo', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::MEDIA,
-               'default' => [
-                  'url' => Elementor\Utils::get_placeholder_image_src(),
-               ],
 					'condition' => [
 						'dh_product_comparition_custom_type' => 'button',
 					],
@@ -1798,9 +1792,6 @@ class DH_Widgets_Content_Controls {
             $repeater->add_control( 'dh_product_comparition_sustainability_score_image', [
                'label' => __( 'Image', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::MEDIA,
-               'default' => [
-                  'url' => Elementor\Utils::get_placeholder_image_src(),
-               ],
                'separator' => 'after',
             ] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_quality', [
@@ -1949,9 +1940,6 @@ class DH_Widgets_Content_Controls {
 				$repeater->add_control( 'dh_product_comparition_sustainability_score_button_image', [
                'label' => __( 'Logo', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::MEDIA,
-               'default' => [
-                  'url' => Elementor\Utils::get_placeholder_image_src(),
-               ],
 					'condition' => [
 						'dh_product_comparition_sustainability_score_custom_type' => 'button',
 					],
@@ -2115,9 +2103,6 @@ class DH_Widgets_Content_Controls {
             $repeater->add_control( 'dh_company_offer_image', [
                'label' => __( 'Image', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::MEDIA,
-               'default' => [
-                  'url' => Elementor\Utils::get_placeholder_image_src(),
-               ],
                'separator' => 'after',
             ] );
             // $repeater->add_control( 'dh_company_offer_quality', [
