@@ -262,7 +262,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                                  echo '</div>'; 
                               } else {
                                  echo '<a target="_blank" href="' . $item['dh_product_comparition_sustainability_score_button_link'] . '"' . $rel . '>';
-                                    echo '<span class="elementor-button elementor-size-sm no-logo">' . $item['dh_product_comparition__sustainability_scorebutton_text'] . '</span>';
+                                    echo '<span class="elementor-button elementor-size-sm no-logo">' . $item['dh_product_comparition_sustainability_score_button_text'] . '</span>';
                                  echo '</a>';
                               }
                            echo '</div>'; // dh-product-column
