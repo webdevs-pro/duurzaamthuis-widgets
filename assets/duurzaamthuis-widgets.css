@@ -2797,8 +2797,13 @@ i.svg-icon {
 i.svg-icon:before {
    content: none !important;
 }
+.elementor-widget-dh-menu-tree-navigation .dh-subpages-toggle > i:before {
+   content: none !important;
+}
+
 i.svg-icon svg {
    fill: currentColor;
+   vertical-align: text-top;
 }
 i.svg-icon svg path {
    fill: currentColor;

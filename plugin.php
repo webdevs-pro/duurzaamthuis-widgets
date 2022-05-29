@@ -2511,6 +2511,7 @@ function change_heading_widget_content2( $widget_content, $widget ) {
 		'dh-product-review',
 		'dh-mega-menu',
 		'dh-page-header',
+		'dh-menu-tree-navigation',
 	];
 
 	if ( in_array( $widget->get_name(), $widgets ) ) {

@@ -133,7 +133,7 @@ class DH_Menu_Tree_Navigation extends \Elementor\Widget_Base {
 			}
 
 
-         $toggleSpan->appendXML('<span class="dh-subpages-toggle"><i class="eicon-chevron-right"></i></span>');
+         $toggleSpan->appendXML('<span class="dh-subpages-toggle"><i class="dh-icon dh-icon-arrow-right"></i></span>');
 			$parent->insertBefore( $toggleSpan, $firstChild );
 		}
 
