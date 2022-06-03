@@ -1926,27 +1926,26 @@ class DH_Widgets_Content_Controls {
 					'label' => esc_html__( 'Product name', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXT,
                'label_block' => true,
-					'placeholder' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
+					'placeholder' => 'Bosch KGN33NLEB',
 					'description' => 'Name attribute for [dfrcs name="XXXXXXXX" filters="currency=EUR"] shorcode',
 					'default' => '',
 					'condition' => [
 						'dh_product_comparition_sustainability_score_custom_type' => 'name',
 					],
 				] );
-            $repeater->add_control( 'dh_product_comparition_sustainability_score_name_last_updated_text', [
-               'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'label_block' => true,
-					'condition' => [
-						'dh_product_comparition_sustainability_score_custom_type' => 'name',
-					],
-            ] );
+            // $repeater->add_control( 'dh_product_comparition_sustainability_score_name_last_updated_text', [
+            //    'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'label_block' => true,
+				// 	'condition' => [
+				// 		'dh_product_comparition_sustainability_score_custom_type' => 'name',
+				// 	],
+            // ] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_shortcode', [
-					'label' => esc_html__( 'Shortcode below overrides [dfrcs ean="XXX"]', 'duurzaamthuis' ),
+					'label' => esc_html__( 'Shortcode', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXTAREA,
-					'placeholder' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
 					'description' => 'HTML allowed. Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
-					'default' => '',
+					'default' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
 					'condition' => [
 						'dh_product_comparition_sustainability_score_custom_type' => 'shortcode',
 					],
