@@ -101,15 +101,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               echo '</div>';
                            }
 
-                           if ( $item['dh_product_comparition_ean'] ) {
-                              echo '<div class="dh-product-price">';
-                                 echo '€' . str_replace( ['€', '.'], ['', ','], $price );
-                                 if ( $last_updated ) {
-                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
-                                 }
-                              echo '</div>';
-                           }
-
                         echo '</div>';
 
                         if ( $item['dh_product_comparition_custom_type'] == 'ean' ) {
