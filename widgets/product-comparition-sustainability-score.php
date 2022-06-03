@@ -246,7 +246,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                         if ( $item['dh_product_comparition_sustainability_score_custom_type'] == 'name' ) {
                            echo '<div class="dh-product-column dh-product-shortcode-column">';
                               echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
-                              echo '<div class="dh-product-shortcode">' . $this->render_shortcode( '[dfrcs name="' . $item['dh_product_comparition_sustainability_score_name'], $item['_id'] . '" filters="currency=EUR"]' ) . '</div>';
+                              echo '<div class="dh-product-shortcode">' . $this->render_shortcode( '[dfrcs name="' . $item['dh_product_comparition_sustainability_score_name'] . '" filters="currency=EUR"]', $item['_id'] ) . '</div>';
                               // echo '<div class="dh-product-last-updated-text">' . $last_updated_name_text . '</div>';
                            echo '</div>'; // dh-product-column
                         }
