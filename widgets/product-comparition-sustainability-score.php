@@ -175,6 +175,8 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            }
                            echo '<div class="dh-product-score">';
                               echo wp_get_attachment_image( attachment_url_to_postid( $settings['dh_product_comparition_sustainability_score_logo_url'] ) );
+                              // echo '<img src="' . $settings['dh_product_comparition_sustainability_score_logo_url'] . '" alt="">';
+                              
                               echo '<div>';
                                  echo '<div class="dh-product-rating-heading">';
                                     echo 'Duurzaam Thuis Score';

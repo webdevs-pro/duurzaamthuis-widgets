@@ -93,28 +93,31 @@ class DH_Impact extends \Elementor\Widget_Base {
 							<?php if ( $prijs ) { ?>
 								<div class="dh-impact-feature">
 									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-payback"></i>Kosten</div>
-									<div class="dh-impact-feature-value"><?php echo $prijs; ?></div>
+									<div class="dh-impact-feature-value"><?php echo esc_html( $prijs ); ?></div>
 								</div>
 							<?php } ?>
 
 							<?php if ( $terugverdientijd ) { ?>
 								<div class="dh-impact-feature">
-									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-clock-solid"></i>Terugverdientijd</div>
-									<div class="dh-impact-feature-value"><?php echo $terugverdientijd; ?></div>
+									<div class="dh-impact-feature-title">
+										<i class="dh-icon dh-icon-clock-solid"></i>
+										Terugverdientijd
+									</div>
+									<div class="dh-impact-feature-value"><?php echo esc_html( $terugverdientijd ); ?></div>
 								</div>
 							<?php } ?>
 
 							<?php if ( $gemak ) { ?>
 								<div class="dh-impact-feature">
 									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-chevron-circle-down-solid"></i>Gemak</div>
-									<div class="dh-impact-feature-value"><?php echo $gemak; ?></div>
+									<div class="dh-impact-feature-value"><?php echo esc_html( $gemak ); ?></div>
 								</div>
 							<?php } ?>
 
 							<?php if ( $vervuiling ) { ?>
 								<div class="dh-impact-feature">
 									<div class="dh-impact-feature-title"><i class="dh-icon dh-icon-convenience"></i>Vervuiling</div>
-									<div class="dh-impact-feature-value"><?php echo $vervuiling; ?></div>
+									<div class="dh-impact-feature-value"><?php echo esc_html( $vervuiling ); ?></div>
 								</div>
 							<?php } ?>
 
