@@ -1927,7 +1927,7 @@ class DH_Widgets_Content_Controls {
 					'type' => Elementor\Controls_Manager::TEXT,
                'label_block' => true,
 					'placeholder' => 'Bosch KGN33NLEB',
-					'description' => 'Name attribute for [dfrcs name="XXXXXXXX" filters="currency=EUR"] shorcode',
+					'description' => 'Name attribute for [dfrcs name="XXXXXXXX""] shorcode',
 					'default' => '',
 					'condition' => [
 						'dh_product_comparition_sustainability_score_custom_type' => 'name',
@@ -1950,14 +1950,14 @@ class DH_Widgets_Content_Controls {
 						'dh_product_comparition_sustainability_score_custom_type' => 'shortcode',
 					],
 				] );
-            $repeater->add_control( 'dh_product_comparition_sustainability_score_last_updated_text', [
-               'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'label_block' => true,
-					'condition' => [
-						'dh_product_comparition_sustainability_score_custom_type' => 'shortcode',
-					],
-            ] );
+            // $repeater->add_control( 'dh_product_comparition_sustainability_score_last_updated_text', [
+            //    'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'label_block' => true,
+				// 	'condition' => [
+				// 		'dh_product_comparition_sustainability_score_custom_type' => 'shortcode',
+				// 	],
+            // ] );
 				$repeater->add_control( 'dh_product_comparition_sustainability_score_button_image', [
                'label' => __( 'Logo', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::MEDIA,

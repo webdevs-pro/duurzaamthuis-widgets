@@ -92,7 +92,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                   $dfrcs_get_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-' . $item['_id'] . '-cache', true );
                   $price = dh_format_price( $item['dh_product_comparition_sustainability_score_price'] ?: ( $dfrcs_get_cache['price'] ?? '' ) );
                   $last_updated = $item['dh_product_comparition_sustainability_score_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
-                  $last_updated_text = $item['dh_product_comparition_sustainability_score_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
+                  // $last_updated_text = $item['dh_product_comparition_sustainability_score_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
                   // $last_updated_name_text = $item['dh_product_comparition_sustainability_score_name_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
                   $pros = json_decode( $item['dh_product_comparition_sustainability_score_pros'] );
                   $cons = json_decode( $item['dh_product_comparition_sustainability_score_cons'] );
@@ -231,7 +231,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            echo '<div class="dh-product-column dh-product-shortcode-column">';
                               echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
                               echo '<div class="dh-product-shortcode">' . $this->render_shortcode( '[dfrcs ean="' . $item['dh_product_comparition_sustainability_score_ean'] . '"]', $item['_id'] ) . '</div>';
-                              echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
+                              // echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
                            echo '</div>'; // dh-product-column
                         }
 
@@ -239,7 +239,7 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                            echo '<div class="dh-product-column dh-product-shortcode-column">';
                               echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
                               echo '<div class="dh-product-shortcode">' . $this->render_shortcode( $item['dh_product_comparition_sustainability_score_shortcode'], $item['_id'] ) . '</div>';
-                              echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
+                              // echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
                            echo '</div>'; // dh-product-column
                         }
 
