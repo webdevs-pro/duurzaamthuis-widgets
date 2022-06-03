@@ -154,8 +154,10 @@
 
 	var DH_Company_Offer = function( $scope, $ ) {
 		var form_id = $scope.find( '.dh-widget-dh-company-offer' ).data( 'form-id' );
+		if ( ! form_id ) {
+			form_id = 'not-found-form'
+		}
 		var max_checked = $scope.find( '.dh-widget-dh-company-offer' ).data( 'max-companies' );
-		var empty_text = 'Selecteer minimaal 1 bedrijf';
 
 		$scope.find('.dh-product-description').each(function() {
 			var height = $( this ).height();

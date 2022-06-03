@@ -1906,11 +1906,14 @@ class DH_Widgets_Content_Controls {
 						'ean' => [
 							'title' => esc_html__( 'EAN', 'duurzaamthuis' ),
 						],
-						'shortcode' => [
-							'title' => esc_html__( 'Shortcode', 'duurzaamthuis' ),
+						'name' => [
+							'title' => esc_html__( 'Name', 'duurzaamthuis' ),
 						],
 						'button' => [
 							'title' => esc_html__( 'Button', 'duurzaamthuis' ),
+						],
+						'shortcode' => [
+							'title' => esc_html__( 'Shortcode', 'duurzaamthuis' ),
 						],
 					],
 					'label_block' => true,
@@ -1919,6 +1922,25 @@ class DH_Widgets_Content_Controls {
 					'classes' => 'tab-like-switcher',
 					'separator' => 'before',
 				] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_name', [
+					'label' => esc_html__( 'Product name', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXT,
+               'label_block' => true,
+					'placeholder' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
+					'description' => 'Name attribute for [dfrcs name="XXXXXXXX" filters="currency=EUR"] shorcode',
+					'default' => '',
+					'condition' => [
+						'dh_product_comparition_sustainability_score_custom_type' => 'name',
+					],
+				] );
+            $repeater->add_control( 'dh_product_comparition_sustainability_score_name_last_updated_text', [
+               'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'label_block' => true,
+					'condition' => [
+						'dh_product_comparition_sustainability_score_custom_type' => 'name',
+					],
+            ] );
             $repeater->add_control( 'dh_product_comparition_sustainability_score_shortcode', [
 					'label' => esc_html__( 'Shortcode below overrides [dfrcs ean="XXX"]', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXTAREA,
