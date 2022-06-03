@@ -69,7 +69,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                   $dfrcs_get_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-' . $item['_id'] . '-cache', true );
                   $price = dh_format_price( $item['dh_product_comparition_price'] ?: ( $dfrcs_get_cache['price'] ?? '' ) );
                   $last_updated = $item['dh_product_comparition_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
-                  $last_updated_text = $item['dh_product_comparition_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
+                  // $last_updated_text = $item['dh_product_comparition_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
 
                   echo '<div class="dh-product dh-product-' . $item['_id'] . '">';
                      echo '<div class="dh-product-wrapper">';
@@ -95,19 +95,42 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               echo '</div>';
                            }
 
+                           if ( $item['dh_product_comparition_description'] ) {
+                              echo '<div class="dh-product-description">';
+                                 echo $item['dh_product_comparition_description'];
+                              echo '</div>';
+                           }
+
+                           if ( $item['dh_product_comparition_ean'] ) {
+                              echo '<div class="dh-product-price">';
+                                 echo '€' . str_replace( ['€', '.'], ['', ','], $price );
+                                 if ( $last_updated ) {
+                                    echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
+                                 }
+                              echo '</div>';
+                           }
+
                         echo '</div>';
 
                         if ( $item['dh_product_comparition_custom_type'] == 'ean' ) {
                            echo '<div class="dh-product-column dh-product-shortcode-column">';
                               echo '<div class="dh-product-shortcode">' . $this->render_shortcode( '[dfrcs ean="' . $item['dh_product_comparition_ean'] . '"]', $item['_id'] ) . '</div>';
-                              echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
+                              // echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
                            echo '</div>'; // dh-product-column
                         }
 
                         if ( $item['dh_product_comparition_custom_type'] == 'shortcode' ) {
                            echo '<div class="dh-product-column dh-product-shortcode-column">';
                               echo '<div class="dh-product-shortcode">' . $this->render_shortcode( $item['dh_product_comparition_shortcode'], $item['_id'] ) . '</div>';
-                              echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
+                              // echo '<div class="dh-product-last-updated-text">' . $last_updated_text . '</div>';
+                           echo '</div>'; // dh-product-column
+                        }
+
+                        if ( $item['dh_product_comparition_custom_type'] == 'name' ) {
+                           echo '<div class="dh-product-column dh-product-shortcode-column">';
+                              echo '<div class="dh-product-shortcode-heading">Beste prijs</div>';
+                              echo '<div class="dh-product-shortcode">' . $this->render_shortcode( '[dfrcs name="' . $item['dh_product_comparition_name'] . '" filters="currency=EUR"]', $item['_id'] ) . '</div>';
+                              // echo '<div class="dh-product-last-updated-text">' . $last_updated_name_text . '</div>';
                            echo '</div>'; // dh-product-column
                         }
 
@@ -227,8 +250,8 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                                  <div class="dh-product-price">€{{{ item.dh_product_comparition_price }}}</div>
                                  
                               <# } #>
-                              <# if(item.dh_product_comparition_order_by) { #>
-                                 <div class="dh-product-order-by">{{{ item.dh_product_comparition_order_by }}}</div>
+                              <# if(item.dh_product_comparition_description) { #>
+                                 <div class="dh-product-description">{{{ item.dh_product_comparition_description }}}</div>
                               <# } #>
                            </div>
 

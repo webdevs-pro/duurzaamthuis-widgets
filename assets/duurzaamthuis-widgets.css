@@ -569,6 +569,9 @@
    color: #769179;
    margin-top: 5px;
 }
+.dh-widget-dh-product-comparition .dh-product-description {
+   word-break: break-word;
+}
 .dh-widget-dh-product-comparition .dh-product-shortcode-column {
    grid-column: span 2;
 }

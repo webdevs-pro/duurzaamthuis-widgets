@@ -822,6 +822,12 @@ class DH_Widgets_Content_Controls {
                'default' => __( 'Product title' , 'duurzaamthuis' ),
                'label_block' => true,
             ] );
+            $repeater->add_control( 'dh_product_comparition_brand', [ // title
+               'label' => __( 'Brand', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXT,
+               'default' => __( '' , 'duurzaamthuis' ),
+               'label_block' => true,
+            ] );
 				$repeater->add_control( 'dh_product_comparition_ean', [
 					'label' => __( 'EAN Product ID (GTIN-13)', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXT,
@@ -842,10 +848,15 @@ class DH_Widgets_Content_Controls {
 					'step' => 0.1,
 					'default' => 5,
 				] );
-            $repeater->add_control( 'dh_product_comparition_order_by', [ // order_by
-               'label' => __( 'Order By', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'default' => 'Voor 23:59 besteld',
+            // $repeater->add_control( 'dh_product_comparition_order_by', [ // order_by
+            //    'label' => __( 'Order By', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'default' => 'Voor 23:59 besteld',
+            // ] );
+				$repeater->add_control( 'dh_product_comparition_description', [ // description
+               'label' => __( 'Description', 'duurzaamthuis' ),
+               'type' => Elementor\Controls_Manager::TEXTAREA,
+               'default' => '',
             ] );
 				$repeater->add_control( 'dh_product_comparition_custom_type', [
 					'label' => esc_html__( 'Custom shortcode or button', 'duurzaamthuis' ),
@@ -854,11 +865,14 @@ class DH_Widgets_Content_Controls {
 						'ean' => [
 							'title' => esc_html__( 'EAN', 'duurzaamthuis' ),
 						],
-						'shortcode' => [
-							'title' => esc_html__( 'Shortcode', 'duurzaamthuis' ),
+						'name' => [
+							'title' => esc_html__( 'Name', 'duurzaamthuis' ),
 						],
 						'button' => [
 							'title' => esc_html__( 'Button', 'duurzaamthuis' ),
+						],
+						'shortcode' => [
+							'title' => esc_html__( 'Shortcode', 'duurzaamthuis' ),
 						],
 					],
 					'label_block' => true,
@@ -867,6 +881,24 @@ class DH_Widgets_Content_Controls {
 					'classes' => 'tab-like-switcher',
 					'separator' => 'before',
 				] );
+            $repeater->add_control( 'dh_product_comparition_name', [
+					'label' => esc_html__( 'Shortcode below overrides [dfrcs ean="XXX"]', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXTAREA,
+					'placeholder' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
+					'description' => 'HTML allowed. Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
+					'default' => '',
+					'condition' => [
+						'dh_product_comparition_custom_type' => 'name',
+					],
+				] );
+            // $repeater->add_control( 'dh_product_comparition_last_updated_text', [
+            //    'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'label_block' => true,
+				// 	'condition' => [
+				// 		'dh_product_comparition_custom_type' => 'name',
+				// 	],
+            // ] );
             $repeater->add_control( 'dh_product_comparition_shortcode', [
 					'label' => esc_html__( 'Shortcode below overrides [dfrcs ean="XXX"]', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::TEXTAREA,
@@ -877,14 +909,14 @@ class DH_Widgets_Content_Controls {
 						'dh_product_comparition_custom_type' => 'shortcode',
 					],
 				] );
-            $repeater->add_control( 'dh_product_comparition_last_updated_text', [
-               'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
-               'type' => Elementor\Controls_Manager::TEXT,
-               'label_block' => true,
-					'condition' => [
-						'dh_product_comparition_custom_type' => 'shortcode',
-					],
-            ] );
+            // $repeater->add_control( 'dh_product_comparition_last_updated_text', [
+            //    'label' => __( 'Last Updated Text', 'duurzaamthuis' ),
+            //    'type' => Elementor\Controls_Manager::TEXT,
+            //    'label_block' => true,
+				// 	'condition' => [
+				// 		'dh_product_comparition_custom_type' => 'shortcode',
+				// 	],
+            // ] );
 				$repeater->add_control( 'dh_product_comparition_button_image', [
                'label' => __( 'Logo', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::MEDIA,
