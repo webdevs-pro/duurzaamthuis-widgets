@@ -54,13 +54,15 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 								echo '<div class="dh-youtube-video"><iframe style="position: absolute; left: 0; top: 0; width: 100%; height: 100%;" width="1280" height="720" src="https://www.youtube.com/embed/' . $video_id . '" frameborder="0" allowfullscreen></iframe></div>';
 							}
 							echo '<div class="dh-how-to-faq-item-text dh-image-height-' . $item['dh_how_to_faq_item_image_height'] . '">';
-								echo '<div class="dh-image-column">';
-									echo '<div class="dh-image-wrapper">';
-										echo '<div class="dh-image">';
-											echo wp_get_attachment_image( $item['dh_how_to_faq_item_image']['id'], 'medium'  );
+								if ( $item['dh_how_to_faq_item_image']['id'] ) {
+									echo '<div class="dh-image-column">';
+										echo '<div class="dh-image-wrapper">';
+											echo '<div class="dh-image">';
+												echo wp_get_attachment_image( $item['dh_how_to_faq_item_image']['id'], 'medium'  );
+											echo '</div>';
 										echo '</div>';
 									echo '</div>';
-								echo '</div>';
+								}
 							 	echo $item['dh_how_to_faq_item_text'];
 							 echo '</div>';
 						echo '</div>';
