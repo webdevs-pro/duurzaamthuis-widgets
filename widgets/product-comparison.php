@@ -39,10 +39,8 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
    protected function render_stars( $rating ) {
       if ( ! $rating ) return '';
 
-      error_log( "rating1\n" . print_r( $rating, true ) . "\n" );
       // $rating = intval( $rating ) * 20;
       $rating = $rating * 20;
-      error_log( "rating2\n" . print_r( $rating, true ) . "\n" );
       ob_start();
       echo '<div class="dh-rating">';
          echo '<div class="dh-rating-bg">';

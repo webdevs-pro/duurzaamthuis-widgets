@@ -101,7 +101,9 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                      echo '<div class="dh-product-wrapper">';
                         echo '<div class="dh-product-column">';
                            echo '<h3 class="dh-product-heading">';
-                              echo '<div class="dh-number">' . ( $index + 1 ) . '</div>';
+                              if ( count( $settings['dh_product_comparition_sustainability_score_products'] ) > 1 ) {
+                                 echo '<div class="dh-number">' . ( $index + 1 ) . '</div>';
+                              }
                               echo '<div class="dh-heading">' . $item['dh_product_comparition_sustainability_score_title'] . '</div>';
                            echo '</h3>'; // dh-product-heading
                            echo '<div class="dh-product-image">';
@@ -447,7 +449,9 @@ class DH_Product_Comparition_Sustainability_Score extends \Elementor\Widget_Base
                         <div class="dh-product-wrapper">
                            <div class="dh-product-column">
                               <h3 class="dh-product-heading dh-number-heading">
-                                 <div class="dh-number">{{ index + 1 }}</div>
+                                 <# if ( settings.dh_product_comparition_sustainability_score_products.length > 1 ) { #>
+                                    <div class="dh-number">{{ index + 1 }}</div>
+                                 <# } #>
                                  <div class="dh-heading">{{ item.dh_product_comparition_sustainability_score_title }}</div>
                               </h3>
                               <div class="dh-product-image">

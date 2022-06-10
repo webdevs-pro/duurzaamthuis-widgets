@@ -41,7 +41,9 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 
 				$add_class = $settings['dh_number_heading_badge'] != 'none' ? ' with-badge' : '';
 				echo '<' . $settings['dh_number_heading_size'] . ' class="dh-number-heading' . $add_class . '">';
-					echo '<div class="dh-number">' . $settings['dh_number_heading_number'] . '</div>';
+					if ( $settings['dh_number_heading_number'] ) {
+						echo '<div class="dh-number">' . $settings['dh_number_heading_number'] . '</div>';
+					}
 					echo '<div class="dh-heading">' . $settings['dh_number_heading_heading'] . '</div>';
 					if ( $settings['dh_number_heading_badge'] ) {
 						switch ( $settings['dh_number_heading_badge'] ) {
@@ -80,7 +82,9 @@ class DH_Number_Heading extends \Elementor\Widget_Base {
 			<div class="<?php echo 'dh-widget-' . $this->get_name(); ?>{{{ classes }}}">
 				<# var add_class = settings.dh_number_heading_badge != 'none' ? ' with-badge' : ''; #>
 				<{{{ settings.dh_number_heading_size }}} class="dh-number-heading{{{ add_class }}}">
-					<div class="dh-number">{{{ settings.dh_number_heading_number }}}</div>
+					<# if ( settings.dh_number_heading_number ) { #>
+						<div class="dh-number">{{{ settings.dh_number_heading_number }}}</div>
+					<# } #>
 					<div class="dh-heading">{{{ settings.dh_number_heading_heading }}}</div>
 					<#
 						if(settings.dh_number_heading_badge) {

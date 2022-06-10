@@ -905,7 +905,7 @@ class DH_Widgets_Content_Controls {
 					'type' => Elementor\Controls_Manager::TEXTAREA,
 					'placeholder' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
 					'description' => 'HTML allowed. Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
-					'default' => '',
+					'default' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
 					'condition' => [
 						'dh_product_comparition_custom_type' => 'shortcode',
 					],
