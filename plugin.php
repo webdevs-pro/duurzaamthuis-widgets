@@ -881,11 +881,12 @@ class DH_Widgets_Content_Controls {
 					'classes' => 'tab-like-switcher',
 					'separator' => 'before',
 				] );
-            $repeater->add_control( 'dh_product_comparition_name', [
-					'label' => esc_html__( 'Shortcode below overrides [dfrcs ean="XXX"]', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::TEXTAREA,
-					'placeholder' => '[dfrcs name="Euphoria 110 Mono" filters="currency=EUR"]',
-					'description' => 'HTML allowed. Find more shortcode parameters here <a target="_blank" href="https://wordpress.org/plugins/datafeedr-comparison-sets/">https://wordpress.org/plugins/datafeedr-comparison-sets/</a>',
+				$repeater->add_control( 'dh_product_comparition_name', [
+					'label' => esc_html__( 'Product name', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXT,
+               'label_block' => true,
+					'placeholder' => 'Bosch KGN33NLEB',
+					'description' => 'Name attribute for [dfrcs name="XXXXXXXX""] shorcode',
 					'default' => '',
 					'condition' => [
 						'dh_product_comparition_custom_type' => 'name',
