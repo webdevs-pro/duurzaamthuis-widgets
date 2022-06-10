@@ -1565,7 +1565,7 @@ class DH_Widgets_Content_Controls {
 				$repeater->add_control( 'dh_how_to_faq_item_image_height', [
 					'label' => __( 'Image height', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::SELECT,
-					'default' => 'ratio',
+					'default' => 'ratio-cover',
 					'options' => [
 						'auto'  => __( 'Auto', 'duurzaamthuis' ),
 						'ratio' => __( 'Ratio Contain', 'duurzaamthuis' ),
