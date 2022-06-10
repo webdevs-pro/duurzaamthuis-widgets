@@ -53,7 +53,16 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 							if ( $video_id ) {
 								echo '<div class="dh-youtube-video"><iframe style="position: absolute; left: 0; top: 0; width: 100%; height: 100%;" width="1280" height="720" src="https://www.youtube.com/embed/' . $video_id . '" frameborder="0" allowfullscreen></iframe></div>';
 							}
-							echo '<div class="dh-how-to-faq-item-text">' . wp_get_attachment_image( $item['dh_how_to_faq_item_image']['id'], 'medium'  ) . $item['dh_how_to_faq_item_text']. '</div>';
+							echo '<div class="dh-how-to-faq-item-text dh-image-height-' . $item['dh_how_to_faq_item_image_height'] . '">';
+								echo '<div class="dh-image-column">';
+									echo '<div class="dh-image-wrapper">';
+										echo '<div class="dh-image">';
+											echo wp_get_attachment_image( $item['dh_how_to_faq_item_image']['id'], 'medium'  );
+										echo '</div>';
+									echo '</div>';
+								echo '</div>';
+							 	echo $item['dh_how_to_faq_item_text'];
+							 echo '</div>';
 						echo '</div>';
 					echo '</div>';
 				}
@@ -170,9 +179,15 @@ class DH_How_To_Faq extends \Elementor\Widget_Base {
 								<# if ( item.dh_how_to_faq_item_video_url.url ) { #>
 									<div class="dh-youtube-video"><div style="position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #ccc; display: flex; justify-content: center; align-items: center;">VIDEO AVAILABLE ONLY ON FRONTEND</div></div>
 								<# } #>
-								<div class="dh-how-to-faq-item-text">
+								<div class="dh-how-to-faq-item-text dh-image-height-{{{ item.dh_how_to_faq_item_image_height }}}">
 									<# if ( item.dh_how_to_faq_item_image.url ) { #>
-										<img src="{{{ item.dh_how_to_faq_item_image.url }}}">
+										<div class="dh-image-column">
+											<div class="dh-image-wrapper">
+												<div class="dh-image">
+													<img src="{{{ item.dh_how_to_faq_item_image.url }}}">
+												</div>
+											</div>
+										</div>
 									<# } #>
 									{{{ item.dh_how_to_faq_item_text }}}
 								</div>

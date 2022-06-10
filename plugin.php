@@ -1562,6 +1562,17 @@ class DH_Widgets_Content_Controls {
                'type' => Elementor\Controls_Manager::MEDIA,
 					// 'label_block' => false,
             ] );
+				$repeater->add_control( 'dh_how_to_faq_item_image_height', [
+					'label' => __( 'Image height', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::SELECT,
+					'default' => 'ratio',
+					'options' => [
+						'auto'  => __( 'Auto', 'duurzaamthuis' ),
+						'ratio' => __( 'Ratio Contain', 'duurzaamthuis' ),
+						'ratio-cover' => __( 'Ratio Cover', 'duurzaamthuis' ),
+					],
+					// 'prefix_class' => 'dh-image-height-',
+				] );
 				$repeater->add_control( 'dh_how_to_faq_item_video_url', [
 						'label' => 'YouTube video url',
 						'type' => Elementor\Controls_Manager::URL,
