@@ -2631,6 +2631,7 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
 }
 .dh-widget-dh-company-offer .dh-product-checkbox-button span {
    order: 3;
+   font-weight: bold;
 }
 .dh-widget-dh-company-offer .dh-product-checkbox-button:not(.active) {
    cursor: not-allowed;
