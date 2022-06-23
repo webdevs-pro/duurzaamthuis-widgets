@@ -2627,6 +2627,10 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
    align-items: center;
    margin-top: 10px;
    cursor: pointer;
+   flex-wrap: wrap;
+}
+.dh-widget-dh-company-offer .dh-product-checkbox-button span {
+   order: 3;
 }
 .dh-widget-dh-company-offer .dh-product-checkbox-button:not(.active) {
    cursor: not-allowed;
@@ -2640,9 +2644,11 @@ body:not(.logged-in) .dh-widget-dh-product-review .dh-product-last-updated-text 
    background-color: #fff;
    margin-right: 5px;
    border-radius: 3px;
+   order: 1;
 }
 .dh-widget-dh-company-offer .dh-product-checkbox-button:after {
    content: 'Selecteer';
+   order: 2;
 }
 .dh-widget-dh-company-offer .dh-product-checkbox-button.checked:after {
    content: 'Geselecteerd';

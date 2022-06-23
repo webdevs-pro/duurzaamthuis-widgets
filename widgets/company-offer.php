@@ -216,7 +216,7 @@ class DH_Company_Offer extends \Elementor\Widget_Base {
                               echo '</div>';
                            }
                            echo '<div class="dh-product-checkbox-button-wrapper">';
-                              echo '<div class="dh-product-checkbox-button active elementor-button elementor-size-sm" data-email="' . esc_html( $item['dh_company_offer_email'] ) . '"></div>';
+                              echo '<div class="dh-product-checkbox-button active elementor-button elementor-size-sm" data-email="' . esc_html( $item['dh_company_offer_email'] ) . '"><span>&nbsp;' . $item['dh_company_offer_title'] . '</span></div>';
                               echo '<div class="dh-product-checkbox-scroll-to-form">Offerte aanvragen</div>';
                            echo '</div>';
                         echo '</div>'; // dh-product-column
