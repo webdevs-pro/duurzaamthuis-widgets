@@ -1259,6 +1259,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
       margin-right: 60px;
       position: relative; 
       font-size: 1.1em;
+      border-bottom: 1px solid #eef7ff;
    }
    .dh-widget-dh-mega-menu .dh-menu-item .top-level-toggle {
       position: absolute;
@@ -1266,7 +1267,7 @@ body:not(.logged-in) .dh-widget-dh-product-comparition .dh-product-last-updated-
       top: 0.3em;;
       height: 25px;
       width: 25px;
-      background-color: #EEF2F4;
+      /* background-color: #EEF2F4; */
       border-radius: 50%;
       cursor: pointer;
       transition: transform 200ms;
