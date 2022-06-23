@@ -378,56 +378,6 @@ class DH_Impact_Fields {
 new DH_Impact_Fields();
 
 
-/**
- * 
- * class for adding Impact meta section to Elementor page/post settings
- * 
- */
-class DH_Intro_Field {
-	public function __construct() {
-		add_action( 'elementor/element/wp-post/document_settings/after_section_end', [ $this, 'add_post_settings_controls' ] );
-		add_action( 'elementor/element/wp-page/document_settings/after_section_end', [ $this, 'add_page_settings_controls' ] );
-		add_action( 'elementor/document/after_save', [ $this, 'save_settings' ], 10, 2 );
-	}
-	public function add_post_settings_controls( \Elementor\Core\DocumentTypes\Post $post ) {
-		$this->add_controls( $post );
-	}
-	public function add_page_settings_controls( \Elementor\Core\DocumentTypes\Page $page ) {
-		$this->add_controls( $page );
-	}
-	public function add_controls( $post ) {
-		$post->start_controls_section( 'section_intro', [
-			'label' => __( 'Introduction', 'duurzaamthuis' ),
-			'tab' => Elementor\Controls_Manager::TAB_SETTINGS, // https://developers.elementor.com/elementor-element-panel-tabs/
-		] );
-			$post->add_control(
-				'intro_text',
-				[
-					'label' => __( 'Introduction Text', 'duurzaamthuis' ),
-					'type' => Elementor\Controls_Manager::WYSIWYG,
-				]
-			);
-			$post->add_control(
-				'intro_button',
-				[
-					'type' => Elementor\Controls_Manager::RAW_HTML,
-					'raw' => '<button class="elementor-update-preview-button elementor-button elementor-button-success" onclick="elementor.saver.update.apply().then(function(){elementor.reloadPreview();});">Update And Reload Preview</button>',
-				]
-			);
-		$post->end_controls_section(); 
-	}
-	public function save_settings( $instance, $data ) {
-		$post_id = $instance->get_post()->ID;
-
-		if ( empty( $data) ) return;
-
-		$settings = $data['settings'];
-
-		update_post_meta( $post_id, 'intro-text', $settings['intro_text'] ?? '' );
-	}
-}
-new DH_Intro_Field();
-
 
 
 
@@ -524,7 +474,7 @@ function dh_excerpt_filter( $excerpt, $post ) {
 	$yoast_description = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true ); 
 	
 	if ( ! $yoast_description ) {
-		$introduction = get_post_meta( $post->ID, 'intro-text', true );
+		$introduction = ''; // intro section removed with version 1.76
 		if ( ! $introduction ) {
 			$post_excerpt = $post->post_excerpt;
 			if ( ! $post_excerpt ) {

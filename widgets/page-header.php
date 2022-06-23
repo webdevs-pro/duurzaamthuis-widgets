@@ -109,7 +109,7 @@ class DH_Page_Header extends \Elementor\Widget_Base {
 
                      $calculations_text = get_post_meta( $post_id, 'calculations-text', true );
 
-                     $intro_text = get_post_meta( $post_id, 'intro-text', true );
+                     // $intro_text = get_post_meta( $post_id, 'intro-text', true );
                   ?>
                      
                   <?php if ( $milieuwinst || $prijs || $terugverdientijd || $gemak || $subsidie || $vervuiling ) : ?>
@@ -223,16 +223,6 @@ class DH_Page_Header extends \Elementor\Widget_Base {
                </div>
 
             </div>
-            
-            
-            <!-- Intro section -->
-            <?php if ( $intro_text ) { ?>
-               <div class="elementor-section elementor-section-boxed">
-                  <div class="dh-page-intro elementor-container">
-                     <?php echo $intro_text; ?>
-                  </div>
-               </div>
-            <?php } ?>
                
          </div>
       <?php
