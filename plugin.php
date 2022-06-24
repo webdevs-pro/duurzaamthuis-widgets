@@ -2373,43 +2373,12 @@ class DH_Widgets_Content_Controls {
 #region get_dh_number_heading_controls
 	public static function get_dh_video_controls( $widget ) {
 		$widget->start_controls_section( 'dh_number_heading_section_content', [
-         'label' => __( 'Humber Heading', 'duurzaamthuis' ),
+         'label' => __( 'Video', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
-			$widget->add_control( 'dh_number_heading_number', [
-				'label' => __( 'Number', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::NUMBER,
-				'min' => 1,
-				'max' => 100,
-				'step' => 1,
-				'default' => 1,
-			] );
-			$widget->add_control( 'dh_number_heading_heading', [
-				'label' => __( 'Heading', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::TEXTAREA,
-				'rows' => 3,
-				'default' => __( 'Default heading', 'duurzaamthuis' ),
-			] );
-			$widget->add_control( 'dh_number_heading_badge', [
-				'label' => __( 'Badge', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::SELECT,
-				'default' => 'none',
-				'options' => [
-					'none'  => __( 'None', 'duurzaamthuis' ),
-					'best_choise' => __( 'Beste Keuze', 'duurzaamthuis' ),
-					'reading_tip' => __( 'Leestip', 'duurzaamthuis' ),
-				],
-			] );
-			$widget->add_control( 'dh_number_heading_size', [
-				'label' => __( 'Size', 'duurzaamthuis' ),
-				'type' => Elementor\Controls_Manager::SELECT,
-				'default' => 'h2',
-				'options' => [
-					'h1'  => __( 'H1', 'duurzaamthuis' ),
-					'h2' => __( 'H2', 'duurzaamthuis' ),
-					'h3' => __( 'H3', 'duurzaamthuis' ),
-					'h4' => __( 'H4', 'duurzaamthuis' ),
-				],
+			$widget->add_control( 'dh_video_link', [
+				'label' => __( 'YouTube video link', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXT,
 			] );
 		$widget->end_controls_section(); 
 	}

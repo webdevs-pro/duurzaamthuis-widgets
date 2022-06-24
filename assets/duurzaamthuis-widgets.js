@@ -310,6 +310,62 @@
 
 	}
 
+	var DH_Video = function( $scope, $ ) {
+
+		var wrapper = $scope.find( '.youtube-video-wrap' );
+		var player_id = $( wrapper ).attr( 'data-player-id' );
+		var video_id = $( wrapper ).attr('data-video-id');
+
+		var player = [];
+		var tag = document.createElement( 'script' );
+			 tag.src = "https://www.youtube.com/iframe_api";  
+		var firstScriptTag = document.getElementsByTagName('script')[0]; 
+
+		$scope.on( 'click', function(){
+
+			enqueueOnYoutubeIframeAPIReady(function () {
+				player[player_id] = new YT.Player( player_id, { 
+					width: 600,
+					height: 400,
+					videoId: video_id,
+					playerVars: {
+						color: 'white'
+					},
+					events: {
+						onReady: initialize,
+					}
+				});
+
+			});
+		});
+
+		function initialize(){
+			player[player_id].playVideo();
+		}
+
+		// HELPERS
+		(function () {
+			var callbacks = [];
+			window.enqueueOnYoutubeIframeAPIReady = function (callback) {
+				if (isReady) {
+					callback();
+				} else {
+					// CREATE VIDEO IFRAME
+					firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+					callbacks.push(callback);
+				}
+			}
+			window.onYouTubeIframeAPIReady = function () {
+				isReady = true;
+				callbacks.forEach(function (callback) {
+					callback();
+				})
+				callbacks.splice(0);
+			}
+		})()
+
+	}
+
 
 	
 	// Make sure you run this code under Elementor.
@@ -323,6 +379,7 @@
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-company-offer.default', DH_Company_Offer );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-page-navigation.default', DH_Page_Navigation );
 		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-menu-tree-navigation.default', DH_Menu_Tree_Navigation );
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/dh-video.default', DH_Video );
 		initDHtooltips();
 	} );
 
