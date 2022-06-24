@@ -317,6 +317,7 @@
 		var video_id = $( wrapper ).attr('data-video-id');
 
 		var player = [];
+		var isReady = false;
 		var tag = document.createElement( 'script' );
 			 tag.src = "https://www.youtube.com/iframe_api";  
 		var firstScriptTag = document.getElementsByTagName('script')[0]; 
