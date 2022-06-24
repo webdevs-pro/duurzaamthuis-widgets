@@ -43,6 +43,7 @@ class DH_Multiwidgets {
          'dh-product-review' => 'DH_Product_Review',
          'dh-related-content' => 'DH_Related_Posts',
          'dh-table' => 'DH_Table',
+         'dh-video' => 'DH_Video',
       );
       return $widgets[$widget_name];
    }

@@ -112,6 +112,7 @@ class DH_Register_Widgets {
 		require __DIR__ . '/widgets/company-offer.php';
 		require __DIR__ . '/widgets/page-navigation.php';
 		require __DIR__ . '/widgets/menu-tree-navigation.php';
+		require __DIR__ . '/widgets/video.php';
 
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Image_Heading_Text() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Anchor_Navigation() );
@@ -132,6 +133,7 @@ class DH_Register_Widgets {
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Company_Offer() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Page_Navigation() );
 		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Menu_Tree_Navigation() );
+		\Elementor\Plugin::instance()->widgets_manager->register_widget_type( new DH_Video() );
 		new DH_Multiwidgets();
 	}
 }
@@ -2352,6 +2354,91 @@ class DH_Widgets_Content_Controls {
 		$widget->end_controls_section(); 
 	}
 #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#region get_dh_number_heading_controls
+	public static function get_dh_video_controls( $widget ) {
+		$widget->start_controls_section( 'dh_number_heading_section_content', [
+         'label' => __( 'Humber Heading', 'duurzaamthuis' ),
+         'tab' => Elementor\Controls_Manager::TAB_CONTENT,
+      ] );
+			$widget->add_control( 'dh_number_heading_number', [
+				'label' => __( 'Number', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 100,
+				'step' => 1,
+				'default' => 1,
+			] );
+			$widget->add_control( 'dh_number_heading_heading', [
+				'label' => __( 'Heading', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::TEXTAREA,
+				'rows' => 3,
+				'default' => __( 'Default heading', 'duurzaamthuis' ),
+			] );
+			$widget->add_control( 'dh_number_heading_badge', [
+				'label' => __( 'Badge', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SELECT,
+				'default' => 'none',
+				'options' => [
+					'none'  => __( 'None', 'duurzaamthuis' ),
+					'best_choise' => __( 'Beste Keuze', 'duurzaamthuis' ),
+					'reading_tip' => __( 'Leestip', 'duurzaamthuis' ),
+				],
+			] );
+			$widget->add_control( 'dh_number_heading_size', [
+				'label' => __( 'Size', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SELECT,
+				'default' => 'h2',
+				'options' => [
+					'h1'  => __( 'H1', 'duurzaamthuis' ),
+					'h2' => __( 'H2', 'duurzaamthuis' ),
+					'h3' => __( 'H3', 'duurzaamthuis' ),
+					'h4' => __( 'H4', 'duurzaamthuis' ),
+				],
+			] );
+		$widget->end_controls_section(); 
+	}
+#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #region get_dh_number_heading_controls
 	public static function get_dh_number_heading_controls( $widget ) {

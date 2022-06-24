@@ -75,7 +75,6 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 				); 
 			?><?php
 		$items = wp_get_nav_menu_items( $settings['dh_mega_menu_menu'] );
-		error_log( "items\n" . print_r($items, true) . "\n" );    
 
 
 		echo '<div class="dh-mobile-menu-toggle"><i class="dh-icon dh-icon-menu"></i></div>';
