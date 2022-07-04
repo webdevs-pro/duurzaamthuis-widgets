@@ -64,8 +64,33 @@ class DH_Video extends \Elementor\Widget_Base {
 
 			</div>
 		</div>
-		<?php
-		
+			<?php
+
+			$post_id = get_the_ID();
+			$page_videos = get_post_meta( $post_id, 'dh_page_video_cache', true ) ?: [];
+
+			if ( ! isset( $page_videos[$video_id] ) ) {
+				$api_key = "AIzaSyDasERdL6nKA92mi1eqCkfLxasAa6ytTsc";
+				$url = "https://www.googleapis.com/youtube/v3/videos?id=" . $video_id . "&key=" . $api_key . "&part=snippet";
+				$json = file_get_contents( $url );
+				$page_videos[$video_id] = json_decode( $json , true );
+
+				update_post_meta( $post_id, 'dh_page_video_cache', $page_videos );
+			}
+
+			// echo '<pre>' . print_r($page_videos, true) . '</pre><br>';
+
+			$schema = array();
+			$schema['@context'] = "https://schema.org/";
+			$schema['@type'] = "VideoObject";
+			$schema['name'] = $page_videos[$video_id]['items'][0]['snippet']['title'];
+			$schema['description'] = $page_videos[$video_id]['items'][0]['snippet']['description'];
+			$schema['uploadDate'] = $page_videos[$video_id]['items'][0]['snippet']['publishedAt'];
+			$schema['thumbnailUrl'] = array_column( $page_videos[$video_id]['items'][0]['snippet']['thumbnails'], 'url' );
+
+
+			$schema_json = json_encode( $schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+			echo '<script type="application/ld+json">' . $schema_json . '</script>';
 
 	}
 

@@ -81,7 +81,7 @@ class DH_Mega_Menu extends \Elementor\Widget_Base {
 
 		if ( $items ) {
 			$items_tree = $this->build_menu_tree( $items );  
-			error_log( "items_tree\n" . print_r($items_tree, true) . "\n" );    
+			// error_log( "items_tree\n" . print_r($items_tree, true) . "\n" );    
 
 			echo '<nav class="dh-menu"><ul class="dh-menu-wrapper">';
 				foreach ( $items_tree as $top_level_item ) {
