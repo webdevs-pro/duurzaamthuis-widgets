@@ -39,17 +39,35 @@ class DH_Video extends \Elementor\Widget_Base {
 		}
 
 		$video_id = $this->get_video_id( $settings['dh_video_link'] )['id'] ?? false;
-		$thumnail_url = $this->get_thumbnail_url( $video_id );
 
-		if ( ! $thumnail_url || ! $video_id ) {
+		if ( ! $video_id ) {
 			return;
 		}
+
+		$post_id = get_the_ID();
+		$page_videos = get_post_meta( $post_id, 'dh_page_video_cache', true ) ?: [];
+
+		if ( ! isset( $page_videos[$video_id] ) ) {
+			$api_key = "AIzaSyDasERdL6nKA92mi1eqCkfLxasAa6ytTsc";
+			$url = "https://www.googleapis.com/youtube/v3/videos?id=" . $video_id . "&key=" . $api_key . "&part=snippet";
+			$json = file_get_contents( $url );
+			$page_videos[$video_id] = json_decode( $json , true );
+
+			update_post_meta( $post_id, 'dh_page_video_cache', $page_videos );
+		}
+
+		$thumnail_url = array_reverse( array_column( $page_videos[$video_id]['items'][0]['snippet']['thumbnails'], 'url' ) )[0];
+
 
 		?>
 		<div class="youtube-player-wrapper">
 			<div class="youtube-video-player">
 
 				<div id="video-<?php echo $this->get_id(); ?>" class="youtube-video-wrap" data-video-id="<?php echo $video_id; ?>"  data-player-id="video-<?php echo $this->get_id(); ?>">
+
+					<?php if ( $settings['dh_video_show_title'] == 'yes' ) { ?>
+						<div class="youtube-video-title"><?php echo $page_videos[$video_id]['items'][0]['snippet']['title']; ?></div>
+					<?php } ?>
 		
 					<img src="<?php echo $thumnail_url; ?>" class="video-thumb-img"/>
 
@@ -65,21 +83,6 @@ class DH_Video extends \Elementor\Widget_Base {
 			</div>
 		</div>
 			<?php
-
-			$post_id = get_the_ID();
-			$page_videos = get_post_meta( $post_id, 'dh_page_video_cache', true ) ?: [];
-
-			if ( ! isset( $page_videos[$video_id] ) ) {
-				$api_key = "AIzaSyDasERdL6nKA92mi1eqCkfLxasAa6ytTsc";
-				$url = "https://www.googleapis.com/youtube/v3/videos?id=" . $video_id . "&key=" . $api_key . "&part=snippet";
-				$json = file_get_contents( $url );
-				$page_videos[$video_id] = json_decode( $json , true );
-
-				update_post_meta( $post_id, 'dh_page_video_cache', $page_videos );
-			}
-
-			// echo '<pre>' . print_r($page_videos, true) . '</pre><br>';
-
 			$schema = array();
 			$schema['@context'] = "https://schema.org/";
 			$schema['@type'] = "VideoObject";
@@ -87,6 +90,7 @@ class DH_Video extends \Elementor\Widget_Base {
 			$schema['description'] = $page_videos[$video_id]['items'][0]['snippet']['description'];
 			$schema['uploadDate'] = $page_videos[$video_id]['items'][0]['snippet']['publishedAt'];
 			$schema['thumbnailUrl'] = array_column( $page_videos[$video_id]['items'][0]['snippet']['thumbnails'], 'url' );
+			$schema['contentUrl'] = $settings['dh_video_link'];
 
 
 			$schema_json = json_encode( $schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
@@ -118,22 +122,6 @@ class DH_Video extends \Elementor\Widget_Base {
 				return false;
 			}
 		}
-	}
-
-	function get_thumbnail_url( $video_id ) {
-		$thumb_url = 'https://img.youtube.com/vi/' . $video_id . '/maxresdefault.jpg';
-		if ( ! file_get_contents( $thumb_url ) ) {
-			$thumb_url = 'https://img.youtube.com/vi/' . $video_id . '/sddefault.jpg';
-			if ( ! file_get_contents( $thumb_url ) ) {
-				$thumb_url = 'https://img.youtube.com/vi/' . $video_id . '/hqdefault.jpg';
-				if ( ! file_get_contents( $thumb_url ) ) {
-					$thumb_url = 'https://img.youtube.com/vi/' . $video_id . '/mqdefault.jpg';
-				} else {
-					return false;
-				}
-			}
-		}
-		return $thumb_url;
 	}
 	
 }

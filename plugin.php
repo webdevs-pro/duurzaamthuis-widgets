@@ -2372,7 +2372,7 @@ class DH_Widgets_Content_Controls {
 
 #region get_dh_number_heading_controls
 	public static function get_dh_video_controls( $widget ) {
-		$widget->start_controls_section( 'dh_number_heading_section_content', [
+		$widget->start_controls_section( 'dh_video_section_content', [
          'label' => __( 'Video', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
       ] );
@@ -2380,6 +2380,14 @@ class DH_Widgets_Content_Controls {
 				'label' => __( 'YouTube video link', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::TEXT,
 			] );
+			$widget->add_control( 'dh_video_show_title',[
+            'label' => __( 'Show video title', 'duurzaamthuis' ),
+            'type' => Elementor\Controls_Manager::SWITCHER,
+            'label_on' => __( 'Yes', 'duurzaamthuis' ),
+            'label_off' => __( 'No', 'duurzaamthuis' ),
+            'default' => 'yes',
+            'return_value' => 'yes',
+         ] );
 		$widget->end_controls_section(); 
 	}
 #endregion

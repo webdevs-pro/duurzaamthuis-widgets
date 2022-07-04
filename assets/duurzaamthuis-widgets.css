@@ -2973,6 +2973,16 @@ i.svg-icon svg path {
    border-radius: 0 !important;
 } 
 
+.elementor-widget-dh-video .youtube-video-title {
+   position: absolute;
+   padding:  15px 20px;
+   text-shadow: 0 0 2px rgba(0,0,0,.5);
+   font-family: "YouTube Noto",Roboto,Arial,Helvetica,sans-serif;
+   color: #eee;
+   font-size: 18px;
+   line-height: 1.3;
+}
+
 .elementor-widget-dh-video .ytp-large-play-button {
 	position: absolute;
 	left: 50%;
