@@ -2704,4 +2704,8 @@ function change_heading_widget_content2( $widget_content, $widget ) {
 add_filter( 'elementor/widget/render_content', 'change_heading_widget_content2', 10, 2 );
 
 
-
+// reset video widget cache on page save
+add_action( 'elementor/document/after_save', function( $instance, $data ) {
+	$post_id = $instance->get_post()->ID;
+	update_post_meta( $post_id, 'dh_page_video_cache', [] );
+}, 10, 2 );
