@@ -48,7 +48,12 @@ class DH_Video extends \Elementor\Widget_Base {
 		$page_videos = get_post_meta( $post_id, 'dh_page_video_cache', true ) ?: [];
 
 		if ( ! isset( $page_videos[$video_id] ) ) {
-			$api_key = "AIzaSyDasERdL6nKA92mi1eqCkfLxasAa6ytTsc";
+			$api_key = get_option( 'dh-youtube-api-key' );
+			if ( ! $api_key ) {
+				echo '<iframe class="elementor-video" style="width: 100%;" allowfullscreen="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" src="https://www.youtube.com/embed/' . $video_id . '?controls=1&rel=0&playsinline=0&modestbranding=0&autoplay=0" width="1080" height="720" frameborder="0"></iframe>';
+				return;
+			}
+
 			$url = "https://www.googleapis.com/youtube/v3/videos?id=" . $video_id . "&key=" . $api_key . "&part=snippet";
 			$json = file_get_contents( $url );
 			$page_videos[$video_id] = json_decode( $json , true );
