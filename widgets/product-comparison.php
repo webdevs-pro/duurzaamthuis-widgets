@@ -166,12 +166,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
                      echo '</div>';
 
-
-
-
-
-
-
                      $schema = array();
                      $schema['@context'] = "https://schema.org/";
                      $schema['@type'] = "Product";
@@ -179,6 +173,10 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                      if ( $item['dh_product_comparition_brand'] ) {
                         $schema['brand']['@type'] = "Brand";
                         $schema['brand']['name'] = (string) $item['dh_product_comparition_brand'];
+                     }
+
+                     if ( $item['dh_product_comparition_description'] ) {
+                        $schema['description'] = (string) $item['dh_product_comparition_description'];
                      }
 
                      $schema['gtin13'] = (string) $item['dh_product_comparition_ean'];
@@ -199,11 +197,8 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                      }
 
                      $schema_json = json_encode( $schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
-                     // error_log( "schema_json\n" . print_r( $schema_json, true ) . "\n" );
+
                      echo '<script type="application/ld+json">' . $schema_json . '</script>';
-
-
-
 
                   echo '</div>';
 

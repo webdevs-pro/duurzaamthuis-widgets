@@ -684,6 +684,14 @@ class DH_Widgets_Content_Controls {
 					'dh_image_heading_text_image_show_text' => 'yes',
 				]
 			] );
+			$widget->add_control( 'dh_image_heading_text_image_style_numbers', [
+				'label' => __( 'Style list numbers', 'duurzaamthuis' ),
+				'type' => Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'Yes', 'duurzaamthuis' ),
+				'label_off' => __( 'No', 'duurzaamthuis' ),		
+				'return_value' => 'yes',
+				'default' => 'yes',		
+			] );
 			$widget->add_control( 'dh_image_heading_text_image_show_button', [
 				'label' => __( 'Show Button', 'duurzaamthuis' ),
 				'type' => Elementor\Controls_Manager::SWITCHER,
