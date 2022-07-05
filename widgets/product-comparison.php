@@ -195,6 +195,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                         $schema['aggregateRating']['@type'] = "AggregateRating";
                         $schema['aggregateRating']['ratingValue'] = str_replace( ',', '.', $item['dh_product_comparition_star_rating'] );
                         $schema['aggregateRating']['bestRating'] = "5";
+                        $schema['aggregateRating']['ratingCount'] = "1";
                      }
 
                      $schema_json = json_encode( $schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
