@@ -165,6 +165,45 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                         }
 
                      echo '</div>';
+
+
+
+
+
+
+
+                     $schema = array();
+                     $schema['@context'] = "https://schema.org/";
+                     $schema['@type'] = "Product";
+
+                     if ( $item['dh_product_comparition_brand'] ) {
+                        $schema['brand']['@type'] = "Brand";
+                        $schema['brand']['name'] = (string) $item['dh_product_comparition_brand'];
+                     }
+
+                     $schema['gtin13'] = (string) $item['dh_product_comparition_ean'];
+                     $schema['image'] = (string) $item['dh_product_comparition_image']['url'];
+                     $schema['name'] = (string) $item['dh_product_comparition_title'];
+
+                     if ( $price ) {
+                        $schema['offers']['@type'] = "Offer";
+                        $schema['offers']['price'] = $price;
+                        $schema['offers']['priceCurrency'] = "EUR";
+                     }
+
+                     if ( isset( $item['dh_product_comparition_star_rating'] ) ) {
+                        $schema['aggregateRating']['@type'] = "AggregateRating";
+                        $schema['aggregateRating']['ratingValue'] = str_replace( ',', '.', $item['dh_product_comparition_star_rating'] );
+                        $schema['aggregateRating']['bestRating'] = "5";
+                     }
+
+                     $schema_json = json_encode( $schema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+                     // error_log( "schema_json\n" . print_r( $schema_json, true ) . "\n" );
+                     echo '<script type="application/ld+json">' . $schema_json . '</script>';
+
+
+
+
                   echo '</div>';
 
 

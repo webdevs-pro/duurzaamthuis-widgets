@@ -2355,21 +2355,6 @@ class DH_Widgets_Content_Controls {
 	}
 #endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #region get_dh_number_heading_controls
 	public static function get_dh_video_controls( $widget ) {
 		$widget->start_controls_section( 'dh_video_section_content', [
@@ -2391,31 +2376,6 @@ class DH_Widgets_Content_Controls {
 		$widget->end_controls_section(); 
 	}
 #endregion
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #region get_dh_number_heading_controls
 	public static function get_dh_number_heading_controls( $widget ) {
