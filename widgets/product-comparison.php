@@ -200,7 +200,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
                         if ( $item['dh_product_comparition_custom_type'] == 'eco' ) {
                            echo '<div class="dh-product-column dh-product-button-column">';
-                              echo '<a target="_blank" href="' . $eco_products[$item['_id']]->Link_Website . '">';
+                              echo '<a target="_blank" rel="sponsored" href="' . $eco_products[$item['_id']]->Link_Website . '">';
                                  echo '<span class="elementor-button elementor-size-sm no-logo">Bekijk</span>';
                               echo '</a>';
                            echo '</div>'; // dh-product-column
