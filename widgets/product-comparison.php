@@ -65,7 +65,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
 	protected function render() { // php template
 		$settings = $this->get_settings_for_display();
-      
+
 		if ( $settings['dh_product_comparition_products'] ) :
          ?><?php 
 				$e = new Exception(); 
@@ -75,10 +75,22 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 					$is_multiwidget ? ' data-widget_type="' . $this->get_name() . '.default" data-element_type="widget"' : ''
 				); 
 			?><?php
+
+            $gtin8s = array_column( $settings['dh_product_comparition_products'], 'dh_product_comparition_eco_gtin8', '_id' );
+            $eco_products = $this->get_eco_products( $gtin8s );
+            error_log( "eco_products\n" . print_r( $eco_products, true ) . "\n" );
+
+
             echo '<div class="dh-products-grid">';
                foreach (  $settings['dh_product_comparition_products'] as $item ) {
-                  $dfrcs_get_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-' . $item['_id'] . '-cache', true );
-                  $price = dh_format_price( $item['dh_product_comparition_price'] ?: ( $dfrcs_get_cache['price'] ?? '' ) );
+
+                  // price
+                  if ( $item['dh_product_comparition_custom_type'] == 'eco' ) {
+                     $price = $eco_products[$item['_id']]->Prijs;
+                  } else {
+                     $dfrcs_get_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-' . $item['_id'] . '-cache', true );
+                     $price = dh_format_price( $item['dh_product_comparition_price'] ?: ( $dfrcs_get_cache['price'] ?? '' ) );
+                  }
                   $last_updated = $item['dh_product_comparition_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
                   // $last_updated_text = $item['dh_product_comparition_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
 
@@ -86,11 +98,19 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                      echo '<div class="dh-product-wrapper">';
                         echo '<div class="dh-product-image">';
                            echo '<div class="dh-product-image-wrapper">';
-                              echo wp_get_attachment_image( $item['dh_product_comparition_image']['id'], 'medium' );
+                              if ( $item['dh_product_comparition_custom_type'] == 'eco' ) {
+                                 echo '<img src="' . $eco_products[$item['_id']]->Afbeelding_URL . '" alt="' . $eco_products[$item['_id']]->Productnaam . '">';
+                              } else {
+                                 echo wp_get_attachment_image( $item['dh_product_comparition_image']['id'], 'medium' );
+                              }
                            echo '</div>';
                         echo '</div>';
                         echo '<div class="dh-product-content">';
-                           echo '<h3 class="dh-product-title">' . $item['dh_product_comparition_title'] . '</h3>';
+                           if ( $item['dh_product_comparition_custom_type'] == 'eco' ) {
+                              echo '<h3 class="dh-product-title">' . $eco_products[$item['_id']]->Productnaam . '</h3>';
+                           } else {
+                              echo '<h3 class="dh-product-title">' . $item['dh_product_comparition_title'] . '</h3>';
+                           }
                            echo '<div class="dh-product-star-rating">';
                               echo '<div class="dh-star-rating">';
                                  echo $this->render_stars( $item['dh_product_comparition_star_rating'] );
@@ -212,6 +232,12 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
    protected function content_template() {
 		?>
          <#
+
+            elementor.channels.editor.on('namespace:editor:submit', function() {
+               view.model.renderRemoteServer();
+            });
+
+            
             function renderStars( rating ) {
                var starsHtml = '';
                rating = rating * 20;
@@ -367,5 +393,24 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
       $content = $DOM->saveHTML();
 
       return $content;
+   }
+
+
+   public function get_eco_products( $gtin8s ) {
+		$start_time = microtime(true);
+      // $xml_file = wp_remote_get( 'https://files.channable.com/kyPOMX6IGA41y3pGJQ8eQw==.xml' )['body'];
+      $xml_file = file_get_contents( ABSPATH . 'eco-cache.xml' );
+
+      $data = new SimpleXMLElement( $xml_file );
+      $result = [];
+      foreach ( $gtin8s as $key => $gtin8 ) {
+         $nodes = $data->xpath('//items/item/GTIN8[.="' . $gtin8 . '"]/parent::*');
+         $result[$key] = $nodes[0];
+      }
+      $end_time = microtime(true);
+      $time = number_format( ( $end_time - $start_time ), 5 );
+      error_log( "time\n" . print_r( $time, true ) . "\n" );
+
+      return $result;
    }
 }
