@@ -78,18 +78,35 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
             $gtin8s = array_column( $settings['dh_product_comparition_products'], 'dh_product_comparition_eco_gtin8', '_id' );
             $eco_products = $this->get_eco_products( $gtin8s );
-            error_log( "eco_products\n" . print_r( $eco_products, true ) . "\n" );
+
+
+
+            echo '
+               <script>
+                  window.eco_' . $this->get_id() . ' = "test";
+                  sessionStorage.setItem("eco_' . $this->get_id() . '", \'' . json_encode( $eco_products ) . '\' );
+               </script>
+            ';
+            // error_log( "eco_products\n" . print_r( $eco_products, true ) . "\n" );
 
 
             echo '<div class="dh-products-grid">';
                foreach (  $settings['dh_product_comparition_products'] as $item ) {
 
+                  $item_image = $item['dh_product_comparition_custom_type'] == 'eco' ? '<img src="' . $eco_products[$item['_id']]->Afbeelding_URL . '" alt="' . $eco_products[$item['_id']]->Productnaam . '">' : wp_get_attachment_image( $item['dh_product_comparition_image']['id'], 'medium' );
+                  $item_image_url = $item['dh_product_comparition_custom_type'] == 'eco' ? $eco_products[$item['_id']]->Afbeelding_URL : $item['dh_product_comparition_image']['url'];
+                  $item_title = $item['dh_product_comparition_custom_type'] == 'eco' ? ( $eco_products[$item['_id']]->Productnaam ?? '' ) : $item['dh_product_comparition_title'];
+                  $item_rating = $item['dh_product_comparition_custom_type'] == 'eco' ? ( $eco_products[$item['_id']]->Beoordeling ?? '' ) : $item['dh_product_comparition_star_rating'];
+                  $item_description = $item['dh_product_comparition_custom_type'] == 'eco' ? ( $eco_products[$item['_id']]->Korte_omschrijving ?? '' ) : $item['dh_product_comparition_description'];
+                  $item_brand = $item['dh_product_comparition_custom_type'] == 'eco' ? ( $eco_products[$item['_id']]->Merk ?? '' ) : $item['dh_product_comparition_brand'];
+                  $item_ean = $item['dh_product_comparition_custom_type'] == 'eco' ? ( $eco_products[$item['_id']]->GTIN8 ?? '' ) : $item['dh_product_comparition_ean'];
+
                   // price
                   if ( $item['dh_product_comparition_custom_type'] == 'eco' ) {
-                     $price = $eco_products[$item['_id']]->Prijs;
+                     $item_price = $eco_products[$item['_id']]->Prijs ?? '';
                   } else {
                      $dfrcs_get_cache = get_post_meta( get_the_ID(), 'dh-dfrcs-set-' . $this->get_id() . '-' . $item['_id'] . '-cache', true );
-                     $price = dh_format_price( $item['dh_product_comparition_price'] ?: ( $dfrcs_get_cache['price'] ?? '' ) );
+                     $item_price = dh_format_price( $item['dh_product_comparition_price'] ?: ( $dfrcs_get_cache['price'] ?? '' ) );
                   }
                   $last_updated = $item['dh_product_comparition_price_tooltip'] ?: ( isset( $dfrcs_set_cache['last_updated'] ) ? 'Laatste update: ' . $dfrcs_set_cache['last_updated'] : '' );
                   // $last_updated_text = $item['dh_product_comparition_last_updated_text'] ?: 'Laatste update: ' . $this->last_updated;
@@ -98,37 +115,34 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                      echo '<div class="dh-product-wrapper">';
                         echo '<div class="dh-product-image">';
                            echo '<div class="dh-product-image-wrapper">';
-                              if ( $item['dh_product_comparition_custom_type'] == 'eco' ) {
-                                 echo '<img src="' . $eco_products[$item['_id']]->Afbeelding_URL . '" alt="' . $eco_products[$item['_id']]->Productnaam . '">';
-                              } else {
-                                 echo wp_get_attachment_image( $item['dh_product_comparition_image']['id'], 'medium' );
-                              }
+                              echo $item_image;
                            echo '</div>';
                         echo '</div>';
                         echo '<div class="dh-product-content">';
-                           if ( $item['dh_product_comparition_custom_type'] == 'eco' ) {
-                              echo '<h3 class="dh-product-title">' . $eco_products[$item['_id']]->Productnaam . '</h3>';
-                           } else {
-                              echo '<h3 class="dh-product-title">' . $item['dh_product_comparition_title'] . '</h3>';
-                           }
-                           echo '<div class="dh-product-star-rating">';
-                              echo '<div class="dh-star-rating">';
-                                 echo $this->render_stars( $item['dh_product_comparition_star_rating'] );
-                              echo '</div>';
-                           echo '</div>';
 
-                           if ( $price ) {
+                           echo '<h3 class="dh-product-title">' . $item_title . '</h3>';
+
+                           if ( $item_rating ) {
+                              echo '<div class="dh-product-star-rating">';
+                                 echo '<div class="dh-star-rating">';
+                                    echo $this->render_stars( $item_rating );
+                                 echo '</div>';
+                              echo '</div>';
+                           }
+
+                           if ( $item_price ) {
                               echo '<div class="dh-product-price">';
-                                 echo '€' . str_replace( ['€', '.'], ['', ','], $price );
+                                 echo '€' . str_replace( ['€', '.'], ['', ','], $item_price );
                                  if ( $last_updated ) {
                                     echo '<i class="dh-icon dh-icon-info" data-dh-tooltip="' . esc_html( $last_updated ) . '"></i>';
                                  }
                               echo '</div>';
                            }
 
-                           if ( $item['dh_product_comparition_description'] ) {
+
+                           if ( $item_description ) {
                               echo '<div class="dh-product-description">';
-                                 echo $item['dh_product_comparition_description'];
+                                 echo $item_description;
                               echo '</div>';
                            }
 
@@ -184,6 +198,14 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                            echo '</div>'; // dh-product-column
                         }
 
+                        if ( $item['dh_product_comparition_custom_type'] == 'eco' ) {
+                           echo '<div class="dh-product-column dh-product-button-column">';
+                              echo '<a target="_blank" href="' . $eco_products[$item['_id']]->Link_Website . '">';
+                                 echo '<span class="elementor-button elementor-size-sm no-logo">Bekijk</span>';
+                              echo '</a>';
+                           echo '</div>'; // dh-product-column
+                        }
+
                      echo '</div>';
 
                      $schema = array();
@@ -192,20 +214,20 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
                      if ( $item['dh_product_comparition_brand'] ) {
                         $schema['brand']['@type'] = "Brand";
-                        $schema['brand']['name'] = (string) $item['dh_product_comparition_brand'];
+                        $schema['brand']['name'] = $item_brand;
                      }
 
-                     if ( $item['dh_product_comparition_description'] ) {
-                        $schema['description'] = (string) $item['dh_product_comparition_description'];
+                     if ( $item_description ) {
+                        $schema['description'] = $item_description;
                      }
 
-                     $schema['gtin13'] = (string) $item['dh_product_comparition_ean'];
-                     $schema['image'] = (string) $item['dh_product_comparition_image']['url'];
-                     $schema['name'] = (string) $item['dh_product_comparition_title'];
+                     $schema['gtin13'] = $item_ean;
+                     $schema['image'] = $item_image_url;
+                     $schema['name'] = $item_title;
 
-                     if ( $price ) {
+                     if ( $item_price ) {
                         $schema['offers']['@type'] = "Offer";
-                        $schema['offers']['price'] = $price;
+                        $schema['offers']['price'] = $item_price;
                         $schema['offers']['priceCurrency'] = "EUR";
                      }
 
@@ -237,6 +259,14 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                view.model.renderRemoteServer();
             });
 
+            var eco_cache = sessionStorage.getItem('eco_' + id);
+            console.log('eco_cache', eco_cache);
+				if ( eco_cache !== null ) {
+					eco_cache = JSON.parse( eco_cache );
+				} else {
+               eco_cache = {};
+            }
+
             
             function renderStars( rating ) {
                var starsHtml = '';
@@ -257,21 +287,6 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                return starsHtml;
             }
 
-            function check_and_parse_json(json) {
-               function is_json(str) {
-                  try {
-                     JSON.parse(str);
-                  } catch (e) {
-                     return false;
-                  }
-                  return true;
-               }
-               if(is_json(json)){
-                  return JSON.parse(json);
-               } else {
-                  return [];
-               }
-            }
          #>
 
          <# if(settings.dh_product_comparition_products.length) { #>
@@ -295,27 +310,60 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                <div class="dh-products-grid">
                   <# _.each( settings.dh_product_comparition_products, function( item ) { #>
 
+                     <# 
+                     var item_id = item['_id'];
+
+                     if ( eco_cache[item_id] === null ) {
+                        eco_cache[item_id] = {
+                           'Afbeelding_URL': '',
+                           'Productnaam': '',
+                           'Prijs': '',
+                           'Korte_omschrijving': '',
+                           'Beoordeling': '',
+                           'Link_Website': ''
+                        };
+                     } 
+                     
+                     var item_image = item.dh_product_comparition_custom_type == 'eco' ? eco_cache[item_id].Afbeelding_URL : item.dh_product_comparition_image.url;
+                     var item_title = item.dh_product_comparition_custom_type == 'eco' ? eco_cache[item_id].Productnaam : item.dh_product_comparition_title;
+                     var item_rating = item.dh_product_comparition_custom_type == 'eco' ? eco_cache[item_id].Beoordeling : item.dh_product_comparition_star_rating;
+                     var item_price = item.dh_product_comparition_custom_type == 'eco' ? eco_cache[item_id].Prijs : item.dh_product_comparition_price;
+                     var item_descripton = item.dh_product_comparition_custom_type == 'eco' ? eco_cache[item_id].Korte_omschrijving : item.dh_product_comparition_description;
+                     
+                     #>
+
                      <div class="dh-product dh-product-{{ item._id }}">
+
                         <div class="dh-product-wrapper">
+
                            <div class="dh-product-image">
                               <div class="dh-product-image-wrapper">
-                                 <img src="{{ item.dh_product_comparition_image.url }}">
+                                    <img src="{{ item_image }}">
                               </div>
                            </div>
+
                            <div class="dh-product-content">
-                              <h3 class="dh-product-title">{{{ item.dh_product_comparition_title }}}</h3>
-                              <div class="dh-product-star-rating">
-                                 <div class="dh-star-rating">
-                                    {{{ renderStars( item.dh_product_comparition_star_rating ) }}}
+
+                              <h3 class="dh-product-title">{{{ item_title }}}</h3>
+
+                              <# if ( item_rating ) { #>
+                                 <div class="dh-product-star-rating">
+                                    <div class="dh-star-rating">
+                                       {{{ renderStars( item_rating ) }}}
+                                    </div>
                                  </div>
-                              </div>
-                              <# if(item.dh_product_comparition_price && item.dh_product_comparition_custom_type == 'button') { #>
-                                 <div class="dh-product-price">€{{{ item.dh_product_comparition_price }}}</div>
-                                 
                               <# } #>
-                              <# if(item.dh_product_comparition_description) { #>
-                                 <div class="dh-product-description">{{{ item.dh_product_comparition_description }}}</div>
+
+
+                              <# if ( item_price ) { #>
+                                 <div class="dh-product-price">€{{{ item_price }}}</div>
                               <# } #>
+
+
+                              <# if ( item_descripton ) { #>
+                                 <div class="dh-product-description">{{{ item_descripton }}}</div>
+                              <# } #>
+
                            </div>
 
                            <# if ( item.dh_product_comparition_custom_type == 'ean' ) { #>
@@ -359,6 +407,14 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                               </div>
                            <# } #>
 
+                           <# if ( item.dh_product_comparition_custom_type == 'eco' ) { #>
+                              <div class="dh-product-column dh-product-button-column">
+                                 <a target="_blank" href="{{ eco_cache[item_id].Link_Website }}">
+                                    <span class="elementor-button elementor-size-sm no-logo">Bekijk</span>
+                                 </a>
+                              </div>
+                           <# } #>
+
                         </div>
                      </div>
 
@@ -397,6 +453,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
 
    public function get_eco_products( $gtin8s ) {
+
 		$start_time = microtime(true);
       // $xml_file = wp_remote_get( 'https://files.channable.com/kyPOMX6IGA41y3pGJQ8eQw==.xml' )['body'];
       $xml_file = file_get_contents( ABSPATH . 'eco-cache.xml' );
@@ -404,12 +461,15 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
       $data = new SimpleXMLElement( $xml_file );
       $result = [];
       foreach ( $gtin8s as $key => $gtin8 ) {
+         if ( ! $gtin8 ) {
+            continue;
+         }
          $nodes = $data->xpath('//items/item/GTIN8[.="' . $gtin8 . '"]/parent::*');
          $result[$key] = $nodes[0];
       }
       $end_time = microtime(true);
       $time = number_format( ( $end_time - $start_time ), 5 );
-      error_log( "time\n" . print_r( $time, true ) . "\n" );
+      // error_log( "time\n" . print_r( $time, true ) . "\n" );
 
       return $result;
    }
