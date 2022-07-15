@@ -260,12 +260,12 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
             });
 
             var eco_cache = sessionStorage.getItem('eco_' + id);
-            console.log('eco_cache', eco_cache);
 				if ( eco_cache !== null ) {
 					eco_cache = JSON.parse( eco_cache );
 				} else {
-               eco_cache = {};
+               eco_cache = [];
             }
+
 
             
             function renderStars( rating ) {
@@ -313,7 +313,8 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                      <# 
                      var item_id = item['_id'];
 
-                     if ( eco_cache[item_id] === null ) {
+                     if ( eco_cache[item_id] === null || typeof eco_cache[item_id] === 'undefined' ) {
+
                         eco_cache[item_id] = {
                            'Afbeelding_URL': '',
                            'Productnaam': '',
