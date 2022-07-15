@@ -781,12 +781,18 @@ class DH_Widgets_Content_Controls {
                'type' => Elementor\Controls_Manager::TEXT,
                'default' => __( 'Product title' , 'duurzaamthuis' ),
                'label_block' => true,
+					'condition' => [
+						'dh_product_comparition_custom_type!' => 'eco',
+					],
             ] );
             $repeater->add_control( 'dh_product_comparition_brand', [ // title
                'label' => __( 'Brand', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::TEXT,
                'default' => __( '' , 'duurzaamthuis' ),
                'label_block' => true,
+					'condition' => [
+						'dh_product_comparition_custom_type!' => 'eco',
+					],
             ] );
 				$repeater->add_control( 'dh_product_comparition_ean', [
 					'label' => __( 'EAN Product ID (GTIN-13)', 'duurzaamthuis' ),
@@ -795,10 +801,16 @@ class DH_Widgets_Content_Controls {
 					'label_block' => true,
 					'description' => 'For example: 9789000378937 (13 digits)',
 					'classes' => "dh-13-chars-max dh-numbers-only",
+					'condition' => [
+						'dh_product_comparition_custom_type!' => 'eco',
+					],
 				] );
 				$repeater->add_control( 'dh_product_comparition_image', [ // image
 					'label' => __( 'Image', 'duurzaamthuis' ),
 					'type' => Elementor\Controls_Manager::MEDIA,
+					'condition' => [
+						'dh_product_comparition_custom_type!' => 'eco',
+					],
 				] );
 				$repeater->add_control( 'dh_product_comparition_star_rating', [ // star_rating
 					'label' => __( 'Rating', 'elementor' ),
@@ -807,6 +819,9 @@ class DH_Widgets_Content_Controls {
 					'max' => 5,
 					'step' => 0.1,
 					'default' => 5,
+					'condition' => [
+						'dh_product_comparition_custom_type!' => 'eco',
+					],
 				] );
             // $repeater->add_control( 'dh_product_comparition_order_by', [ // order_by
             //    'label' => __( 'Order By', 'duurzaamthuis' ),
@@ -817,23 +832,42 @@ class DH_Widgets_Content_Controls {
                'label' => __( 'Description', 'duurzaamthuis' ),
                'type' => Elementor\Controls_Manager::TEXTAREA,
                'default' => '',
+					'condition' => [
+						'dh_product_comparition_custom_type!' => 'eco',
+					],
             ] );
+				// $repeater->add_control( 'dh_product_comparition_custom_type', [
+				// 	'label' => esc_html__( 'Custom shortcode or button', 'duurzaamthuis' ),
+				// 	'type' => \Elementor\Controls_Manager::CHOOSE,
+				// 	'options' => [
+				// 		'ean' => [
+				// 			'title' => esc_html__( 'EAN', 'duurzaamthuis' ),
+				// 		],
+				// 		'name' => [
+				// 			'title' => esc_html__( 'Name', 'duurzaamthuis' ),
+				// 		],
+				// 		'button' => [
+				// 			'title' => esc_html__( 'Button', 'duurzaamthuis' ),
+				// 		],
+				// 		'shortcode' => [
+				// 			'title' => esc_html__( 'Shortcode', 'duurzaamthuis' ),
+				// 		],
+				// 	],
+				// 	'label_block' => true,
+				// 	'toggle' => false,
+				// 	'default' => 'ean',
+				// 	'classes' => 'tab-like-switcher',
+				// 	'separator' => 'before',
+				// ] );
 				$repeater->add_control( 'dh_product_comparition_custom_type', [
 					'label' => esc_html__( 'Custom shortcode or button', 'duurzaamthuis' ),
-					'type' => \Elementor\Controls_Manager::CHOOSE,
+					'type' => \Elementor\Controls_Manager::SELECT,
 					'options' => [
-						'ean' => [
-							'title' => esc_html__( 'EAN', 'duurzaamthuis' ),
-						],
-						'name' => [
-							'title' => esc_html__( 'Name', 'duurzaamthuis' ),
-						],
-						'button' => [
-							'title' => esc_html__( 'Button', 'duurzaamthuis' ),
-						],
-						'shortcode' => [
-							'title' => esc_html__( 'Shortcode', 'duurzaamthuis' ),
-						],
+						'ean' => esc_html__( 'EAN', 'duurzaamthuis' ),
+						'name' => esc_html__( 'Name', 'duurzaamthuis' ),
+						'button' => esc_html__( 'Button', 'duurzaamthuis' ),
+						'shortcode' => esc_html__( 'Shortcode', 'duurzaamthuis' ),
+						'eco' => esc_html__( 'eco-logisch.nl', 'duurzaamthuis' ),
 					],
 					'label_block' => true,
 					'toggle' => false,
@@ -931,6 +965,27 @@ class DH_Widgets_Content_Controls {
 						'dh_product_comparition_custom_type' => 'button',
 					],
             ] );
+				$repeater->add_control( 'dh_product_comparition_eco_gtin8', [
+					'label' => esc_html__( 'EAN', 'duurzaamthuis' ),
+					'type' => Elementor\Controls_Manager::TEXT,
+               'label_block' => true,
+					// 'placeholder' => 'Bosch KGN33NLEB',
+					'default' => '',
+					'render_type' => 'ui',
+					'condition' => [
+						'dh_product_comparition_custom_type' => 'eco',
+					],
+				] );
+				$repeater->add_control( 'dh_product_comparition_update_widget', [
+					// 'label' => esc_html__( 'Apply', 'duurzaamthuis' ),
+					'type' => \Elementor\Controls_Manager::BUTTON,
+					'button_type' => 'success',
+					'text' => '&nbsp;&nbsp;&nbsp;Apply&nbsp;&nbsp;&nbsp;',
+					'event' => 'namespace:editor:submit',
+					'condition' => [
+						'dh_product_comparition_custom_type' => 'eco',
+					],
+				] );
 				$repeater->add_control( 'dh_product_comparition_script', [
 					'type' => Elementor\Controls_Manager::RAW_HTML,
 					'raw' => $script,
@@ -2685,3 +2740,16 @@ add_action( 'elementor/document/after_save', function( $instance, $data ) {
 	$post_id = $instance->get_post()->ID;
 	update_post_meta( $post_id, 'dh_page_video_cache', [] );
 }, 10, 2 );
+
+
+
+
+
+add_action( 'init', function() {
+	$file_name = ABSPATH . 'eco-cache.xml';
+	if ( ! file_exists( $file_name ) || time() - filemtime( $file_name ) > 24 * 3600 ) {
+	// if ( ! file_exists( $file_name ) || time() - filemtime( $file_name ) > 1 * 100 ) {
+		file_put_contents( "eco-cache.xml", fopen( "https://files.channable.com/kyPOMX6IGA41y3pGJQ8eQw==.xml", 'r') );
+		error_log( 'XML feed updated' );
+	} 
+}, 100 );
