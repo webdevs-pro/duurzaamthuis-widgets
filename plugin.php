@@ -2746,10 +2746,11 @@ add_action( 'elementor/document/after_save', function( $instance, $data ) {
 
 
 add_action( 'init', function() {
-	$file_name = ABSPATH . 'eco-cache.xml';
-	if ( ! file_exists( $file_name ) || time() - filemtime( $file_name ) > 24 * 3600 ) {
-	// if ( ! file_exists( $file_name ) || time() - filemtime( $file_name ) > 1 * 100 ) {
-		file_put_contents( "eco-cache.xml", fopen( "https://files.channable.com/kyPOMX6IGA41y3pGJQ8eQw==.xml", 'r') );
+	$upload_dir = wp_upload_dir();
+	$file_name = $upload_dir['basedir'] . '/' . 'eco-cache.xml';
+	// if ( ! file_exists( $file_name ) || time() - filemtime( $file_name ) > 24 * 3600 ) {
+	if ( ! file_exists( $file_name ) || time() - filemtime( $file_name ) > 1 * 100 ) {
+		file_put_contents( $file_name, fopen( "https://files.channable.com/kyPOMX6IGA41y3pGJQ8eQw==.xml", 'r') );
 		error_log( 'XML feed updated' );
 	} 
 }, 100 );

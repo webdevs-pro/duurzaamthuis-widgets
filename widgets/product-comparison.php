@@ -456,9 +456,17 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
 		$start_time = microtime(true);
       // $xml_file = wp_remote_get( 'https://files.channable.com/kyPOMX6IGA41y3pGJQ8eQw==.xml' )['body'];
-      $xml_file = file_get_contents( ABSPATH . 'eco-cache.xml' );
 
-      $data = new SimpleXMLElement( $xml_file );
+      $upload_dir = wp_upload_dir();
+
+      if ( ! file_exists( $upload_dir['basedir'] . '/' . 'eco-cache.xml' ) ) {
+         return [];
+      }
+
+      $xml_file = file_get_contents( $upload_dir['basedir'] . '/' . 'eco-cache.xml' );
+
+      $data = simplexml_load_string( $xml_file );
+      
       $result = [];
       foreach ( $gtin8s as $key => $gtin8 ) {
          if ( ! $gtin8 ) {
@@ -469,7 +477,7 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
       }
       $end_time = microtime(true);
       $time = number_format( ( $end_time - $start_time ), 5 );
-      // error_log( "time\n" . print_r( $time, true ) . "\n" );
+      error_log( "time\n" . print_r( $time, true ) . "\n" );
 
       return $result;
    }
