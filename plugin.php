@@ -758,6 +758,30 @@ class DH_Widgets_Content_Controls {
 			}
 		</style>
 		<?php $script = ob_get_clean();
+
+		// repeater title script
+		ob_start(); ?>
+		<# 
+			var id = sessionStorage.getItem("dh_curent_comparison_simple_widget_id");
+			var key = 'eco_title_' + id + '_' + _id;
+
+			if (dh_product_comparition_custom_type == 'eco') {
+				var title = sessionStorage.getItem(key);
+			} else {
+				var title = dh_product_comparition_title;
+			}
+			
+			window.addEventListener('storage', function(e) {  
+				if(e.storageArea===sessionStorage) {
+					if ( e.key == key ) {
+						jQuery('#item-' + _id).text(e.newValue);
+					}
+				}
+			});
+		#>
+		<span id="item-{{_id}}">{{{ title }}}</span>
+		<?php $title_script = ob_get_clean();
+
 		$widget->start_controls_section( 'dh_product_comparition_content', [
          'label' => __( 'Product Comparison', 'duurzaamthuis' ),
          'tab' => Elementor\Controls_Manager::TAB_CONTENT,
@@ -999,7 +1023,7 @@ class DH_Widgets_Content_Controls {
                   'title' => __( 'Product title', 'duurzaamthuis' ),
                ],
             ],
-            'title_field' => '{{{ dh_product_comparition_title }}}',
+            'title_field' => $title_script,
          ] );
 		$widget->end_controls_section(); 
 	}
