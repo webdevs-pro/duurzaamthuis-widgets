@@ -83,12 +83,12 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
             echo '
                <script>
-                  window.eco_' . $this->get_id() . ' = "test";
                   sessionStorage.setItem("eco_' . $this->get_id() . '", \'' . json_encode( $eco_products ) . '\' );
                </script>
             ';
             // error_log( "eco_products\n" . print_r( $eco_products, true ) . "\n" );
 
+            $titles = []; // for repeater labels
 
             echo '<div class="dh-products-grid">';
                foreach (  $settings['dh_product_comparition_products'] as $item ) {
@@ -100,6 +100,14 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
                   $item_description = $item['dh_product_comparition_custom_type'] == 'eco' ? ( $eco_products[$item['_id']]->Korte_omschrijving ?? '' ) : $item['dh_product_comparition_description'];
                   $item_brand = $item['dh_product_comparition_custom_type'] == 'eco' ? ( $eco_products[$item['_id']]->Merk ?? '' ) : $item['dh_product_comparition_brand'];
                   $item_ean = $item['dh_product_comparition_custom_type'] == 'eco' ? ( $eco_products[$item['_id']]->GTIN8 ?? '' ) : $item['dh_product_comparition_ean'];
+
+
+                  echo '
+                     <script>
+                        sessionStorage.setItem("eco_title_' . $this->get_id() . '_' . $item['_id'] . '", "' . $item_title . '" );
+                     </script>
+                  ';
+
 
                   // price
                   if ( $item['dh_product_comparition_custom_type'] == 'eco' ) {
@@ -247,6 +255,10 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 
                }
             echo '</div>';
+
+
+
+            
          ?></div><?php
       endif;
 	}
@@ -255,7 +267,20 @@ class DH_Product_Comparison extends \Elementor\Widget_Base {
 		?>
          <#
 
-            elementor.channels.editor.on('namespace:editor:submit', function() {
+            elementor.hooks.addAction( 'panel/open_editor/widget/dh-product-comparition', function( panel, model, view ) {
+               sessionStorage.setItem("dh_curent_comparison_simple_widget_id", model.attributes.id );
+               
+            //   _.each( settings.dh_product_comparition_products, function( item ) {
+            //      if ( item.dh_product_comparition_custom_type == 'eco' ) {
+            //         var key = 'eco_title_' + id + '_' + item['_id'];
+            //         var title = sessionStorage.getItem(key);
+            //         jQuery('#item-' + item['_id']).text(title);
+            //      }
+            //   } );
+            
+            } );
+
+            elementor.channels.editor.on('namespace:editor:submit' , function() {
                view.model.renderRemoteServer();
             });
 
